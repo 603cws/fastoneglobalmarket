@@ -5,7 +5,6 @@ import CookieBanner from "../components/CookieBanner";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 function Root() {
-
   return (
     <div className="root-container">
       <div className="above-header">
@@ -15,7 +14,6 @@ function Root() {
       <WhatsAppButton />
       <Footer />
       <CookieBanner />
-      
     </div>
   );
 }

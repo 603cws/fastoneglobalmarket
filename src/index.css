@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --primary-color: #1368a6;
 }
@@ -64,7 +66,7 @@ section p {
   padding: 1rem 0;
   z-index: 1;
 }
-.header-2-wrap .page-header{
+.header-2-wrap .page-header {
   top: -5rem;
 }
 .main-header svg {
@@ -534,8 +536,8 @@ footer {
   justify-content: space-between;
   align-items: flex-start;
 }
-.footer-comapny-select a{
-  color: #000
+.footer-comapny-select a {
+  color: #000;
 }
 .entity-select {
   width: 100%;
@@ -569,7 +571,6 @@ footer {
   color: white !important;
 }
 
-
 .section-title {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -582,7 +583,7 @@ footer {
   margin-top: 5rem;
   padding: 4rem 1rem 2rem;
 }
-.header-2-wrap .title-area-center{
+.header-2-wrap .title-area-center {
   padding: 8rem 0;
 }
 .page-title-area .pta-width {
@@ -869,14 +870,14 @@ footer {
   font-weight: bold;
   text-align: center;
 }
-.partner-img-1 img{
+.partner-img-1 img {
   border-radius: 1.563rem;
 }
-.patner-am svg{
+.patner-am svg {
   max-height: 30rem;
   margin-bottom: 2rem;
 }
-#tradingview-widget{
+#tradingview-widget {
   height: 50vh;
 }
 .infoDiv {
@@ -888,11 +889,11 @@ footer {
   padding-left: 2rem;
   margin-top: 2rem;
 }
-.start-la{
+.start-la {
   background: var(--primary-color);
   padding: 2rem;
 }
-.start-la button{
+.start-la button {
   border: none;
 }
 @media screen and (min-width: 767px) {
@@ -912,8 +913,8 @@ footer {
   .main-menu .submenu {
     padding: 1.5rem;
     min-width: 300px;
-    border-bottom-left-radius: 1.635rem ;
-    border-bottom-right-radius: 1.635rem ;
+    border-bottom-left-radius: 1.635rem;
+    border-bottom-right-radius: 1.635rem;
     border-top: 3px solid var(--primary-color);
     border-bottom: 3px solid var(--primary-color);
     border-left: 1px solid #ccc;
@@ -933,7 +934,6 @@ footer {
   .main-menu li.has-submenu:hover .submenu {
     display: flex;
     flex-direction: column;
- 
   }
   .main-menu li.has-submenu:hover .submenu.fo-horizontal {
     display: flex;
@@ -942,7 +942,7 @@ footer {
     background: #fff;
     top: 0;
   }
-  .header-2-wrap .page-header{
+  .header-2-wrap .page-header {
     top: -5rem;
   }
   .menu-and-search {
@@ -1154,7 +1154,7 @@ footer {
     background: #fff;
     margin: 0;
   }
-  .auth-nav{
+  .auth-nav {
     padding: 2rem 1rem;
     background: var(--primary-color);
   }
