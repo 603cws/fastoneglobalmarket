@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";
-
 export const Footer = () => {
   const handleLinkClick = (event, isLogin) => {
     event.preventDefault();

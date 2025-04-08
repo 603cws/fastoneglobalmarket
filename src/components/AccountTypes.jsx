@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './AccountTypes.css'
+import "./AccountTypes.css";
 const AccountTypes = () => {
   const [activeTab, setActiveTab] = useState("standard");
 
@@ -33,7 +33,7 @@ const AccountTypes = () => {
                 Standard Account
               </a>
             </li>
-            
+
             <li className="nav-item">
               <a
                 className={`nav-link ${activeTab === "gold" ? "active" : ""}`}
@@ -52,15 +52,22 @@ const AccountTypes = () => {
             }`}
             onMouseEnter={() => handleTabClick("standard")}
           >
-           <div className="standard-acc acc-watermark"></div>
-            <div className="vertical-text"><h3>Standard <p>Account</p> </h3></div>
+            <div className="standard-acc acc-watermark"></div>
+            <div className="vertical-text">
+              <h3>
+                Standard <p>Account</p>{" "}
+              </h3>
+            </div>
             <div className="h-content">
               <h3>Standard Account</h3>
               <p>
                 An excellent option for all types of traders, featuring tight
                 spreads.
               </p>
-              <a href="/account-comparison" className="btn-one rounded-btn blue-btn">
+              <a
+                href="/account-comparison"
+                className="btn-one rounded-btn blue-btn"
+              >
                 Open Account
               </a>
             </div>
@@ -72,16 +79,24 @@ const AccountTypes = () => {
             onMouseEnter={() => handleTabClick("gold")}
           >
             <div className="gold-acc acc-watermark"></div>
-            <div className="vertical-text"><h3>Gold <p>Account</p> </h3></div>
+            <div className="vertical-text">
+              <h3>
+                Gold <p>Account</p>{" "}
+              </h3>
+            </div>
             <div className="h-content">
               <h3>Gold Account</h3>
               <p>
                 Similar to Standard account, you’ll enjoy ZERO spreads for over
                 90% of the trading day, low commissions capped at 3.5 USD per
-                lot per side and opportunity to earn excing rebates of up to 21%
-                of your commissions. MINIMUM deposit $1,000.
+                lot per side and opportunity to earn excing rebates of up to
+                21% of your commissions. MINIMUM deposit $1,000.
               </p>
-              <a href="/account-comparison" onClick={(e) => handleLinkClick(e, false)} className="btn-one rounded-btn blue-btn">
+              <a
+                href="/account-comparison"
+                onClick={(e) => handleLinkClick(e, false)}
+                className="btn-one rounded-btn blue-btn"
+              >
                 Open Account
               </a>
             </div>

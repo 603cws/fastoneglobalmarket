@@ -1,5 +1,6 @@
 import React from "react";
-import './FeaturesGrid.css'
+import "./FeaturesGrid.css";
+
 const FeaturesGrid = ({ advantages }) => {
   return (
     <div className="row adv-1-grid">

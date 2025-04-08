@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Root from "./layouts/Root.jsx";
 import RootNoTicker from "./layouts/RootNoTicker.jsx"; // Import RootNoTicker
 import Home from "./pages/Home.jsx";
