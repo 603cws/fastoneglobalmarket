@@ -8,6 +8,7 @@ import {
   FaYoutube,
   FaTelegramPlane,
 } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 
 const features = [
   {
@@ -152,8 +153,43 @@ function Landing() {
 
   return (
     <div>
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0A0F2C] to-[#0F172A] text-white px-6">
-        <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <header className="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-md text-white">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img src="/logo.svg" alt="FastOne" className="h-8" />
+            <span className="text-xl font-semibold">FastOne</span>
+          </div>
+
+          {/* Nav Links */}
+          <nav className="hidden md:flex space-x-6 text-sm font-semibold">
+            <a href="#">Trading</a>
+            <a href="#">Markets</a>
+            <a href="#">Platforms</a>
+            <a href="#">News</a>
+            <a href="#">Company</a>
+            <a href="#">Partners</a>
+          </nav>
+
+          {/* Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <button className="border border-white px-4 py-1.5 rounded-full hover:bg-white hover:text-black transition">
+              Log in
+            </button>
+            <button className="bg-white text-black px-4 py-1.5 rounded-full hover:bg-gray-200 transition">
+              Create Account
+            </button>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden">
+            <FaBars className="text-2xl" />
+          </div>
+        </div>
+      </header>
+
+      <section className="min-h-screen bg-gradient-to-br from-[#0A0F2C] to-[#0F172A] text-white px-6 pt-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Left Content */}
           <div className="space-y-4">
             <p className="text-sm tracking-wide text-blue-400 uppercase">
@@ -178,7 +214,7 @@ function Landing() {
             </div>
           </div>
 
-          {/* Right Media (Image/Graphic/Video Placeholder) */}
+          {/* Right Placeholder */}
           <div className="w-full h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl" />
         </div>
       </section>
