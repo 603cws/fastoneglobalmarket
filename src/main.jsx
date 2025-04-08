@@ -41,6 +41,7 @@ import AdditionalRiskDisclosure from "./pages/AdditionalRiskDisclosure.jsx";
 import RegulatoryDisclaimers from "./pages/RegulatoryDisclaimers.jsx";
 import LegalTerms from "./pages/LegalTerms.jsx";
 import AppComingSoon from "./pages/AppComingSoon.jsx";
+import Landing from "./components/Landing.jsx";
 
 const router = createBrowserRouter([
   {
@@ -186,6 +187,10 @@ const router = createBrowserRouter([
         element: <AppComingSoon />,
       },
     ],
+  },
+  {
+    path: "landing",
+    element: <Landing />,
   },
   {
     path: "/currencies",
