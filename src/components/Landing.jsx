@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
-  FaStar,
-  FaChevronDown,
-  FaChevronUp,
-  FaRegCircle,
-} from "react-icons/fa";
-import {
   FaInstagram,
   FaFacebookF,
   FaTwitter,
   FaYoutube,
   FaTelegramPlane,
+  FaStar,
+  FaRegCircle,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
-import { FaBars } from "react-icons/fa";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import PriceTicker from "./PriceTicker";
 
 const features = [
   {
@@ -255,6 +253,14 @@ function Landing() {
   const cardsPerSlide = 2;
   const totalSlides = Math.ceil(testimonials.length / cardsPerSlide);
   const [active, setActive] = useState(0);
+  const start = currentSlide * cardsPerSlide;
+  const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = Math.ceil(cryptos.length / CRYPTOS_PER_PAGE);
+  const startIdx = currentPage * CRYPTOS_PER_PAGE;
+  const visibleCryptos = cryptos.slice(startIdx, startIdx + CRYPTOS_PER_PAGE);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -264,15 +270,14 @@ function Landing() {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
-  const start = currentSlide * cardsPerSlide;
-  const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
 
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const totalPages = Math.ceil(cryptos.length / CRYPTOS_PER_PAGE);
-
-  const startIdx = currentPage * CRYPTOS_PER_PAGE;
-  const visibleCryptos = cryptos.slice(startIdx, startIdx + CRYPTOS_PER_PAGE);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="scrollbar-hidden">
@@ -285,16 +290,24 @@ function Landing() {
         </defs>
       </svg>
 
+      <div className="">
+        <PriceTicker />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md">
+      <header
+        className={`fixed left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md transition-all duration-300 ${
+          scrolled ? "top-0" : "lg:top-12"
+        }`}
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src="./fastone-logo-text.png" alt="FastOne" className="h-8" />
+            <img src="./fastone-logo-text2.png" alt="FastOne" className="h-8" />
           </div>
 
-          {/* Nav Links */}
-          <nav className="hidden md:flex space-x-6 text-sm font-semibold">
+          {/* Desktop Nav Links */}
+          <nav className="hidden lg:flex space-x-6 text-sm font-semibold">
             <a href="#">Trading</a>
             <a href="#">Markets</a>
             <a href="#">Platforms</a>
@@ -303,8 +316,8 @@ function Landing() {
             <a href="#">Partners</a>
           </nav>
 
-          {/* Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
             <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition">
               Log in
             </button>
@@ -314,20 +327,54 @@ function Landing() {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="md:hidden">
-            <FaBars className="text-2xl" />
+          <div className="lg:hidden">
+            {menuOpen ? (
+              <FaTimes
+                className="text-2xl cursor-pointer"
+                onClick={() => setMenuOpen(false)}
+              />
+            ) : (
+              <FaBars
+                className="text-2xl cursor-pointer"
+                onClick={() => setMenuOpen(true)}
+              />
+            )}
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="lg:hidden bg-[#0b132e] px-6 pb-4 pt-2">
+            <nav className="flex flex-col space-y-3 text-sm font-semibold">
+              <a href="#">Trading</a>
+              <a href="#">Markets</a>
+              <a href="#">Platforms</a>
+              <a href="#">News</a>
+              <a href="#">Company</a>
+              <a href="#">Partners</a>
+            </nav>
+            <div className="mt-4 flex flex-col space-y-3">
+              <button className="border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition">
+                Log in
+              </button>
+              <button className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
+                Create Account
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Section 1 */}
       <section
-        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 pt-40 text-white"
+        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 text-white flex items-center sm:pt-0 pt-8"
+        // className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 lg:pt-45 sm:pt-30 pt-30 text-white"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 justify-items-stretch gap-10 items-center"> */}
+        <div className="max-w-7xl w-full mx-auto md:flex justify-between items-center gap-10">
           {/* Left Content */}
-          <div className="space-y-4">
+          <div className="space-y-4 flex-1">
             <p className="text-sm tracking-wide uppercase flex items-center gap-2">
               <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={16} />
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -335,14 +382,14 @@ function Landing() {
               </span>
             </p>
 
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            <h1 className="lg:text-5xl sm:text-4xl text-2xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Empower Your Trade
               </span>
               <br />
               Master the <span className="text-white">Markets</span>
             </h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-gray-300 lg:text-lg sm:text-sm">
               Stake your cryptocurrencies and earn up to 15% APY. Secure,
               <br />
               transparent, and beginner-friendly.
@@ -358,7 +405,7 @@ function Landing() {
           </div>
 
           {/* Right Placeholder */}
-          <div className="w-full h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl" />
+          <div className="w-full h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl flex-1" />
         </div>
       </section>
 
@@ -780,24 +827,24 @@ function Landing() {
               className="h-[2px] w-1/2 mx-auto"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
+                  "linear-gradient(to right, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
               }}
             ></div>
           </div>
 
           {/* Footer */}
-          <div className="pt-10 text-center text-sm text-gray-400">
+          <div className="pt-2 text-center text-sm text-gray-400">
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <img
-                src="./fastone-logo-text.png"
+                src="./fastone-logo-text2.png"
                 alt="FastOne"
                 className="h-10 md:h-12 object-contain"
               />
             </div>
 
             {/* Footer Links */}
-            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 mb-6 text-base">
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 mb-6 text-base pt-12">
               <a href="#" className="hover:text-white transition">
                 How It Works
               </a>
@@ -819,7 +866,7 @@ function Landing() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex justify-center gap-5 text-white text-lg mb-6">
+            <div className="flex justify-center gap-5 text-white text-lg mb-6 pt-6">
               <FaInstagram className="hover:text-blue-400 transition" />
               <FaFacebookF className="hover:text-blue-400 transition" />
               <FaTwitter className="hover:text-blue-400 transition" />
@@ -828,7 +875,9 @@ function Landing() {
             </div>
 
             {/* Copyright */}
-            <p className="text-white text-sm">&copy; 2019–2025 FastOne.com</p>
+            <p className="text-white text-sm pt-4">
+              &copy; 2019–2025 FastOne.com
+            </p>
           </div>
         </div>
       </section>
