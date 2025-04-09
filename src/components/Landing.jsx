@@ -13,6 +13,7 @@ import {
   FaTelegramPlane,
 } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 const features = [
   {
@@ -362,7 +363,7 @@ function Landing() {
       </section>
 
       {/* Section 2 */}
-      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6 ">
+      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6 pt-30">
         <div className="max-w-7xl mx-auto grid grid-cols-3 grid-rows-3 gap-6">
           {/* div1: Image - span 2 rows */}
           <div className="col-start-1 row-start-1 row-span-2 bg-gray-300 h-[300px] md:h-[300px]" />
@@ -372,7 +373,10 @@ function Landing() {
             {/* div2: Heading */}
             <div className="flex-1">
               <h2 className="text-5xl md:text-5xl font-bold leading-snug text-white">
-                Why <span className="text-blue-500">Stake</span>
+                Why{" "}
+                <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                  Stake
+                </span>
                 <br />
                 with Us
               </h2>
@@ -477,7 +481,10 @@ function Landing() {
               <div className="">
                 <h2 className="text-5xl font-bold leading-snug">
                   How Crypto Staking <br /> Works in
-                  <span className="text-blue-400"> 3 Simple Steps</span>
+                  <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                    {" "}
+                    3 Simple Steps
+                  </span>
                 </h2>
               </div>
 
@@ -504,19 +511,23 @@ function Landing() {
               {steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center border border-blue-500 rounded-xl p-6 bg-transparent hover:bg-blue-900/10 transition"
+                  className="rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px]"
                 >
-                  {/* Number */}
-                  <div className="text-5xl font-bold text-white mr-4">
-                    {step.number}
-                  </div>
+                  <div className="flex items-center rounded-xl bg-[#0b132e] p-6 h-full">
+                    {/* Number */}
+                    <div className="text-5xl font-bold text-white mr-4">
+                      {step.number}
+                    </div>
 
-                  {/* Content */}
-                  <div>
-                    <h4 className="text-white text-lg font-semibold mb-1">
-                      {step.title}
-                    </h4>
-                    <p className="text-gray-400 text-sm">{step.description}</p>
+                    {/* Content */}
+                    <div>
+                      <h4 className="text-white text-lg font-semibold mb-1">
+                        {step.title}
+                      </h4>
+                      <p className="text-gray-400 text-sm">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -529,7 +540,9 @@ function Landing() {
               <div className="">
                 <h2 className="text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
-                  <span className="text-blue-400">Crypto Currencies</span>
+                  <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                    Crypto Currencies
+                  </span>
                 </h2>
               </div>
 
@@ -556,21 +569,23 @@ function Landing() {
               {visibleCryptos.map((crypto, idx) => (
                 <div
                   key={idx}
-                  className="border border-blue-500 rounded-xl p-6 flex flex-col items-center text-center space-y-4 hover:bg-blue-900/10 transition"
+                  className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF]"
                 >
-                  <img
-                    src={crypto.image}
-                    alt={crypto.name}
-                    className="w-12 h-12"
-                  />
-                  <h4 className="font-semibold">{crypto.name}</h4>
-                  <p className="text-2xl font-bold text-blue-400">
-                    {crypto.reward}
-                  </p>
-                  <p className="text-sm text-gray-400">Monthly Rewards</p>
-                  <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm transition">
-                    Stake Now
-                  </button>
+                  <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition">
+                    <img
+                      src={crypto.image}
+                      alt={crypto.name}
+                      className="w-12 h-12"
+                    />
+                    <h4 className="font-semibold">{crypto.name}</h4>
+                    <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                      {crypto.reward}
+                    </p>
+                    <p className="text-sm text-gray-400">Monthly Rewards</p>
+                    <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
+                      Stake Now
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -583,7 +598,7 @@ function Landing() {
                   onClick={() => setCurrentPage(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     currentPage === index
-                      ? "bg-blue-500 scale-110"
+                      ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
                       : "bg-gray-500 hover:bg-blue-400"
                   }`}
                 />
@@ -601,7 +616,7 @@ function Landing() {
             <div className="flex-1">
               <h2 className="text-5xl font-bold leading-snug">
                 What Our{" "}
-                <span className="text-blue-400">
+                <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                   Users Are
                   <br /> Saying
                 </span>
@@ -633,19 +648,21 @@ function Landing() {
             {visibleTestimonials.map((user, idx) => (
               <div
                 key={idx}
-                className="border border-blue-500 rounded-xl p-6 flex items-start gap-4 w-full md:w-1/2"
+                className="w-full md:w-1/2 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl"
               >
-                {/* Image */}
-                <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
-                {/* Content */}
-                <div>
-                  <h4 className="font-semibold text-lg">{user.name}</h4>
-                  <div className="flex text-blue-400 mb-2">
-                    {[...Array(user.rating)].map((_, i) => (
-                      <FaStar key={i} size={16} />
-                    ))}
+                <div className="rounded-xl p-6 flex items-start gap-4 bg-[#111827] h-full">
+                  {/* Image */}
+                  <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
+                  {/* Content */}
+                  <div>
+                    <h4 className="font-semibold text-lg">{user.name}</h4>
+                    <div className="flex text-blue-400 mb-2">
+                      {[...Array(user.rating)].map((_, i) => (
+                        <FaStar key={i} size={16} />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-300">{user.comment}</p>
                   </div>
-                  <p className="text-sm text-gray-300">{user.comment}</p>
                 </div>
               </div>
             ))}
@@ -658,7 +675,9 @@ function Landing() {
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  idx === currentSlide ? "bg-blue-400" : "bg-gray-400"
+                  idx === currentSlide
+                    ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
+                    : "bg-gray-500 hover:bg-blue-400"
                 }`}
               ></button>
             ))}
@@ -678,7 +697,9 @@ function Landing() {
             <div className="flex-1">
               <h2 className="text-5xl md:text-5xl font-semibold leading-tight mb-4">
                 Frequently Asked <br />
-                <span className="text-blue-400">Questions</span>
+                <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                  Questions
+                </span>
               </h2>
 
               {/* Vertical line + Paragraph */}
@@ -703,28 +724,28 @@ function Landing() {
               {faqs.map((item, index) => (
                 <div
                   key={index}
-                  className={`border rounded-md transition-all duration-300 px-6 py-4 ${
-                    active === index
-                      ? "border-blue-400 bg-[#1f2937]"
-                      : "border-blue-500"
-                  }`}
+                  className={`bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-md transition-all duration-300`}
                 >
                   <div
-                    className="flex justify-between items-center cursor-pointer"
+                    className="rounded-md px-6 py-4 transition-all duration-300 cursor-pointer bg-[#1f2937]"
                     onClick={() => setActive(index === active ? null : index)}
                   >
-                    <h4 className="text-white font-medium">{item.question}</h4>
-                    {active === index ? (
-                      <FaChevronUp className="text-blue-400" />
-                    ) : (
-                      <FaChevronDown className="text-gray-400" />
+                    <div className="flex justify-between items-center">
+                      <h4 className="text-white font-medium">
+                        {item.question}
+                      </h4>
+                      {active === index ? (
+                        <TiArrowSortedUp className="text-white" size={20} />
+                      ) : (
+                        <TiArrowSortedDown className="text-white" size={20} />
+                      )}
+                    </div>
+                    {active === index && (
+                      <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+                        {item.answer}
+                      </p>
                     )}
                   </div>
-                  {active === index && (
-                    <p className="mt-3 text-sm text-gray-300 leading-relaxed">
-                      {item.answer}
-                    </p>
-                  )}
                 </div>
               ))}
             </div>
@@ -733,18 +754,21 @@ function Landing() {
           {/* CTA */}
           <div className="text-center mb-28">
             <h2 className="text-4xl md:text-5xl font-bold">
-              Ready to <span className="text-blue-400">Start Earning?</span>
+              Ready to{" "}
+              <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                Start Earning?
+              </span>
             </h2>
             <p className="text-gray-300 mt-4 mb-8">
               Join thousands of users growing their crypto portfolios with
               staking.
             </p>
             <div className="flex justify-center gap-4">
-              <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 text-[#0B132E] font-medium py-2 px-6 rounded-md transition duration-300">
+              <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-[#0B132E] font-medium py-2 px-6 rounded-md transition duration-300">
                 Get Started Now
               </button>
 
-              <button className="border border-blue-400 text-blue-400 py-2 px-6 rounded-md hover:bg-blue-400 hover:text-white transition">
+              <button className="border border-blue-400 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text py-2 px-6 rounded-md hover:bg-blue-400 hover:text-white transition">
                 Contact Support
               </button>
             </div>
@@ -804,9 +828,7 @@ function Landing() {
             </div>
 
             {/* Copyright */}
-            <p className="text-gray-500 text-xs">
-              &copy; 2019–2025 FastOne.com
-            </p>
+            <p className="text-white text-sm">&copy; 2019–2025 FastOne.com</p>
           </div>
         </div>
       </section>
