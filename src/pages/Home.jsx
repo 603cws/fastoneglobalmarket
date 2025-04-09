@@ -7,7 +7,6 @@ import Testimonials from "../components/Testimonials";
 import Header from "../components/Header";
 import OpenAccount from "../components/OpenAccount";
 import Cta3 from "../components/Cta3";
-import Landing from "./Landing";
 
 function Home() {
   return (

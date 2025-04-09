@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import {
+  FaStar,
+  FaChevronDown,
+  FaChevronUp,
+  FaRegCircle,
+} from "react-icons/fa";
 import {
   FaInstagram,
   FaFacebookF,
@@ -12,29 +16,34 @@ import { FaBars } from "react-icons/fa";
 
 const features = [
   {
+    icon: "📈",
     title: "High Returns",
     description: "Earn competitive APY on your staked assets.",
-    icon: "📈", // You can replace this with an actual icon or image
   },
   {
-    title: "Secure Protocol",
-    description: "Built with industry-grade security standards.",
-    icon: "🔐",
+    icon: "🔒",
+    title: "Secure Staking",
+    description: "Top-notch security protocols for peace of mind.",
   },
   {
-    title: "User Friendly",
-    description: "Simple interface for hassle-free staking.",
-    icon: "🧑‍💻",
-  },
-  {
-    title: "Fast Payouts",
-    description: "Withdraw your rewards quickly and easily.",
     icon: "⚡",
+    title: "Instant Rewards",
+    description: "No waiting—earn rewards instantly.",
   },
   {
-    title: "Transparent System",
-    description: "Track your staking performance in real-time.",
-    icon: "🔍",
+    icon: "📊",
+    title: "Real-Time Tracking",
+    description: "Keep track of earnings with live analytics.",
+  },
+  {
+    icon: "🧠",
+    title: "Smart Automation",
+    description: "Let AI optimize your staking strategy.",
+  },
+  {
+    icon: "🌐",
+    title: "Global Access",
+    description: "Stake from anywhere, anytime.",
   },
 ];
 
@@ -77,9 +86,113 @@ const cryptos = [
     reward: "3.8%",
     image: "/icons/cardano.svg",
   },
+  {
+    name: "Bitcoin2",
+    reward: "4.5%",
+    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
+  },
+  {
+    name: "Ethereum",
+    reward: "5.2%",
+    image: "/icons/ethereum.svg",
+  },
+  {
+    name: "Solana",
+    reward: "6.1%",
+    image: "/icons/solana.svg",
+  },
+  {
+    name: "Cardano",
+    reward: "3.8%",
+    image: "/icons/cardano.svg",
+  },
+  {
+    name: "Bitcoin3",
+    reward: "4.5%",
+    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
+  },
+  {
+    name: "Ethereum",
+    reward: "5.2%",
+    image: "/icons/ethereum.svg",
+  },
+  {
+    name: "Solana",
+    reward: "6.1%",
+    image: "/icons/solana.svg",
+  },
+  {
+    name: "Cardano",
+    reward: "3.8%",
+    image: "/icons/cardano.svg",
+  },
+  {
+    name: "Bitcoin4",
+    reward: "4.5%",
+    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
+  },
+  {
+    name: "Ethereum",
+    reward: "5.2%",
+    image: "/icons/ethereum.svg",
+  },
+  {
+    name: "Solana",
+    reward: "6.1%",
+    image: "/icons/solana.svg",
+  },
+  {
+    name: "Cardano",
+    reward: "3.8%",
+    image: "/icons/cardano.svg",
+  },
+  {
+    name: "Bitcoin4",
+    reward: "4.5%",
+    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
+  },
+  {
+    name: "Ethereum",
+    reward: "5.2%",
+    image: "/icons/ethereum.svg",
+  },
+  {
+    name: "Solana",
+    reward: "6.1%",
+    image: "/icons/solana.svg",
+  },
+  {
+    name: "Cardano",
+    reward: "3.8%",
+    image: "/icons/cardano.svg",
+  },
 ];
 
 const testimonials = [
+  {
+    name: "Sarah L",
+    rating: 5,
+    comment:
+      "I started staking with FastOne and have already earned 10% in rewards. It’s so easy to use! I love how transparent and secure the platform is.",
+  },
+  {
+    name: "John D",
+    rating: 4,
+    comment:
+      "Great experience overall. The staking rewards are consistent and support is quick to respond.",
+  },
+  {
+    name: "Alex K",
+    rating: 5,
+    comment:
+      "Using FastOne for staking has been a game changer. Super easy, secure, and rewarding!",
+  },
+  {
+    name: "Emily R",
+    rating: 5,
+    comment:
+      "Really impressed by how intuitive and sleek the platform is. And the returns are awesome!",
+  },
   {
     name: "Sarah L",
     rating: 5,
@@ -134,6 +247,8 @@ const faqs = [
   },
 ];
 
+const CRYPTOS_PER_PAGE = 5;
+
 function Landing() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const cardsPerSlide = 2;
@@ -151,14 +266,30 @@ function Landing() {
   const start = currentSlide * cardsPerSlide;
   const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
 
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const totalPages = Math.ceil(cryptos.length / CRYPTOS_PER_PAGE);
+
+  const startIdx = currentPage * CRYPTOS_PER_PAGE;
+  const visibleCryptos = cryptos.slice(startIdx, startIdx + CRYPTOS_PER_PAGE);
+
   return (
-    <div>
-      <header className="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-md text-white">
+    <div className="scrollbar-hidden">
+      <svg width="0" height="0">
+        <defs>
+          <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#4575FF" />
+            <stop offset="100%" stopColor="#92AEFF" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Header */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="FastOne" className="h-8" />
-            <span className="text-xl font-semibold">FastOne</span>
+            <img src="./fastone-logo-text.png" alt="FastOne" className="h-8" />
           </div>
 
           {/* Nav Links */}
@@ -173,10 +304,10 @@ function Landing() {
 
           {/* Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="border border-white px-4 py-1.5 rounded-full hover:bg-white hover:text-black transition">
+            <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition">
               Log in
             </button>
-            <button className="bg-white text-black px-4 py-1.5 rounded-full hover:bg-gray-200 transition">
+            <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition">
               Create Account
             </button>
           </div>
@@ -188,27 +319,38 @@ function Landing() {
         </div>
       </header>
 
-      <section className="min-h-screen bg-gradient-to-br from-[#0A0F2C] to-[#0F172A] text-white px-6 pt-28">
+      {/* Section 1 */}
+      <section
+        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 pt-40 text-white"
+        style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Left Content */}
           <div className="space-y-4">
-            <p className="text-sm tracking-wide text-blue-400 uppercase">
-              ● Grow your assets effortlessly!
+            <p className="text-sm tracking-wide uppercase flex items-center gap-2">
+              <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={16} />
+              <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                Grow your assets effortlessly!
+              </span>
             </p>
+
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              <span className="text-blue-500">Empower Your Trade</span>
+              <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                Empower Your Trade
+              </span>
               <br />
               Master the <span className="text-white">Markets</span>
             </h1>
             <p className="text-gray-300 text-lg">
               Stake your cryptocurrencies and earn up to 15% APY. Secure,
+              <br />
               transparent, and beginner-friendly.
             </p>
             <div className="flex gap-4 pt-4">
-              <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-semibold">
+              <button className="bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
                 Start Staking Now
               </button>
-              <button className="border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold">
+              <button className="border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text hover:bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold">
                 Learn How It Works
               </button>
             </div>
@@ -219,70 +361,163 @@ function Landing() {
         </div>
       </section>
 
-      <section className="bg-[#0A0F2C] text-white py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10 items-start">
-            {/* Left Side Media + Title */}
-            <div className="space-y-4">
-              <div className="w-full h-80 bg-gray-300 rounded-md" />{" "}
-              {/* Placeholder image */}
-              <h2 className="text-4xl font-bold leading-snug">
+      {/* Section 2 */}
+      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6 ">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 grid-rows-3 gap-6">
+          {/* div1: Image - span 2 rows */}
+          <div className="col-start-1 row-start-1 row-span-2 bg-gray-300 h-[300px] md:h-[300px]" />
+
+          {/* div2 and div3 with vertical divider */}
+          <div className="col-start-2 col-span-2 row-start-1 flex items-start gap-4">
+            {/* div2: Heading */}
+            <div className="flex-1">
+              <h2 className="text-5xl md:text-5xl font-bold leading-snug text-white">
                 Why <span className="text-blue-500">Stake</span>
                 <br />
                 with Us
               </h2>
-              <p className="text-gray-300 text-lg pr-4">
-                Discover the advantages of staking with FastOne—where security,
-                simplicity, and high rewards come together to help you grow your
-                crypto effortlessly.
-              </p>
             </div>
 
-            {/* Right Side Features */}
-            <div className="grid grid-cols-2 gap-4 mt-6 md:mt-0">
-              {features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="border border-blue-600 rounded-xl p-4 hover:bg-blue-900/20 transition"
-                >
-                  <div className="text-3xl mb-2">{feature.icon}</div>
-                  <h4 className="text-lg font-semibold">{feature.title}</h4>
-                  <p className="text-sm text-gray-400">{feature.description}</p>
-                </div>
-              ))}
+            {/* vertical line */}
+            <div
+              className="w-px h-30 mt-1 bg-gradient-to-b ml-6"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+              }}
+            />
+
+            {/* div3: Paragraph */}
+            <div className="flex-1">
+              <p className="text-gray-300 text-base md:text-lg">
+                Discover the advantages of staking with
+                <br /> FastOne-where security, simplicity, and
+                <br /> high rewards come together to help you
+                <br /> grow your crypto effortlessly.
+              </p>
+            </div>
+          </div>
+
+          {/* Div 4 → Feature 0 */}
+          <div className="col-start-2 row-start-2">
+            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
+                <div className="text-3xl mb-2">{features[0].icon}</div>
+                <h4 className="text-lg font-semibold">{features[0].title}</h4>
+                <p className="text-sm text-gray-300">
+                  {features[0].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Div 5 → Feature 1 */}
+          <div className="col-start-3 row-start-2">
+            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
+                <div className="text-3xl mb-2">{features[1].icon}</div>
+                <h4 className="text-lg font-semibold">{features[1].title}</h4>
+                <p className="text-sm text-gray-300">
+                  {features[1].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Div 6 → Feature 2 */}
+          <div className="col-start-1 row-start-3">
+            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
+                <div className="text-3xl mb-2">{features[2].icon}</div>
+                <h4 className="text-lg font-semibold">{features[2].title}</h4>
+                <p className="text-sm text-gray-300">
+                  {features[2].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Div 7 → Feature 3 */}
+          <div className="col-start-2 row-start-3">
+            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
+                <div className="text-3xl mb-2">{features[3].icon}</div>
+                <h4 className="text-lg font-semibold">{features[3].title}</h4>
+                <p className="text-sm text-gray-300">
+                  {features[3].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Div 8 → Feature 4 */}
+          <div className="col-start-3 row-start-3">
+            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
+                <div className="text-3xl mb-2">{features[4].icon}</div>
+                <h4 className="text-lg font-semibold">{features[4].title}</h4>
+                <p className="text-sm text-gray-300">
+                  {features[4].description}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0B0F2F] to-[#02071C] text-white py-24 px-6">
+      {/* Section 3 */}
+      <section
+        className="bg-no-repeat bg-cover bg-center py-24 px-6 text-white"
+        style={{ backgroundImage: "url('/images/bg-landing3.png')" }}
+      >
         <div className="max-w-7xl mx-auto space-y-20">
           {/* Staking Steps Section */}
           <div>
-            <div className="text-center md:text-left mb-10 flex flex-col md:flex-row justify-between items-start">
-              <div>
-                <h2 className="text-4xl font-bold leading-snug">
-                  How Crypto Staking Works in{" "}
-                  <span className="text-blue-400">3 Simple Steps</span>
+            <div className="text-center md:text-left mb-10 flex flex-col md:flex-row justify-between items-start gap-6">
+              {/* Heading */}
+              <div className="">
+                <h2 className="text-5xl font-bold leading-snug">
+                  How Crypto Staking <br /> Works in
+                  <span className="text-blue-400"> 3 Simple Steps</span>
                 </h2>
               </div>
-              <p className="text-gray-400 max-w-md mt-4 md:mt-0">
-                Staking your crypto has never been easier. Follow these three
-                simple steps to start earning rewards today!
-              </p>
+
+              {/* Vertical line + Paragraph in flex row */}
+              <div className="flex items-start gap-4 ">
+                {/* Vertical line */}
+                <div
+                  className="w-px h-24 bg-gradient-to-b"
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                  }}
+                />
+
+                {/* Paragraph */}
+                <p className="text-gray-400 max-w-md text-xl">
+                  Staking your crypto has never been easier.
+                  <br /> Follow these three simple steps to start
+                  <br /> earning rewards today!
+                </p>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
               {steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="border border-blue-500 rounded-xl p-6 space-y-2 hover:bg-blue-900/10 transition"
+                  className="flex items-center border border-blue-500 rounded-xl p-6 bg-transparent hover:bg-blue-900/10 transition"
                 >
-                  <div className="text-4xl font-bold text-blue-400">
+                  {/* Number */}
+                  <div className="text-5xl font-bold text-white mr-4">
                     {step.number}
                   </div>
-                  <h4 className="text-lg font-semibold">{step.title}</h4>
-                  <p className="text-sm text-gray-400">{step.description}</p>
+
+                  {/* Content */}
+                  <div>
+                    <h4 className="text-white text-lg font-semibold mb-1">
+                      {step.title}
+                    </h4>
+                    <p className="text-gray-400 text-sm">{step.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -291,20 +526,34 @@ function Landing() {
           {/* Favorite Crypto Section */}
           <div>
             <div className="text-center md:text-left mb-10 flex flex-col md:flex-row justify-between items-start">
-              <div>
-                <h2 className="text-4xl font-bold leading-snug">
+              <div className="">
+                <h2 className="text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
                   <span className="text-blue-400">Crypto Currencies</span>
                 </h2>
               </div>
-              <p className="text-gray-400 max-w-md mt-4 md:mt-0">
-                Choose from a wide range of trusted cryptocurrencies to stake
-                and start earning rewards today.
-              </p>
+
+              {/* Vertical line + Paragraph in flex row */}
+              <div className="flex items-start gap-4">
+                {/* Vertical line */}
+                <div
+                  className="w-px h-24 bg-gradient-to-b"
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                  }}
+                />
+
+                {/* Paragraph */}
+                <p className="text-gray-400 max-w-md mt-4 md:mt-0 text-xl">
+                  Choose from a wide range of trusted
+                  <br /> cryptocurrencies to stake and start earning
+                  <br /> rewards today.
+                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {cryptos.map((crypto, idx) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {visibleCryptos.map((crypto, idx) => (
                 <div
                   key={idx}
                   className="border border-blue-500 rounded-xl p-6 flex flex-col items-center text-center space-y-4 hover:bg-blue-900/10 transition"
@@ -319,28 +568,64 @@ function Landing() {
                     {crypto.reward}
                   </p>
                   <p className="text-sm text-gray-400">Monthly Rewards</p>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+                  <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm transition">
                     Stake Now
                   </button>
                 </div>
+              ))}
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentPage === index
+                      ? "bg-blue-500 scale-110"
+                      : "bg-gray-500 hover:bg-blue-400"
+                  }`}
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* Section 4 */}
       <section className="bg-[#060D27] text-white py-24 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-start mb-12">
-            <h2 className="text-4xl font-bold leading-snug">
-              What Our <span className="text-blue-400">Users Are Saying</span>
-            </h2>
-            <p className="text-gray-400 max-w-md mt-4 md:mt-0">
-              Join thousands of satisfied users who are growing their crypto
-              portfolios with EPTY. Hear what they have to say about their
-              staking experience!
-            </p>
+          <div className="flex flex-col md:flex-row justify-between gap-6 mb-12">
+            <div className="flex-1">
+              <h2 className="text-5xl font-bold leading-snug">
+                What Our{" "}
+                <span className="text-blue-400">
+                  Users Are
+                  <br /> Saying
+                </span>
+              </h2>
+            </div>
+
+            {/* Vertical line + Paragraph in flex row */}
+            <div className="flex items-center gap-4 flex-1">
+              {/* Vertical line */}
+              <div
+                className="w-px h-24 bg-gradient-to-b"
+                style={{
+                  backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                }}
+              />
+
+              {/* Paragraph */}
+              <p className="text-gray-400 max-w-md text-md">
+                Join thousands of satisfied users who are growing their crypto
+                <br />
+                portfolios with EPTY. Hear what they have to say about their
+                staking experience!
+              </p>
+            </div>
           </div>
 
           {/* Testimonial Cards */}
@@ -381,33 +666,54 @@ function Landing() {
         </div>
       </section>
 
-      <section className="bg-[#0B132E] text-white px-4 py-20">
+      {/* Section 5 */}
+      <section
+        className="min-h-screen bg-no-repeat bg-cover bg-center text-white px-4 py-20"
+        style={{ backgroundImage: "url('/images/bg-landing5.png')" }}
+      >
         <div className="max-w-7xl mx-auto">
-          {/* FAQ */}
-          <div className="flex flex-col md:flex-row gap-10 mb-28">
+          {/* FAQ container */}
+          <div className="bg-[#111827] rounded-2xl p-10 flex flex-col md:flex-row gap-6 mb-28">
+            {/* Left side - FAQ intro */}
             <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Frequently Asked{" "}
+              <h2 className="text-5xl md:text-5xl font-semibold leading-tight mb-4">
+                Frequently Asked <br />
                 <span className="text-blue-400">Questions</span>
               </h2>
-              <p className="text-gray-400">
-                Join thousands of satisfied users who are growing their crypto
-                portfolios with FastOne. Hear what they have to say about their
-                staking experience!
-              </p>
+
+              {/* Vertical line + Paragraph */}
+              <div className="flex items-start gap-4">
+                <div
+                  className="w-0.5 h-24"
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                  }}
+                />
+                <p className="text-gray-400 leading-relaxed text-md">
+                  Join thousands of satisfied users who are
+                  <br /> growing their crypto portfolios with FastOne.
+                  <br /> Hear what they have to say about their
+                  <br /> staking experience!
+                </p>
+              </div>
             </div>
 
+            {/* Right side - Accordion */}
             <div className="flex-1 space-y-4">
               {faqs.map((item, index) => (
                 <div
                   key={index}
-                  className="border border-blue-400 rounded-lg p-4 bg-[#111827] transition-all"
+                  className={`border rounded-md transition-all duration-300 px-6 py-4 ${
+                    active === index
+                      ? "border-blue-400 bg-[#1f2937]"
+                      : "border-blue-500"
+                  }`}
                 >
                   <div
                     className="flex justify-between items-center cursor-pointer"
                     onClick={() => setActive(index === active ? null : index)}
                   >
-                    <h4 className="text-sm font-semibold">{item.question}</h4>
+                    <h4 className="text-white font-medium">{item.question}</h4>
                     {active === index ? (
                       <FaChevronUp className="text-blue-400" />
                     ) : (
@@ -415,7 +721,9 @@ function Landing() {
                     )}
                   </div>
                   {active === index && (
-                    <p className="mt-2 text-sm text-gray-300">{item.answer}</p>
+                    <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+                      {item.answer}
+                    </p>
                   )}
                 </div>
               ))}
@@ -432,35 +740,73 @@ function Landing() {
               staking.
             </p>
             <div className="flex justify-center gap-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-md transition">
+              <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 text-[#0B132E] font-medium py-2 px-6 rounded-md transition duration-300">
                 Get Started Now
               </button>
+
               <button className="border border-blue-400 text-blue-400 py-2 px-6 rounded-md hover:bg-blue-400 hover:text-white transition">
                 Contact Support
               </button>
             </div>
           </div>
 
+          {/* Gradient Horizontal Line */}
+          <div className="relative my-20">
+            <div
+              className="h-[2px] w-1/2 mx-auto"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
+              }}
+            ></div>
+          </div>
+
           {/* Footer */}
-          <div className="border-t border-gray-700 pt-10 text-center text-sm text-gray-400">
-            <div className="flex flex-wrap justify-center gap-6 mb-6">
-              <a href="#">How It Works</a>
-              <a href="#">Supported Cryptos</a>
-              <a href="#">Staking Plans</a>
-              <a href="#">FAQ</a>
-              <a href="#">Blog</a>
-              <a href="#">Contact Us</a>
+          <div className="pt-10 text-center text-sm text-gray-400">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <img
+                src="./fastone-logo-text.png"
+                alt="FastOne"
+                className="h-10 md:h-12 object-contain"
+              />
             </div>
 
-            <div className="flex justify-center gap-4 text-white text-lg mb-6">
-              <FaInstagram />
-              <FaFacebookF />
-              <FaTwitter />
-              <FaYoutube />
-              <FaTelegramPlane />
+            {/* Footer Links */}
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 mb-6 text-base">
+              <a href="#" className="hover:text-white transition">
+                How It Works
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Supported Cryptos
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Staking Plans
+              </a>
+              <a href="#" className="hover:text-white transition">
+                FAQ
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Blog
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Contact Us
+              </a>
             </div>
 
-            <p className="text-sm">&copy; 2019–2025 . FastOne.com</p>
+            {/* Social Icons */}
+            <div className="flex justify-center gap-5 text-white text-lg mb-6">
+              <FaInstagram className="hover:text-blue-400 transition" />
+              <FaFacebookF className="hover:text-blue-400 transition" />
+              <FaTwitter className="hover:text-blue-400 transition" />
+              <FaYoutube className="hover:text-blue-400 transition" />
+              <FaTelegramPlane className="hover:text-blue-400 transition" />
+            </div>
+
+            {/* Copyright */}
+            <p className="text-gray-500 text-xs">
+              &copy; 2019–2025 FastOne.com
+            </p>
           </div>
         </div>
       </section>
