@@ -344,8 +344,15 @@ function Landing() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-[#0b132e] px-6 pb-4 pt-2">
-            <nav className="flex flex-col space-y-3 text-sm font-semibold">
+          <div
+            className="lg:hidden px-6 pb-4 pt-2 bg-blue"
+            style={{
+              background:
+                "linear-gradient(to bottom, #0b132e 0%, #1c2740 100%)", // linear-gradient(to bottom, #0b132e 0%, #1a2340 50%, #314e91 100%)
+            }}
+          >
+            {" "}
+            <nav className="flex flex-col space-y-3 text-sm font-semibold items-center">
               <a href="#">Trading</a>
               <a href="#">Markets</a>
               <a href="#">Platforms</a>
@@ -367,45 +374,46 @@ function Landing() {
 
       {/* Section 1 */}
       <section
-        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 text-white flex items-center sm:pt-0 pt-8"
-        // className="relative min-h-screen bg-no-repeat bg-cover bg-center px-6 lg:pt-45 sm:pt-30 pt-30 text-white"
+        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-4 sm:px-6 text-white flex items-center pt-6 sm:pt-12 lg:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
-        {/* <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 justify-items-stretch gap-10 items-center"> */}
-        <div className="max-w-7xl w-full mx-auto md:flex justify-between items-center gap-10">
+        <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-10">
           {/* Left Content */}
-          <div className="space-y-4 flex-1">
-            <p className="text-sm tracking-wide uppercase flex items-center gap-2">
-              <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={16} />
+          <div className="space-y-4 flex-1 text-center md:text-left">
+            <p className="text-xs sm:text-sm tracking-wide uppercase flex justify-center md:justify-start items-center gap-2">
+              <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={14} />
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Grow your assets effortlessly!
               </span>
             </p>
 
-            <h1 className="lg:text-5xl sm:text-4xl text-2xl font-bold leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-snug sm:leading-tight">
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Empower Your Trade
               </span>
               <br />
-              Master the <span className="text-white">Markets</span>
+              <span className="text-white">Master the Markets</span>
             </h1>
-            <p className="text-gray-300 lg:text-lg sm:text-sm">
+
+            <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed">
               Stake your cryptocurrencies and earn up to 15% APY. Secure,
-              <br />
+              <br className="hidden sm:block" />
               transparent, and beginner-friendly.
             </p>
-            <div className="flex gap-4 pt-4">
-              <button className="bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
+
+            {/* <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4 pt-4"> */}
+            <div className="flex gap-3 pt-4 w-full justify-center md:justify-normal">
+              <button className="text-sm sm:text-base whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
                 Start Staking Now
               </button>
-              <button className="border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text hover:bg-blue-600 hover:text-white px-6 py-2 rounded-lg font-semibold">
+              <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text hover:bg-blue-600 hover:text-white px-3 sm:px-6 py-2 rounded-lg font-semibold">
                 Learn How It Works
               </button>
             </div>
           </div>
 
           {/* Right Placeholder */}
-          <div className="w-full h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl flex-1" />
+          <div className="w-58 sm:w-64 md:w-[400px] h-58 sm:h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl md:flex-1 mt-6 sm:mt-10 md:mt-0" />
         </div>
       </section>
 
@@ -416,7 +424,7 @@ function Landing() {
           <div className="col-start-1 row-start-1 row-span-2 bg-gray-300 h-[300px] md:h-[300px]" />
 
           {/* div2 and div3 with vertical divider */}
-          <div className="col-start-2 col-span-2 row-start-1 flex items-start gap-4">
+          <div className="col-start-2 col-span-2 row-start-1 md:flex items-start gap-4">
             {/* div2: Heading */}
             <div className="flex-1">
               <h2 className="text-5xl md:text-5xl font-bold leading-snug text-white">
