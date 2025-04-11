@@ -39,11 +39,11 @@ const features = [
     title: "Smart Automation",
     description: "Let AI optimize your staking strategy.",
   },
-  {
-    icon: "🌐",
-    title: "Global Access",
-    description: "Stake from anywhere, anytime.",
-  },
+  // {
+  //   icon: "🌐",
+  //   title: "Global Access",
+  //   description: "Stake from anywhere, anytime.",
+  // },
 ];
 
 const steps = [
@@ -374,28 +374,28 @@ function Landing() {
 
       {/* Section 1 */}
       <section
-        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-4 sm:px-6 text-white flex items-center pt-6 sm:pt-12 lg:pt-0"
+        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-4 sm:px-6 text-white flex items-center py-5 pt-20 md:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
         <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-10">
           {/* Left Content */}
-          <div className="space-y-4 flex-1 text-center md:text-left">
-            <p className="text-xs sm:text-sm tracking-wide uppercase flex justify-center md:justify-start items-center gap-2">
+          <div className="space-y-4 flex-1 text-left">
+            <p className="text-md sm:text-xl tracking-wide uppercase flex justify-start items-center gap-2">
               <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={14} />
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Grow your assets effortlessly!
               </span>
             </p>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-snug sm:leading-tight">
-              <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug sm:leading-tight">
+              <span className="whitespace-nowrap bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Empower Your Trade
               </span>
               <br />
               <span className="text-white">Master the Markets</span>
             </h1>
 
-            <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed">
+            <p className="text-gray-300 text-xl sm:text-md lg:text-lg leading-relaxed">
               Stake your cryptocurrencies and earn up to 15% APY. Secure,
               <br className="hidden sm:block" />
               transparent, and beginner-friendly.
@@ -413,113 +413,70 @@ function Landing() {
           </div>
 
           {/* Right Placeholder */}
-          <div className="w-58 sm:w-64 md:w-[400px] h-58 sm:h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl md:flex-1 mt-6 sm:mt-10 md:mt-0" />
+          <div className="w-45 sm:w-64 md:w-[400px] h-45 sm:h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl md:flex-1 mt-4 sm:mt-10 md:mt-0" />
         </div>
       </section>
 
       {/* Section 2 */}
-      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6 pt-30">
-        <div className="max-w-7xl mx-auto grid grid-cols-3 grid-rows-3 gap-6">
-          {/* div1: Image - span 2 rows */}
-          <div className="col-start-1 row-start-1 row-span-2 bg-gray-300 h-[300px] md:h-[300px]" />
+      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6">
+        <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {/* Image Block */}
+          <div className="hidden sm:block bg-gray-300 h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2" />
 
-          {/* div2 and div3 with vertical divider */}
-          <div className="col-start-2 col-span-2 row-start-1 md:flex items-start gap-4">
-            {/* div2: Heading */}
-            <div className="flex-1">
-              <h2 className="text-5xl md:text-5xl font-bold leading-snug text-white">
-                Why{" "}
-                <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                  Stake
-                </span>
-                <br />
-                with Us
-              </h2>
+          {/* Text Content with Heading + Paragraph */}
+          <div className="lg:col-span-2">
+            <div className="flex flex-col lg:flex-row items-start gap-6">
+              {/* Heading */}
+              <div className="flex-1">
+                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white">
+                  Why{" "}
+                  <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                    Stake
+                  </span>
+                  <br />
+                  with Us
+                </h2>
+              </div>
+
+              {/* Horizontal line for tablet & below */}
+              {/* <div className="block lg:hidden w-full h-px my-6 bg-gradient-to-r from-[#000] via-[#92aeff] to-[#4575ff]" /> */}
+
+              {/* Vertical line for large screen only */}
+              <div className="flex items-center gap-4 sm:items-start mt-4 sm:mt-0">
+                {/* Vertical Line */}
+                <div
+                  className="w-px h-[120px] bg-gradient-to-b"
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                  }}
+                />
+
+                {/* Paragraph */}
+                <div className="flex-1">
+                  <p className="text-gray-300 text-base md:text-lg">
+                    Discover the advantages of staking with
+                    <br /> FastOne—where security, simplicity, and
+                    <br /> high rewards come together to help you
+                    <br /> grow your crypto effortlessly.
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
 
-            {/* vertical line */}
+          {/* Feature Cards (5 items) */}
+          {features.map((feature, index) => (
             <div
-              className="w-px h-30 mt-1 bg-gradient-to-b ml-6"
-              style={{
-                backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
-              }}
-            />
-
-            {/* div3: Paragraph */}
-            <div className="flex-1">
-              <p className="text-gray-300 text-base md:text-lg">
-                Discover the advantages of staking with
-                <br /> FastOne-where security, simplicity, and
-                <br /> high rewards come together to help you
-                <br /> grow your crypto effortlessly.
-              </p>
-            </div>
-          </div>
-
-          {/* Div 4 → Feature 0 */}
-          <div className="col-start-2 row-start-2">
-            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
-              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
-                <div className="text-3xl mb-2">{features[0].icon}</div>
-                <h4 className="text-lg font-semibold">{features[0].title}</h4>
-                <p className="text-sm text-gray-300">
-                  {features[0].description}
-                </p>
+              key={index}
+              className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]"
+            >
+              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition h-full">
+                <div className="text-3xl mb-2">{feature.icon}</div>
+                <h4 className="text-lg font-semibold">{feature.title}</h4>
+                <p className="text-sm text-gray-300">{feature.description}</p>
               </div>
             </div>
-          </div>
-
-          {/* Div 5 → Feature 1 */}
-          <div className="col-start-3 row-start-2">
-            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
-              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
-                <div className="text-3xl mb-2">{features[1].icon}</div>
-                <h4 className="text-lg font-semibold">{features[1].title}</h4>
-                <p className="text-sm text-gray-300">
-                  {features[1].description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Div 6 → Feature 2 */}
-          <div className="col-start-1 row-start-3">
-            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
-              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
-                <div className="text-3xl mb-2">{features[2].icon}</div>
-                <h4 className="text-lg font-semibold">{features[2].title}</h4>
-                <p className="text-sm text-gray-300">
-                  {features[2].description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Div 7 → Feature 3 */}
-          <div className="col-start-2 row-start-3">
-            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
-              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
-                <div className="text-3xl mb-2">{features[3].icon}</div>
-                <h4 className="text-lg font-semibold">{features[3].title}</h4>
-                <p className="text-sm text-gray-300">
-                  {features[3].description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Div 8 → Feature 4 */}
-          <div className="col-start-3 row-start-3">
-            <div className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]">
-              <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition">
-                <div className="text-3xl mb-2">{features[4].icon}</div>
-                <h4 className="text-lg font-semibold">{features[4].title}</h4>
-                <p className="text-sm text-gray-300">
-                  {features[4].description}
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
