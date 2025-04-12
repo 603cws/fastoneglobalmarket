@@ -3,10 +3,13 @@ import PriceTicker from "../components/PriceTicker";
 import TitleAreaVideo from "../components/TitleAreaVideo";
 import TradingTools from "../components/TradingTools";
 import WhyTrade from "../components/WhyTrade";
+import MarketHeaderSection from "../components/MarketHeaderSection";
+import TitleArea from "../components/TitleArea";
+import InstantAccount from "../components/InstantAccount";
 
 const benefits = [
   <>
-    <strong>
+    <strong className="">
       Trade major and minor forex pairs, metals, and other instruments
     </strong>{" "}
     including cfds, indices, metals, and energy.
@@ -37,24 +40,43 @@ function Currencies() {
     { name: "Markets", href: "" },
     { name: "Currencies" },
   ];
-  return (
-    <div className="header-2-wrap">
-      <Header mode={"light"} />
 
-      <TitleAreaVideo
-        title="Diversify your investment portfolio by trading CFDS on forex"
-        description=""
-        videoURL="/video/fastone-forex.mp4"
-        breadcrumbPaths={breadcrumbPaths}
+  const imagepath = "/dummyimage.png";
+  return (
+    <div className="">
+      <div className="bg-[#030B20] py-6 md:py-10">
+        <TitleArea breadcrumbPaths={breadcrumbPaths} />
+      </div>
+      <MarketHeaderSection
+        title={"Diversify your investment portfolio by trading CFDS on forex"}
+        imagepath={imagepath}
       />
-      <PriceTicker />
       <WhyTrade
         title="Why trade Currencies with FastOne?"
         benefits={benefits}
       />
       <TradingTools />
+      <InstantAccount />
     </div>
   );
+  // return (
+  //   <div className="header-2-wrap ">
+  //     {/* <Header mode={"light"} /> */}
+  //     <PriceTicker />
+  //     {/* <TitleAreaVideo
+  //       title="Diversify your investment portfolio by trading CFDS on forex"
+  //       description=""
+  //       videoURL="/video/fastone-forex.mp4"
+  //       breadcrumbPaths={breadcrumbPaths}
+  //     /> */}
+
+  //     <WhyTrade
+  //       title="Why trade Currencies with FastOne?"
+  //       benefits={benefits}
+  //     />
+  //     <TradingTools />
+  //   </div>
+  // );
 }
 
 export default Currencies;

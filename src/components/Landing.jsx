@@ -706,15 +706,15 @@ function Landing() {
 
       {/* Section 5 */}
       <section
-        className="min-h-screen bg-no-repeat bg-cover bg-center text-white px-4 py-20"
+        className="lg:min-h-screen bg-no-repeat bg-cover bg-center text-white px-4 py-10  lg:py-20"
         style={{ backgroundImage: "url('/images/bg-landing5.png')" }}
       >
         <div className="max-w-7xl mx-auto">
           {/* FAQ container */}
-          <div className="bg-[#111827] rounded-2xl p-10 flex flex-col md:flex-row gap-6 mb-28">
+          <div className="bg-[#111827] rounded-2xl p-10 hidden   sm:flex flex-col lg:flex-row gap-6 mb-10 lg:mb-28">
             {/* Left side - FAQ intro */}
-            <div className="flex-1">
-              <h2 className="text-5xl md:text-5xl font-semibold leading-tight mb-4">
+            <div className="flex-1 flex flex-col ju items-center  lg:justify-normal ">
+              <h2 className="text-4xl lg:text-5xl font-semibold leading-tight mb-4">
                 Frequently Asked <br />
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                   Questions
@@ -722,14 +722,14 @@ function Landing() {
               </h2>
 
               {/* Vertical line + Paragraph */}
-              <div className="flex items-start gap-4">
+              <div className="flex justify-center items-center lg:items-start gap-4">
                 <div
                   className="w-0.5 h-24"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
                 />
-                <p className="text-gray-400 leading-relaxed text-md">
+                <p className="text-[#fff] leading-relaxed text-sm lg:text-base">
                   Join thousands of satisfied users who are
                   <br /> growing their crypto portfolios with FastOne.
                   <br /> Hear what they have to say about their
@@ -750,7 +750,7 @@ function Landing() {
                     onClick={() => setActive(index === active ? null : index)}
                   >
                     <div className="flex justify-between items-center">
-                      <h4 className="text-white font-medium">
+                      <h4 className="text-white text-sm lg:text-base font-medium">
                         {item.question}
                       </h4>
                       {active === index ? (
@@ -771,7 +771,7 @@ function Landing() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mb-28">
+          <div className="text-center lg:mb-28">
             <h2 className="text-4xl md:text-5xl font-bold">
               Ready to{" "}
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -782,7 +782,7 @@ function Landing() {
               Join thousands of users growing their crypto portfolios with
               staking.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 text-xs sm:text-base">
               <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-[#0B132E] font-medium py-2 px-6 rounded-md transition duration-300">
                 Get Started Now
               </button>
@@ -794,9 +794,9 @@ function Landing() {
           </div>
 
           {/* Gradient Horizontal Line */}
-          <div className="relative my-20">
+          <div className="relative my-10 lg:my-20">
             <div
-              className="h-[2px] w-1/2 mx-auto"
+              className="h-[2px] sm:w-1/2 mx-auto"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
@@ -805,7 +805,7 @@ function Landing() {
           </div>
 
           {/* Footer */}
-          <div className="pt-2 text-center text-sm text-gray-400">
+          <div className="sm:pt-2 text-center text-sm text-gray-400">
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <img
@@ -816,7 +816,7 @@ function Landing() {
             </div>
 
             {/* Footer Links */}
-            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 mb-6 text-base pt-12">
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 sm:mb-6 text-base sm:pt-12">
               <a href="#" className="hover:text-white transition">
                 How It Works
               </a>

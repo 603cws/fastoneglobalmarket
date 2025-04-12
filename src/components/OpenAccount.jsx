@@ -13,7 +13,10 @@ const OpenAccount = () => {
                 </div>
                 <div className="col-md-6 box-right">
                   <div className="inner-img">
-                    <a href="/account-comparison" className="btn-one rounded-btn white-btn">
+                    <a
+                      href="/account-comparison"
+                      className="btn-one rounded-btn white-btn"
+                    >
                       Open Account Now
                     </a>
                   </div>

@@ -59,12 +59,30 @@ section p {
   z-index: 9999;
 }
 .main-header {
+}
+/* .main-header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   padding: 1rem 0;
   z-index: 1;
+} */
+
+.gradient-left-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px; /* Thickness of the border */
+  background-image: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #92aeff 24%,
+    #4575ff 77%,
+    #000000 98%
+  );
 }
 .header-2-wrap .page-header {
   top: -5rem;
