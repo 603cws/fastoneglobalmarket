@@ -1177,3 +1177,25 @@ footer {
     border: 1px solid #f8f9fa;
   }
 }
+
+.swiper {
+  padding-bottom: 20px !important;
+  position: relative !important;
+}
+
+/* Add to your global CSS or inside a module */
+.swiper-scrollbar {
+  /* background-color: #1e293b; track color */
+  background: linear-gradient(to right, #4575ff, #92aeff) !important;
+  height: 6px !important;
+  border-radius: 8px !important;
+  position: absolute !important;
+  bottom: 0px !important; /* control position */
+  z-index: 999 !important;
+  cursor: pointer;
+}
+
+.swiper-scrollbar-drag {
+  background: linear-gradient(to right, #4575ff, #92aeff); /* thumb */
+  border-radius: 8px;
+}

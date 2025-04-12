@@ -12,6 +12,10 @@ import {
 } from "react-icons/fa";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import PriceTicker from "./PriceTicker";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Scrollbar } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const features = [
   {
@@ -246,7 +250,7 @@ const faqs = [
   },
 ];
 
-const CRYPTOS_PER_PAGE = 5;
+// const CRYPTOS_PER_PAGE = isMobile ? 2 : 5;
 
 function Landing() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -255,10 +259,11 @@ function Landing() {
   const [active, setActive] = useState(0);
   const start = currentSlide * cardsPerSlide;
   const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
-  const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = Math.ceil(cryptos.length / CRYPTOS_PER_PAGE);
-  const startIdx = currentPage * CRYPTOS_PER_PAGE;
-  const visibleCryptos = cryptos.slice(startIdx, startIdx + CRYPTOS_PER_PAGE);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const CRYPTOS_PER_PAGE = isMobile ? 2 : 5;
+  // const totalPages = Math.ceil(cryptos.length / CRYPTOS_PER_PAGE);
+  // const startIdx = currentPage * CRYPTOS_PER_PAGE;
+  // const visibleCryptos = cryptos.slice(startIdx, startIdx + CRYPTOS_PER_PAGE);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -488,10 +493,10 @@ function Landing() {
         <div className="max-w-7xl mx-auto space-y-20">
           {/* Staking Steps Section */}
           <div>
-            <div className="text-center md:text-left mb-10 flex flex-col md:flex-row justify-between items-start gap-6">
+            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between lg:items-start gap-6 ">
               {/* Heading */}
               <div className="">
-                <h2 className="text-5xl font-bold leading-snug">
+                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug text-start">
                   How Crypto Staking <br /> Works in
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                     {" "}
@@ -501,7 +506,7 @@ function Landing() {
               </div>
 
               {/* Vertical line + Paragraph in flex row */}
-              <div className="flex items-start gap-4 ">
+              <div className="flex items-start lg:items-center gap-4 ">
                 {/* Vertical line */}
                 <div
                   className="w-px h-24 bg-gradient-to-b"
@@ -511,7 +516,7 @@ function Landing() {
                 />
 
                 {/* Paragraph */}
-                <p className="text-gray-400 max-w-md text-xl">
+                <p className="text-gray-400 max-w-md text-start text-base lg:text-xl">
                   Staking your crypto has never been easier.
                   <br /> Follow these three simple steps to start
                   <br /> earning rewards today!
@@ -519,11 +524,11 @@ function Landing() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-6">
               {steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px]"
+                  className="rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px]  w-auto sm:w-3/4 lg:w-auto"
                 >
                   <div className="flex items-center rounded-xl bg-[#0b132e] p-6 h-full">
                     {/* Number */}
@@ -548,9 +553,9 @@ function Landing() {
 
           {/* Favorite Crypto Section */}
           <div>
-            <div className="text-center md:text-left mb-10 flex flex-col md:flex-row justify-between items-start">
+            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start">
               <div className="">
-                <h2 className="text-5xl font-bold leading-snug">
+                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                     Crypto Currencies
@@ -569,7 +574,7 @@ function Landing() {
                 />
 
                 {/* Paragraph */}
-                <p className="text-gray-400 max-w-md mt-4 md:mt-0 text-xl">
+                <p className="text-gray-400 max-w-md mt-4 md:mt-0 text-start text-base lg:text-xl">
                   Choose from a wide range of trusted
                   <br /> cryptocurrencies to stake and start earning
                   <br /> rewards today.
@@ -577,44 +582,46 @@ function Landing() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {visibleCryptos.map((crypto, idx) => (
-                <div
-                  key={idx}
-                  className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF]"
-                >
-                  <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition">
-                    <img
-                      src={crypto.image}
-                      alt={crypto.name}
-                      className="w-12 h-12"
-                    />
-                    <h4 className="font-semibold">{crypto.name}</h4>
-                    <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                      {crypto.reward}
-                    </p>
-                    <p className="text-sm text-gray-400">Monthly Rewards</p>
-                    <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
-                      Stake Now
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="flex justify-center mt-6 space-x-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentPage === index
-                      ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
-                      : "bg-gray-500 hover:bg-blue-400"
-                  }`}
-                />
-              ))}
+            <div className="">
+              <Swiper
+                modules={[Pagination, Scrollbar, Autoplay]}
+                scrollbar={{ draggable: true }}
+                spaceBetween={20}
+                autoplay={true}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 2,
+                  },
+                  640: {
+                    slidesPerView: 3,
+                  },
+                  1024: {
+                    slidesPerView: 5,
+                  },
+                }}
+              >
+                {cryptos.map((crypto, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
+                      <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition">
+                        <img
+                          src={crypto.image}
+                          alt={crypto.name}
+                          className="w-12 h-12"
+                        />
+                        <h4 className="font-semibold">{crypto.name}</h4>
+                        <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                          {crypto.reward}
+                        </p>
+                        <p className="text-sm text-gray-400">Monthly Rewards</p>
+                        <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
+                          Stake Now
+                        </button>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
         </div>
