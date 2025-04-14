@@ -631,63 +631,95 @@ function Landing() {
       <section className="bg-[#060D27] text-white py-24 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between gap-6 mb-12">
+          <div className="flex flex-col lg:flex-row justify-between gap-6 mb-12">
+            {/* Heading */}
             <div className="flex-1">
-              <h2 className="text-5xl font-bold leading-snug">
+              <h2 className="text-4xl md:text-5xl font-bold leading-snug">
                 What Our{" "}
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                   Users Are
-                  <br /> Saying
+                  <br className="hidden md:block" /> Saying
                 </span>
               </h2>
             </div>
 
-            {/* Vertical line + Paragraph in flex row */}
-            <div className="flex items-center gap-4 flex-1">
-              {/* Vertical line */}
+            {/* Paragraph block - placed below on tablet & mobile */}
+            <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0">
+              {/* Gradient line */}
               <div
-                className="w-px h-24 bg-gradient-to-b"
+                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b"
                 style={{
-                  backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
+                  backgroundImage:
+                    "linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)",
                 }}
               />
 
               {/* Paragraph */}
-              <p className="text-gray-400 max-w-md text-md">
+              <p className="text-gray-400 text-md sm:text-xl max-w-md">
                 Join thousands of satisfied users who are growing their crypto
-                <br />
                 portfolios with EPTY. Hear what they have to say about their
                 staking experience!
               </p>
             </div>
           </div>
 
-          {/* Testimonial Cards */}
-          <div className="bg-[#111827] p-6 rounded-2xl flex flex-col md:flex-row gap-6 justify-center transition-all duration-500">
-            {visibleTestimonials.map((user, idx) => (
-              <div
-                key={idx}
-                className="w-full md:w-1/2 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl"
-              >
-                <div className="rounded-xl p-6 flex items-start gap-4 bg-[#111827] h-full">
+          {/* Testimonials Wrapper */}
+          <div className="bg-[#111827] p-6 rounded-2xl transition-all duration-500">
+            {/* Mobile: Show only currentSlide */}
+            <div className="flex flex-col gap-6 md:hidden">
+              <div className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl">
+                <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
                   {/* Image */}
                   <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
                   {/* Content */}
-                  <div>
-                    <h4 className="font-semibold text-lg">{user.name}</h4>
-                    <div className="flex text-blue-400 mb-2">
-                      {[...Array(user.rating)].map((_, i) => (
-                        <FaStar key={i} size={16} />
-                      ))}
+                  {testimonials[currentSlide] && (
+                    <div>
+                      <h4 className="font-semibold text-lg">
+                        {testimonials[currentSlide].name}
+                      </h4>
+                      <div className="flex text-blue-400 mb-2">
+                        {[...Array(testimonials[currentSlide].rating)].map(
+                          (_, i) => (
+                            <FaStar key={i} size={16} />
+                          )
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-300">
+                        {testimonials[currentSlide].comment}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-300">{user.comment}</p>
-                  </div>
+                  )}
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Tablet and above: Show all */}
+            <div className="hidden md:flex flex-col lg:flex-row gap-6">
+              {visibleTestimonials.map((user, idx) => (
+                <div
+                  key={idx}
+                  className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl"
+                >
+                  <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
+                    {/* Image */}
+                    <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
+                    {/* Content */}
+                    <div>
+                      <h4 className="font-semibold text-lg">{user.name}</h4>
+                      <div className="flex text-blue-400 mb-2">
+                        {[...Array(user.rating)].map((_, i) => (
+                          <FaStar key={i} size={16} />
+                        ))}
+                      </div>
+                      <p className="text-sm text-gray-300">{user.comment}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Pagination Dots */}
+          {/* Pagination Dots only on mobile */}
           <div className="flex justify-center gap-2 mt-8">
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
