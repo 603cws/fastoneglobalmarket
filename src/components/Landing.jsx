@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  FaInstagram,
-  FaFacebookF,
-  FaTwitter,
-  FaYoutube,
-  FaTelegramPlane,
-  FaStar,
-  FaRegCircle,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
+import { FaStar, FaRegCircle, FaBars, FaTimes } from "react-icons/fa";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import PriceTicker from "./PriceTicker";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -571,7 +561,6 @@ function Landing() {
               transparent, and beginner-friendly.
             </p>
 
-            {/* <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4 pt-4"> */}
             <div className="flex gap-3 pt-4 w-full justify-center md:justify-normal">
               <button className="text-sm sm:text-base whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
                 Start Staking Now
@@ -607,9 +596,6 @@ function Landing() {
                   with Us
                 </h2>
               </div>
-
-              {/* Horizontal line for tablet & below */}
-              {/* <div className="block lg:hidden w-full h-px my-6 bg-gradient-to-r from-[#000] via-[#92aeff] to-[#4575ff]" /> */}
 
               {/* Vertical line for large screen only */}
               <div className="flex items-center gap-4 sm:items-start mt-4 sm:mt-0">
@@ -1037,11 +1023,32 @@ function Landing() {
 
             {/* Social Icons */}
             <div className="flex justify-center gap-5 text-white text-lg mb-6 pt-6">
-              <FaInstagram className="hover:text-blue-400 transition" />
-              <FaFacebookF className="hover:text-blue-400 transition" />
-              <FaTwitter className="hover:text-blue-400 transition" />
-              <FaYoutube className="hover:text-blue-400 transition" />
-              <FaTelegramPlane className="hover:text-blue-400 transition" />
+              {/* <FaInstagram className="hover:text-blue-400 transition" /> */}
+              <img
+                src="./icons/instagram.png"
+                alt="Instagram"
+                className="hover:brightness-125 transition"
+              />
+              <img
+                src="./icons/facebook.png"
+                alt="Facebook"
+                className="hover:brightness-125 transition"
+              />
+              <img
+                src="./icons/twitter.png"
+                alt="Twitter"
+                className="hover:brightness-125 transition"
+              />
+              <img
+                src="./icons/youtube.png"
+                alt="Youtube"
+                className="hover:brightness-125 transition"
+              />
+              <img
+                src="./icons/linkedin.png"
+                alt="LinkedIn"
+                className="hover:brightness-125 transition"
+              />
             </div>
 
             {/* Copyright */}
