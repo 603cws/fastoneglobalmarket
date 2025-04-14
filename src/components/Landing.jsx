@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Header from "./Header";
 
 const features = [
   {
@@ -247,9 +248,6 @@ function Landing() {
   const [active, setActive] = useState(0);
   const start = currentSlide * cardsPerSlide;
   const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [expandedMenu, setExpandedMenu] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -258,20 +256,6 @@ function Landing() {
 
     return () => clearInterval(interval);
   }, [totalSlides]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Helper function to toggle dropdowns
-  const toggleMenu = (menu) => {
-    setExpandedMenu((prev) => (prev === menu ? null : menu));
-  };
 
   return (
     <div className="scrollbar-hidden">
@@ -289,248 +273,7 @@ function Landing() {
       </div>
 
       {/* Header */}
-      <header
-        className={`fixed left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md transition-all duration-300 ${
-          scrolled ? "top-0" : "lg:top-12"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
-          {/* Logo */}
-          <div className="flex items-center space-x-2 py-6">
-            <img src="./fastone-logo-text2.png" alt="FastOne" className="h-8" />
-          </div>
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex text-sm font-semibold">
-            <ul className="flex space-x-6">
-              {/* Trading */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  Trading
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-              {/* Markets */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  Trading
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-              {/* Platforms */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  Platforms
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-              {/* News */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  News
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-              {/* Company */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  Company
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-              {/* Partners */}
-              <li className="relative group hover:text-blue-600">
-                <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  Partners
-                </div>
-                <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Overview
-                  </li>
-                  <li className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md">
-                    Tools
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          {/* Desktop Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition">
-              Log in
-            </button>
-            <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition">
-              Create Account
-            </button>
-          </div>
-          {/* Mobile Menu Icon */}
-          <div className="lg:hidden">
-            {menuOpen ? (
-              <FaTimes
-                className="text-2xl cursor-pointer"
-                onClick={() => setMenuOpen(false)}
-              />
-            ) : (
-              <FaBars
-                className="text-2xl cursor-pointer"
-                onClick={() => setMenuOpen(true)}
-              />
-            )}
-          </div>
-        </div>
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <div
-            className="lg:hidden px-6 pb-4 pt-2 bg-blue transform transition-all duration-500 ease-in-out"
-            style={{
-              background:
-                "linear-gradient(to bottom, #0b132e 0%, #1c2740 100%)", // linear-gradient(to bottom, #0b132e 0%, #1a2340 50%, #314e91 100%)
-            }}
-          >
-            {" "}
-            <nav className="flex flex-col space-y-7 text-sm font-semibold">
-              {/* Trading */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("trading")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>Trading</span>
-                  <span>{expandedMenu === "trading" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "trading" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-              {/* Markets */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("markets")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>Markets</span>
-                  <span>{expandedMenu === "markets" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "markets" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-              {/* Platforms */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("platforms")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>Platforms</span>
-                  <span>{expandedMenu === "platforms" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "platforms" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-              {/* News */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("news")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>News</span>
-                  <span>{expandedMenu === "news" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "news" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-              {/* Company */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("company")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>Company</span>
-                  <span>{expandedMenu === "company" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "company" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-              {/* Partners */}
-              <div>
-                <div
-                  onClick={() => toggleMenu("partners")}
-                  className="flex justify-between items-center cursor-pointer"
-                >
-                  <span>Partners</span>
-                  <span>{expandedMenu === "partners" ? "▲" : "▼"}</span>
-                </div>
-                {expandedMenu === "partners" && (
-                  <ul className="mt-2 ml-4 text-white space-y-3">
-                    <li className="hover:underline">Overview</li>
-                    <li className="hover:underline">Tools</li>
-                  </ul>
-                )}
-              </div>
-            </nav>
-            <div className="mt-4 flex flex-col space-y-3">
-              <button className="border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition">
-                Log in
-              </button>
-              <button className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
-                Create Account
-              </button>
-            </div>
-          </div>
-        )}
-      </header>
+      <Header />
 
       {/* Section 1 */}
       <section
@@ -897,7 +640,7 @@ function Landing() {
           {/* FAQ container */}
           <div className="bg-[#111827] rounded-2xl p-10 hidden   sm:flex flex-col lg:flex-row gap-6 mb-10 lg:mb-28">
             {/* Left side - FAQ intro */}
-            <div className="flex-1 flex flex-col ju items-center  lg:justify-normal ">
+            <div className="flex-1 flex flex-col  lg:justify-normal ">
               <h2 className="text-4xl lg:text-5xl font-semibold leading-tight mb-4">
                 Frequently Asked <br />
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -906,7 +649,7 @@ function Landing() {
               </h2>
 
               {/* Vertical line + Paragraph */}
-              <div className="flex justify-center items-center lg:items-start gap-4">
+              <div className="flex  items-center lg:items-start gap-4">
                 <div
                   className="w-0.5 h-24"
                   style={{

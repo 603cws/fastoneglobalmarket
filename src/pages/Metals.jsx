@@ -48,7 +48,10 @@ function Metals() {
       <div className="bg-[#030B20] py-10">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>
-      <MarketHeaderSection imagepath={imagepath} />
+      <MarketHeaderSection
+        title="Trade CFDs on spot and metals, Take advantage of volatility in gold, silver, oil and natural gas."
+        imagepath={imagepath}
+      />
       <WhyTrade
         title="Why trade Precious Metals with FastOne?"
         benefits={benefits}
