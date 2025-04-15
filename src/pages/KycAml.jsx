@@ -218,7 +218,8 @@ function KycAml() {
                 Financial Markets Limited has full discretion to temporarily
                 block the suspicious customer's account or terminate a
                 relationship with an existing customer. For more information you
-                can contact us at <strong>support@fastoneglobalmarkets.com</strong>
+                can contact us at{" "}
+                <strong>support@fastoneglobalmarkets.com</strong>
               </p>
             </div>
           </div>

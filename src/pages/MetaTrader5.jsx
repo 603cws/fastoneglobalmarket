@@ -4,7 +4,7 @@ import InstantAccount from "../components/InstantAccount";
 import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 
-function MetaTrader4() {
+function MetaTrader5() {
   const imagepath = "/dummyimage.png";
   const handleLinkClick = (event, isLogin) => {
     event.preventDefault();
@@ -14,26 +14,27 @@ function MetaTrader4() {
   const tradingGridData = [
     {
       imagepath: "/images/oneclick.png",
-      title: "one-click Trading",
-      description: "Enter the market and close positions with just one click.",
+      title: "MetaTrader Market",
+      description:
+        "A big and reliable online shop, where you can find more that 1,500 expert advisors and technical indicators.",
     },
     {
       imagepath: "/images/AlgoTrading.png",
       title: "Algorithmic trading",
       description:
-        "Create your own trading robots in MQL4 programming language and run them in your terminal.",
+        "Using MQL5, a specialized programming environment, you can create, optimize, and test trading robots by yourself.",
     },
     {
       imagepath: "/images/metatradermarket.png",
-      title: "MetaTrader Market",
+      title: "Virtual hosting",
       description:
-        "Buy Expert Advisors and indicators directly in MetaTrader 4.",
+        "MetaTrader 5 may help you to rent a virtual hosting for 24/7 operation of trading robots and subscriptions for trading signals.",
     },
     {
       imagepath: "/images/fundamentalAnalyisi.png",
-      title: "Fundamental analysis",
+      title: "Flexible trading system",
       description:
-        "News and signals in your terminal will allow you to keep track of all financial market events.",
+        "MetaTrader 5 features netting and hedging systems, Market Depth, and segregation of orders and transactions.",
     },
   ];
 
@@ -59,32 +60,36 @@ function MetaTrader4() {
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
                   <h2 className="font-bold text-2xl lg:text-left md:text-3xl lg:text-4xl lg:-mb-1">
-                    MetaTrader 4
+                    MetaTrader 5
                   </h2>
                   <p className="text-lg font-light md:text-3xl lg:text-3xl">
-                    One of the most popular platforms on the currency market
+                    Choose MT5 - one of the best and most advanced terminals on
+                    the market
                   </p>
                   <p className="text-sm lg:text-base  font-light text-white/60">
-                    The classic MetaTrader 4 terminal offered by RoboForex is
-                    the top choice for trading among its clients. It is widely
-                    popular among both beginner and experienced traders,
-                    providing all necessary features and tools for the financial
-                    market. Additionally, it offers unique functionality and
-                    opportunities specific to MQL platforms.
+                    MetaTrader 5 (MT5) trading terminal combines advanced
+                    technologies of order execution and distributed computations
+                    for implementing the most ambitious trading ideas.
+                    MetaTrader 5 is one of the most advanced platforms for
+                    creating and testing trading robots and strategies. If you
+                    value speed and reliability while working with trading
+                    robots, and want to use the most up-to-date modern
+                    technologies, then MetaTrader 5 platform is the best choice
+                    for you.
                   </p>
                   <div className="text-sm  lg:text-base font-light text-white/60">
                     <ul className="list-disc pl-5 lg:pl-0 lg:list-inside">
-                      <li>3 types of order execution</li>
-                      <li>50 ready-to-use indicators for technical analysis</li>
-                      <li>Basic tools for graphic analysis</li>
-                      <li>Opportunity to program your own trading robot</li>
+                      <li>4 types of order execution</li>
+                      <li>Multi-currency tester</li>
+                      <li>80 technical indicators and analytical tools</li>
+                      <li>Transfer funds between accounts</li>
                     </ul>
                   </div>
 
                   <div>
                     <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium">
                       {" "}
-                      <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt4/fastoneglobal4setup.exe">
+                      <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt5/fastoneglobal5setup.exe">
                         download meta trader 4 for pc
                       </a>
                     </button>
@@ -109,17 +114,19 @@ function MetaTrader4() {
                   ))}
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
-                  <button className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button
+                    onClick={(e) => handleLinkClick(e, false)}
+                    className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium"
+                  >
                     {" "}
-                    <a href="#" onClick={(e) => handleLinkClick(e, false)}>
-                      open trading account{" "}
-                    </a>
+                    <a href="#">open trading account </a>
                   </button>
-                  <button className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button
+                    onClick={(e) => handleLinkClick(e, false)}
+                    className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium"
+                  >
                     {" "}
-                    <a href="#" onClick={(e) => handleLinkClick(e, false)}>
-                      open demo account{" "}
-                    </a>
+                    <a href="#">open demo account </a>
                   </button>
                 </div>
               </div>
@@ -132,21 +139,23 @@ function MetaTrader4() {
             <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 mb-10">
               <div className="flex-1 space-y-6">
                 <h2 className="text-white text-3xl lg:text-4xl capitalize">
-                  MetaTrader 4 mobile application
+                  MetaTrader 5 mobile Terminal
                 </h2>
                 <p className="text-sm lg:text-base text-white/20">
-                  MetaTrader 4 portable application will allow you to trade from
-                  anywhere in the world. Designed specifically for smartphones
-                  and tablets, this mobile terminal offers traders a familiar
-                  interface with slight modifications and the same set of tools
-                  and features as the desktop terminal. Download the portable
-                  version of the MetaTrader 4 to your mobile device and try
-                  trading from any convenient place - the terminal will always
-                  be with you!
+                  You can trade through MetaTrader 5 using any portable device
+                  from anywhere in the world at any moment. The application
+                  supports both netting and hedging systems, includes all tools
+                  and features necessary for work: Market Depth, all types of
+                  trading operations, 30 technical indicators, 24 analytical
+                  objects, and more. You will always keep track of the market
+                  situation, be able to perform trading operations and monitor
+                  the history. Download the portable version of MetaTrader 5 to
+                  your mobile device and try trading from any convenient place -
+                  the terminal will always be with you!
                 </p>
                 <div className="flex flex-col md:flex-row justify-start items-start lg:items-center gap-4">
                   <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="https://download.mql5.com/cdn/mobile/mt4/ios?server=FastOneGlobal-Demo,FastOneGlobal-Main">
+                    <a href="/app-coming-soon">
                       <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
                         <FaApple size={30} color="white" />
                         <div>
@@ -157,7 +166,7 @@ function MetaTrader4() {
                     </a>
                   </button>
                   <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="https://download.mql5.com/cdn/mobile/mt4/android?server=FastOneGlobal-Demo,FastOneGlobal-Main">
+                    <a href="/app-coming-soon">
                       <div className="flex  items-center bg-[#000A73]/50 px-12 lg:px-10 py-1 gap-3">
                         <IoLogoGooglePlaystore size={30} color="white" />
                         <div>
@@ -183,15 +192,17 @@ function MetaTrader4() {
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10">
               <div className="flex-1 space-y-6">
                 <h2 className="text-white text-3xl lg:text-4xl">
-                  MetaTrader 4 web platform
+                  MetaTrader 5 web platform
                 </h2>
                 <p className="text-white/20">
-                  Also, you have an opportunity to use a web version of
-                  MetaTrader 4 platform, which is supported by all available
-                  browsers. The MT4 web terminal offers the same features and
-                  performance as the desktop version, and is still available in
-                  all languages supported by FastOne websites. Manage your
-                  positions freely and easily from any place in the world.
+                  Using MetaTrader 5 web terminal from MetaQuotes, you can trade
+                  on any device directly from a browser. The web terminal
+                  includes all features and options of the desktop version, so
+                  you will always be able to keep track of your positions and
+                  make quick trading decisions depending on the market situation
+                  at the moment. All you have to do to use the web version of
+                  MetaTrader 5 terminal is to have internet connection, a
+                  browser, and the password to your FastOne trading account.
                 </p>
                 <div className="flex justify-start items-center gap-4">
                   <button className="text-white border border-[#4575FF] capitalize font-medium">
@@ -223,13 +234,13 @@ function MetaTrader4() {
               {/* Left Side */}
               <div className="space-y-4">
                 <h2 className="text-xl md:text-2xl lg:text-3xl text-white font-semibold">
-                  Why trade on MetaTrader 4 app with Fastone
+                  Why trade on MetaTrader 5 app with Fastone
                 </h2>
                 <p className="text-sm text-white/30 ">
-                  Enjoy trading on this time-tested and convenient mobile
-                  trading platform, with the broker 800,000 traders trust.
-                  Access diverse financial markets and real-time execution to
-                  trade anytime, anywhere.
+                  Better-than-market conditions, unique features and
+                  cutting-edge security, partnered with our dedication to
+                  transparency and excellent customer service, are the reasons
+                  traders continue to choose FastOne.
                 </p>
               </div>
 
@@ -285,4 +296,4 @@ function MetaTrader4() {
   );
 }
 
-export default MetaTrader4;
+export default MetaTrader5;

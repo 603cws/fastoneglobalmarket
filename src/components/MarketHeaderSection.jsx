@@ -1,7 +1,8 @@
 function MarketHeaderSection({ title, imagepath }) {
   return (
     <div className="bg-[#030B20]">
-      <div className="!container mx-auto lg:pt-10  md:pb-5 px-4">
+      <div className="container mx-auto lg:pt-10  md:pb-5 ">
+        {/* <div className="container mx-auto lg:pt-10  md:pb-5 px-4"> */}
         <div className="">
           <div className="flex flex-col lg:flex-row justify-center ">
             <div className="flex-1 flex justify-center pb-4 mb:pb-0 lg:py-10 ">

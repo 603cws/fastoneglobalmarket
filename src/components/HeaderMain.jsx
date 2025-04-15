@@ -37,30 +37,32 @@ const menuItems = [
     title: "Platforms",
     href: null,
     submenu: [
-      {
-        title: "Desktop",
-        href: null,
-        subsubmenu: [
-          { title: "MetaTrader 4", href: "/desktop/metatrader4" },
-          { title: "MetaTrader 5", href: "/desktop/metatrader5" },
-        ],
-      },
-      {
-        title: "Mobile",
-        href: null,
-        subsubmenu: [
-          { title: "FastOne MetaTrader 4", href: "/mobile/metatrader4" },
-          { title: "FastOne MetaTrader 5", href: "/mobile/metatrader5" },
-        ],
-      },
-      {
-        title: "Web",
-        href: null,
-        subsubmenu: [
-          { title: "WebTerminal - MetaTrader 4", href: "/web/metatrader4" },
-          { title: "WebTerminal - MetaTrader 5", href: "/web/metatrader5" },
-        ],
-      },
+      { title: "MetaTrader 4", href: "/metatrader4" },
+      { title: "MetaTrader 5", href: "/metatrader5" },
+      // {
+      //   title: "Desktop",
+      //   href: null,
+      //   subsubmenu: [
+      //     { title: "MetaTrader 4", href: "/desktop/metatrader4" },
+      //     { title: "MetaTrader 5", href: "/desktop/metatrader5" },
+      //   ],
+      // },
+      // {
+      //   title: "Mobile",
+      //   href: null,
+      //   subsubmenu: [
+      //     { title: "FastOne MetaTrader 4", href: "/mobile/metatrader4" },
+      //     { title: "FastOne MetaTrader 5", href: "/mobile/metatrader5" },
+      //   ],
+      // },
+      // {
+      //   title: "Web",
+      //   href: null,
+      //   subsubmenu: [
+      //     { title: "WebTerminal - MetaTrader 4", href: "/web/metatrader4" },
+      //     { title: "WebTerminal - MetaTrader 5", href: "/web/metatrader5" },
+      //   ],
+      // },
     ],
     orientation: "fo-horizontal",
   },
@@ -145,7 +147,7 @@ function HeaderMain() {
                         <Link
                           to={submenuitem.href}
                           onClick={(e) =>
-                            submenuitem.onClick && submenuitem.onClick(e)
+                            submenuitem.onClick && handleLinkClick(e, false)
                           }
                         >
                           {submenuitem.title}
@@ -172,7 +174,7 @@ function HeaderMain() {
             </Link>
           </button>
           <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition">
-            <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
+            <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
               Create Account
             </Link>
           </button>
@@ -220,7 +222,15 @@ function HeaderMain() {
                     {expandedMenu === items.title &&
                       items.submenu.map((submenuitem) => (
                         <li className="hover:underline" key={submenuitem.title}>
-                          <a href={submenuitem.href}>{submenuitem.title}</a>{" "}
+                          {/* <a href={submenuitem.href}>{submenuitem.title}</a>{" "} */}
+                          <Link
+                            to={submenuitem.href}
+                            onClick={(e) =>
+                              submenuitem.onClick && handleLinkClick(e, false)
+                            }
+                          >
+                            {submenuitem.title}
+                          </Link>
                         </li>
                       ))}
                   </ul>
@@ -235,7 +245,7 @@ function HeaderMain() {
               </Link>
             </button>
             <button className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
-              <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
+              <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
                 Create Account
               </Link>
             </button>

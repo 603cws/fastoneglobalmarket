@@ -1,4 +1,4 @@
-// import Header from "../components/Header";
+import Header from "../components/Header";
 // import FeaturesGrid from "../components/FeaturesGrid";
 // import TitleAreaVideo from "../components/TitleAreaVideo";
 // import OpenAccount from "../components/OpenAccount";
@@ -45,6 +45,7 @@ function CFD() {
   const imagepath = "/dummyimage.png";
   return (
     <>
+      <Header />
       <div className="bg-[#030B20] py-6 md:py-10">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>

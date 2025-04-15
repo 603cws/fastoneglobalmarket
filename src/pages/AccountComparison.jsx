@@ -67,6 +67,7 @@ function AccountComparison() {
   return (
     <>
       <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10">
+        <Header />
         <div className="max-w-7xl mx-auto text-center">
           <TitleArea
             title="ACCOUNT COMPARISON"

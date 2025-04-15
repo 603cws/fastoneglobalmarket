@@ -45,6 +45,7 @@ function Energy() {
   return (
     <>
       <div className="">
+        <Header />
         <div className="bg-[#030B20] py-6 md:py-10">
           <TitleArea breadcrumbPaths={breadcrumbPaths} />
         </div>

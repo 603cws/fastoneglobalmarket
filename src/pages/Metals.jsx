@@ -45,6 +45,7 @@ function Metals() {
   const imagepath = "/dummyimage.png";
   return (
     <div className="">
+      <Header />
       <div className="bg-[#030B20] py-10">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>

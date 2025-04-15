@@ -1,6 +1,7 @@
 import React from "react";
 import { BsLightningCharge } from "react-icons/bs";
 import TitleArea from "../components/TitleArea";
+import Header from "../components/Header";
 const PricingModel = () => {
   const pricingGrid = [
     {
@@ -49,17 +50,7 @@ const PricingModel = () => {
   return (
     <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10">
       <div className="max-w-7xl mx-auto text-center">
-        {/* <h2 className="text-sm md:text-base text-gray-400">
-          Home / Trading / <span className="text-blue-400">Pricing Model</span>
-        </h2>
-        <h1 className="text-xl lg:text-3xl xl:text-5xl font-bold text-blue-400 mt-4">
-          NDD EXECUTION
-        </h1>
-        <p className="text-gray-300 mt-4 text-xs md:text-sm lg:text-lg">
-          Deep liquidity, the best possible prices, and ultra fast precise
-          execution at the best prices possible. Doesn't get FASTER than this.
-        </p> */}
-
+        <Header />
         <TitleArea
           title="NDD EXECUTION"
           description="Deep liquidity, the best possible prices, and ultra fast precise execution at the best prices possible. Doesn't get FASTer than this."
