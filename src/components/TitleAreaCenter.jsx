@@ -5,7 +5,7 @@ const TitleAreaCenter = ({ title, description, breadcrumbPaths }) => {
   return (
     <div className={`title-area-center`}>
       <div className="container">
-        <div className="pta-width">
+        <div className="pta-width pt-20">
           {breadcrumbPaths && (
             <Breadcrumbs paths={breadcrumbPaths} currentTitle="Pricing Model" />
           )}

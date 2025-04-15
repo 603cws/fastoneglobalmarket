@@ -596,11 +596,11 @@ footer {
   color: #333;
 }
 
-.page-title-area,
+/* .page-title-area,
 .title-area-center {
   margin-top: 5rem;
   padding: 4rem 1rem 2rem;
-}
+} */
 .header-2-wrap .title-area-center {
   padding: 8rem 0;
 }
@@ -1084,11 +1084,11 @@ footer {
     padding: 0.5rem 1rem;
   }
 
-  .page-title-area,
+  /* .page-title-area,
   .title-area-center {
     margin-top: 5rem;
     padding: 8rem 2rem 6rem;
-  }
+  } */
   .page-title-area .pta-width {
     width: 70%;
   }
@@ -1229,8 +1229,8 @@ footer {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 1rem /* 48px */;
-  padding-left: 1rem /* 48px */;
+  padding-right: 1rem /* 16px */;
+  padding-left: 1rem /* 16px */;
 }
 @media (min-width: 640px) {
   .container {

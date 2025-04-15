@@ -116,6 +116,11 @@ function HeaderMain() {
     setExpandedMenu((prev) => (prev === menu ? null : menu));
   };
   return (
+    // <header
+    //   className={`fixed left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md transition-all duration-300 ${
+    //     scrolled ? "top-0" : "lg:top-12"
+    //   }`}
+    // >
     <header
       className={`fixed left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md transition-all duration-300 ${
         scrolled ? "top-0" : "lg:top-12"

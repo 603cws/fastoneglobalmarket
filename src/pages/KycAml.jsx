@@ -8,18 +8,23 @@ function KycAml() {
     { name: "KYC/AML" },
   ];
   return (
-    <>
+    <div className="bg-[#030B20] relative">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute to-0 left-0"
+      />
       <Header mode={"light"} />
       <TitleBgCenter
         title="KYC/AML Policies"
         description=""
-        backgroundImage="/images/bg-2.png"
+        // backgroundImage="/images/bg-2.png"
         breadcrumbPaths={breadcrumbPaths}
       />
       <section className="mt-5">
-        <div className="container">
+        <div className="container relative">
           <div className="row">
-            <div className="col-12 about-text">
+            <div className="col-12 about-text text-[#B2B2B2]">
               <p>
                 FastOne Global Financial Markets Limited is committed to the
                 highest standards of compliance against money laundering (AML)
@@ -39,7 +44,7 @@ function KycAml() {
                 into other funds or investments that appear legitimate to hide
                 or distort the actual source of funds.
               </p>
-              <h4 className="mt-4">
+              <h4 className="mt-4 text-white text-2xl">
                 The money laundering process can be divided into three
                 sequential stages:
               </h4>
@@ -79,7 +84,7 @@ function KycAml() {
                   related to money laundering.
                 </li>
               </ul>
-              <h4 className="mt-4">Company procedures</h4>
+              <h4 className="mt-4 text-white text-2xl">Company procedures</h4>
               <p>
                 FastOne Global Financial Markets Limited will ensure that it is
                 a real or legal person. FastOne Global Financial Markets Limited
@@ -107,7 +112,7 @@ function KycAml() {
                 corruption and beneficial owners who reside in and whose funds
                 are sourced from named countries.
               </p>
-              <h4 className="mt-4">Individual clients</h4>
+              <h4 className="mt-4 text-white text-2xl">Individual clients</h4>
               <p>
                 During the registration process, each client provides personal
                 information, specifically: full name; birthdate; country of
@@ -137,7 +142,7 @@ function KycAml() {
                 These documents should not be older than 3 months from the
                 filing date.
               </p>
-              <h4 className="mt-4">Corporate clients</h4>
+              <h4 className="mt-4 text-white text-2xl">Corporate clients</h4>
               <p>
                 In the event that the applicant company is listed on a
                 recognized or approved stock exchange or when there is
@@ -183,7 +188,9 @@ function KycAml() {
                 </li>
               </ul>
 
-              <h4 className="mt-4">Tracking customer activity</h4>
+              <h4 className="mt-4 text-white text-2xl">
+                Tracking customer activity
+              </h4>
               <p>
                 In addition to collecting customer information, FastOne Global
                 Financial Markets Limited continues to monitor the activity of
@@ -196,7 +203,7 @@ function KycAml() {
                 monitoring system (both automatic and, if necessary, manual) to
                 prevent criminals from using the company's services.
               </p>
-              <h4 className="mt-4">Registry maintenance</h4>
+              <h4 className="mt-4 text-white text-2xl">Registry maintenance</h4>
               <p>
                 Records must be kept of all transaction data and data obtained
                 for identification purposes, as well as all documents related to
@@ -205,7 +212,7 @@ function KycAml() {
                 records are kept for a minimum of 7 years after the account is
                 closed.
               </p>
-              <h4 className="mt-4">Measures taken</h4>
+              <h4 className="mt-4 text-white text-2xl">Measures taken</h4>
               <p>
                 In cases of an attempt to execute transactions that FastOne
                 Global Financial Markets Limited suspects are related to money
@@ -225,7 +232,7 @@ function KycAml() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
