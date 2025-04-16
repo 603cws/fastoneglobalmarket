@@ -55,7 +55,7 @@ function MetaTrader5() {
       <div className="bg-[#030B20] ">
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
-          <div className="lg:container lg:mx-auto md:mx-10 lg:pt-10  md:pb-5 px-4">
+          <div className="container mx-auto  lg:pt-10  md:pb-5 ">
             <div className="">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
@@ -135,7 +135,7 @@ function MetaTrader5() {
         </div>
 
         <div className="bg-[#030B20] ">
-          <div className="lg:container lg:mx-auto md:mx-10 lg:pt-10  md:pb-5 px-4">
+          <div className="container mx-auto  lg:pt-10  md:pb-5 ">
             <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 mb-10">
               <div className="flex-1 space-y-6">
                 <h2 className="text-white text-3xl lg:text-4xl capitalize">
@@ -188,7 +188,7 @@ function MetaTrader5() {
         </div>
 
         <div className="bg-[#030B20] ">
-          <div className="lg:container lg:mx-auto md:mx-10 lg:pt-10  md:pb-5 px-4">
+          <div className="container mx-auto  lg:pt-10  md:pb-5">
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10">
               <div className="flex-1 space-y-6">
                 <h2 className="text-white text-3xl lg:text-4xl">
@@ -229,7 +229,7 @@ function MetaTrader5() {
         </div>
 
         <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
-          <div className="lg:container lg:mx-auto md:mx-10 flex justify-center">
+          <div className="container mx-auto  flex justify-center">
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
               {/* Left Side */}
               <div className="space-y-4">

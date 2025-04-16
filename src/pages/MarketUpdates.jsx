@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import TitleAreaCenter from "../components/TitleAreaCenter";
 import "./MarketUpdates.css";
+import InstantAccount from "../components/InstantAccount";
 
 function MarketUpdates() {
   const [tweets, setTweets] = useState([]);
@@ -107,43 +108,45 @@ function MarketUpdates() {
         breadcrumbPaths={breadcrumbPaths}
       />
 
-      <section className="economic-calendar">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h2>Economic Calendar</h2>
-              <div className="tradingview-widget-container">
-                <div id="tradingview-widget" />
-                <div className="tradingview-widget-copyright">
-                  <a
-                    href="https://www.tradingview.com/"
-                    rel="noopener nofollow"
-                    target="_blank"
-                  >
-                    <span className="blue-text">
-                      Track all markets on TradingView
-                    </span>
-                  </a>
-                </div>
-              </div>
+      {/* Economic Calendar Section */}
+      <section className="mt-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+            Economic Calendar
+          </h2>
+          <div className="tradingview-widget-container">
+            <div id="tradingview-widget" />
+            <div className="tradingview-widget-copyright">
+              <a
+                href="https://www.tradingview.com/"
+                rel="noopener nofollow"
+                target="_blank"
+              >
+                <span className="text-white">
+                  Track all markets on TradingView
+                </span>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="twitter-feed">
-        <div className="container">
-          <h2>Latest News</h2>
-          <div className="grid">
+      {/* Twitter Feed Section */}
+      <section className="mt-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+            Latest News
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {loading ? (
-              <p>Loading tweets...</p>
+              <p className="text-white">Loading tweets...</p>
             ) : tweets.length > 0 ? (
               tweets.map((tweet, index) => {
-                const { username, logo } = getUserData(tweet); // Get user data for each tweet
+                const { username, logo } = getUserData(tweet);
                 return (
                   <div
-                    className="card"
                     key={index}
+                    className="border bg-[#fff]/0 text-white border-[#22A4FF] rounded-lg cursor-pointer transform transition-transform duration-200 hover:scale-105"
                     onClick={() =>
                       window.open(
                         `https://twitter.com/${username.replace(
@@ -154,41 +157,52 @@ function MarketUpdates() {
                       )
                     }
                   >
-                    <div className="card-header">
-                      <img src={logo} alt="Logo" className="logo" />
-                      <div className="header-info">
-                        <span className="channel-name">{username}</span>
-                        <span className="date">
-                          {timeAgo(tweet.created_at)} {/* Display time ago */}
+                    <div className="flex items-center p-4">
+                      <img
+                        src={logo}
+                        alt="Logo"
+                        className="w-8 h-8 rounded-full mr-3"
+                      />
+                      <div className="flex flex-col">
+                        <span className="font-bold">{username}</span>
+                        <span className=" text-sm">
+                          {timeAgo(tweet.created_at)}
                         </span>
                       </div>
                     </div>
-                    <div className="card-body">
-                      <p>{tweet.text}</p>
+                    <div className="p-4">
+                      <p className="text-[#CDE6FF] text-sm ">{tweet.text}</p>
                     </div>
                   </div>
                 );
               })
             ) : (
-              <p>No tweets found</p>
+              <p className="text-white">No tweets found</p>
             )}
           </div>
         </div>
       </section>
-      <section className="market-analysis">
-        <div className="container">
-          <h2>Market Analysis</h2>
-          <div className="video-container">
+
+      {/* Market Analysis Section */}
+      <section className="mt-24 pb-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+            Market Analysis
+          </h2>
+          <div className="relative w-full pb-[56.25%]">
             <iframe
               src="https://www.youtube.com/embed/CFPIPoM8KB8"
               title="Market Analysis"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              className="absolute top-0 left-0 w-full h-full"
             ></iframe>
           </div>
         </div>
       </section>
+
+      <InstantAccount />
     </div>
   );
   // return (

@@ -1,13 +1,19 @@
-.economic-calendar h2, .twitter-feed h2, .market-analysis h2{
+.economic-calendar h2,
+.twitter-feed h2,
+.market-analysis h2 {
   text-align: center;
   margin-bottom: 3rem;
 }
-.twitter-feed{
+.twitter-feed {
   margin-top: 6rem;
 }
-.market-analysis{
-  margin: 6rem 0;
+.market-analysis {
+  margin: 6rem 0 0 0;
+  padding: 0 0 2rem 0;
 }
+/* .market-analysis{
+  margin: 6rem 0;
+} */
 .twitter-feed .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -17,10 +23,17 @@
 .twitter-feed .card {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
   cursor: pointer;
   transition: transform 0.2s;
 }
+/* .twitter-feed .card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+} */
 
 .twitter-feed .card:hover {
   transform: scale(1.02);

@@ -9,7 +9,7 @@ const TitleAreaCenter = ({ title, description, breadcrumbPaths }) => {
           {breadcrumbPaths && (
             <Breadcrumbs paths={breadcrumbPaths} currentTitle="Pricing Model" />
           )}
-          <div className="py-16 space-y-5">
+          <div className="py-8 lg:py-12 space-y-5">
             {title && (
               <h1 className="text-7xl uppercase font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 {title}

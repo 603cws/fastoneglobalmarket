@@ -907,13 +907,13 @@ footer {
   padding-left: 2rem;
   margin-top: 2rem;
 }
-.start-la {
+/* .start-la {
   background: var(--primary-color);
   padding: 2rem;
 }
 .start-la button {
   border: none;
-}
+} */
 @media screen and (min-width: 767px) {
   /* section h2 {
     font-size: 2.5rem;

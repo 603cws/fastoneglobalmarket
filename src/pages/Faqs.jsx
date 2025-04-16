@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import TitleArea from "../components/TitleArea";
 import Faq from "../components/Faq";
+import InstantAccount from "../components/InstantAccount";
 
 const faqData = [
   {
@@ -444,90 +445,169 @@ function Faqs() {
   ];
 
   return (
-    <>
-      <Header mode={"light"} />
-      <TitleArea
-        title="FAQs"
-        description=""
-        breadcrumbPaths={breadcrumbPaths}
-      />
-      <section className="text-center">
-        <div className="container">
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData} />
-            </div>
+    <div className="bg-[#030B20]">
+      <Header />
+      <div className=" py-6 md:py-10">
+        <div className="max-w-7xl mx-auto text-center my-6 ">
+          <TitleArea title="FAQs" breadcrumbPaths={breadcrumbPaths} />
+        </div>
+      </div>
+      <section className="container mx-auto text-center pb-10 [&_h2]:text-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="mt-10">
+            <Faq questions={faqData} />
           </div>
-          <h2>Account Opening</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData2} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Account Opening</h2>
+          <div className="mt-10">
+            <Faq questions={faqData2} />
           </div>
-          <h2>Account Statement</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData3} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">
+            Account Statement
+          </h2>
+          <div className="mt-10">
+            <Faq questions={faqData3} />
           </div>
-          <h2>Topup and Withdrawal</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData4} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">
+            Topup and Withdrawal
+          </h2>
+          <div className="mt-10">
+            <Faq questions={faqData4} />
           </div>
-          <h2>Update of personal particulars</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData5} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">
+            Update of personal particulars
+          </h2>
+          <div className="mt-10">
+            <Faq questions={faqData5} />
           </div>
-          <h2>General</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData6} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">General</h2>
+          <div className="mt-10">
+            <Faq questions={faqData6} />
           </div>
-          <h2>Commodities</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData7} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Commodities</h2>
+          <div className="mt-10">
+            <Faq questions={faqData7} />
           </div>
-          <h2>Currency</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData8} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Currency</h2>
+          <div className="mt-10">
+            <Faq questions={faqData8} />
           </div>
-          <h2>Call In</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData9} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Call In</h2>
+          <div className="mt-10">
+            <Faq questions={faqData9} />
           </div>
-          <h2>Margin call</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData10} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Margin call</h2>
+          <div className="mt-10">
+            <Faq questions={faqData10} />
           </div>
-          <h2>Error Trades</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData11} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Error Trades</h2>
+          <div className="mt-10">
+            <Faq questions={faqData11} />
           </div>
-          <h2>Type of orders</h2>
-          <div className="row mt-5">
-            <div className="col-md-10 offset-md-1">
-              <Faq questions={faqData12} />
-            </div>
+
+          <h2 className="text-2xl font-semibold mt-16 mb-4">Type of orders</h2>
+          <div className="mt-10">
+            <Faq questions={faqData12} />
           </div>
         </div>
       </section>
-    </>
+      <InstantAccount />
+    </div>
   );
+  // return (
+  //   <>
+  //     <Header mode={"light"} />
+  //     <TitleArea
+  //       title="FAQs"
+  //       description=""
+  //       breadcrumbPaths={breadcrumbPaths}
+  //     />
+  //     <section className="text-center">
+  //       <div className="container">
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData} />
+  //           </div>
+  //         </div>
+  //         <h2>Account Opening</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData2} />
+  //           </div>
+  //         </div>
+  //         <h2>Account Statement</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData3} />
+  //           </div>
+  //         </div>
+  //         <h2>Topup and Withdrawal</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData4} />
+  //           </div>
+  //         </div>
+  //         <h2>Update of personal particulars</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData5} />
+  //           </div>
+  //         </div>
+  //         <h2>General</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData6} />
+  //           </div>
+  //         </div>
+  //         <h2>Commodities</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData7} />
+  //           </div>
+  //         </div>
+  //         <h2>Currency</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData8} />
+  //           </div>
+  //         </div>
+  //         <h2>Call In</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData9} />
+  //           </div>
+  //         </div>
+  //         <h2>Margin call</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData10} />
+  //           </div>
+  //         </div>
+  //         <h2>Error Trades</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData11} />
+  //           </div>
+  //         </div>
+  //         <h2>Type of orders</h2>
+  //         <div className="row mt-5">
+  //           <div className="col-md-10 offset-md-1">
+  //             <Faq questions={faqData12} />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </section>
+  //   </>
+  // );
 }
 
 export default Faqs;
