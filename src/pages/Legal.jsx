@@ -8,20 +8,25 @@ function Legal() {
     { name: "Legal" },
   ];
   return (
-    <>
+    <div className="bg-[#030B20] relative">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0"
+      />
       <Header mode={"light"} />
       <TitleBgCenter
         title="Legal"
         description=""
-        backgroundImage="/images/bg-2.png"
+        // backgroundImage="/images/bg-2.png"
         breadcrumbPaths={breadcrumbPaths}
       />
       <section className="mt-5">
-        <div className="container">
+        <div className="container relative">
           <div className="row">
-            <div className="col-12 about-text">
+            <div className="col-12 about-text [&_h4]:capitalize [&_h4]:font-bold [&_h4]:bg-gradient-to-r [&_h4]:from-[#4575FF] [&_h4]:to-[#92AEFF] [&_h4]:text-transparent [&_h4]:bg-clip-text [&_p]:text-[#B2B2B2] [&_h2]:text-[#FFFFFF] [&_h2]:font-bold [&_h2]:text-4xl [&_h3]:text-[#FFFFFF] [&_h3]:text-[28px] [&_h3]:font-bold">
               <a href="/legal/risk-warning">
-                <h4>Risk Warning</h4>
+                <h4 className="">Risk Warning</h4>
               </a>
               <a href="/legal/additional-risk-disclosure">
                 <h4>Additional Risk Disclosure</h4>
@@ -41,7 +46,7 @@ function Legal() {
                 not manage any funds nor plays any role in any portfolio
                 management.
               </p>
-              <hr id="riskwarning"/>
+              <hr id="riskwarning" />
               <h2 className="text-center mt-5"> Risk Warning</h2>
               <p>
                 FastOne Global Financial Markets Limited, a leading financial
@@ -693,13 +698,31 @@ function Legal() {
                 natural disaster.
               </p>
               <h3 className="mt-4">Change in Privacy Policy</h3>
-              <p>FastOne Global Financial Markets Limited may change its' privacy policy from time to time in its' sole discretion without any prior notice and a revised Privacy Policy would be posted on this website. FastOne Global Financial Markets Limited customers and visitors of this website consent to FastOne Global Financial Markets Limited to introduce future changes in the Privacy Policy and agree to accept the revised Privacy Policy. FastOne Global Financial Markets Limited customers also acknowledge and agree that revised Privacy Policy of this website will have no impact on the Know Your Client (Account Opening) form, KYC notes, rate schedule, terms and conditions of business, risk disclosure, additional risk disclosure, discretionary agreement and regulatory disclaimer (collectively, the Agreement) of FastOne Global Financial Markets Limited</p>
-              <p>For any queries and concerns regarding this Privacy Policy please contact support@fastoneglobalmarkets.com</p>
+              <p>
+                FastOne Global Financial Markets Limited may change its' privacy
+                policy from time to time in its' sole discretion without any
+                prior notice and a revised Privacy Policy would be posted on
+                this website. FastOne Global Financial Markets Limited customers
+                and visitors of this website consent to FastOne Global Financial
+                Markets Limited to introduce future changes in the Privacy
+                Policy and agree to accept the revised Privacy Policy. FastOne
+                Global Financial Markets Limited customers also acknowledge and
+                agree that revised Privacy Policy of this website will have no
+                impact on the Know Your Client (Account Opening) form, KYC
+                notes, rate schedule, terms and conditions of business, risk
+                disclosure, additional risk disclosure, discretionary agreement
+                and regulatory disclaimer (collectively, the Agreement) of
+                FastOne Global Financial Markets Limited
+              </p>
+              <p>
+                For any queries and concerns regarding this Privacy Policy
+                please contact support@fastoneglobalmarkets.com
+              </p>
             </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

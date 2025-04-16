@@ -92,6 +92,11 @@ function ContactUs() {
 
   return (
     <div className="bg-[#030B20]">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0 object-cover"
+      />
       <Header />
       <div className=" py-6 md:py-10">
         <div className="max-w-7xl mx-auto text-center my-10 ">
@@ -99,7 +104,7 @@ function ContactUs() {
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto relative">
         <div className="flex flex-col justify-between items-center gap-4 py-6">
           <div>
             <h3 className="font-bold text-[#FFFFFF] text-2xl">
@@ -119,9 +124,9 @@ function ContactUs() {
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto relative">
         <div className="flex justify-center items-center [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
-          <div className="bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full mx-auto rounded-2xl p-4">
+          <div className="bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full mx-auto rounded-2xl p-4 relative">
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Get in Touch!</p>
               <h4 className="text-xl">Love to hear from you</h4>
@@ -190,7 +195,7 @@ function ContactUs() {
               </form>
             </div>
           </div>
-          <div>
+          <div className="bg-white">
             <img src="/images/contactus/formimage.png" alt="form image" />
           </div>
         </div>

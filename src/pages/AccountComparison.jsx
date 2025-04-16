@@ -66,7 +66,12 @@ function AccountComparison() {
 
   return (
     <>
-      <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10">
+      <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10 relative">
+        <img
+          src="/images/bg-shadow.png"
+          alt=""
+          className="absolute top-0 left-0"
+        />
         <Header />
         <div className="max-w-7xl mx-auto text-center">
           <TitleArea
@@ -75,10 +80,13 @@ function AccountComparison() {
             breadcrumbPaths={breadcrumbPaths}
           />
         </div>
-        <PricingTable />
+        <div className="relative">
+          <PricingTable />
+        </div>
 
-        <section className="my-10 flex items-center justify-center px-4">
+        <section className="my-10 flex items-center justify-center px-4 relative">
           {/* <section className="min-h-screen bg-gradient-to-r from-[#001633] to-[#00204D] flex items-center justify-center px-4"> */}
+
           <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 text-white">
             {/* Left Side */}
             <div className="space-y-4">

@@ -51,11 +51,16 @@ function MetaTrader5() {
   }
 
   return (
-    <>
+    <div className="relative">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0 "
+      />
       <div className="bg-[#030B20] ">
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
-          <div className="container mx-auto  lg:pt-10  md:pb-5 ">
+          <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
             <div className="">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
@@ -292,7 +297,7 @@ function MetaTrader5() {
 
         <InstantAccount />
       </div>
-    </>
+    </div>
   );
 }
 

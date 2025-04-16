@@ -12,7 +12,7 @@ function KycAml() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute to-0 left-0"
+        className="absolute top-0 left-0"
       />
       <Header mode={"light"} />
       <TitleBgCenter

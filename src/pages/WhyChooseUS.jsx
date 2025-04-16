@@ -51,6 +51,11 @@ function WhyChooseUS() {
   ];
   return (
     <div className="bg-[#030B20]">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0 max-h-full w-full object-cover"
+      />
       <Header />
       {/* <TitleBgCenter
         title="Why Choose Us?"
@@ -61,7 +66,7 @@ function WhyChooseUS() {
       <div className="bg-[#030B20] py-10 text-center">
         <TitleArea title="Why Choose Us?" breadcrumbPaths={breadcrumbPaths} />
       </div>
-      <section className="mt-5">
+      <section className="mt-5 relative">
         <div className="container mx-auto">
           <div className=" ">
             <h1 className="text-white text-center">

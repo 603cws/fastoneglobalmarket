@@ -123,17 +123,19 @@ function HeaderMain() {
     // >
     <header
       className={`fixed left-0 w-full z-50 bg-[#0b132e]/50 backdrop-blur-md text-white shadow-md transition-all duration-300 ${
-        scrolled ? "top-0" : "lg:top-12"
+        scrolled ? "top-0" : "top-20 sm:top-14 md:top-12"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
         {/* Logo */}
-        <div className="flex items-center space-x-2 py-6">
-          <img src="./fastone-logo-text2.png" alt="FastOne" className="h-8" />
-        </div>
+        <Link to="/">
+          <div className="flex items-center space-x-2 py-6">
+            <img src="./fastone-logo-text2.png" alt="FastOne" className="h-8" />
+          </div>
+        </Link>
         {/* Desktop Nav Links */}
         <div className="hidden lg:flex text-sm font-semibold">
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-1.5 xl:space-x-6">
             {menuItems.map((items) => (
               <li
                 className="relative group hover:text-blue-600"
@@ -143,21 +145,22 @@ function HeaderMain() {
                   <a href={items.href}> {items.title}</a>
                 </div>
                 {items.submenu && (
-                  <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[200px] z-10">
+                  <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[250px]  z-10 space-y-1">
                     {items.submenu.map((submenuitem) => (
-                      <li
-                        className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md"
+                      <Link
                         key={submenuitem.title}
+                        to={submenuitem.href}
+                        onClick={(e) =>
+                          submenuitem.onClick && handleLinkClick(e, false)
+                        }
                       >
-                        <Link
-                          to={submenuitem.href}
-                          onClick={(e) =>
-                            submenuitem.onClick && handleLinkClick(e, false)
-                          }
+                        <li
+                          className="block px-4 py-4 my-1 hover:bg-gray-200 text-black hover:rounded-md"
+                          key={submenuitem.title}
                         >
                           {submenuitem.title}
-                        </Link>
-                      </li>
+                        </li>
+                      </Link>
                       // <li
                       //   className="block px-4 py-2 hover:bg-gray-200 text-black hover:rounded-md"
                       //   key={submenuitem.title}

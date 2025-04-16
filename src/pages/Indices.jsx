@@ -45,7 +45,12 @@ function Indices() {
 
   const imagepath = "/dummyimage.png";
   return (
-    <>
+    <div className="relative">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0 "
+      />
       <Header />
       <div className="bg-[#030B20] py-6 md:py-10">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
@@ -59,7 +64,7 @@ function Indices() {
       <WhyTrade title="Why trade Indices with FastOne?" benefits={benefits} />
       <TradingTools />
       <InstantAccount />
-    </>
+    </div>
   );
   // return (
   //   <>
