@@ -155,7 +155,7 @@ function HeaderMain() {
                         }
                       >
                         <li
-                          className="block px-4 py-4 my-1 hover:bg-gray-200 text-black hover:rounded-md"
+                          className="block px-4 py-4 my-1 hover:bg-gray-200 hover:text-blue-600 text-black hover:rounded-md"
                           key={submenuitem.title}
                         >
                           {submenuitem.title}
