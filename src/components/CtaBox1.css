@@ -1,8 +1,8 @@
-.ctabox-1{
+.ctabox-1 {
   padding: 4rem 1rem;
 }
 .ctabox-1 .container {
-  background: var(--primary-color);
+  background: rgba(69, 117, 255, 0.2); /* Example: 20% opacity */
   padding: 3rem 0;
   border-radius: 1.563rem;
 }
@@ -14,7 +14,7 @@
   color: #fff;
   margin: 2rem 0;
 }
-.imgbtn-2{
-    width: 1.5rem;
-    margin-right: 1rem;
+.imgbtn-2 {
+  width: 1.5rem;
+  margin-right: 1rem;
 }
