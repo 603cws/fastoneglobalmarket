@@ -44,6 +44,7 @@ import AppComingSoon from "./pages/AppComingSoon.jsx";
 import Landing from "./components/Landing.jsx";
 import MetaTrader4 from "./pages/MetaTrader4.jsx";
 import MetaTrader5 from "./pages/MetaTrader5.jsx";
+import CryptoBubbles from "./pages/CryptoBubbles.jsx";
 
 const router = createBrowserRouter([
   {
@@ -193,6 +194,10 @@ const router = createBrowserRouter([
       {
         path: "app-coming-soon",
         element: <AppComingSoon />,
+      },
+      {
+        path: "crypto-bubbles",
+        element: <CryptoBubbles />,
       },
     ],
   },

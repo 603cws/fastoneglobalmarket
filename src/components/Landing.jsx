@@ -7,6 +7,7 @@ import { Autoplay, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Header from "./Header";
+import CryptoBubbles from "../pages/CryptoBubbles";
 
 const features = [
   {
@@ -274,6 +275,9 @@ function Landing() {
 
       {/* Header */}
       <Header />
+      {/* <div className="h-[90vh] relative top-[10vh]">
+        <CryptoBubbles />
+      </div> */}
 
       {/* Section 1 */}
       <section
