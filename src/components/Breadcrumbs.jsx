@@ -13,7 +13,7 @@ const Breadcrumbs = ({ paths }) => {
             {index < lastItemIndex ? (
               // Render link for all items except the last one
               <>
-                <li className="breadcrumb-item">
+                <li className="breadcrumb-item ">
                   <Link to={path.href}>{path.name}</Link>
                 </li>
                 <span className="separator"> / </span>

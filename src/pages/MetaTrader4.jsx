@@ -87,7 +87,7 @@ function MetaTrader4() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium">
+                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-lg">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt4/fastoneglobal4setup.exe">
                         download meta trader 4 for pc
@@ -114,13 +114,13 @@ function MetaTrader4() {
                   ))}
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
-                  <button className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-[#112556] rounded-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open trading account{" "}
                     </a>
                   </button>
-                  <button className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-white rounded-lg bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open demo account{" "}

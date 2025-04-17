@@ -93,11 +93,11 @@ function AccountComparison() {
               <h2 className="text-xl text-[#1368A6] font-semibold">
                 How to get Started
               </h2>
-              <p className="text-sm text-[#3C3C3C]">
+              <p className="text-sm text-[#B2B2B2]">
                 Getting Started is as simple as 1 2 3! And the onboarding
                 process is so smooth you won’t have to worry about a thing.
               </p>
-              <div className="">
+              <div className="font-medium">
                 <button className="border border-[#4575FF] bg-[#1368A6]/20 text-white px-6 py-2 rounded-md transition cursor-pointer duration-300 ">
                   Start Trading
                 </button>
@@ -106,7 +106,7 @@ function AccountComparison() {
 
             {/* Right Side */}
             <div className="bg-[#1368A6]/20 rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 lg:mt-6">
                 <div className="text-2xl font-bold text-white">1</div>
                 <div>
                   <h3 className="font-bold text-xl text-white">

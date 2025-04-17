@@ -2,6 +2,7 @@ import React from "react";
 import { BsLightningCharge } from "react-icons/bs";
 import TitleArea from "../components/TitleArea";
 import Header from "../components/Header";
+import InstantAccount from "../components/InstantAccount";
 const PricingModel = () => {
   const pricingGrid = [
     {
@@ -48,8 +49,10 @@ const PricingModel = () => {
     { name: "Pricing Model" },
   ];
   return (
-    <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10">
-      <div className="max-w-7xl mx-auto text-center">
+    <div className="bg-[#030B20] text-white  py-10">
+      {/* <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10"> */}
+      <div className="container mx-auto text-center mb-10">
+        {/* <div className="max-w-7xl mx-auto text-center"> */}
         <Header />
         <TitleArea
           title="NDD EXECUTION"
@@ -62,23 +65,27 @@ const PricingModel = () => {
           {pricingGrid.map((item, index) => (
             <div
               key={index}
-              className="border border-blue-400 flex items-center justify-around gap-1  rounded-md p-5 hover:shadow-lg transition duration-300"
+              className="border border-blue-400  gap-1 flex items-center rounded-md p-5 hover:shadow-lg transition duration-300"
             >
-              <div className="border-l  border-l-[#4575FF] pl-1">
-                <img src={item.pricingimage} alt="pricingmodel" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-sm lg:text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs lg:text-sm text-[#B2B2B2]">{item.desc}</p>
+              <div className="flex justify-between items-center gap-2  border-l  border-l-[#4575FF] pl-1">
+                <div className="">
+                  <img src={item.pricingimage} alt="pricingmodel" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm lg:text-lg mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs lg:text-sm text-[#B2B2B2]">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* CTA Section */}
-        <div className="mt-12 flex  justify-between  border-2 border-blue-400 drop-shadow-2xl rounded-lg p-4 items-center gap-4">
+        <div className="mt-12 flex  justify-between   border-2 border-[#4575FF] shadow-xl/30  rounded-xl p-4 items-center gap-4">
           <div className=" text-white text-sm lg:text-xl font-bold  rounded-md ">
             Start Trading Now
           </div>
@@ -87,7 +94,7 @@ const PricingModel = () => {
           </button>
         </div>
 
-        <div className="bg-[#0A324F] flex justify-center md:justify-around items-center mt-16 py-6 rounded-md text-center px-2 md:px-0">
+        {/* <div className="bg-[#0A324F] flex justify-center md:justify-around items-center mt-16 py-6 rounded-md text-center px-2 md:px-0">
           <div>
             <p className="text-white font-semibold text-sm lg:text-lg ">
               Instant Account - Trade Within Minutes!
@@ -98,8 +105,10 @@ const PricingModel = () => {
               <a href="/account-comparison">Start Live Account</a>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
+
+      <InstantAccount />
     </div>
   );
 };

@@ -56,7 +56,7 @@ const PricingCard = ({
                 </p>
               </div>
               <div className="flex justify-between items-center border-b border-b-[#494949] pb-3">
-                <p className=" text-[#B2B2B2] text-sm">Charges:</p>
+                <p className=" text-[#B2B2B2] text-sm">Charges</p>
                 <div className="flex-1 flex justify-center items-center">
                   <ul className=" list-disc list-inside ml-2 space-y-1 text-xs text-[#CCD9FF]">
                     {charges.map((charge, index) => (
@@ -105,7 +105,7 @@ const PricingCard = ({
                 "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
             }}
           ></div>
-          <button className="mt-3 w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-[#000] py-2 rounded-lg transition cursor-pointer">
+          <button className="mt-3 w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-[#112556] py-2 rounded-lg transition cursor-pointer">
             <a href="#" onClick={(e) => handleLinkClick(e, false)}>
               Open {title} Account
             </a>

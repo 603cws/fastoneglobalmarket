@@ -721,7 +721,7 @@ function Landing() {
           </div>
 
           {/* Gradient Horizontal Line */}
-          <div className="relative my-10 lg:my-20">
+          {/* <div className="relative my-10 lg:my-20">
             <div
               className="h-[2px] sm:w-1/2 mx-auto"
               style={{
@@ -729,11 +729,11 @@ function Landing() {
                   "linear-gradient(to right, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
               }}
             ></div>
-          </div>
+          </div> */}
 
           {/* Footer */}
-          <div className="sm:pt-2 text-center text-sm text-gray-400">
-            {/* Logo */}
+          {/* <div className="sm:pt-2 text-center text-sm text-gray-400">
+
             <div className="flex justify-center mb-6">
               <img
                 src="./fastone-logo-text2.png"
@@ -742,7 +742,7 @@ function Landing() {
               />
             </div>
 
-            {/* Footer Links */}
+  
             <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 sm:mb-6 text-base sm:pt-12">
               <a href="#" className="hover:text-white transition">
                 How It Works
@@ -764,9 +764,9 @@ function Landing() {
               </a>
             </div>
 
-            {/* Social Icons */}
+
             <div className="flex justify-center gap-5 text-white text-lg mb-6 pt-6">
-              {/* <FaInstagram className="hover:text-blue-400 transition" /> */}
+        
               <img
                 src="./icons/instagram.png"
                 alt="Instagram"
@@ -794,11 +794,11 @@ function Landing() {
               />
             </div>
 
-            {/* Copyright */}
+
             <p className="text-white text-sm pt-4">
               &copy; 2019–2025 FastOne.com
             </p>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

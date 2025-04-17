@@ -25,13 +25,13 @@ function ContactUs() {
       title: "Mail and Phone Number",
       description:
         "Email: support@fastoneglobalmarkets.com Phone: +230 698 3426",
-      imagepath: "/images/contactus/addr.png.png",
+      imagepath: "/images/contactus/contact-mail.png.png",
       social: false,
     },
     {
       title: "Stay in Touch",
       description: "",
-      imagepath: "/images/contactus/addr.png.png",
+      imagepath: "/images/contactus/share.png.png",
       social: true,
     },
   ];
@@ -39,20 +39,24 @@ function ContactUs() {
   function ContactusDetails({ title, description, imagepath, social }) {
     return (
       <div
-        className={`flex-1 flex flex-col justify-center items-center p-6 ${
-          !social && "border-r-1"
+        className={`flex-1 flex flex-col justify-center items-center p-2 lg:p-6 ${
+          !social && "md:border-r-1"
         } border-[#ccc] `}
       >
         {imagepath && (
           <div>
-            <img src={imagepath} alt="address icon" />
+            <img src={imagepath} alt="address icon" className="h-10 mb-2" />
           </div>
         )}
         {title && (
-          <h3 className="font-medium text-[#FFFFFF] text-lg">{title}</h3>
+          <h3 className="font-medium text-[#FFFFFF] text-sm lg:text-lg mb-2">
+            {title}
+          </h3>
         )}
         {description && (
-          <p className="text-center text-[#fff] text-sm">{description}</p>
+          <p className="text-center text-[#fff] text-xs lg:text-sm">
+            {description}
+          </p>
         )}
 
         {social && (
@@ -62,27 +66,27 @@ function ContactUs() {
             <img
               src="./icons/instagram.png"
               alt="Instagram"
-              className="hover:brightness-125 transition"
+              className="hover:brightness-125 h-8 lg:h-12 transition"
             />
             <img
               src="./icons/facebook.png"
               alt="Facebook"
-              className="hover:brightness-125 transition"
+              className="hover:brightness-125 h-8 lg:h-12 transition"
             />
             <img
               src="./icons/twitter.png"
               alt="Twitter"
-              className="hover:brightness-125 transition"
+              className="hover:brightness-125 h-8 lg:h-12 transition"
             />
             <img
               src="./icons/youtube.png"
               alt="Youtube"
-              className="hover:brightness-125 transition"
+              className="hover:brightness-125 h-8 lg:h-12 transition"
             />
             <img
               src="./icons/linkedin.png"
               alt="LinkedIn"
-              className="hover:brightness-125 transition"
+              className="hover:brightness-125 h-8 lg:h-12 transition"
             />
           </div>
         )}
@@ -98,8 +102,8 @@ function ContactUs() {
         className="absolute top-0 left-0 object-cover"
       />
       <Header />
-      <div className=" py-6 md:py-10">
-        <div className="max-w-7xl mx-auto text-center my-10 ">
+      <div className="pt-6 lg:pt-0 lg:py-6 md:py-10">
+        <div className="max-w-7xl mx-auto text-center lg:py-10 ">
           <TitleArea title="Contact us" breadcrumbPaths={breadcrumbPaths} />
         </div>
       </div>
@@ -107,11 +111,11 @@ function ContactUs() {
       <div className="container mx-auto relative">
         <div className="flex flex-col justify-between items-center gap-4 py-6">
           <div>
-            <h3 className="font-bold text-[#FFFFFF] text-2xl">
+            <h3 className="font-bold text-[#FFFFFF]  text-lg lg:text-2xl">
               FastOne Global Financial Markets Limited (Mauritius)
             </h3>
           </div>
-          <div className="flex justify-between items-center border-1 border-[#CCCCCC] rounded-xl">
+          <div className="grid grid-cols-1 md:flex md:justify-between items-center border-1 border-[#CCCCCC] rounded-xl">
             {contactdetail.map((detail) => (
               <ContactusDetails
                 title={detail.title}
@@ -125,8 +129,8 @@ function ContactUs() {
       </div>
 
       <div className="container mx-auto relative">
-        <div className="flex justify-center items-center [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
-          <div className="bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full mx-auto rounded-2xl p-4 relative">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-center items-center [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
+          <div className="bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full mx-auto rounded-2xl p-4">
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Get in Touch!</p>
               <h4 className="text-xl">Love to hear from you</h4>
@@ -154,7 +158,7 @@ function ContactUs() {
                     required
                   />
                 </div>
-                <div className="mb-2 flex flex-col gap-1.5">
+                {/* <div className="mb-2 flex flex-col gap-1.5">
                   <label className="mt-2 text-sm">Company Name*</label>
                   <input
                     type="text"
@@ -162,7 +166,7 @@ function ContactUs() {
                     className="w-full rounded-lg p-2 mb-1 border-2 border-[#D1D5DB] bg-[#F8F8F8] focus:outline-none placeholder:text-[#CCC] font-medium text-sm"
                     required
                   />
-                </div>
+                </div> */}
                 <div className="mb-2 flex flex-col gap-1.5">
                   <label className="font-semibold mt-2 text-sm">
                     Mobile Number*
@@ -195,7 +199,7 @@ function ContactUs() {
               </form>
             </div>
           </div>
-          <div className="bg-white">
+          <div>
             <img src="/images/contactus/formimage.png" alt="form image" />
           </div>
         </div>

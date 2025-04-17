@@ -9,15 +9,18 @@
   margin-top: 0;
 }
 .breadcrumb a {
-  color: #3e3e3e;
+  color: #fff;
 }
+/* .breadcrumb a {
+  color: #3e3e3e;
+} */
 .content-overlay .breadcrumb a,
 .with-bg .breadcrumb a {
   color: #ffffff;
 }
 .breadcrumb-item {
   font-size: 16px;
-  color: #000;
+  color: #fff;
 }
 .breadcrumb-item.active {
   color: var(--primary-color);

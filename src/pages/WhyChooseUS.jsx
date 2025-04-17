@@ -3,6 +3,7 @@ import FeaturesGrid from "../components/FeaturesGrid";
 import TitleBgCenter from "../components/TitleBgCenter";
 import OpenAccount from "../components/OpenAccount";
 import TitleArea from "../components/TitleArea";
+import InstantAccount from "../components/InstantAccount";
 
 const advantages = [
   {
@@ -27,7 +28,9 @@ const advantages = [
     icon: "/images/icons/heart.png",
     title: "Trusted & Regulated Broker",
     description:
-      "FastOne is a Mauritius based broker authorised and regulated by the Financial Services Commission (the “FSC”). We are a leading financial intermediary with a significant presence in Europe, MENA and South East Asia regions offering online trading solutions. Our senior management has extensive industry experience spanning over 25 years on aggregate, and this translates into our transparent, reliable, and reputable service.",
+      // description:
+      "FastOne is a Mauritius based broker authorised and regulated by the Financial Services Commission (the “FSC”).",
+    // "FastOne is a Mauritius based broker authorised and regulated by the Financial Services Commission (the “FSC”). We are a leading financial intermediary with a significant presence in Europe, MENA and South East Asia regions offering online trading solutions. Our senior management has extensive industry experience spanning over 25 years on aggregate, and this translates into our transparent, reliable, and reputable service.",
   },
   {
     icon: "/images/icons/television.png",
@@ -80,9 +83,11 @@ function WhyChooseUS() {
               <FeaturesGrid advantages={advantages} />
             </div>
           </div>
-          {/* <OpenAccount /> */}
+          <OpenAccount />
         </div>
       </section>
+
+      <InstantAccount />
     </div>
   );
   // return (
