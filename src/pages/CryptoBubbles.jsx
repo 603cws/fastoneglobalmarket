@@ -4,7 +4,7 @@ import axios from "axios";
 import "../pages/CryptoBubbles.css";
 // import { clamp } from "three/src/math/MathUtils.js";
 
-const CryptoBubbles = () => {
+const CryptoBubbles = ({ height }) => {
   const svgRef = useRef(null);
   const positionsRef = useRef(new Map());
   const simulationRef = useRef(null);
@@ -76,7 +76,7 @@ const CryptoBubbles = () => {
     if (!data.length || !svgRef.current) return;
 
     const width = window.innerWidth;
-    const height = window.innerHeight;
+    // const height = window.innerHeight;
     const svg = d3.select(svgRef.current);
 
     svg.selectAll("defs").remove();
@@ -173,12 +173,13 @@ const CryptoBubbles = () => {
               radiusScale(Math.abs(d.price_change / 4 || 0))
             )
             .attr("x", (d) => {
-              const r = radiusScale(Math.abs(d.price_change / 4 || 0));
+              const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
               return -r / 2;
             })
             .attr("y", (d) => {
-              const r = radiusScale(Math.abs(d.price_change / 4 || 0));
-              return Math.abs(d.price_change) <= 1 ? -r / 2 : -r / 2 + 10; // Shift up if symbol shown
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              const imageSize = r * 0.6;
+              return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
             })
             .attr("clip-path", "circle()")
             .style("pointer-events", "none");
@@ -249,6 +250,26 @@ const CryptoBubbles = () => {
           update
             .select("text.change")
             .text((d) => `${d.price_change?.toFixed(1)}%`);
+
+          update
+            .select("image")
+            .transition()
+            .duration(500)
+            .attr("width", (d) =>
+              radiusScale(Math.abs(d.price_change / 4 || 0))
+            )
+            .attr("height", (d) =>
+              radiusScale(Math.abs(d.price_change / 4 || 0))
+            )
+            .attr("x", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
+              return -r;
+            })
+            .attr("y", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              const imageSize = r * 0.6;
+              return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
+            });
 
           return update;
         },
@@ -375,7 +396,7 @@ const CryptoBubbles = () => {
 
   return (
     <div className="bg-[#030B20] relative">
-      <svg ref={svgRef} className="bubbles-canvas w-full h-full" />
+      <svg ref={svgRef} className="bubbles-canvas w-full" />
 
       <div className="controls">
         {/* <h1>Crypto Bubbles</h1> */}
@@ -413,7 +434,7 @@ const CryptoBubbles = () => {
                   <h3 className="text-lg font-semibold">{currentCoin.name}</h3>
                 </div>
                 <button
-                  className="text-gray-400 hover:text-red-500 text-xl"
+                  className="text-gray-400 hover:text-red-500 text-xl cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setTooltipData({ ...tooltipData, visible: false });
@@ -462,7 +483,7 @@ const CryptoBubbles = () => {
                 {["24h", "7d", "30d"].map((label) => (
                   <button
                     key={label}
-                    className={`px-2 py-1 rounded-md ${
+                    className={`px-2 py-1 rounded-md cursor-pointer ${
                       tooltipTimeRange === label
                         ? "bg-green-500 text-white"
                         : "bg-gray-700 text-gray-300"

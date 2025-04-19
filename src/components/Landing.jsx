@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaStar, FaRegCircle, FaBars, FaTimes } from "react-icons/fa";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import PriceTicker from "./PriceTicker";
@@ -249,6 +249,8 @@ function Landing() {
   const [active, setActive] = useState(0);
   const start = currentSlide * cardsPerSlide;
   const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -257,6 +259,12 @@ function Landing() {
 
     return () => clearInterval(interval);
   }, [totalSlides]);
+
+  useLayoutEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   return (
     <div className="scrollbar-hidden">
@@ -269,15 +277,17 @@ function Landing() {
         </defs>
       </svg>
 
-      <div className="">
-        <PriceTicker />
-      </div>
+      <div className="max-h-screen">
+        {/* <PriceTicker /> */}
 
-      {/* Header */}
-      <Header />
-      {/* <div className="h-[90vh] relative top-[10vh]">
-        <CryptoBubbles />
-      </div> */}
+        {/* Header */}
+        <div ref={headerRef} className="">
+          <Header />
+        </div>
+        {/* <div className="" style={{ height: `calc(100vh - ${headerHeight}px)` }}>
+          <CryptoBubbles height={window.innerHeight - headerHeight} />
+        </div> */}
+      </div>
 
       {/* Section 1 */}
       <section
