@@ -277,16 +277,20 @@ function Landing() {
         </defs>
       </svg>
 
-      <div className="max-h-screen">
+      <div className="max-h-screen bg-[#0A0F2C]">
         {/* <PriceTicker /> */}
 
         {/* Header */}
         <div ref={headerRef} className="">
           <Header />
         </div>
-        {/* <div className="" style={{ height: `calc(100vh - ${headerHeight}px)` }}>
-          <CryptoBubbles height={window.innerHeight - headerHeight} />
-        </div> */}
+        <div
+          className="pt-20"
+          style={{ height: `calc(95vh - ${headerHeight}px)` }}
+        >
+          {" "}
+          <CryptoBubbles height={window.innerHeight - headerHeight - 110} />
+        </div>
       </div>
 
       {/* Section 1 */}
