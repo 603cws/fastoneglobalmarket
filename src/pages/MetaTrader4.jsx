@@ -3,9 +3,10 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import InstantAccount from "../components/InstantAccount";
 import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
+import MetaTraderPlatform from "../components/MetaTraderPlatform";
 
 function MetaTrader4() {
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/newmetatrader4.png";
   const handleLinkClick = (event, isLogin) => {
     event.preventDefault();
     handleRedirect(isLogin);
@@ -60,7 +61,7 @@ function MetaTrader4() {
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto lg:pt-10  md:pb-5 relative">
-            <div className="">
+            <div className="lg:mt-20">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
                   <h2 className="font-bold text-2xl lg:text-left md:text-3xl lg:text-4xl lg:-mb-1">
@@ -132,60 +133,38 @@ function MetaTrader4() {
           </div>
         </div>
 
-        <div className="bg-[#030B20] ">
-          <div className="container mx-auto lg:pt-10  md:pb-5 px-4">
-            <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 mb-10">
-              <div className="flex-1 space-y-6">
-                <h2 className="text-white text-3xl lg:text-4xl capitalize">
-                  MetaTrader 4 mobile application
-                </h2>
-                <p className="text-sm lg:text-base text-white/20">
-                  MetaTrader 4 portable application will allow you to trade from
+        <MetaTraderPlatform
+          title="MetaTrader 4 mobile application"
+          imagepath="/images/metatradermobile4.png"
+          description="MetaTrader 4 portable application will allow you to trade from
                   anywhere in the world. Designed specifically for smartphones
                   and tablets, this mobile terminal offers traders a familiar
                   interface with slight modifications and the same set of tools
                   and features as the desktop terminal. Download the portable
                   version of the MetaTrader 4 to your mobile device and try
                   trading from any convenient place - the terminal will always
-                  be with you!
-                </p>
-                <div className="flex flex-col md:flex-row justify-start items-start lg:items-center gap-4">
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="https://download.mql5.com/cdn/mobile/mt4/ios?server=FastOneGlobal-Demo,FastOneGlobal-Main">
-                      <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
-                        <FaApple size={30} color="white" />
-                        <div>
-                          <p className="text-sm">Download on the</p>
-                          <h3 className="text-lg">App Store</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="https://download.mql5.com/cdn/mobile/mt4/android?server=FastOneGlobal-Demo,FastOneGlobal-Main">
-                      <div className="flex  items-center bg-[#000A73]/50 px-12 lg:px-10 py-1 gap-3">
-                        <IoLogoGooglePlaystore size={30} color="white" />
-                        <div>
-                          <p className="text-sm">Get it on</p>
-                          <h3 className="text-lg">Google Play</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 flex justify-center ">
-                <div className="">
-                  <img src={imagepath} alt="dummy image" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  be with you!"
+          button={[
+            {
+              href: "https://download.mql5.com/cdn/mobile/mt4/ios?server=FastOneGlobal-Demo,FastOneGlobal-Main",
+              firstname: "Download on the",
+              lastname: "App Store",
+              // imgpath: "/images/mt4.png",
+              icon: <FaApple size={30} color="white" />,
+            },
+            {
+              href: "https://download.mql5.com/cdn/mobile/mt4/android?server=FastOneGlobal-Demo,FastOneGlobal-Main",
+              firstname: "Get it on",
+              lastname: "Google Play",
+              // imgpath: "/images/mt4.png",
+              icon: <IoLogoGooglePlaystore size={30} color="white" />,
+            },
+          ]}
+        />
 
-        <div className="bg-[#030B20] ">
+        {/* <div className="bg-[#030B20] ">
           <div className="container mx-auto  lg:pt-10  md:pb-5">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10 lg:justify-center lg:items-center">
               <div className="flex-1 space-y-6">
                 <h2 className="text-white text-3xl lg:text-4xl">
                   MetaTrader 4 web platform
@@ -203,7 +182,10 @@ function MetaTrader4() {
                     {" "}
                     <a href="#">
                       <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
-                        <FaApple size={30} color="white" />
+                       
+                        <div>
+                          <img src="/images/mt4.png" alt="mt5" />
+                        </div>
                         <div>
                           <p className="text-sm">open in</p>
                           <h3 className="text-lg">browser</h3>
@@ -220,7 +202,26 @@ function MetaTrader4() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+
+        <MetaTraderPlatform
+          title="MetaTrader 4 web platform"
+          imagepath="/images/metatraderwebapp.png"
+          description=" Also, you have an opportunity to use a web version of
+                  MetaTrader 4 platform, which is supported by all available
+                  browsers. The MT4 web terminal offers the same features and
+                  performance as the desktop version, and is still available in
+                  all languages supported by FastOne websites. Manage your
+                  positions freely and easily from any place in the world."
+          button={[
+            {
+              href: "#",
+              firstname: "open in",
+              lastname: "browser",
+              imgpath: "/images/mt4.png",
+            },
+          ]}
+        />
 
         <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
           <div className="container mx-auto flex justify-center">

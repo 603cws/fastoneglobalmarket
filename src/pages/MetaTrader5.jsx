@@ -3,9 +3,10 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import InstantAccount from "../components/InstantAccount";
 import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
+import MetaTraderPlatform from "../components/MetaTraderPlatform";
 
 function MetaTrader5() {
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/meta5.png";
   const handleLinkClick = (event, isLogin) => {
     event.preventDefault();
     handleRedirect(isLogin);
@@ -61,7 +62,7 @@ function MetaTrader5() {
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
-            <div className="">
+            <div className="lg:mt-20">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
                   <h2 className="font-bold text-2xl lg:text-left md:text-3xl lg:text-4xl lg:-mb-1">
@@ -139,15 +140,10 @@ function MetaTrader5() {
           </div>
         </div>
 
-        <div className="bg-[#030B20] ">
-          <div className="container mx-auto  lg:pt-10  md:pb-5 ">
-            <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 mb-10">
-              <div className="flex-1 space-y-6">
-                <h2 className="text-white text-3xl lg:text-4xl capitalize">
-                  MetaTrader 5 mobile Terminal
-                </h2>
-                <p className="text-sm lg:text-base text-white/20">
-                  You can trade through MetaTrader 5 using any portable device
+        <MetaTraderPlatform
+          title="MetaTrader 5 mobile Terminal"
+          imagepath="/images/meta5mobileapp.png"
+          description="You can trade through MetaTrader 5 using any portable device
                   from anywhere in the world at any moment. The application
                   supports both netting and hedging systems, includes all tools
                   and features necessary for work: Market Depth, all types of
@@ -156,82 +152,45 @@ function MetaTrader5() {
                   situation, be able to perform trading operations and monitor
                   the history. Download the portable version of MetaTrader 5 to
                   your mobile device and try trading from any convenient place -
-                  the terminal will always be with you!
-                </p>
-                <div className="flex flex-col md:flex-row justify-start items-start lg:items-center gap-4">
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="/app-coming-soon">
-                      <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
-                        <FaApple size={30} color="white" />
-                        <div>
-                          <p className="text-sm">Download on the</p>
-                          <h3 className="text-lg">App Store</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    <a href="/app-coming-soon">
-                      <div className="flex  items-center bg-[#000A73]/50 px-12 lg:px-10 py-1 gap-3">
-                        <IoLogoGooglePlaystore size={30} color="white" />
-                        <div>
-                          <p className="text-sm">Get it on</p>
-                          <h3 className="text-lg">Google Play</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 flex justify-center ">
-                <div className="">
-                  <img src={imagepath} alt="dummy image" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  the terminal will always be with you!"
+          button={[
+            {
+              href: "/app-coming-soon",
+              firstname: "Download on the",
+              lastname: "App Store",
+              // imgpath: "/images/mt4.png",
+              icon: <FaApple size={30} color="white" />,
+            },
+            {
+              href: "/app-coming-soon",
+              firstname: "Get it on",
+              lastname: "Google Play",
+              // imgpath: "/images/mt4.png",
+              icon: <IoLogoGooglePlaystore size={30} color="white" />,
+            },
+          ]}
+        />
 
-        <div className="bg-[#030B20] ">
-          <div className="container mx-auto  lg:pt-10  md:pb-5">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10">
-              <div className="flex-1 space-y-6">
-                <h2 className="text-white text-3xl lg:text-4xl">
-                  MetaTrader 5 web platform
-                </h2>
-                <p className="text-white/20">
-                  Using MetaTrader 5 web terminal from MetaQuotes, you can trade
+        <MetaTraderPlatform
+          title="MetaTrader 5 web platform"
+          imagepath="/images/meta5webapp.png"
+          description="Using MetaTrader 5 web terminal from MetaQuotes, you can trade
                   on any device directly from a browser. The web terminal
                   includes all features and options of the desktop version, so
                   you will always be able to keep track of your positions and
                   make quick trading decisions depending on the market situation
                   at the moment. All you have to do to use the web version of
                   MetaTrader 5 terminal is to have internet connection, a
-                  browser, and the password to your FastOne trading account.
-                </p>
-                <div className="flex justify-start items-center gap-4">
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    {" "}
-                    <a href="#">
-                      <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
-                        <FaApple size={30} color="white" />
-                        <div>
-                          <p className="text-sm">open in</p>
-                          <h3 className="text-lg">browser</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 flex justify-center ">
-                <div className="">
-                  <img src={imagepath} alt="dummy image" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  browser, and the password to your FastOne trading account."
+          button={[
+            {
+              href: "#",
+              firstname: "open in",
+              lastname: "browser",
+              imgpath: "/images/mt5.png",
+            },
+          ]}
+        />
 
         <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
           <div className="container mx-auto  flex justify-center">

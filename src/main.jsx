@@ -45,6 +45,7 @@ import Landing from "./components/Landing.jsx";
 import MetaTrader4 from "./pages/MetaTrader4.jsx";
 import MetaTrader5 from "./pages/MetaTrader5.jsx";
 import CryptoBubbles from "./pages/CryptoBubbles.jsx";
+import TestCompont from "./components/TestCompont.jsx";
 
 const router = createBrowserRouter([
   {
@@ -199,6 +200,7 @@ const router = createBrowserRouter([
         path: "crypto-bubbles",
         element: <CryptoBubbles />,
       },
+      { path: "test", element: <TestCompont /> },
     ],
   },
   {

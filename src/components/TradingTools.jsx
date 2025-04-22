@@ -26,10 +26,15 @@ const TradingTools = () => {
         <div className="row">
           <div className="col-12 platform-content">
             <img
-              src="/images/home-img/platforms.webp"
+              src="/images/iPhone12Pro.png"
               className="t-platform-image"
               alt=""
             />
+            {/* <img
+              src="/images/home-img/platforms.webp"
+              className="t-platform-image"
+              alt=""
+            /> */}
             <div className="platform-grid ">
               <a href="" className=" pf-card pf-card-1 bg-[#fff] mb-3  md:mb-0">
                 <img

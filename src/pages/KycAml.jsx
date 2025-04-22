@@ -21,7 +21,7 @@ function KycAml() {
         // backgroundImage="/images/bg-2.png"
         breadcrumbPaths={breadcrumbPaths}
       />
-      <section className="mt-5">
+      <section className="mt-5 pb-8 lg:pb-10">
         <div className="container relative">
           <div className="row">
             <div className="col-12 about-text text-[#B2B2B2]">

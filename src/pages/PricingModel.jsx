@@ -49,66 +49,73 @@ const PricingModel = () => {
     { name: "Pricing Model" },
   ];
   return (
-    <div className="bg-[#030B20] text-white  py-10">
-      {/* <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10"> */}
-      <div className="container mx-auto text-center mb-10">
-        {/* <div className="max-w-7xl mx-auto text-center"> */}
-        <Header />
-        <TitleArea
-          title="NDD EXECUTION"
-          description="Deep liquidity, the best possible prices, and ultra fast precise execution at the best prices possible. Doesn't get FASTer than this."
-          breadcrumbPaths={breadcrumbPaths}
-        />
+    <div className="relative">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0 max-h-full w-full object-cover"
+      />
+      <div className=" bg-[#030B20] text-white  py-10">
+        {/* <div className="bg-[#030B20] text-white min-h-screen px-4 lg:px-16 py-10"> */}
+        <div className="relative container mx-auto text-center mb-10">
+          {/* <div className="max-w-7xl mx-auto text-center"> */}
+          <Header />
+          <TitleArea
+            title="NDD EXECUTION"
+            description="Deep liquidity, the best possible prices, and ultra fast precise execution at the best prices possible. Doesn't get FASTer than this."
+            breadcrumbPaths={breadcrumbPaths}
+          />
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-          {pricingGrid.map((item, index) => (
-            <div
-              key={index}
-              className="border border-blue-400  gap-1 flex items-center rounded-md p-5 hover:shadow-lg transition duration-300"
-            >
-              <div className="flex justify-between items-center gap-2  border-l  border-l-[#4575FF] pl-1">
-                <div className="">
-                  <img src={item.pricingimage} alt="pricingmodel" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm lg:text-lg mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs lg:text-sm text-[#B2B2B2]">
-                    {item.desc}
-                  </p>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+            {pricingGrid.map((item, index) => (
+              <div
+                key={index}
+                className="border border-blue-400  gap-1 flex items-center rounded-md p-5 hover:shadow-lg transition duration-300"
+              >
+                <div className="flex justify-between items-center gap-2  border-l  border-l-[#4575FF] pl-1">
+                  <div className="">
+                    <img src={item.pricingimage} alt="pricingmodel" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-sm lg:text-lg mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs lg:text-sm text-[#B2B2B2]">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* CTA Section */}
+          <div className="mt-12 flex  justify-between   border-2 border-[#4575FF] shadow-xl/30  rounded-xl p-4 items-center gap-4">
+            <div className=" text-white text-sm lg:text-xl font-bold  rounded-md ">
+              Start Trading Now
             </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-12 flex  justify-between   border-2 border-[#4575FF] shadow-xl/30  rounded-xl p-4 items-center gap-4">
-          <div className=" text-white text-sm lg:text-xl font-bold  rounded-md ">
-            Start Trading Now
-          </div>
-          <button className="bg-white text-sm lg:text-base text-black px-6 py-3 border-2 border-[#fff] rounded-xl">
-            Open Account Now
-          </button>
-        </div>
-
-        {/* <div className="bg-[#0A324F] flex justify-center md:justify-around items-center mt-16 py-6 rounded-md text-center px-2 md:px-0">
-          <div>
-            <p className="text-white font-semibold text-sm lg:text-lg ">
-              Instant Account - Trade Within Minutes!
-            </p>
-          </div>
-          <div>
-            <button className="md:mt-4 text-xs lg:text-base bg-white text-black px-3 py-1 md:px-6 md:py-2 rounded-md font-medium">
-              <a href="/account-comparison">Start Live Account</a>
+            <button className="bg-white text-sm lg:text-base text-black px-6 py-3 border-2 border-[#fff] rounded-xl">
+              Open Account Now
             </button>
           </div>
-        </div> */}
-      </div>
 
-      <InstantAccount />
+          {/* <div className="bg-[#0A324F] flex justify-center md:justify-around items-center mt-16 py-6 rounded-md text-center px-2 md:px-0">
+            <div>
+              <p className="text-white font-semibold text-sm lg:text-lg ">
+                Instant Account - Trade Within Minutes!
+              </p>
+            </div>
+            <div>
+              <button className="md:mt-4 text-xs lg:text-base bg-white text-black px-3 py-1 md:px-6 md:py-2 rounded-md font-medium">
+                <a href="/account-comparison">Start Live Account</a>
+              </button>
+            </div>
+          </div> */}
+        </div>
+
+        <InstantAccount />
+      </div>
     </div>
   );
 };

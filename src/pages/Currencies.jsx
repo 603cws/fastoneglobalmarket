@@ -41,7 +41,7 @@ function Currencies() {
     { name: "Currencies" },
   ];
 
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/currencyimage.png";
   return (
     <div className="relative">
       <img
@@ -49,7 +49,9 @@ function Currencies() {
         alt=""
         className="absolute top-0 left-0 "
       />
-      <PriceTicker />
+      <div className="relative">
+        <PriceTicker />
+      </div>
       <Header />
       <div className="bg-[#030B20] py-6 md:py-10">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />

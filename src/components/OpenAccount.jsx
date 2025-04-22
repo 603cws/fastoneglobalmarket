@@ -6,7 +6,7 @@ const OpenAccount = () => {
       <div className="max-w-screen-xl mx-auto px-4 start-trading">
         <div className="mt-3">
           <div className="flex">
-            <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl">
+            <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl w-full">
               <div className="w-full border bg-[#030B20]  rounded-xl p-3 md:p-6 flex flex-col md:flex-row md:justify-between md:items-center md:gap-6 ">
                 {/* Left Column */}
                 <div className="w-full md:w-1/2 box-left">

@@ -100,10 +100,10 @@ export const Footer = () => {
                 </div>
                 <ul>
                   <li>
-                    <Link to="/desktop/metatrader4"> MetaTrader 4</Link>
+                    <Link to="/metatrader4"> MetaTrader 4</Link>
                   </li>
                   <li>
-                    <Link to="/desktop/metatrader5">MetaTrader 5</Link>
+                    <Link to="/metatrader5">MetaTrader 5</Link>
                   </li>
                 </ul>
               </div>

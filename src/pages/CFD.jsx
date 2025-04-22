@@ -55,9 +55,7 @@ function CFD() {
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>
       <MarketHeaderSection
-        title={
-          "Trade various indices covering the US market, eurozone and emerging markets."
-        }
+        title={"Diversify your investment portfolio by trading CFD on forex"}
         imagepath={imagepath}
       />
       <WhyTrade title="Why trade CFD with FastOne?" benefits={benefits} />
