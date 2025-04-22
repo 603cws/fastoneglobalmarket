@@ -11,9 +11,6 @@ import PriceTicker from "./components/PriceTicker";
 import AccountTypes from "./components/AccountTypes";
 import Testimonials from "./components/Testimonials";
 
-
-
-
 function App() {
   const [count, setCount] = useState(0);
 

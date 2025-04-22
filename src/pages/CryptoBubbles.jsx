@@ -23,10 +23,45 @@ const CryptoBubbles = ({ height }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d`
-        );
+        // const response = await axios.get(
+        //   // `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d`
+        //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d&x_cg_demo_api_key=CG-7AbQRHEkb37BAAFt4qDVSE68`
+        // );
+        let response;
 
+        // First attempt: Free public API (no API key required)
+        try {
+          response = await axios.get(
+            "https://api.coingecko.com/api/v3/coins/markets",
+            {
+              params: {
+                vs_currency: "usd",
+                order: "market_cap_desc",
+                per_page: 100,
+                price_change_percentage: "24h,7d,30d",
+              },
+            }
+          );
+        } catch (primaryError) {
+          console.warn(
+            "Public API failed. Trying demo API...",
+            primaryError.message
+          );
+
+          // Fallback: demo API with demo key
+          response = await axios.get(
+            "https://api.coingecko.com/api/v3/coins/markets",
+            {
+              params: {
+                vs_currency: "usd",
+                order: "market_cap_desc",
+                per_page: 100,
+                price_change_percentage: "24h,7d,30d",
+                x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
+              },
+            }
+          );
+        }
         const nodes = response.data.map((coin) => {
           const cached = positionsRef.current.get(coin.id);
           return {
@@ -81,12 +116,42 @@ const CryptoBubbles = ({ height }) => {
 
     svg.selectAll("defs").remove();
     const defs = svg.append("defs");
-    defs
-      .append("filter")
-      .attr("id", "shadow")
-      .html(
-        `<feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="black" flood-opacity="0.3"/>`
-      );
+    // defs
+    //   .append("filter")
+    //   .attr("id", "glow")
+    //   .attr("x", "-50%")
+    //   .attr("y", "-50%")
+    //   .attr("width", "200%")
+    //   .attr("height", "200%").html(`
+    //   <feGaussianBlur stdDeviation="4" result="blur"/>
+    //   <feMerge>
+    //     <feMergeNode in="blur"/>
+    //     <feMergeNode in="SourceGraphic"/>
+    //   </feMerge>
+    // `);
+    data.forEach((d) => {
+      const change = Math.abs(d.price_change || 0);
+      const blur = Math.min(12, 2 + change * 0.5); // adjust glow intensity
+
+      const glow = defs
+        .append("filter")
+        .attr("id", `glow-${d.id}`)
+        .attr("x", "-50%")
+        .attr("y", "-50%")
+        .attr("width", "200%")
+        .attr("height", "200%");
+
+      glow
+        .append("feGaussianBlur")
+        .attr("in", "SourceGraphic")
+        .attr("stdDeviation", blur)
+        .attr("result", "blur");
+
+      glow.append("feMerge").html(`
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        `);
+    });
 
     svg
       .attr("viewBox", [0, 0, width, height])
@@ -100,11 +165,18 @@ const CryptoBubbles = ({ height }) => {
     // const cappedMax = Math.min(maxChange, 30);
     let forceStrength;
     let minRadius, maxRadius;
-    let jiggle = () => (Math.random() - 1) * (timeRange === "30d" ? 2 : 5);
+    const collisionStrength = timeRange === "30d" ? 1 : 0.7;
+    // let jiggle = () => (Math.random() - 1) * (timeRange === "30d" ? 2 : 5);
+    let jiggle;
+    if (timeRange === "30d") {
+      jiggle = () => 0; // 🔥 turn off jiggle completely
+    } else {
+      jiggle = () => (Math.random() - 0.5) * 3;
+    }
 
-    if (timeRange === "24h") forceStrength = 0.03;
+    if (timeRange === "24h") forceStrength = 0.015;
     else if (timeRange === "7d") forceStrength = 0.02;
-    else if (timeRange === "30d") forceStrength = 0.045;
+    else if (timeRange === "30d") forceStrength = 0.008;
 
     if (window.innerWidth < 600) {
       minRadius = 15;
@@ -113,17 +185,14 @@ const CryptoBubbles = ({ height }) => {
       minRadius = 20;
       maxRadius = 70;
     } else {
-      minRadius = 30;
-      maxRadius = 120;
+      minRadius = 25;
+      maxRadius = 115;
     }
 
     // 🔁 Adjust based on timeRange
-    if (timeRange === "7d") {
+    if (timeRange === "30d") {
       minRadius -= 2;
-      maxRadius -= 2;
-    } else if (timeRange === "30d") {
-      minRadius -= 7;
-      maxRadius -= 30;
+      maxRadius -= 10;
     }
     let domainMax;
     if (timeRange === "24h") domainMax = 10;
@@ -139,8 +208,8 @@ const CryptoBubbles = ({ height }) => {
 
     let collisionRadius = (d) => {
       const base = radiusScale(Math.abs(d.price_change || 0));
-      const cap = timeRange === "30d" ? 70 : 100;
-      return Math.min(base, cap) + (timeRange === "30d" ? 0 : 10);
+      const buffer = 8; // Add consistent spacing around all bubbles
+      return base + buffer;
     };
 
     const node = svg
@@ -158,11 +227,21 @@ const CryptoBubbles = ({ height }) => {
             .style("fill", (d) =>
               d.price_change >= 0 ? "rgba(0,255,0,0.1)" : "rgba(255,0,0,0.1)"
             )
-            .style("stroke", (d) =>
-              d.price_change >= 0 ? "#00ff00" : "#ff0000"
-            )
-            .style("stroke-width", 2)
-            .style("filter", "url(#shadow)");
+            // .style("stroke", (d) =>
+            //   d.price_change >= 0 ? "#4CA94E" : "#C34646"
+            // )
+            .style("stroke", (d) => {
+              const change = Math.abs(d.price_change || 0);
+              const isGainer = d.price_change >= 0;
+
+              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E"; // low change
+              if (change < 5) return isGainer ? "#379E3C" : "#ad3333"; // moderate
+              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f"; // strong
+              return isGainer ? "#00FF00" : "#FF0000"; // very strong
+            })
+
+            .style("stroke-width", 3)
+            .style("filter", (d) => `url(#glow-${d.id})`);
 
           g.append("image")
             .attr("xlink:href", (d) => d.image)
@@ -172,15 +251,21 @@ const CryptoBubbles = ({ height }) => {
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 4 || 0))
             )
-            .attr("x", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
-              return -r / 2;
+            // .attr("x", (d) => {
+            //   const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
+            //   return -r / 2;
+            // })
+            // .attr("y", (d) => {
+            //   const r = radiusScale(Math.abs(d.price_change || 0));
+            //   const imageSize = r * 0.6;
+            //   return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
+            // })
+            .attr("class", (d) => {
+              return Math.abs(d.price_change) <= 1
+                ? "bubble-logo center"
+                : "bubble-logo top";
             })
-            .attr("y", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              const imageSize = r * 0.6;
-              return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
-            })
+
             .attr("clip-path", "circle()")
             .style("pointer-events", "none");
 
@@ -188,7 +273,7 @@ const CryptoBubbles = ({ height }) => {
           g.append("text")
             .attr("class", "symbol")
             .attr("text-anchor", "middle")
-            .attr("dy", ".2em")
+            .attr("dy", ".3em")
             .style("fill", "#fff")
             .style("font-weight", "bold")
             .style(
@@ -196,14 +281,14 @@ const CryptoBubbles = ({ height }) => {
               (d) =>
                 `${Math.min(
                   radiusScale(Math.abs(d.price_change || 0)) / 2.5,
-                  20
+                  15
                 )}px`
             )
             .style("pointer-events", "none")
             .text((d) => d.symbol.toUpperCase())
             .style("display", (d) =>
               Math.abs(d.price_change) <= 1 ? "none" : "block"
-            ); // 👈 KEY LINE
+            );
 
           // ALWAYS SHOW % CHANGE
           g.append("text")
@@ -233,9 +318,15 @@ const CryptoBubbles = ({ height }) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
               return Math.abs(d.price_change) <= 1 ? base * 0.7 : base;
             })
-            .style("stroke", (d) =>
-              d.price_change >= 0 ? "#00ff00" : "#ff0000"
-            )
+            .style("stroke", (d) => {
+              const change = Math.abs(d.price_change || 0);
+              const isGainer = d.price_change >= 0;
+
+              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E"; // low change
+              if (change < 5) return isGainer ? "#379E3C" : "#ad3333"; // moderate
+              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f"; // strong
+              return isGainer ? "#00FF00" : "#FF0000"; // very strong
+            })
             .style("fill", (d) =>
               d.price_change >= 0 ? "rgba(0,255,0,0.1)" : "rgba(255,0,0,0.1)"
             );
@@ -260,16 +351,16 @@ const CryptoBubbles = ({ height }) => {
             )
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 4 || 0))
-            )
-            .attr("x", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
-              return -r;
-            })
-            .attr("y", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              const imageSize = r * 0.6;
-              return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
-            });
+            );
+          // .attr("x", (d) => {
+          //   const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
+          //   return -r;
+          // })
+          // .attr("y", (d) => {
+          //   const r = radiusScale(Math.abs(d.price_change || 0));
+          //   const imageSize = r * 0.6;
+          //   return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
+          // });
 
           return update;
         },
@@ -304,6 +395,11 @@ const CryptoBubbles = ({ height }) => {
         y: event.pageY - 100,
         coinId: d.id,
       });
+      // Remove blink from all circles
+      svg.selectAll("circle").classed("blink", false);
+
+      // Add blink to selected
+      d3.select(event.currentTarget).select("circle").classed("blink", true);
     });
 
     if (!simulationRef.current) {
@@ -311,21 +407,31 @@ const CryptoBubbles = ({ height }) => {
         .forceSimulation(data)
         .force("x", d3.forceX(width / 2).strength(forceStrength))
         .force("y", d3.forceY(height / 2).strength(forceStrength))
-        .force("collision", d3.forceCollide(collisionRadius))
-        .force("jiggle", d3.forceManyBody().strength(jiggle))
+        .force(
+          "collision",
+          d3.forceCollide(collisionRadius).strength(collisionStrength)
+        )
+        // .force("jiggle", d3.forceManyBody().strength(jiggle))
+        .force("charge", d3.forceManyBody().strength(-5))
         .velocityDecay(0.92)
         .alpha(0.4)
         .alphaMin(0.001)
-        .alphaDecay(0.002)
+        .alphaDecay(0.012)
         .on("tick", ticked);
     } else {
       simulationRef.current.nodes(data);
-      simulationRef.current.alphaTarget(0.3).restart();
+      // simulationRef.current.alphaTarget(0.3).restart();
+      simulationRef.current
+        // .alphaTarget(timeRange === "30d" ? 0.05 : 0.1)
+        .alphaTarget(0.02)
+        .restart();
     }
 
     function repelBubbles(x, y) {
       const repelRadius = 500;
-      const repelStrength = 0.3;
+      // const repelStrength = 0.3;
+      const repelStrength =
+        timeRange === "30d" ? 0.15 : timeRange === "7d" ? 0.2 : 0.25;
 
       function localizedRepel(alpha) {
         data.forEach((d) => {
@@ -375,8 +481,11 @@ const CryptoBubbles = ({ height }) => {
   }, [data]);
 
   useEffect(() => {
-    const handleClickOutside = () =>
+    const handleClickOutside = () => {
       setTooltipData({ ...tooltipData, visible: false });
+      // Remove blinking effect from all bubbles
+      d3.select(svgRef.current).selectAll("circle").classed("blink", false);
+    };
     if (tooltipData.visible)
       window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
@@ -438,6 +547,9 @@ const CryptoBubbles = ({ height }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                     setTooltipData({ ...tooltipData, visible: false });
+                    d3.select(svgRef.current)
+                      .selectAll("circle")
+                      .classed("blink", false);
                   }}
                 >
                   ×
@@ -475,7 +587,7 @@ const CryptoBubbles = ({ height }) => {
                       : "text-red-400"
                   }`}
                 >
-                  {currentCoin[`price_change_${tooltipTimeRange}`]}%
+                  {currentCoin[`price_change_${tooltipTimeRange}`]?.toFixed(2)}%
                 </p>
               </div>
 

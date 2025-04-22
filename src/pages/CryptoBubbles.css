@@ -221,3 +221,33 @@ text {
 .fade-slide-in {
   animation: fadeSlideIn 0.5s ease-out forwards;
 }
+@keyframes blink-border {
+  0% {
+    stroke-opacity: 1;
+    stroke-width: 4px;
+  }
+  50% {
+    stroke-opacity: 0.2;
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-opacity: 1;
+    stroke-width: 4px;
+  }
+}
+
+.blink {
+  animation: blink-border 1s infinite;
+}
+.bubble-logo {
+  transform-box: fill-box; /* Makes transform relative to element */
+  transform-origin: center; /* Ensures transform happens from center */
+}
+
+.bubble-logo.center {
+  transform: translate(-50%, -50%);
+}
+
+.bubble-logo.top {
+  transform: translate(-50%, -120%);
+}
