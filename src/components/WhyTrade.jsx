@@ -4,7 +4,7 @@ import Cta2Btn from "./Cta2Btn";
 const WhyTrade = ({ title, benefits }) => {
   return (
     <section className=" text-center flex justify-center bg-[#030B20] lg:py-10">
-      <div className="container px-4 mx-auto">
+      <div className="container px-4 mx-auto relative">
         <h2 className="text-xl md:text-3xl font-bold py-8 md:py-20 text-transparent bg-clip-text bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
           {title}
         </h2>

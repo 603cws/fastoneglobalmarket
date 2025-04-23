@@ -8,6 +8,7 @@ const CryptoBubbles = ({ height }) => {
   const svgRef = useRef(null);
   const positionsRef = useRef(new Map());
   const simulationRef = useRef(null);
+  const repelPointRef = useRef(null);
 
   const [data, setData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
@@ -19,7 +20,7 @@ const CryptoBubbles = ({ height }) => {
     coinId: null,
   });
   const [tooltipTimeRange, setTooltipTimeRange] = useState("24h");
-
+  const [isRepelling, setIsRepelling] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -159,12 +160,13 @@ const CryptoBubbles = ({ height }) => {
       .on("click", function (event) {
         const [clickX, clickY] = d3.pointer(event);
         repelBubbles(clickX, clickY);
+        repelPointRef.current = { x: clickX, y: clickY };
       });
 
     // const maxChange = d3.max(data, (d) => Math.abs(d.price_change || 0));
     // const cappedMax = Math.min(maxChange, 30);
     let forceStrength;
-    let minRadius, maxRadius;
+    // let minRadius, maxRadius;
     const collisionStrength = timeRange === "30d" ? 1 : 0.7;
     // let jiggle = () => (Math.random() - 1) * (timeRange === "30d" ? 2 : 5);
     let jiggle;
@@ -178,6 +180,54 @@ const CryptoBubbles = ({ height }) => {
     else if (timeRange === "7d") forceStrength = 0.02;
     else if (timeRange === "30d") forceStrength = 0.008;
 
+    // if (window.innerWidth < 600) {
+    //   minRadius = 15;
+    //   maxRadius = 50;
+    // } else if (window.innerWidth < 1024) {
+    //   minRadius = 20;
+    //   maxRadius = 70;
+    // } else {
+    //   minRadius = 25;
+    //   maxRadius = 115;
+    // }
+
+    // // 🔁 Adjust based on timeRange
+    // if (timeRange === "30d") {
+    //   minRadius -= 2;
+    //   maxRadius -= 10;
+    // }
+    // const priceChanges = data.map((d) =>
+    //   Math.abs(d.price_change_percentage_24h || 0)
+    // );
+    // const highChangeCount = priceChanges.filter(
+    //   (change) => change >= 10
+    // ).length;
+    // const totalCoins = data.length;
+    // const highChangeRatio = highChangeCount / totalCoins;
+    // let domainMax;
+    // if (timeRange === "24h") domainMax = 10;
+    // else if (timeRange === "7d") domainMax = 30;
+    // else if (timeRange === "30d") domainMax = 50;
+    // if (highChangeRatio > 0.5) {
+    //   // Too many high changes, keep bubbles tighter
+    //   domainMax = 10;
+    // } else if (highChangeRatio > 0.2) {
+    //   domainMax = 20;
+    // } else {
+    //   // Only a few coins are spiking — we can show more range
+    //   // domainMax = d3.max(priceChanges);
+    //   domainMax = 30;
+    // }
+
+    // const radiusScale = d3
+    //   .scalePow()
+    //   .exponent(1.3)
+    //   .domain([0, domainMax])
+    //   .range([minRadius, maxRadius])
+    //   .clamp(true);
+
+    // 1. Set radius bounds based on screen size
+    let minRadius, maxRadius;
     if (window.innerWidth < 600) {
       minRadius = 15;
       maxRadius = 50;
@@ -186,19 +236,40 @@ const CryptoBubbles = ({ height }) => {
       maxRadius = 70;
     } else {
       minRadius = 25;
-      maxRadius = 115;
+      maxRadius = 100;
     }
 
-    // 🔁 Adjust based on timeRange
-    if (timeRange === "30d") {
-      minRadius -= 2;
-      maxRadius -= 10;
-    }
+    // 2. Extract price changes from data
+    const priceChanges = data.map((d) =>
+      Math.abs(d.price_change_percentage_24h || 0)
+    );
+
+    // 3. Base domainMax on timeRange
+    let baseDomainMax;
+    if (timeRange === "24h") baseDomainMax = 25;
+    else if (timeRange === "7d") baseDomainMax = 40;
+    else if (timeRange === "30d") baseDomainMax = 40;
+
+    // 4. Adjust domainMax based on market-wide volatility
+    const highChangeCount = priceChanges.filter(
+      (change) => change >= 10
+    ).length;
+    const totalCoins = data.length;
+    const highChangeRatio = highChangeCount / totalCoins;
+
     let domainMax;
-    if (timeRange === "24h") domainMax = 10;
-    else if (timeRange === "7d") domainMax = 30;
-    else if (timeRange === "30d") domainMax = 50;
+    if (highChangeRatio > 0.6) {
+      domainMax = baseDomainMax * 0.1; // super tight if most coins are pumping
+    } else if (highChangeRatio > 0.3) {
+      domainMax = baseDomainMax * 0.75;
+    } else {
+      domainMax = baseDomainMax;
+    }
 
+    // Enforce minimum domainMax (avoid all small bubbles)
+    domainMax = Math.max(domainMax, 5);
+
+    // 5. Build the radius scale
     const radiusScale = d3
       .scalePow()
       .exponent(1.3)
@@ -351,16 +422,12 @@ const CryptoBubbles = ({ height }) => {
             )
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 4 || 0))
-            );
-          // .attr("x", (d) => {
-          //   const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
-          //   return -r;
-          // })
-          // .attr("y", (d) => {
-          //   const r = radiusScale(Math.abs(d.price_change || 0));
-          //   const imageSize = r * 0.6;
-          //   return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
-          // });
+            )
+            .attr("class", (d) => {
+              return Math.abs(d.price_change) <= 1
+                ? "bubble-logo center"
+                : "bubble-logo top";
+            });
 
           return update;
         },
@@ -428,30 +495,28 @@ const CryptoBubbles = ({ height }) => {
     }
 
     function repelBubbles(x, y) {
-      const repelRadius = 500;
-      // const repelStrength = 0.3;
-      const repelStrength =
-        timeRange === "30d" ? 0.15 : timeRange === "7d" ? 0.2 : 0.25;
+      repelPointRef.current = { x, y, expires: Date.now() + 1500 };
+      setIsRepelling(true);
 
-      function localizedRepel(alpha) {
-        data.forEach((d) => {
-          const dx = d.x - x;
-          const dy = d.y - y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < repelRadius) {
-            const force = repelStrength * (1 - distance / repelRadius);
-            d.vx += (dx / distance) * force;
-            d.vy += (dy / distance) * force;
-          }
-        });
-      }
-
-      simulationRef.current.force("repel", localizedRepel);
-      simulationRef.current.alpha(0.7).restart();
+      // Temporarily remove center forces
+      simulationRef.current.force("x", null);
+      simulationRef.current.force("y", null);
+      simulationRef.current.alpha(0.9).restart();
 
       setTimeout(() => {
-        simulationRef.current.force("repel", null);
+        // Restore center forces after repel ends
+        simulationRef.current.force(
+          "x",
+          d3.forceX(window.innerWidth / 2).strength(forceStrength)
+        );
+        simulationRef.current.force(
+          "y",
+          d3.forceY(height / 2).strength(forceStrength)
+        );
+        simulationRef.current.alpha(0.4).restart();
+
+        repelPointRef.current = null;
+        setIsRepelling(false);
       }, 1500);
     }
 
@@ -475,6 +540,26 @@ const CryptoBubbles = ({ height }) => {
           vy: d.vy,
         });
       });
+
+      // Custom repel logic inside tick
+      if (isRepelling && repelPointRef.current) {
+        const { x, y } = repelPointRef.current;
+        const repelRadius = 200;
+        const repelStrength = 8;
+
+        data.forEach((d) => {
+          const dx = d.x - x;
+          const dy = d.y - y;
+          const distSq = dx * dx + dy * dy;
+          const dist = Math.sqrt(distSq);
+
+          if (dist < repelRadius && dist > 0) {
+            const force = repelStrength * (1 - dist / repelRadius);
+            d.vx += (dx / dist) * force;
+            d.vy += (dy / dist) * force;
+          }
+        });
+      }
 
       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     }

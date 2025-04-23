@@ -48,7 +48,7 @@ function Metals() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0 "
+        className="absolute top-0 left-0 w-full object-cover"
       />
       <Header />
       <div className="bg-[#030B20] py-10">
