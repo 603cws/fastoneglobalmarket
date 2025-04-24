@@ -151,7 +151,7 @@ text {
 
 .controls {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: -20px;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.6);

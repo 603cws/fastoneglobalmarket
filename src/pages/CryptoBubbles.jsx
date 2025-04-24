@@ -2,17 +2,36 @@ import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import axios from "axios";
 import "../pages/CryptoBubbles.css";
+import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 // import { clamp } from "three/src/math/MathUtils.js";
+
+const getDaysFromRange = (range) => {
+  console.log("range in getDaysFromRange", range);
+
+  switch (range) {
+    case "24h":
+      return 1;
+    case "7d":
+      return 7;
+    case "30d":
+      return 30;
+    case "1y":
+      return 365;
+    default:
+      return 7;
+  }
+};
 
 const CryptoBubbles = ({ height }) => {
   const svgRef = useRef(null);
   const positionsRef = useRef(new Map());
   const simulationRef = useRef(null);
   const repelPointRef = useRef(null);
+  const sparklineRef = useRef(null);
 
   const [data, setData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
-  const [timeRange, setTimeRange] = useState("24h");
+  const [timeRange, setTimeRange] = useState("7d");
   const [tooltipData, setTooltipData] = useState({
     visible: false,
     x: 0,
@@ -21,6 +40,8 @@ const CryptoBubbles = ({ height }) => {
   });
   const [tooltipTimeRange, setTooltipTimeRange] = useState("24h");
   const [isRepelling, setIsRepelling] = useState(false);
+  const [sparklineData, setSparklineData] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,7 +60,8 @@ const CryptoBubbles = ({ height }) => {
                 vs_currency: "usd",
                 order: "market_cap_desc",
                 per_page: 100,
-                price_change_percentage: "24h,7d,30d",
+                price_change_percentage: "24h,7d,30d,1y",
+                sparkline: true,
               },
             }
           );
@@ -57,8 +79,9 @@ const CryptoBubbles = ({ height }) => {
                 vs_currency: "usd",
                 order: "market_cap_desc",
                 per_page: 100,
-                price_change_percentage: "24h,7d,30d",
+                price_change_percentage: "24h,7d,30d,1y",
                 x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
+                sparkline: true,
               },
             }
           );
@@ -71,12 +94,15 @@ const CryptoBubbles = ({ height }) => {
             name: coin.name,
             price: coin.current_price,
             market_cap: coin.market_cap,
+            market_cap_rank: coin.market_cap_rank,
             price_change:
               coin[`price_change_percentage_${timeRange}_in_currency`],
             price_change_24h: coin.price_change_percentage_24h_in_currency,
             price_change_7d: coin.price_change_percentage_7d_in_currency,
             price_change_30d: coin.price_change_percentage_30d_in_currency,
+            price_change_1y: coin.price_change_percentage_1y_in_currency,
             volume: coin.total_volume,
+            sparkline: coin.sparkline_in_7d?.price,
             url: `https://www.coingecko.com/en/coins/${coin.id}`,
             image: coin.image,
             x: cached?.x ?? Math.random() * window.innerWidth,
@@ -249,6 +275,7 @@ const CryptoBubbles = ({ height }) => {
     if (timeRange === "24h") baseDomainMax = 25;
     else if (timeRange === "7d") baseDomainMax = 40;
     else if (timeRange === "30d") baseDomainMax = 40;
+    else if (timeRange === "1y") baseDomainMax = 150;
 
     // 4. Adjust domainMax based on market-wide volatility
     const highChangeCount = priceChanges.filter(
@@ -376,7 +403,13 @@ const CryptoBubbles = ({ height }) => {
                 )}px`
             )
             .style("pointer-events", "none")
-            .text((d) => `${d.price_change?.toFixed(1)}%`);
+            // .text((d) => `${d.price_change?.toFixed(1)}%`);
+            .text((d) => {
+              const change = d.price_change;
+              return change !== undefined && change !== null
+                ? `${change.toFixed(1)}%`
+                : "–";
+            });
 
           return g;
         },
@@ -410,8 +443,15 @@ const CryptoBubbles = ({ height }) => {
             );
 
           update
+            // .select("text.change")
+            // .text((d) => `${d.price_change?.toFixed(1)}%`);
             .select("text.change")
-            .text((d) => `${d.price_change?.toFixed(1)}%`);
+            .text((d) => {
+              const change = d.price_change;
+              return change !== undefined && change !== null
+                ? `${change.toFixed(1)}%`
+                : "–";
+            });
 
           update
             .select("image")
@@ -453,7 +493,7 @@ const CryptoBubbles = ({ height }) => {
 
     node.call(drag);
 
-    node.on("click", (event, d) => {
+    node.on("click", async (event, d) => {
       event.stopPropagation();
       setSelectedCoin(d);
       setTooltipData({
@@ -462,11 +502,14 @@ const CryptoBubbles = ({ height }) => {
         y: event.pageY - 100,
         coinId: d.id,
       });
+
       // Remove blink from all circles
       svg.selectAll("circle").classed("blink", false);
 
       // Add blink to selected
       d3.select(event.currentTarget).select("circle").classed("blink", true);
+      const prices = await fetchSparklineForCoin(d.id, tooltipTimeRange);
+      setSparklineData(prices);
     });
 
     if (!simulationRef.current) {
@@ -588,6 +631,53 @@ const CryptoBubbles = ({ height }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const fetchSparklineForCoin = async (coinId, range) => {
+    // 🛠️ override 24h request with 2d to avoid 401
+    const actualRange = range === "24h" ? 2 : getDaysFromRange(range);
+    const interval = actualRange <= 2 ? "hourly" : "daily";
+
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart`,
+        {
+          params: {
+            vs_currency: "usd",
+            days: actualRange,
+            interval,
+          },
+        }
+      );
+
+      const prices = response.data.prices.map((p) => p[1]);
+
+      // 🧠 if original request was "24h", simulate it from last 24 hourly points
+      if (range === "24h") {
+        return prices.slice(-24);
+      }
+
+      return prices;
+    } catch (error) {
+      console.warn(
+        `Sparkline fetch failed for ${coinId} (${range}) — ${error.message}`
+      );
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    if (!tooltipData.visible) {
+      setSparklineData([]);
+    }
+  }, [tooltipData.visible]);
+  console.log("sparkline", sparklineData);
+
+  const displayPoints =
+    tooltipTimeRange === "1y"
+      ? sparklineData.slice(-90) // last ~3 months
+      : tooltipTimeRange === "24h"
+      ? sparklineData.slice(-48) // last 48 hourly points
+      : sparklineData.slice(-30); // default
+
   return (
     <div className="bg-[#030B20] relative">
       <svg ref={svgRef} className="bubbles-canvas w-full" />
@@ -595,7 +685,7 @@ const CryptoBubbles = ({ height }) => {
       <div className="controls">
         {/* <h1>Crypto Bubbles</h1> */}
         <div className="time-range">
-          {["24h", "7d", "30d"].map((range) => (
+          {["24h", "7d", "30d", "1y"].map((range) => (
             <button
               key={range}
               onClick={() => setTimeRange(range)}
@@ -612,23 +702,31 @@ const CryptoBubbles = ({ height }) => {
         (() => {
           const currentCoin = data.find((c) => c.id === tooltipData.coinId);
           if (!currentCoin) return null;
+          const maxPrice = Math.max(...sparklineData);
+          const maxIndex = sparklineData.indexOf(maxPrice);
+          const graphHeight = 120;
+          const graphWidth = sparklineRef.current?.offsetWidth || 120;
+          const minPrice = Math.min(...sparklineData);
+
+          // X position
+          const maxX = (maxIndex / (sparklineData.length - 1)) * graphWidth;
+
+          // Y position (invert because higher value = lower y)
+          const maxY =
+            ((maxPrice - minPrice) / (maxPrice - minPrice || 1)) * graphHeight;
 
           return (
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="absolute z-50 bg-gray-900 text-white shadow-xl rounded-2xl p-4 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fade-slide-in"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-bold">
-                      {currentCoin.symbol.toUpperCase().charAt(0)}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold">{currentCoin.name}</h3>
+            <div className="absolute z-50 bg-[#1a1c1f] text-white shadow-2xl rounded-2xl p-6 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all fade-slide-in">
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={currentCoin.image}
+                    alt={currentCoin.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <div className="text-lg font-bold">{currentCoin.name}</div>
                 </div>
                 <button
-                  className="text-gray-400 hover:text-red-500 text-xl cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setTooltipData({ ...tooltipData, visible: false });
@@ -636,12 +734,19 @@ const CryptoBubbles = ({ height }) => {
                       .selectAll("circle")
                       .classed("blink", false);
                   }}
+                  className="text-gray-400 hover:text-red-500 text-xl cursor-pointer"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 text-sm gap-y-2 mb-4">
+              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <p className="text-gray-400">Rank</p>
+                  <p className="font-semibold">
+                    #{currentCoin.market_cap_rank}
+                  </p>
+                </div>
                 <div>
                   <p className="text-gray-400">Market Cap</p>
                   <p className="font-semibold">
@@ -654,16 +759,15 @@ const CryptoBubbles = ({ height }) => {
                     ${currentCoin.volume.toLocaleString()}
                   </p>
                 </div>
+                <div>
+                  <p className="text-gray-400">Price</p>
+                  <p className="font-semibold text-green-400">
+                    ${currentCoin.price.toFixed(4)}
+                  </p>
+                </div>
               </div>
 
-              <div className="text-sm mb-4">
-                <p className="text-gray-400">Price</p>
-                <p className="text-xl font-bold text-green-400">
-                  ${currentCoin.price.toLocaleString()}
-                </p>
-              </div>
-
-              <div className="text-sm mb-4">
+              <div className="text-sm mb-3">
                 <p className="text-gray-400">Change ({tooltipTimeRange})</p>
                 <p
                   className={`font-semibold ${
@@ -672,25 +776,64 @@ const CryptoBubbles = ({ height }) => {
                       : "text-red-400"
                   }`}
                 >
-                  {currentCoin[`price_change_${tooltipTimeRange}`]?.toFixed(2)}%
+                  {typeof currentCoin[`price_change_${tooltipTimeRange}`] ===
+                  "number"
+                    ? `${currentCoin[
+                        `price_change_${tooltipTimeRange}`
+                      ].toFixed(2)}%`
+                    : "–"}
                 </p>
               </div>
-
-              <div className="flex justify-between mt-4 text-xs">
-                {["24h", "7d", "30d"].map((label) => (
-                  <button
-                    key={label}
-                    className={`px-2 py-1 rounded-md cursor-pointer ${
-                      tooltipTimeRange === label
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-700 text-gray-300"
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setTooltipTimeRange(label);
+              {sparklineData.length > 0 && (
+                <div className="relative w-full" ref={sparklineRef}>
+                  <Sparklines data={displayPoints} width={120} height={40}>
+                    <SparklinesLine
+                      color={
+                        currentCoin[`price_change_${tooltipTimeRange}`] >= 0
+                          ? "#00ff00"
+                          : "#ff4444"
+                      }
+                      style={{ fill: "none", strokeWidth: 1 }}
+                    />
+                    <SparklinesSpots size={2} />
+                  </Sparklines>
+                  {/* {latestPrice && ( */}
+                  <div
+                    className="absolute text-sm text-white bg-black/70 px-1 rounded whitespace-nowrap"
+                    style={{
+                      left: `${maxX}px`,
+                      top: `${graphHeight - maxY - 14}px`, // position above the spot
+                      transform: "translateX(-50%)",
                     }}
                   >
-                    {label}
+                    ${maxPrice.toFixed(3)}
+                  </div>
+                  {/* )} */}
+                </div>
+              )}
+
+              <div className="flex justify-between mt-3 text-xs">
+                {["24h", "7d", "30d", "1y"].map((label) => (
+                  <button
+                    key={label}
+                    className={`px-3 py-1 rounded-md cursor-pointer ${
+                      tooltipTimeRange === label
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-800 text-gray-300"
+                    }`}
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      setTooltipTimeRange(label);
+                      if (tooltipData.coinId) {
+                        const prices = await fetchSparklineForCoin(
+                          tooltipData.coinId,
+                          label
+                        );
+                        setSparklineData(prices);
+                      }
+                    }}
+                  >
+                    {label.toUpperCase()}
                   </button>
                 ))}
               </div>
