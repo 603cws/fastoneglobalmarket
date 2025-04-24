@@ -295,20 +295,23 @@ function Landing() {
 
       {/* Section 1 */}
       <section
-        className="relative min-h-screen bg-no-repeat bg-cover bg-center px-4 sm:px-6 text-white flex items-center py-5 pt-20 md:pt-0"
+        className="relative min-h-screen bg-no-repeat bg-cover bg-center text-white flex flex-col md:flex-row items-center py-5 pt-15 sm:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-10">
+        <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-10 px-4 sm:px-0 sm:pl-6 lg:pl-10 header-text pad-left">
           {/* Left Content */}
           <div className="space-y-4 flex-1 text-left">
             <p className="text-md sm:text-xl tracking-wide uppercase flex justify-start items-center gap-2">
-              <FaRegCircle style={{ fill: "url(#icon-gradient)" }} size={14} />
+              <FaRegCircle
+                className="w-5 h-5 icon-4k"
+                style={{ fill: "url(#icon-gradient)" }}
+              />
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Grow your assets effortlessly!
               </span>
             </p>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug sm:leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug sm:leading-tight ">
               <span className="whitespace-nowrap bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Empower Your Trade
               </span>
@@ -316,14 +319,18 @@ function Landing() {
               <span className="text-white">Master the Markets</span>
             </h1>
 
-            <p className="text-gray-300 text-xl sm:text-md lg:text-lg leading-relaxed">
-              Stake your cryptocurrencies and earn up to 15% APY. Secure,
+            <p className="text-gray-300 text-xl sm:text-md lg:text-lg xl:text-2xl leading-relaxed">
+              Stake your cryptocurrencies and earn up to{" "}
+              <span className="hidden md:inline">
+                <br />
+              </span>{" "}
+              15% APY. Secure,
               <br className="hidden sm:block" />
               transparent, and beginner-friendly.
             </p>
 
-            <div className="flex gap-3 pt-4 w-full justify-center md:justify-normal">
-              <button className="text-sm sm:text-base whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
+            <div className="flex gap-3 pt-4 w-full justify-center md:justify-normal gap-4k">
+              <button className="text-sm sm:text-base lg:text-lg whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
                 Start Staking Now
               </button>
               <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text hover:bg-blue-600 hover:text-white px-3 sm:px-6 py-2 rounded-lg font-semibold">
@@ -331,23 +338,35 @@ function Landing() {
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Right Placeholder */}
-          <div className="w-45 sm:w-64 md:w-[400px] h-45 sm:h-64 md:h-[400px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl shadow-xl md:flex-1 mt-4 sm:mt-10 md:mt-0" />
+        {/* Right-side Image Positioned Absolutely and Touching Right Edge */}
+        <div className="h-full md:pt-0 pt-10">
+          <img
+            src="/images/home-page.png"
+            alt="Home Page Graphic"
+            className="object-contain sm:mt-8 md:mt-0" //w-[320px] sm:w-[420px] md:w-[420px] lg:w-[700px]
+          />
         </div>
       </section>
 
       {/* Section 2 */}
-      <section className="min-h-screen bg-[#0A0F2C] text-white py-20 px-6">
-        <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <section className=" bg-[#0A0F2C] text-white py-20 px-6">
+        <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {/* Image Block */}
-          <div className="hidden sm:block bg-gray-300 h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2" />
+          <div className="hidden sm:block h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2 img-4k">
+            <img
+              src="./images/bitcoin.png" // Update this path to the correct location of your image
+              alt="Bitcoin"
+              className="w-full h-full object-contain rounded-xl"
+            />
+          </div>
 
           {/* Text Content with Heading + Paragraph */}
           <div className="lg:col-span-2">
             <div className="flex flex-col lg:flex-row items-start gap-6">
               {/* Heading */}
-              <div className="flex-1">
+              <div className="flex-1 header-text-s2">
                 <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white">
                   Why{" "}
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -359,10 +378,10 @@ function Landing() {
               </div>
 
               {/* Vertical line for large screen only */}
-              <div className="flex items-center gap-4 sm:items-start mt-4 sm:mt-0">
+              <div className="flex items-center gap-4 sm:items-start mt-4 sm:mt-0 header-text-s2">
                 {/* Vertical Line */}
                 <div
-                  className="w-px h-[120px] bg-gradient-to-b"
+                  className="w-px h-[120px] bg-gradient-to-b line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -385,7 +404,7 @@ function Landing() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF]"
+              className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF] header-text-s2"
             >
               <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition h-full">
                 <div className="text-3xl mb-2">{feature.icon}</div>
@@ -402,12 +421,12 @@ function Landing() {
         className="bg-no-repeat bg-cover bg-center py-24 px-6 text-white"
         style={{ backgroundImage: "url('/images/bg-landing3.png')" }}
       >
-        <div className="max-w-7xl mx-auto space-y-20">
+        <div className="container mx-auto space-y-20">
           {/* Staking Steps Section */}
           <div>
             <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between lg:items-start gap-6 ">
               {/* Heading */}
-              <div className="">
+              <div className="header-text-s2">
                 <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug text-start">
                   How Crypto Staking <br /> Works in
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -418,20 +437,21 @@ function Landing() {
               </div>
 
               {/* Vertical line + Paragraph in flex row */}
-              <div className="flex items-start lg:items-center gap-4 ">
+              <div className="flex items-start lg:items-center gap-4">
                 {/* Vertical line */}
                 <div
-                  className="w-px h-24 bg-gradient-to-b"
+                  className="w-px h-24 bg-gradient-to-b line-h-4k2"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
                 />
 
                 {/* Paragraph */}
-                <p className="text-gray-400 max-w-md text-start text-base lg:text-xl">
+                <p className="text-gray-400 max-w-md text-start text-base lg:text-xl para-4k">
                   Staking your crypto has never been easier.
-                  <br /> Follow these three simple steps to start
-                  <br /> earning rewards today!
+                  <br className="br-4k" /> Follow these three simple steps to
+                  start
+                  <br className="br-4k" /> earning rewards today!
                 </p>
               </div>
             </div>
@@ -442,14 +462,14 @@ function Landing() {
                   key={idx}
                   className="rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px]  w-auto sm:w-3/4 lg:w-auto"
                 >
-                  <div className="flex items-center rounded-xl bg-[#0b132e] p-6 h-full">
+                  <div className="flex items-center rounded-xl bg-[#0b132e] p-6 h-full header-text-s2">
                     {/* Number */}
-                    <div className="text-5xl font-bold text-white mr-4">
+                    <div className="text-5xl font-bold text-white mr-4 ">
                       {step.number}
                     </div>
 
                     {/* Content */}
-                    <div>
+                    <div className="">
                       <h4 className="text-white text-lg font-semibold mb-1">
                         {step.title}
                       </h4>
@@ -466,7 +486,7 @@ function Landing() {
           {/* Favorite Crypto Section */}
           <div>
             <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start">
-              <div className="">
+              <div className="header-text-s2">
                 <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -479,22 +499,23 @@ function Landing() {
               <div className="flex items-start gap-4">
                 {/* Vertical line */}
                 <div
-                  className="w-px h-24 bg-gradient-to-b"
+                  className="w-px h-24 bg-gradient-to-b line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
                 />
 
                 {/* Paragraph */}
-                <p className="text-gray-400 max-w-md mt-4 md:mt-0 text-start text-base lg:text-xl">
+                <p className="text-gray-400 max-w-md mt-4 md:mt-0 text-start text-base lg:text-xl para-4k">
                   Choose from a wide range of trusted
-                  <br /> cryptocurrencies to stake and start earning
-                  <br /> rewards today.
+                  <br className="br-4k" /> cryptocurrencies to stake and start
+                  earning
+                  <br className="br-4k" /> rewards today.
                 </p>
               </div>
             </div>
 
-            <div className="">
+            <div className="header-text-s2">
               <Swiper
                 modules={[Pagination, Scrollbar, Autoplay]}
                 scrollbar={{ draggable: true }}
@@ -542,11 +563,11 @@ function Landing() {
 
       {/* Section 4 */}
       <section className="bg-[#060D27] text-white py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           {/* Header */}
           <div className="flex flex-col lg:flex-row justify-between gap-6 mb-12">
             {/* Heading */}
-            <div className="flex-1">
+            <div className="flex-1 header-text-s2">
               <h2 className="text-4xl md:text-5xl font-bold leading-snug">
                 What Our{" "}
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -557,10 +578,10 @@ function Landing() {
             </div>
 
             {/* Paragraph block - placed below on tablet & mobile */}
-            <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0">
+            <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0 gap-4k">
               {/* Gradient line */}
               <div
-                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b"
+                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b line-h-4k2"
                 style={{
                   backgroundImage:
                     "linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)",
@@ -568,7 +589,7 @@ function Landing() {
               />
 
               {/* Paragraph */}
-              <p className="text-gray-400 text-md sm:text-xl max-w-md">
+              <p className="text-gray-400 text-md sm:text-xl max-w-md para-4k">
                 Join thousands of satisfied users who are growing their crypto
                 portfolios with EPTY. Hear what they have to say about their
                 staking experience!
@@ -586,7 +607,7 @@ function Landing() {
                   <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
                   {/* Content */}
                   {testimonials[currentSlide] && (
-                    <div>
+                    <div className="">
                       <h4 className="font-semibold text-lg">
                         {testimonials[currentSlide].name}
                       </h4>
@@ -607,11 +628,11 @@ function Landing() {
             </div>
 
             {/* Tablet and above: Show all */}
-            <div className="hidden md:flex flex-col lg:flex-row gap-6">
+            <div className="hidden md:flex flex-col lg:flex-row gap-6 gap-4k2">
               {visibleTestimonials.map((user, idx) => (
                 <div
                   key={idx}
-                  className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl"
+                  className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl header-text-s2"
                 >
                   <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
                     {/* Image */}
@@ -621,7 +642,7 @@ function Landing() {
                       <h4 className="font-semibold text-lg">{user.name}</h4>
                       <div className="flex text-blue-400 mb-2">
                         {[...Array(user.rating)].map((_, i) => (
-                          <FaStar key={i} size={16} />
+                          <FaStar key={i} className="icon-4k" />
                         ))}
                       </div>
                       <p className="text-sm text-gray-300">{user.comment}</p>
@@ -633,12 +654,12 @@ function Landing() {
           </div>
 
           {/* Pagination Dots only on mobile */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-2 mt-8 gap-4k">
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 pagination-btn-4k ${
                   idx === currentSlide
                     ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
                     : "bg-gray-500 hover:bg-blue-400"
@@ -651,14 +672,14 @@ function Landing() {
 
       {/* Section 5 */}
       <section
-        className="lg:min-h-screen bg-no-repeat bg-cover bg-center text-white px-4 py-10  lg:py-20"
+        className="lg:min-h-screen bg-no-repeat bg-cover bg-center text-white px-4 py-10 lg:py-20"
         style={{ backgroundImage: "url('/images/bg-landing5.png')" }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           {/* FAQ container */}
-          <div className="bg-[#111827] rounded-2xl p-10 hidden   sm:flex flex-col lg:flex-row gap-6 mb-10 lg:mb-28">
+          <div className="bg-[#111827] rounded-2xl p-10 hidden sm:flex flex-col lg:flex-row gap-6 mb-10 lg:mb-28">
             {/* Left side - FAQ intro */}
-            <div className="flex-1 flex flex-col  lg:justify-normal ">
+            <div className="flex-1 flex flex-col lg:justify-normal header-text-s2">
               <h2 className="text-4xl lg:text-5xl font-semibold leading-tight mb-4">
                 Frequently Asked <br />
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
@@ -667,9 +688,9 @@ function Landing() {
               </h2>
 
               {/* Vertical line + Paragraph */}
-              <div className="flex  items-center lg:items-start gap-4">
+              <div className="flex items-center lg:items-start gap-4">
                 <div
-                  className="w-0.5 h-24"
+                  className="w-0.5 h-24 line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -691,7 +712,7 @@ function Landing() {
                   className={`bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-md transition-all duration-300`}
                 >
                   <div
-                    className="rounded-md px-6 py-4 transition-all duration-300 cursor-pointer bg-[#1f2937]"
+                    className="rounded-md px-6 py-4 transition-all duration-300 cursor-pointer bg-[#1f2937] header-text-s5"
                     onClick={() => setActive(index === active ? null : index)}
                   >
                     <div className="flex justify-between items-center">
@@ -716,7 +737,7 @@ function Landing() {
           </div>
 
           {/* CTA */}
-          <div className="text-center lg:mb-28">
+          <div className="text-center lg:mb-28 header-text-s2">
             <h2 className="text-4xl md:text-5xl font-bold">
               Ready to{" "}
               <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">

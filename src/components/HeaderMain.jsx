@@ -127,11 +127,15 @@ function HeaderMain() {
         scrolled ? "top-0" : "top-20 sm:top-14 md:top-12"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
+      <div className="container mx-auto flex items-center justify-between px-6">
         {/* Logo */}
         <Link to="/">
-          <div className="flex items-center space-x-2 py-6">
-            <img src="./fastone-logo-text2.png" alt="FastOne" className="h-8" />
+          <div className="flex items-center space-x-2 py-6 padding-4k">
+            <img
+              src="./fastone-logo-text2.png"
+              alt="FastOne"
+              className="h-8 img-4k2"
+            />
           </div>
         </Link>
         {/* Desktop Nav Links */}
@@ -143,7 +147,10 @@ function HeaderMain() {
                 key={items.title}
               >
                 <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  <a href={items.href}> {items.title}</a>
+                  <a href={items.href} className="title-4k">
+                    {" "}
+                    {items.title}
+                  </a>
                 </div>
                 {items.submenu && (
                   <ul className="absolute top-full -translate-y-2 left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-b-md min-w-[250px]  z-10 space-y-1">
@@ -177,12 +184,12 @@ function HeaderMain() {
         </div>
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center space-x-4">
-          <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition">
+          <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition btn-4k">
             <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
               Log in
             </Link>
           </button>
-          <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition">
+          <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition btn-4k">
             <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
               Create Account
             </Link>
