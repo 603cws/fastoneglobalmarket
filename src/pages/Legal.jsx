@@ -12,7 +12,7 @@ function Legal() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0"
+        className="absolute w-full top-0 left-0"
       />
       <Header mode={"light"} />
       <TitleBgCenter

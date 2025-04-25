@@ -47,7 +47,7 @@ function Currencies() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0 w-full"
+        className="absolute w-full top-0 left-0 w-full"
       />
       <div className="relative">
         <PriceTicker />

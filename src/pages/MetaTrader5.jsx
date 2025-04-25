@@ -56,7 +56,7 @@ function MetaTrader5() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0 "
+        className="absolute top-0 left-0 w-full"
       />
       <div className="bg-[#030B20] ">
         <Header mode={"light"} />

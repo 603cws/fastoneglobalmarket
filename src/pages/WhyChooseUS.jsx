@@ -4,6 +4,7 @@ import TitleBgCenter from "../components/TitleBgCenter";
 import OpenAccount from "../components/OpenAccount";
 import TitleArea from "../components/TitleArea";
 import InstantAccount from "../components/InstantAccount";
+import MarketHeaderSection from "../components/MarketHeaderSection";
 
 const advantages = [
   {
@@ -67,12 +68,32 @@ function WhyChooseUS() {
         breadcrumbPaths={breadcrumbPaths}
       /> */}
       <div className="bg-[#030B20] py-10 text-center">
-        <TitleArea title="Why Choose Us?" breadcrumbPaths={breadcrumbPaths} />
+        <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>
+      <div className="bg-[#030B20]">
+        <div className="container mx-auto lg:pt-10  md:pb-5 relative">
+          <div className="">
+            <div className="flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center lg:gap-10 ">
+              <div className="flex-1 flex justify-center pb-4 mb:pb-0 lg:py-10 ">
+                <h2 className="font-bold text-xl text-center lg:text-left md:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
+                  Why Choose Us?
+                </h2>
+              </div>
+              <div className="flex-1 flex justify-center items-center  ">
+                <div className="md:max-w-lg">
+                  {" "}
+                  <img src="/images/whychooseus.png" alt="whychooseus" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section className="mt-5 relative">
         <div className="container mx-auto">
-          <div className=" ">
-            <h1 className="text-white text-center">
+          <div className=" space-y-4">
+            <h1 className="text-white text-center pt-8">
               The Advantages of Trading With FastOne
             </h1>
             <p className="text-center text-[#B2B2B2] ">

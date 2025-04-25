@@ -59,34 +59,63 @@ function Complaints() {
         )}
 
         {social && (
-          <div className="flex justify-center gap-2 text-white text-lg">
-            {/* <div className="flex justify-center gap-5 text-white text-lg mb-6 pt-6"> */}
-            {/* <FaInstagram className="hover:text-blue-400 transition" /> */}
-            <img
-              src="./icons/instagram.png"
-              alt="Instagram"
-              className="hover:brightness-125 h-8 lg:h-12 transition"
-            />
-            <img
-              src="./icons/facebook.png"
-              alt="Facebook"
-              className="hover:brightness-125 h-8 lg:h-12 transition"
-            />
-            <img
-              src="./icons/twitter.png"
-              alt="Twitter"
-              className="hover:brightness-125 h-8 lg:h-12 transition"
-            />
-            <img
-              src="./icons/youtube.png"
-              alt="Youtube"
-              className="hover:brightness-125 h-8 lg:h-12 transition"
-            />
-            <img
-              src="./icons/linkedin.png"
-              alt="LinkedIn"
-              className="hover:brightness-125 h-8 lg:h-12 transition"
-            />
+          <div className="flex justify-center gap-2 md:gap-4 text-white text-lg">
+            <a
+              href="https://www.instagram.com/fastone_global/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="./icons/instagram.png"
+                alt="Instagram"
+                className="hover:brightness-125 h-8 lg:h-12 transition"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/FastoneMarkets"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="./icons/facebook.png"
+                alt="Facebook"
+                className="hover:brightness-125 h-8 lg:h-12 transition"
+              />
+            </a>
+
+            <a
+              href="https://x.com/Fastone_Markets"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="./icons/twitter.png"
+                alt="Twitter"
+                className="hover:brightness-125 h-8 lg:h-12 transition"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/@f1globexmedia744"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="./icons/youtube.png"
+                alt="Youtube"
+                className="hover:brightness-125 h-8 lg:h-12 transition"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/vibhs-financials-ltd-mauritius"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="./icons/linkedin.png"
+                alt="LinkedIn"
+                className="hover:brightness-125 h-8 lg:h-12 transition"
+              />
+            </a>
           </div>
         )}
       </div>
@@ -98,12 +127,18 @@ function Complaints() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0 object-cover"
+        className="absolute top-0 w-full left-0 object-cover"
       />
       <Header />
       <div className="pt-6 lg:pt-0 lg:py-6 md:py-10">
         <div className="max-w-7xl mx-auto text-center lg:py-10 ">
           <TitleArea title="Complaints" breadcrumbPaths={breadcrumbPaths} />
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center relative z-10">
+        <div>
+          <img src="/images/fastonecontactus.png" alt="" />
         </div>
       </div>
 
@@ -128,8 +163,8 @@ function Complaints() {
       </div>
 
       <div className="container mx-auto relative">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-center items-center [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
-          <div className="bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full mx-auto rounded-2xl p-4">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
+          <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4">
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Complaint Form</p>
               <h4 className="">
@@ -201,8 +236,11 @@ function Complaints() {
               </form>
             </div>
           </div>
-          <div>
-            <img src="/images/contactus/formimage.png" alt="form image" />
+          <div className=" flex  ">
+            <div className="lg:max-w-lg">
+              {" "}
+              <img src="/images/contactimg.png" alt="form image" />
+            </div>
           </div>
         </div>
       </div>

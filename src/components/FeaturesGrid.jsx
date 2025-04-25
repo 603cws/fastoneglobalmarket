@@ -3,7 +3,7 @@ import "./FeaturesGrid.css";
 
 const FeaturesGrid = ({ advantages }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-10 py-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-10 md:px-20 xl:px-32 py-6">
       {advantages.map((adv, index) => (
         <>
           <div
@@ -13,7 +13,7 @@ const FeaturesGrid = ({ advantages }) => {
           >
             <div>
               {" "}
-              <img src={adv.icon} alt="" className="h-8  " />
+              <img src={adv.icon} alt="" className="w-8 xl:w-12 " />
             </div>
 
             <div className="flex flex-col justify-center items-center text-center">
@@ -22,7 +22,8 @@ const FeaturesGrid = ({ advantages }) => {
                   {adv.title}
                 </h3>
               )}
-              <p className="text-[#B2B2B2] text-xs lg:text-sm">
+              <p className="text-[#B2B2B2] text-xs lg:text-sm ">
+                {/* <p className="text-[#B2B2B2] text-xs lg:text-sm line-clamp-4"> */}
                 {adv.description}
               </p>
             </div>

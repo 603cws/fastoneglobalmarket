@@ -46,8 +46,10 @@ function MarketUpdates() {
       script.innerHTML = JSON.stringify({
         width: "100%",
         height: "100%",
-        colorTheme: "light",
+        colorTheme: "dark",
         isTransparent: false,
+        // colorTheme: "light",
+        // isTransparent: false,
         locale: "en",
         importanceFilter: "-1,0,1",
         countryFilter:

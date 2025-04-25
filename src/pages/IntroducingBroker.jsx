@@ -92,10 +92,17 @@ function IntroducingBroker() {
 
       <section className="wc-fmarket wc-fm-2">
         <div className="container">
-          <div className="row partner-img-1">
-            <IbAnimation />
+          <div className="flex justify-center items-start    partner-img-1">
+            {/* <IbAnimation /> */}
+            <div className=" lg:max-w-4xl">
+              {" "}
+              <img src="/images/BROKER.png" alt="" />
+            </div>
           </div>
-          <div className="flex flex-col items-center md:items-stretch md:flex-row md:justify-between gap-4 px-4 md:px-0">
+          {/* <div className="row partner-img-1">
+            <img src="/images/BROKER.png" alt="" />
+          </div> */}
+          {/* <div className="flex flex-col items-center md:items-stretch md:flex-row md:justify-between gap-4 px-4 md:px-0">
             <div className="md:w-1/3 w-full wcfm-col">
               <p>
                 Partner with FastOne Markets - where your referrals lead to real
@@ -114,15 +121,16 @@ function IntroducingBroker() {
                 and per lot commissions.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
       {/* Gradient border wrapper */}
       <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20">
+        {/* <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20"> */}
         {/* Inner content with solid background */}
-        <div className="bg-[#030B20] text-white rounded-xl p-6 md:p-10">
-          <div className="container">
+        <div className="bg-[#030B20] text-white rounded-xl p-6 lg:p-10">
+          <div className="lg:container">
             <div className="row inf-cta-title flex flex-col md:flex-row gap-4">
               {/* Heading Block */}
               <div className="w-full md:w-1/2 flex items-center font-bold">
@@ -154,7 +162,7 @@ function IntroducingBroker() {
             </div>
 
             {/* Steps */}
-            <div className="flex flex-col md:flex-row items-start md:justify-between gap-6 mt-8 text-left md:text-center py-8">
+            <div className="flex flex-col md:flex-row items-start md:justify-between gap-6 md:mt-8 text-left md:text-center md:py-8">
               {stepsData.map((step) => (
                 <div
                   key={step.id}
@@ -168,7 +176,7 @@ function IntroducingBroker() {
             </div>
 
             {/* CTA Button */}
-            <div className="inf-cta-btn mt-4 text-left">
+            <div className="inf-cta-btn mt-4 text-left !text-[#1368A6]">
               <Link
                 to="#"
                 onClick={(e) => handleLinkClick(e, true)}

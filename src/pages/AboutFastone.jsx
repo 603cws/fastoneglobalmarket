@@ -1,6 +1,7 @@
 import AboutAnimation from "../components/animations/AboutAnimation";
 import Cta2Btn from "../components/Cta2Btn";
 import Header from "../components/Header";
+import InstantAccount from "../components/InstantAccount";
 import TitleAreaCenter from "../components/TitleAreaCenter";
 import WhyTrade from "../components/WhyTrade";
 
@@ -20,9 +21,9 @@ function AboutFastone() {
           breadcrumbPaths={breadcrumbPaths}
         />
         <section className="about-intro ">
-          <div className="container">
+          <div className="container mx-auto">
             <div className="lg:flex flex-row-reverse justify-center items-center">
-              <div className="flex-1 about-text text-sm">
+              <div className="flex-1 about-text text-sm lg:px-30">
                 <h3 className=" text-2xl capitalize font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text my-5">
                   FastOne Global Financial Markets Limited
                 </h3>
@@ -59,8 +60,9 @@ function AboutFastone() {
                 </p>
               </div>
               <div className="flex-1 flex justify-center items-center">
-                <div className="w-3/4">
-                  <AboutAnimation />
+                <div className="">
+                  {/* <AboutAnimation /> */}
+                  <img src="/images/Stratergy.png" alt="stratergy" />
                 </div>
               </div>
             </div>
@@ -70,7 +72,36 @@ function AboutFastone() {
         {/* section 2 */}
         <section className="container mx-auto my-10">
           <div className=" space-y-4 lg:px-20 xl:px-30">
-            <div className="w-full flex justify-stretch items-center">
+            {/* <div className=" space-y-4 lg:px-20 xl:px-30"> */}
+            <div className="w-full flex justify-around  items-center ">
+              <div className="flex-1 ">
+                <div className="w-full xl:w-2/3">
+                  <div
+                    className="h-[1.5px] w-full"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
+                    }}
+                  ></div>
+                  <h4 className="capitalize text-2xl font-bold text-white my-5">
+                    Our Strategy
+                  </h4>
+                  <p className="text-[#B2B2B2] text-sm text-wrap">
+                    FastOne aims growth by provision of highest possible level
+                    of Customer Service to Clientele by focusing resources on
+                    Customer Satisfaction, building collaborative relationship
+                    with other stakeholders and associates.
+                  </p>
+                </div>
+              </div>
+              <div className="hidden flex-1 md:flex items-center">
+                <div className="max-w-sm lg:max-w-lg rounded-sm shrink-0">
+                  {/* <div className="w-60 lg:w-80 h-60 lg:h-80  rounded-sm shrink-0"> */}
+                  <img src="/images/our_stratergy.png" alt="" />
+                </div>
+              </div>
+            </div>
+            {/* <div className="w-full flex justify-stretch items-center">
               <div className="flex-1 ">
                 <div className="w-full xl:w-2/3">
                   <div
@@ -92,10 +123,43 @@ function AboutFastone() {
                 </div>
               </div>
               <div className="hidden flex-1 md:flex justify-end">
-                <div className="w-60 lg:w-80 h-60 lg:h-80 bg-gray-300 rounded-sm shrink-0" />
+                <div className="">
+                  <img src="/images/Stratergy.png" alt="" />{" "}
+                </div>
+              </div>
+            </div> */}
+            <div className="flex  items-center w-full">
+              <div className="hidden flex-1 md:flex items-center">
+                <div className="max-w-sm lg:max-w-lg rounded-sm shrink-0">
+                  {/* <div className="w-60 lg:w-80 h-60 lg:h-80  rounded-sm shrink-0"> */}
+                  <img src="/images/our_vision.png" alt="" />
+                </div>
+              </div>
+              <div className="flex-1 xl:flex flex-col justify-end items-center">
+                {/* <div className="flex-1 xl:flex flex-col justify-end items-end w-full xl:w-2/3"> */}
+                <div className="w-full xl:w-2/3">
+                  <div
+                    className="h-[1.5px] w-full"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
+                    }}
+                  ></div>
+                  <h4 className="capitalize text-2xl font-bold text-white my-5">
+                    Our vision
+                  </h4>
+                  <p className="text-[#B2B2B2] text-sm text-wrap">
+                    To be Financial Service Provider of choice. Our Vision is to
+                    maintain our status as a Market Leader reknown for
+                    exceptional Customer Centric Ideology by providing
+                    excellence in client service, compliance, enviable
+                    commitment to staff and a continuous endeavor on process
+                    improvement.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex justify-stretch items-center w-full">
+            {/* <div className="flex justify-stretch items-center w-full">
               <div className="hidden flex-1 md:flex justify-start">
                 <div className="w-60 lg:w-80 h-60 lg:h-80 bg-gray-300 rounded-sm shrink-0" />
               </div>
@@ -121,7 +185,7 @@ function AboutFastone() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="w-full flex justify-stretch items-center">
               <div className="flex-1">
                 <div className="w-full xl:w-2/3">
@@ -144,19 +208,23 @@ function AboutFastone() {
                   </p>
                 </div>
               </div>
-              <div className="hidden flex-1 md:flex justify-end">
-                <div className="w-60 lg:w-80 h-60 lg:h-80 bg-gray-300 rounded-sm shrink-0" />
+              <div className="hidden flex-1 md:flex items-center">
+                <div className="max-w-sm lg:max-w-lg rounded-sm shrink-0">
+                  {/* <div className="w-60 lg:w-80 h-60 lg:h-80  rounded-sm shrink-0"> */}
+                  <img src="/images/our_value.png" alt="" />
+                </div>
               </div>
             </div>
           </div>
+          <Cta2Btn
+            title="Get Started"
+            button1="Open An Account"
+            button2="Become A Partner"
+            buttonLinks={["#", "#"]}
+          />
         </section>
 
-        <Cta2Btn
-          title="Get Started"
-          button1="Open An Account"
-          button2="Become A Partner"
-          buttonLinks={["#", "#"]}
-        />
+        <InstantAccount />
       </div>
     </>
   );

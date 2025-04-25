@@ -12,9 +12,10 @@ const CtaBox = ({
     <section
       className={`border border-[#4575FF] bg-[${sectionColor}]/${opacity} rounded-2xl  `}
     >
-      <div className="lg:container lg:mx-auto">
+      <div className="lg:container relative lg:mx-auto">
         <div className="flex justify-center items-center text-center">
-          <div className="max-w-2xl p-8 lg:p-3">
+          <div className="max-w-2xl p-3">
+            {/* <div className="max-w-2xl p-8 lg:p-3"> */}
             <h2 className="font-bold text-xl lg:text-3xl my-2 text-[#fff]">
               {heading}
             </h2>

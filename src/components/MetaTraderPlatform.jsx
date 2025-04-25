@@ -11,7 +11,7 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
             )}
             {description && <p className="text-white/20">{description}</p>}
             {button && (
-              <div className="flex flex-col md:flex-row relative justify-start items-center gap-4">
+              <div className="flex flex-col items-start md:flex-row relative md:justify-start md:items-center gap-4">
                 {button.map((buttonitem, index) => (
                   <button
                     className="text-white border border-[#4575FF] capitalize font-medium cursor-pointer"
@@ -19,7 +19,11 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
                   >
                     {" "}
                     <a href={buttonitem.href}>
-                      <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
+                      <div
+                        className={`flex items-center bg-[#000A73]/50 ${
+                          index === 1 ? "px-12" : "px-10"
+                        }   py-1 gap-3`}
+                      >
                         {buttonitem.imgpath && (
                           <div>
                             <img src={buttonitem.imgpath} alt="mt5" />

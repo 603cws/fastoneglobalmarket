@@ -48,7 +48,7 @@ function Energy() {
         <img
           src="/images/bg-shadow.png"
           alt=""
-          className="absolute top-0 left-0 w-full"
+          className="absolute  top-0 left-0 w-full"
         />
         <Header />
         <div className="bg-[#030B20] py-6 md:py-10">

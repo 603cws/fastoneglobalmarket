@@ -12,11 +12,23 @@ function Regulations() {
   return (
     <div className="bg-[#030B20]">
       <Header />
-      <div className=" py-10 text-center">
+      <img
+        src="/images/bg-shadow.png"
+        alt=""
+        className="absolute top-0 left-0  w-full object-cover"
+      />
+      <div className="pt-10 text-center">
         <TitleArea title="Regulations" breadcrumbPaths={breadcrumbPaths} />
       </div>
+      <section>
+        <div className="flex justify-center">
+          <div className="md:max-w-2xl lg:max-w-3xl">
+            <img src="/images/REGULATION.png" alt="regulation" />
+          </div>
+        </div>
+      </section>
       <section className="container mx-auto">
-        <div className="flex justify-center items-center py-10">
+        <div className="flex justify-center items-center py-10 lg:py-0 lg:pt-10 lg:pb-32">
           <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl">
             <div className="text-[#B2B2B2] bg-[#030B20] px-6 py-10  rounded-xl">
               <p className="mb-4">

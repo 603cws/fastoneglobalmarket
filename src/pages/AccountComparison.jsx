@@ -70,7 +70,7 @@ function AccountComparison() {
         <img
           src="/images/bg-shadow.png"
           alt=""
-          className="absolute top-0 left-0"
+          className="absolute w-full top-0 left-0"
         />
         <Header />
         <div className="max-w-7xl mx-auto text-center">
