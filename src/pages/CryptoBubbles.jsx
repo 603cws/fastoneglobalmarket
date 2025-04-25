@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import axios from "axios";
 import "../pages/CryptoBubbles.css";
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
+import {
+  Sparklines,
+  SparklinesBars,
+  SparklinesCurve,
+  SparklinesLine,
+  SparklinesReferenceLine,
+  SparklinesSpots,
+} from "react-sparklines";
 // import { clamp } from "three/src/math/MathUtils.js";
 
 const getDaysFromRange = (range) => {
@@ -40,15 +47,99 @@ const CryptoBubbles = ({ height }) => {
   });
   const [tooltipTimeRange, setTooltipTimeRange] = useState("24h");
   const [isRepelling, setIsRepelling] = useState(false);
-  const [sparklineData, setSparklineData] = useState([]);
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  // const [sparklineData, setSparklineData] = useState([]);
 
   useEffect(() => {
+    // const fetchData = async () => {
+    //   try {
+    //     // const response = await axios.get(
+    //     //   // `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d`
+    //     //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d&x_cg_demo_api_key=CG-7AbQRHEkb37BAAFt4qDVSE68`
+    //     // );
+    //     let response;
+
+    //     // First attempt: Free public API (no API key required)
+    //     try {
+    //       response = await axios.get(
+    //         "https://api.coingecko.com/api/v3/coins/markets",
+    //         {
+    //           params: {
+    //             vs_currency: "usd",
+    //             order: "market_cap_desc",
+    //             per_page: 100,
+    //             price_change_percentage: "24h,7d,30d,1y",
+    //             sparkline: true,
+    //           },
+    //         }
+    //       );
+    //     } catch (primaryError) {
+    //       console.warn(
+    //         "Public API failed. Trying demo API...",
+    //         primaryError.message
+    //       );
+
+    //       // Fallback: demo API with demo key
+    //       response = await axios.get(
+    //         "https://api.coingecko.com/api/v3/coins/markets",
+    //         {
+    //           params: {
+    //             vs_currency: "usd",
+    //             order: "market_cap_desc",
+    //             per_page: 100,
+    //             price_change_percentage: "24h,7d,30d,1y",
+    //             x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
+    //             sparkline: true,
+    //           },
+    //         }
+    //       );
+    //     }
+    //     const nodes = response.data.map((coin) => {
+    //       const cached = positionsRef.current.get(coin.id);
+    //       return {
+    //         id: coin.id,
+    //         symbol: coin.symbol,
+    //         name: coin.name,
+    //         price: coin.current_price,
+    //         market_cap: coin.market_cap,
+    //         market_cap_rank: coin.market_cap_rank,
+    //         price_change:
+    //           coin[`price_change_percentage_${timeRange}_in_currency`],
+    //         price_change_24h: coin.price_change_percentage_24h_in_currency,
+    //         price_change_7d: coin.price_change_percentage_7d_in_currency,
+    //         price_change_30d: coin.price_change_percentage_30d_in_currency,
+    //         price_change_1y: coin.price_change_percentage_1y_in_currency,
+    //         volume: coin.total_volume,
+    //         sparkline: coin.sparkline_in_7d?.price,
+    //         url: `https://www.coingecko.com/en/coins/${coin.id}`,
+    //         image: coin.image,
+    //         x: cached?.x ?? Math.random() * window.innerWidth,
+    //         y: cached?.y ?? Math.random() * window.innerHeight,
+    //         vx: cached?.vx ?? 0,
+    //         vy: cached?.vy ?? 0,
+    //         fx: null,
+    //         fy: null,
+    //       };
+    //     });
+
+    //     setData(nodes);
+
+    //     nodes.forEach((coin) => {
+    //       positionsRef.current.set(coin.id, {
+    //         x: coin.x,
+    //         y: coin.y,
+    //         vx: coin.vx,
+    //         vy: coin.vy,
+    //       });
+    //     });
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // };
+
     const fetchData = async () => {
       try {
-        // const response = await axios.get(
-        //   // `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d`
-        //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&price_change_percentage=24h,7d,30d&x_cg_demo_api_key=CG-7AbQRHEkb37BAAFt4qDVSE68`
-        // );
         let response;
 
         // First attempt: Free public API (no API key required)
@@ -86,43 +177,53 @@ const CryptoBubbles = ({ height }) => {
             }
           );
         }
-        const nodes = response.data.map((coin) => {
-          const cached = positionsRef.current.get(coin.id);
-          return {
-            id: coin.id,
-            symbol: coin.symbol,
-            name: coin.name,
-            price: coin.current_price,
-            market_cap: coin.market_cap,
-            market_cap_rank: coin.market_cap_rank,
-            price_change:
-              coin[`price_change_percentage_${timeRange}_in_currency`],
-            price_change_24h: coin.price_change_percentage_24h_in_currency,
-            price_change_7d: coin.price_change_percentage_7d_in_currency,
-            price_change_30d: coin.price_change_percentage_30d_in_currency,
-            price_change_1y: coin.price_change_percentage_1y_in_currency,
-            volume: coin.total_volume,
-            sparkline: coin.sparkline_in_7d?.price,
-            url: `https://www.coingecko.com/en/coins/${coin.id}`,
-            image: coin.image,
-            x: cached?.x ?? Math.random() * window.innerWidth,
-            y: cached?.y ?? Math.random() * window.innerHeight,
-            vx: cached?.vx ?? 0,
-            vy: cached?.vy ?? 0,
-            fx: null,
-            fy: null,
-          };
-        });
 
-        setData(nodes);
+        setData((prevData = []) => {
+          const prevDataMap = new Map(prevData.map((coin) => [coin.id, coin]));
 
-        nodes.forEach((coin) => {
-          positionsRef.current.set(coin.id, {
-            x: coin.x,
-            y: coin.y,
-            vx: coin.vx,
-            vy: coin.vy,
+          const nodes = response.data.map((coin) => {
+            const cached = positionsRef.current.get(coin.id);
+            const existingCoin = prevDataMap.get(coin.id);
+
+            return {
+              id: coin.id,
+              symbol: coin.symbol,
+              name: coin.name,
+              price: coin.current_price,
+              market_cap: coin.market_cap,
+              market_cap_rank: coin.market_cap_rank,
+              price_change:
+                coin[`price_change_percentage_${timeRange}_in_currency`],
+              price_change_24h: coin.price_change_percentage_24h_in_currency,
+              price_change_7d: coin.price_change_percentage_7d_in_currency,
+              price_change_30d: coin.price_change_percentage_30d_in_currency,
+              price_change_1y: coin.price_change_percentage_1y_in_currency,
+              volume: coin.total_volume,
+              sparkline: coin.sparkline_in_7d?.price,
+              url: `https://www.coingecko.com/en/coins/${coin.id}`,
+              image: coin.image,
+              x: cached?.x ?? Math.random() * window.innerWidth,
+              y: cached?.y ?? Math.random() * window.innerHeight,
+              vx: cached?.vx ?? 0,
+              vy: cached?.vy ?? 0,
+              fx: null,
+              fy: null,
+              // Preserve existing sparkline_365d if available
+              sparkline_365d: existingCoin?.sparkline_365d,
+            };
           });
+
+          // Update positionsRef with new positions
+          nodes.forEach((coin) => {
+            positionsRef.current.set(coin.id, {
+              x: coin.x,
+              y: coin.y,
+              vx: coin.vx,
+              vy: coin.vy,
+            });
+          });
+
+          return nodes;
         });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -143,19 +244,7 @@ const CryptoBubbles = ({ height }) => {
 
     svg.selectAll("defs").remove();
     const defs = svg.append("defs");
-    // defs
-    //   .append("filter")
-    //   .attr("id", "glow")
-    //   .attr("x", "-50%")
-    //   .attr("y", "-50%")
-    //   .attr("width", "200%")
-    //   .attr("height", "200%").html(`
-    //   <feGaussianBlur stdDeviation="4" result="blur"/>
-    //   <feMerge>
-    //     <feMergeNode in="blur"/>
-    //     <feMergeNode in="SourceGraphic"/>
-    //   </feMerge>
-    // `);
+
     data.forEach((d) => {
       const change = Math.abs(d.price_change || 0);
       const blur = Math.min(12, 2 + change * 0.5); // adjust glow intensity
@@ -260,9 +349,15 @@ const CryptoBubbles = ({ height }) => {
     } else if (window.innerWidth < 1024) {
       minRadius = 20;
       maxRadius = 70;
-    } else {
+    } else if (window.innerWidth <= 1536) {
       minRadius = 25;
       maxRadius = 100;
+    } else if (window.innerWidth < 1920) {
+      minRadius = 35;
+      maxRadius = 115;
+    } else {
+      minRadius = 45;
+      maxRadius = 140;
     }
 
     // 2. Extract price changes from data
@@ -349,15 +444,6 @@ const CryptoBubbles = ({ height }) => {
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 4 || 0))
             )
-            // .attr("x", (d) => {
-            //   const r = radiusScale(Math.abs(d.price_change || 0)) * 0.6;
-            //   return -r / 2;
-            // })
-            // .attr("y", (d) => {
-            //   const r = radiusScale(Math.abs(d.price_change || 0));
-            //   const imageSize = r * 0.6;
-            //   return r < 10 ? -imageSize / 4 : -r + 6; // center for small, top-aligned for large
-            // })
             .attr("class", (d) => {
               return Math.abs(d.price_change) <= 1
                 ? "bubble-logo center"
@@ -496,20 +582,58 @@ const CryptoBubbles = ({ height }) => {
     node.on("click", async (event, d) => {
       event.stopPropagation();
       setSelectedCoin(d);
+      // setTooltipData({
+      //   visible: true,
+      //   x: event.pageX,
+      //   y: event.pageY - 100,
+      //   coinId: d.id,
+      // });
+
+      // Remove blink from all circles
+      // svg.selectAll("circle").classed("blink", false);
+
+      // Add blink to selected
+      d3.select(event.currentTarget).select("circle").classed("blink", true);
+      // const prices = await fetchSparklineForCoin(d.id, tooltipTimeRange);
+      // setSparklineData(prices);
+      const svg = d3.select(svgRef.current);
+      svg.selectAll("circle").classed("blink", false);
+      d3.select(event.currentTarget).select("circle").classed("blink", true);
+
+      const coin = data.find((c) => c.id === d.id);
+
+      // Only fetch sparkline if not already stored
+      if (!coin.sparkline_365d) {
+        try {
+          const res = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart`,
+            {
+              params: {
+                vs_currency: "usd",
+                days: 365,
+                interval: "daily",
+              },
+            }
+          );
+          const prices = res.data.prices.map((p) => p[1]);
+
+          // Update that coin's data
+          setData((prev) =>
+            prev.map((c) =>
+              c.id === coin.id ? { ...c, sparkline_365d: prices } : c
+            )
+          );
+        } catch (err) {
+          console.warn(`Sparkline fetch failed for ${coin.id}:`, err.message);
+        }
+      }
+
       setTooltipData({
         visible: true,
         x: event.pageX,
         y: event.pageY - 100,
-        coinId: d.id,
+        coinId: coin.id,
       });
-
-      // Remove blink from all circles
-      svg.selectAll("circle").classed("blink", false);
-
-      // Add blink to selected
-      d3.select(event.currentTarget).select("circle").classed("blink", true);
-      const prices = await fetchSparklineForCoin(d.id, tooltipTimeRange);
-      setSparklineData(prices);
     });
 
     if (!simulationRef.current) {
@@ -631,52 +755,52 @@ const CryptoBubbles = ({ height }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fetchSparklineForCoin = async (coinId, range) => {
-    // 🛠️ override 24h request with 2d to avoid 401
-    const actualRange = range === "24h" ? 2 : getDaysFromRange(range);
-    const interval = actualRange <= 2 ? "hourly" : "daily";
+  // const fetchSparklineForCoin = async (coinId, range) => {
+  //   // 🛠️ override 24h request with 2d to avoid 401
+  //   const actualRange = range === "24h" ? 2 : getDaysFromRange(range);
+  //   const interval = actualRange <= 2 ? "hourly" : "daily";
 
-    try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart`,
-        {
-          params: {
-            vs_currency: "usd",
-            days: actualRange,
-            interval,
-          },
-        }
-      );
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart`,
+  //       {
+  //         params: {
+  //           vs_currency: "usd",
+  //           days: actualRange,
+  //           interval,
+  //         },
+  //       }
+  //     );
 
-      const prices = response.data.prices.map((p) => p[1]);
+  //     const prices = response.data.prices.map((p) => p[1]);
 
-      // 🧠 if original request was "24h", simulate it from last 24 hourly points
-      if (range === "24h") {
-        return prices.slice(-24);
-      }
+  //     // 🧠 if original request was "24h", simulate it from last 24 hourly points
+  //     if (range === "24h") {
+  //       return prices.slice(-24);
+  //     }
 
-      return prices;
-    } catch (error) {
-      console.warn(
-        `Sparkline fetch failed for ${coinId} (${range}) — ${error.message}`
-      );
-      return [];
-    }
-  };
+  //     return prices;
+  //   } catch (error) {
+  //     console.warn(
+  //       `Sparkline fetch failed for ${coinId} (${range}) — ${error.message}`
+  //     );
+  //     return [];
+  //   }
+  // };
 
-  useEffect(() => {
-    if (!tooltipData.visible) {
-      setSparklineData([]);
-    }
-  }, [tooltipData.visible]);
-  console.log("sparkline", sparklineData);
+  // useEffect(() => {
+  //   if (!tooltipData.visible) {
+  //     setSparklineData([]);
+  //   }
+  // }, [tooltipData.visible]);
+  // console.log("sparkline", sparklineData);
 
-  const displayPoints =
-    tooltipTimeRange === "1y"
-      ? sparklineData.slice(-90) // last ~3 months
-      : tooltipTimeRange === "24h"
-      ? sparklineData.slice(-48) // last 48 hourly points
-      : sparklineData.slice(-30); // default
+  // const displayPoints =
+  //   tooltipTimeRange === "1y"
+  //     ? sparklineData.slice(-90) // last ~3 months
+  //     : tooltipTimeRange === "24h"
+  //     ? sparklineData.slice(-48) // last 48 hourly points
+  //     : sparklineData.slice(-30); // default
 
   return (
     <div className="bg-[#030B20] relative">
@@ -702,18 +826,28 @@ const CryptoBubbles = ({ height }) => {
         (() => {
           const currentCoin = data.find((c) => c.id === tooltipData.coinId);
           if (!currentCoin) return null;
-          const maxPrice = Math.max(...sparklineData);
-          const maxIndex = sparklineData.indexOf(maxPrice);
-          const graphHeight = 120;
-          const graphWidth = sparklineRef.current?.offsetWidth || 120;
-          const minPrice = Math.min(...sparklineData);
+          // const maxPrice = Math.max(...sparklineData);
+          // const maxIndex = sparklineData.indexOf(maxPrice);
+          // const graphHeight = 120;
+          // const graphWidth = sparklineRef.current?.offsetWidth || 120;
+          // const minPrice = Math.min(...sparklineData);
 
-          // X position
-          const maxX = (maxIndex / (sparklineData.length - 1)) * graphWidth;
+          // // X position
+          // const maxX = (maxIndex / (sparklineData.length - 1)) * graphWidth;
 
-          // Y position (invert because higher value = lower y)
-          const maxY =
-            ((maxPrice - minPrice) / (maxPrice - minPrice || 1)) * graphHeight;
+          // // Y position (invert because higher value = lower y)
+          // const maxY =
+          //   ((maxPrice - minPrice) / (maxPrice - minPrice || 1)) * graphHeight;
+          const fullSparkline = currentCoin.sparkline_365d || [];
+          let slicedSparkline = [];
+
+          if (tooltipTimeRange === "1y") slicedSparkline = fullSparkline;
+          else if (tooltipTimeRange === "30d")
+            slicedSparkline = fullSparkline.slice(-30);
+          else if (tooltipTimeRange === "7d")
+            slicedSparkline = fullSparkline.slice(-7);
+          else if (tooltipTimeRange === "24h")
+            slicedSparkline = fullSparkline.slice(-2);
 
           return (
             <div className="absolute z-50 bg-[#1a1c1f] text-white shadow-2xl rounded-2xl p-6 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all fade-slide-in">
@@ -784,9 +918,9 @@ const CryptoBubbles = ({ height }) => {
                     : "–"}
                 </p>
               </div>
-              {sparklineData.length > 0 && (
+              {slicedSparkline.length > 0 && (
                 <div className="relative w-full" ref={sparklineRef}>
-                  <Sparklines data={displayPoints} width={120} height={40}>
+                  <Sparklines data={slicedSparkline} width={120} height={40}>
                     <SparklinesLine
                       color={
                         currentCoin[`price_change_${tooltipTimeRange}`] >= 0
@@ -796,19 +930,71 @@ const CryptoBubbles = ({ height }) => {
                       style={{ fill: "none", strokeWidth: 1 }}
                     />
                     <SparklinesSpots size={2} />
+                    <SparklinesCurve />
                   </Sparklines>
-                  {/* {latestPrice && ( */}
-                  <div
-                    className="absolute text-sm text-white bg-black/70 px-1 rounded whitespace-nowrap"
-                    style={{
-                      left: `${maxX}px`,
-                      top: `${graphHeight - maxY - 14}px`, // position above the spot
-                      transform: "translateX(-50%)",
+
+                  {/* Custom transparent SVG overlay for hover tracking */}
+                  <svg
+                    width={120}
+                    height={40}
+                    style={{ position: "absolute", top: 0, left: 0 }}
+                    onMouseMove={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const index = Math.round(
+                        (x / rect.width) * (slicedSparkline.length - 1)
+                      );
+                      setHoverIndex(
+                        Math.max(0, Math.min(index, slicedSparkline.length - 1))
+                      );
                     }}
+                    onMouseLeave={() => setHoverIndex(null)}
                   >
-                    ${maxPrice.toFixed(3)}
-                  </div>
-                  {/* )} */}
+                    {hoverIndex !== null && (
+                      <>
+                        {/* Vertical line */}
+                        <line
+                          x1={(hoverIndex / (slicedSparkline.length - 1)) * 120}
+                          x2={(hoverIndex / (slicedSparkline.length - 1)) * 120}
+                          y1={0}
+                          y2={40}
+                          stroke="white"
+                          strokeWidth="1"
+                          strokeDasharray="3,2"
+                        />
+                        {/* Dot on curve */}
+                        <circle
+                          cx={(hoverIndex / (slicedSparkline.length - 1)) * 120}
+                          cy={
+                            40 -
+                            ((slicedSparkline[hoverIndex] -
+                              Math.min(...slicedSparkline)) /
+                              (Math.max(...slicedSparkline) -
+                                Math.min(...slicedSparkline))) *
+                              40
+                          }
+                          r="2"
+                          fill="white"
+                        />
+                      </>
+                    )}
+                  </svg>
+
+                  {/* Price label */}
+                  {hoverIndex !== null && (
+                    <div
+                      className="absolute text-sm text-white bg-black/70 px-2 py-1 rounded pointer-events-none"
+                      style={{
+                        left: `${
+                          (hoverIndex / (slicedSparkline.length - 1)) * 120
+                        }px`,
+                        top: "-1.75rem",
+                        transform: "translateX(-50%)",
+                      }}
+                    >
+                      ${slicedSparkline[hoverIndex].toFixed(4)}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -824,13 +1010,13 @@ const CryptoBubbles = ({ height }) => {
                     onClick={async (e) => {
                       e.stopPropagation();
                       setTooltipTimeRange(label);
-                      if (tooltipData.coinId) {
-                        const prices = await fetchSparklineForCoin(
-                          tooltipData.coinId,
-                          label
-                        );
-                        setSparklineData(prices);
-                      }
+                      // if (tooltipData.coinId) {
+                      //   const prices = await fetchSparklineForCoin(
+                      //     tooltipData.coinId,
+                      //     label
+                      //   );
+                      //   setSparklineData(prices);
+                      // }
                     }}
                   >
                     {label.toUpperCase()}
