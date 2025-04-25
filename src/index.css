@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-3xl: 1800px;
+}
+
 :root {
   --primary-color: #1368a6;
 }
@@ -1268,9 +1272,6 @@ footer {
   .container {
     max-width: 1800px;
     padding: 0 5rem;
-  }
-  .pad-left {
-    /* padding-left: 10%; */
   }
   .header-text h1 {
     font-size: 3.5rem;

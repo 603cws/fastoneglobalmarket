@@ -298,7 +298,7 @@ function Landing() {
         className="relative min-h-screen bg-no-repeat bg-cover bg-center text-white flex flex-col md:flex-row items-center py-5 pt-15 sm:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
-        <div className="flex-1 mx-auto flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 px-4 sm:px-0 sm:pl-6 lg:pl-10 header-text pad-left">
+        <div className="flex-1 mx-auto flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 px-4 sm:px-0 sm:pl-6 lg:pl-10 header-text">
           {/* Left Content */}
           <div className="space-y-4 text-left pl-4">
             <p className="text-md sm:text-xl tracking-wide uppercase flex justify-start items-center gap-2">
@@ -487,7 +487,7 @@ function Landing() {
           <div>
             <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start">
               <div className="header-text-s2">
-                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug 3xl:bg-red-200">
+                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                     Crypto Currencies
