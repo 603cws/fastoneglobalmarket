@@ -1,6 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { handleRedirect } from "../lib/redirectLocationHandler";
 // bg-[#0d1b2a]
 const OpenAccount = () => {
+  const handleLinkClick = (event, isLogin) => {
+    event.preventDefault();
+    handleRedirect(isLogin);
+  };
+
   return (
     <section className="py-10">
       <div className="max-w-screen-xl mx-auto px-4 start-trading">
@@ -17,14 +24,16 @@ const OpenAccount = () => {
 
                 {/* Right Column */}
                 <div className="w-full md:w-1/2 box-right flex justify-center md::justify-end">
-                  <div className="inner-img">
-                    <a
-                      href="/account-comparison"
-                      className="bg-white text-sm rounded-lg py-2 px-5 "
-                    >
-                      Open Account Now
-                    </a>
-                  </div>
+                  <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
+                    <button className="inner-img">
+                      <a
+                        href="/account-comparison"
+                        className="bg-white text-sm rounded-lg py-2 px-5 "
+                      >
+                        Open Account Now
+                      </a>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

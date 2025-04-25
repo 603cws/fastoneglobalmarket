@@ -96,7 +96,7 @@ function MetaTrader5() {
                     <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt5/fastoneglobal5setup.exe">
-                        download meta trader 4 for pc
+                        download meta trader 5 for pc
                       </a>
                     </button>
                   </div>

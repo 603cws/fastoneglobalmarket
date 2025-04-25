@@ -6,10 +6,7 @@ const TradingTools = () => {
       <div className="container mx-auto px-4">
         {/* Title and description row */}
 
-        <div
-          className="flex pb-5 md:pb-0
-         flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-center"
-        >
+        <div className="flex pb-5 md:pb-0 flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-center">
           <div className="flex-1 text-3xl text-[#4575FF] font-bold text-center">
             <h2>Trusted trading platforms</h2>
           </div>
@@ -36,7 +33,8 @@ const TradingTools = () => {
               alt=""
             /> */}
             <div className="platform-grid ">
-              <a href="" className=" pf-card pf-card-1 bg-[#fff] mb-3  md:mb-0">
+              {/* <a href="" className=" pf-card pf-card-1 bg-[#fff] mb-3  md:mb-0"> */}
+              <a className="pf-card pf-card-1 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/mt4.svg"
                   className="grid-img"
@@ -47,7 +45,7 @@ const TradingTools = () => {
                   <p>Level up your experience.</p>
                 </div>
               </a>
-              <a href="" className="pf-card pf-card-2 bg-[#fff] mb-3  md:mb-0">
+              <a className="pf-card pf-card-2 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/mt5.svg"
                   className="grid-img"
@@ -58,7 +56,7 @@ const TradingTools = () => {
                   <p>A step up in Trading function</p>
                 </div>
               </a>
-              <a href="" className="pf-card pf-card-4 bg-[#fff] mb-3 md:mb-0">
+              <a className="pf-card pf-card-4 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/security.png"
                   className="grid-img"

@@ -27,7 +27,7 @@ const PricingCard = ({
               {title}
             </h3>
             <div
-              className="h-0.5 w-full my-10"
+              className="h-px w-full my-10"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
@@ -82,7 +82,7 @@ const PricingCard = ({
               <div className="flex justify-between items-center gap-2 ">
                 <p className=" text-[#B2B2B2]">Margin Call/Stopout Level</p>{" "}
                 <p className="flex-1 flex justify-center items-center  text-[#E3E3E3]">
-                  {marginCall} /{stopoutLevel}
+                  {marginCall} / {stopoutLevel}
                 </p>
               </div>
               {/* <p>
@@ -99,7 +99,7 @@ const PricingCard = ({
           </div>
 
           <div
-            className="h-0.5 w-full mt-5"
+            className="h-px w-full mt-5"
             style={{
               backgroundImage:
                 "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",

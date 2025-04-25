@@ -5,6 +5,7 @@ import CtaBox from "../components/CtaBox1";
 import Faq from "../components/Faq";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import InstantAccount from "../components/InstantAccount";
+import { Link } from "react-router-dom";
 
 const advantages = [
   {
@@ -98,9 +99,11 @@ function AccountComparison() {
                 process is so smooth you won’t have to worry about a thing.
               </p>
               <div className="font-medium">
-                <button className="border border-[#4575FF] bg-[#1368A6]/20 text-white px-6 py-2 rounded-md transition cursor-pointer duration-300 ">
-                  Start Trading
-                </button>
+                <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
+                  <button className="border border-[#4575FF] bg-[#1368A6]/20 text-white px-6 py-2 rounded-md transition cursor-pointer duration-300 ">
+                    Start Trading
+                  </button>
+                </Link>
               </div>
             </div>
 

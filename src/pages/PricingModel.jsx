@@ -3,6 +3,9 @@ import { BsLightningCharge } from "react-icons/bs";
 import TitleArea from "../components/TitleArea";
 import Header from "../components/Header";
 import InstantAccount from "../components/InstantAccount";
+import { Link } from "react-router-dom";
+import { handleRedirect } from "../lib/redirectLocationHandler";
+
 const PricingModel = () => {
   const pricingGrid = [
     {
@@ -42,6 +45,11 @@ const PricingModel = () => {
       pricingimage: "/images/pricing-model/reputation.png",
     },
   ];
+
+  const handleLinkClick = (event, isLogin) => {
+    event.preventDefault();
+    handleRedirect(isLogin);
+  };
 
   const breadcrumbPaths = [
     { name: "Home", href: "/" },
@@ -91,13 +99,15 @@ const PricingModel = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-12 flex  justify-between   border-2 border-[#4575FF] shadow-xl/30  rounded-xl p-4 items-center gap-4">
+          <div className="mt-12 flex justify-between border-2 border-[#4575FF] shadow-xl/30 rounded-xl p-4 items-center gap-4">
             <div className=" text-white text-sm lg:text-xl font-bold  rounded-md ">
               Start Trading Now
             </div>
-            <button className="bg-white text-sm lg:text-base text-black px-6 py-3 border-2 border-[#fff] rounded-xl">
-              Open Account Now
-            </button>
+            <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
+              <button className="bg-white text-sm lg:text-base text-black px-6 py-3 border-2 border-[#fff] rounded-xl cursor-pointer">
+                Open Account Now
+              </button>
+            </Link>
           </div>
 
           {/* <div className="bg-[#0A324F] flex justify-center md:justify-around items-center mt-16 py-6 rounded-md text-center px-2 md:px-0">

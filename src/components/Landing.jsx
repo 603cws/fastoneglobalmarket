@@ -8,6 +8,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Header from "./Header";
 import CryptoBubbles from "../pages/CryptoBubbles";
+import { Link } from "react-router-dom";
+import { handleRedirect } from "../lib/redirectLocationHandler";
 
 const features = [
   {
@@ -266,6 +268,11 @@ function Landing() {
     }
   }, []);
 
+  const handleLinkClick = (event, isLogin) => {
+    event.preventDefault();
+    handleRedirect(isLogin);
+  };
+
   return (
     <div className="scrollbar-hidden">
       <svg width="0" height="0">
@@ -330,12 +337,16 @@ function Landing() {
             </p>
 
             <div className="flex gap-3 pt-4 w-full justify-start md:justify-normal gap-4k">
-              <button className="text-sm sm:text-base lg:text-lg whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
-                Start Staking Now
-              </button>
-              <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text hover:bg-blue-600 hover:text-white px-3 sm:px-6 py-2 rounded-lg font-semibold">
-                Learn How It Works
-              </button>
+              <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
+                <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] hover:text-black hover:bg-clip-border cursor-pointer">
+                  Start Staking Now
+                </button>
+              </Link>
+              <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
+                <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] hover:text-black hover:bg-clip-border cursor-pointer">
+                  Learn How It Works
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -378,10 +389,10 @@ function Landing() {
               </div>
 
               {/* Vertical line for large screen only */}
-              <div className="flex items-center gap-4 sm:items-start mt-4 sm:mt-0 header-text-s2">
+              <div className="flex items-start gap-4 mt-4 sm:mt-0 header-text-s2">
                 {/* Vertical Line */}
                 <div
-                  className="w-px h-[120px] bg-gradient-to-b line-h-4k"
+                  className="w-px self-stretch bg-gradient-to-b"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -389,7 +400,7 @@ function Landing() {
 
                 {/* Paragraph */}
                 <div className="flex-1">
-                  <p className="text-gray-300 text-base md:text-base lg:text=lg">
+                  <p className="text-gray-300 text-base md:text-sm lg:text-lg">
                     Discover the advantages of staking with
                     <br /> FastOne—where security, simplicity, and
                     <br /> high rewards come together to help you
@@ -437,10 +448,10 @@ function Landing() {
               </div>
 
               {/* Vertical line + Paragraph in flex row */}
-              <div className="flex items-start lg:items-center gap-4">
+              <div className="flex items-start gap-4">
                 {/* Vertical line */}
                 <div
-                  className="w-px h-24 bg-gradient-to-b line-h-4k"
+                  className="w-px self-stretch bg-gradient-to-b line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -499,7 +510,7 @@ function Landing() {
               <div className="flex items-start gap-4">
                 {/* Vertical line */}
                 <div
-                  className="w-px h-24 bg-gradient-to-b line-h-4k"
+                  className="w-px self-stretch bg-gradient-to-b line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -548,9 +559,9 @@ function Landing() {
                           {crypto.reward}
                         </p>
                         <p className="text-sm text-gray-400">Monthly Rewards</p>
-                        <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
+                        {/* <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
                           Stake Now
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </SwiperSlide>
@@ -690,7 +701,7 @@ function Landing() {
               {/* Vertical line + Paragraph */}
               <div className="flex items-center lg:items-start gap-4">
                 <div
-                  className="w-0.5 h-24 line-h-4k"
+                  className="w-px self-stretch line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -749,13 +760,17 @@ function Landing() {
               staking.
             </p>
             <div className="flex justify-center gap-4 text-xs sm:text-base">
-              <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-[#0B132E] font-medium py-2 px-6 rounded-md transition duration-300">
-                Get Started Now
-              </button>
+              <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
+                <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] hover:text-black hover:bg-clip-border cursor-pointer">
+                  Get Started Now
+                </button>
+              </Link>
 
-              <button className="border border-blue-400 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text py-2 px-6 rounded-md hover:bg-blue-400 hover:text-white transition">
-                Contact Support
-              </button>
+              <Link to="/contact">
+                <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] hover:text-black hover:bg-clip-border cursor-pointer">
+                  Contact Support
+                </button>
+              </Link>
             </div>
           </div>
 
