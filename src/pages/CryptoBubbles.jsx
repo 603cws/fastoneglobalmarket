@@ -156,6 +156,7 @@ const CryptoBubbles = ({ height }) => {
               },
             }
           );
+          console.log("Public API");
         } catch (primaryError) {
           console.warn(
             "Public API failed. Trying demo API...",
@@ -176,6 +177,7 @@ const CryptoBubbles = ({ height }) => {
               },
             }
           );
+          console.log("Demo API");
         }
 
         setData((prevData = []) => {
@@ -352,12 +354,12 @@ const CryptoBubbles = ({ height }) => {
     } else if (window.innerWidth <= 1536) {
       minRadius = 25;
       maxRadius = 100;
-    } else if (window.innerWidth < 1920) {
-      minRadius = 35;
-      maxRadius = 115;
+    } else if (window.innerWidth <= 1920) {
+      minRadius = 28;
+      maxRadius = 110;
     } else {
-      minRadius = 45;
-      maxRadius = 140;
+      minRadius = 35;
+      maxRadius = 120;
     }
 
     // 2. Extract price changes from data

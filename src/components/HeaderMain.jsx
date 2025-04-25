@@ -134,7 +134,7 @@ function HeaderMain() {
             <img
               src="./fastone-logo-text2.png"
               alt="FastOne"
-              className="h-8 img-4k2"
+              className="h-8 img-4k"
             />
           </div>
         </Link>
@@ -147,7 +147,7 @@ function HeaderMain() {
                 key={items.title}
               >
                 <div className="px-4 hover:text-blue-600 cursor-pointer py-6">
-                  <a href={items.href} className="title-4k">
+                  <a href={items.href} className="title-4k2">
                     {" "}
                     {items.title}
                   </a>
@@ -184,12 +184,12 @@ function HeaderMain() {
         </div>
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center space-x-4">
-          <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition btn-4k">
+          <button className="border border-white px-4 py-1.5 rounded-md hover:bg-white hover:text-black transition title-4k2">
             <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
               Log in
             </Link>
           </button>
-          <button className="bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition btn-4k">
+          <button className="border border-white bg-white text-black px-4 py-1.5 rounded-md hover:bg-gray-200 transition title-4k2">
             <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
               Create Account
             </Link>

@@ -298,9 +298,9 @@ function Landing() {
         className="relative min-h-screen bg-no-repeat bg-cover bg-center text-white flex flex-col md:flex-row items-center py-5 pt-15 sm:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-10 px-4 sm:px-0 sm:pl-6 lg:pl-10 header-text pad-left">
+        <div className="flex-1 mx-auto flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 px-4 sm:px-0 sm:pl-6 lg:pl-10 header-text pad-left">
           {/* Left Content */}
-          <div className="space-y-4 flex-1 text-left">
+          <div className="space-y-4 text-left pl-4">
             <p className="text-md sm:text-xl tracking-wide uppercase flex justify-start items-center gap-2">
               <FaRegCircle
                 className="w-5 h-5 icon-4k"
@@ -329,7 +329,7 @@ function Landing() {
               transparent, and beginner-friendly.
             </p>
 
-            <div className="flex gap-3 pt-4 w-full justify-center md:justify-normal gap-4k">
+            <div className="flex gap-3 pt-4 w-full justify-start md:justify-normal gap-4k">
               <button className="text-sm sm:text-base lg:text-lg whitespace-nowrap px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] text-black">
                 Start Staking Now
               </button>
@@ -341,24 +341,24 @@ function Landing() {
         </div>
 
         {/* Right-side Image Positioned Absolutely and Touching Right Edge */}
-        <div className="h-full md:pt-0 pt-10">
+        <div className="h-full md:pt-0 pt-10 flex-1">
           <img
             src="/images/home-page.png"
             alt="Home Page Graphic"
-            className="object-contain sm:mt-8 md:mt-0" //w-[320px] sm:w-[420px] md:w-[420px] lg:w-[700px]
+            className="object-contain sm:mt-8 md:mt-0 w-full" //w-[320px] sm:w-[420px] md:w-[420px] lg:w-[700px]
           />
         </div>
       </section>
 
       {/* Section 2 */}
-      <section className=" bg-[#0A0F2C] text-white py-20 px-6">
-        <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <section className=" bg-[#0A0F2C] text-white py-32 px-10">
+        <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {/* Image Block */}
-          <div className="hidden sm:block h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2 img-4k">
+          <div className="sm:flex hidden justify-center items-center w-full h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2">
             <img
               src="./images/bitcoin.png" // Update this path to the correct location of your image
               alt="Bitcoin"
-              className="w-full h-full object-contain rounded-xl"
+              className="w-full h-full object-contain rounded-xl img-4k"
             />
           </div>
 
@@ -367,7 +367,7 @@ function Landing() {
             <div className="flex flex-col lg:flex-row items-start gap-6">
               {/* Heading */}
               <div className="flex-1 header-text-s2">
-                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white">
+                <h2 className="text-4xl md:text-4xl xl:text-5xl font-bold leading-snug text-white">
                   Why{" "}
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                     Stake
@@ -389,7 +389,7 @@ function Landing() {
 
                 {/* Paragraph */}
                 <div className="flex-1">
-                  <p className="text-gray-300 text-base md:text-lg">
+                  <p className="text-gray-300 text-base md:text-base lg:text=lg">
                     Discover the advantages of staking with
                     <br /> FastOne—where security, simplicity, and
                     <br /> high rewards come together to help you
@@ -440,7 +440,7 @@ function Landing() {
               <div className="flex items-start lg:items-center gap-4">
                 {/* Vertical line */}
                 <div
-                  className="w-px h-24 bg-gradient-to-b line-h-4k2"
+                  className="w-px h-24 bg-gradient-to-b line-h-4k"
                   style={{
                     backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                   }}
@@ -487,7 +487,7 @@ function Landing() {
           <div>
             <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start">
               <div className="header-text-s2">
-                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
+                <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug 3xl:bg-red-200">
                   Stake Your Favorite <br />
                   <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                     Crypto Currencies
@@ -581,7 +581,7 @@ function Landing() {
             <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0 gap-4k">
               {/* Gradient line */}
               <div
-                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b line-h-4k2"
+                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b line-h-4k"
                 style={{
                   backgroundImage:
                     "linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)",
