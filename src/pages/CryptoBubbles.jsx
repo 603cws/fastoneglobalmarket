@@ -35,10 +35,11 @@ const CryptoBubbles = ({ height }) => {
   const simulationRef = useRef(null);
   const repelPointRef = useRef(null);
   const sparklineRef = useRef(null);
+  const graphRef = useRef(null);
 
   const [data, setData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
-  const [timeRange, setTimeRange] = useState("7d");
+  const [timeRange, setTimeRange] = useState("24h");
   const [tooltipData, setTooltipData] = useState({
     visible: false,
     x: 0,
@@ -369,8 +370,8 @@ const CryptoBubbles = ({ height }) => {
 
     // 3. Base domainMax on timeRange
     let baseDomainMax;
-    if (timeRange === "24h") baseDomainMax = 25;
-    else if (timeRange === "7d") baseDomainMax = 40;
+    if (timeRange === "24h") baseDomainMax = 10;
+    else if (timeRange === "7d") baseDomainMax = 50;
     else if (timeRange === "30d") baseDomainMax = 40;
     else if (timeRange === "1y") baseDomainMax = 150;
 
@@ -617,7 +618,8 @@ const CryptoBubbles = ({ height }) => {
               },
             }
           );
-          const prices = res.data.prices.map((p) => p[1]);
+          // const prices = res.data.prices.map((p) => p[1]);
+          const prices = res.data.prices;
 
           // Update that coin's data
           setData((prev) =>
@@ -847,12 +849,45 @@ const CryptoBubbles = ({ height }) => {
           else if (tooltipTimeRange === "30d")
             slicedSparkline = fullSparkline.slice(-30);
           else if (tooltipTimeRange === "7d")
-            slicedSparkline = fullSparkline.slice(-7);
+            slicedSparkline = fullSparkline.slice(-14);
           else if (tooltipTimeRange === "24h")
-            slicedSparkline = fullSparkline.slice(-2);
+            slicedSparkline = fullSparkline.slice(-24);
+
+          // const timestamp = slicedSparkline[hoverIndex]?.[0];
+          // const is24h = tooltipTimeRange === "24h";
+          // const formatted = is24h
+          //   ? new Date(timestamp).toLocaleTimeString([], {
+          //       hour: "2-digit",
+          //       minute: "2-digit",
+          //     })
+          //   : new Date(timestamp).toLocaleDateString();
+
+          const timestamp = slicedSparkline[hoverIndex]?.[0];
+          const date = new Date(timestamp);
+          console.log("timestamp", timestamp);
+          console.log("date", date);
+
+          const formatted =
+            tooltipTimeRange === "24h"
+              ? date.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true, // Keeps 12-hour format
+                  timeZone: "UTC", // If you need UTC time
+                })
+              : date.toLocaleDateString(undefined, {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                });
+
+          console.log("formatted", formatted);
 
           return (
-            <div className="absolute z-50 bg-[#1a1c1f] text-white shadow-2xl rounded-2xl p-6 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all fade-slide-in">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="absolute z-50 bg-[#1a1c1f] text-white shadow-2xl rounded-2xl p-6 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all fade-slide-in"
+            >
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center gap-3">
                   <img
@@ -922,7 +957,11 @@ const CryptoBubbles = ({ height }) => {
               </div>
               {slicedSparkline.length > 0 && (
                 <div className="relative w-full" ref={sparklineRef}>
-                  <Sparklines data={slicedSparkline} width={120} height={40}>
+                  <Sparklines
+                    data={slicedSparkline.map((p) => p[1])}
+                    width={120}
+                    height={40}
+                  >
                     <SparklinesLine
                       color={
                         currentCoin[`price_change_${tooltipTimeRange}`] >= 0
@@ -935,16 +974,19 @@ const CryptoBubbles = ({ height }) => {
                     <SparklinesCurve />
                   </Sparklines>
 
-                  {/* Custom transparent SVG overlay for hover tracking */}
+                  {/* Overlay for hover interaction */}
                   <svg
-                    width={120}
-                    height={40}
+                    ref={graphRef}
+                    width="100%"
+                    height="100%"
                     style={{ position: "absolute", top: 0, left: 0 }}
                     onMouseMove={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
+                      const rect = graphRef.current.getBoundingClientRect();
+                      const mouseX = e.clientX - rect.left;
+                      const width = rect.width;
+
                       const index = Math.round(
-                        (x / rect.width) * (slicedSparkline.length - 1)
+                        (mouseX / width) * (slicedSparkline.length - 1)
                       );
                       setHoverIndex(
                         Math.max(0, Math.min(index, slicedSparkline.length - 1))
@@ -952,49 +994,52 @@ const CryptoBubbles = ({ height }) => {
                     }}
                     onMouseLeave={() => setHoverIndex(null)}
                   >
+                    <rect
+                      x="0"
+                      y="0"
+                      width="100%"
+                      height="100%"
+                      fill="transparent"
+                    />
+
                     {hoverIndex !== null && (
                       <>
                         {/* Vertical line */}
                         <line
-                          x1={(hoverIndex / (slicedSparkline.length - 1)) * 120}
-                          x2={(hoverIndex / (slicedSparkline.length - 1)) * 120}
+                          x1={
+                            (hoverIndex / (slicedSparkline.length - 1)) *
+                            graphRef.current?.getBoundingClientRect().width
+                          }
+                          x2={
+                            (hoverIndex / (slicedSparkline.length - 1)) *
+                            graphRef.current?.getBoundingClientRect().width
+                          }
                           y1={0}
                           y2={40}
                           stroke="white"
                           strokeWidth="1"
                           strokeDasharray="3,2"
                         />
-                        {/* Dot on curve */}
-                        <circle
-                          cx={(hoverIndex / (slicedSparkline.length - 1)) * 120}
-                          cy={
-                            40 -
-                            ((slicedSparkline[hoverIndex] -
-                              Math.min(...slicedSparkline)) /
-                              (Math.max(...slicedSparkline) -
-                                Math.min(...slicedSparkline))) *
-                              40
-                          }
-                          r="2"
-                          fill="white"
-                        />
                       </>
                     )}
                   </svg>
 
-                  {/* Price label */}
+                  {/* Floating price label */}
                   {hoverIndex !== null && (
                     <div
-                      className="absolute text-sm text-white bg-black/70 px-2 py-1 rounded pointer-events-none"
+                      className="absolute text-sm text-white bg-black/80 px-2 py-1 rounded pointer-events-none"
                       style={{
                         left: `${
-                          (hoverIndex / (slicedSparkline.length - 1)) * 120
+                          (hoverIndex / (slicedSparkline.length - 1)) *
+                          (graphRef.current?.getBoundingClientRect().width || 0)
                         }px`,
                         top: "-1.75rem",
                         transform: "translateX(-50%)",
                       }}
                     >
-                      ${slicedSparkline[hoverIndex].toFixed(4)}
+                      ${slicedSparkline[hoverIndex]?.[1].toFixed(4)}
+                      <br />
+                      {formatted}
                     </div>
                   )}
                 </div>
