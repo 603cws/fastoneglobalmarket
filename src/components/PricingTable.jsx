@@ -27,7 +27,7 @@ const PricingCard = ({
               {title}
             </h3>
             <div
-              className="h-px w-full my-10"
+              className="h-0.5 w-full my-10"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
@@ -99,7 +99,7 @@ const PricingCard = ({
           </div>
 
           <div
-            className="h-px w-full mt-5"
+            className="h-0.5 w-full mt-5"
             style={{
               backgroundImage:
                 "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",

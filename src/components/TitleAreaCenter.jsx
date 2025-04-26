@@ -12,7 +12,8 @@ const TitleAreaCenter = ({ title, description, breadcrumbPaths }) => {
           )}
           <div className="pt-8 lg:pt-12 space-y-5">
             {title && (
-              <h1 className="text-2xl lg:text-7xl  font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+              <h1 className="text-2xl lg:text-7xl uppercase font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                {/* <h1 className="text-2xl lg:text-7xl  font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text"> */}
                 {title}
               </h1>
             )}

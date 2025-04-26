@@ -91,10 +91,10 @@ function AccountComparison() {
           <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 text-white">
             {/* Left Side */}
             <div className="space-y-4">
-              <h2 className="text-xl text-[#1368A6] font-semibold">
+              <h2 className="text-xl xl:text-2xl text-[#1368A6] font-semibold">
                 How to get Started
               </h2>
-              <p className="text-sm text-[#B2B2B2]">
+              <p className="text-sm lg:text-base 2xl:text-lg text-[#B2B2B2]">
                 Getting Started is as simple as 1 2 3! And the onboarding
                 process is so smooth you won’t have to worry about a thing.
               </p>

@@ -41,7 +41,7 @@ function Energy() {
     { name: "Energy" },
   ];
 
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/energy.png";
   return (
     <>
       <div className="relative">

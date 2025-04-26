@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import InstantAccount from "../components/InstantAccount";
 import TitleBgCenter from "../components/TitleBgCenter";
 
 function DataProtection() {
@@ -15,16 +16,24 @@ function DataProtection() {
         className="absolute w-full top-0 left-0"
       />
       <Header mode={"light"} />
-      <TitleBgCenter
+      {/* <TitleBgCenter
         title="Data Protection Policy"
         description=""
         // backgroundImage="/images/bg-2.png"
         breadcrumbPaths={breadcrumbPaths}
-      />
+      /> */}
+      <div className="lg:pb-20 lg:pt-8">
+        <TitleBgCenter
+          title="Data Protection Policy"
+          description=""
+          // backgroundImage="/images/bg-2.png"
+          breadcrumbPaths={breadcrumbPaths}
+        />
+      </div>
       <section className="mt-5 pb-8 lg:pb-10">
-        <div className="container relative">
-          <div className="row">
-            <div className="col-12 about-text text-[#B2B2B2]">
+        <div className="container mx-auto relative">
+          <div className="row lg:pb-20">
+            <div className="col-12 about-text text-[#B2B2B2] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
               <p>
                 The Firm is committed to protecting and respecting your privacy.
                 This policy sets out the basis on which any personal data we
@@ -437,6 +446,7 @@ function DataProtection() {
           </div>
         </div>
       </section>
+      <InstantAccount />
     </div>
   );
 

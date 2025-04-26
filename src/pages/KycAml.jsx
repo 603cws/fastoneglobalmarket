@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import InstantAccount from "../components/InstantAccount";
 import TitleBgCenter from "../components/TitleBgCenter";
 
 function KycAml() {
@@ -15,16 +16,18 @@ function KycAml() {
         className="absolute w-full top-0 left-0"
       />
       <Header mode={"light"} />
-      <TitleBgCenter
-        title="KYC/AML Policies"
-        description=""
-        // backgroundImage="/images/bg-2.png"
-        breadcrumbPaths={breadcrumbPaths}
-      />
-      <section className="mt-5 pb-8 lg:pb-10">
+      <div className="lg:pb-20 lg:pt-8">
+        <TitleBgCenter
+          title="KYC/AML Policies"
+          description=""
+          // backgroundImage="/images/bg-2.png"
+          breadcrumbPaths={breadcrumbPaths}
+        />
+      </div>
+      <section className="mt-5 pb-8 lg:!pb-20">
         <div className="container relative">
-          <div className="row">
-            <div className="col-12 about-text text-[#B2B2B2]">
+          <div className="row [&_p]:text-sm [&_h4]:capitalize [&_h4]:pb-2">
+            <div className="col-12 about-text text-[#B2B2B2] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
               <p>
                 FastOne Global Financial Markets Limited is committed to the
                 highest standards of compliance against money laundering (AML)
@@ -38,7 +41,7 @@ function KycAml() {
                 obligation to report suspicious client activity relevant to
                 money laundering.
               </p>
-              <p>
+              <p className="lg:pt-6">
                 Money Laundering: The process of converting funds received from
                 illegal activities (such as fraud, corruption, terrorism, etc.)
                 into other funds or investments that appear legitimate to hide
@@ -48,7 +51,7 @@ function KycAml() {
                 The money laundering process can be divided into three
                 sequential stages:
               </h4>
-              <ul>
+              <ul className="list-disc list-outside">
                 <li>
                   <strong>Placement:</strong> At this stage, the funds are
                   turned into financial instruments, such as checks, bank
@@ -232,6 +235,7 @@ function KycAml() {
           </div>
         </div>
       </section>
+      <InstantAccount />
     </div>
   );
 }

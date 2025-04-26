@@ -43,7 +43,7 @@ function Indices() {
     { name: "Indices" },
   ];
 
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/Indicies.png";
   return (
     <div className="relative">
       <img

@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import InstantAccount from "../components/InstantAccount";
 import TitleBgCenter from "../components/TitleBgCenter";
 
 function Legal() {
@@ -15,16 +16,24 @@ function Legal() {
         className="absolute w-full top-0 left-0"
       />
       <Header mode={"light"} />
-      <TitleBgCenter
+      <div className="lg:pb-20 lg:pt-8">
+        <TitleBgCenter
+          title="Legal"
+          description=""
+          // backgroundImage="/images/bg-2.png"
+          breadcrumbPaths={breadcrumbPaths}
+        />
+      </div>
+      {/* <TitleBgCenter
         title="Legal"
         description=""
         // backgroundImage="/images/bg-2.png"
         breadcrumbPaths={breadcrumbPaths}
-      />
+      /> */}
       <section className="mt-5">
         <div className="container relative">
-          <div className="row">
-            <div className="col-12 about-text [&_h4]:capitalize [&_h4]:font-bold [&_h4]:bg-gradient-to-r [&_h4]:from-[#4575FF] [&_h4]:to-[#92AEFF] [&_h4]:text-transparent [&_h4]:bg-clip-text [&_p]:text-[#B2B2B2] [&_h2]:text-[#FFFFFF] [&_h2]:font-bold [&_h2]:text-4xl [&_h3]:text-[#FFFFFF] [&_h3]:text-[28px] [&_h3]:font-bold">
+          <div className="row lg:pb-32">
+            <div className="col-12 space-y-1.5 about-text [&_h4]:capitalize [&_h4]:font-bold [&_h4]:bg-gradient-to-r [&_h4]:from-[#4575FF] [&_h4]:to-[#92AEFF] [&_h4]:text-transparent [&_h4]:bg-clip-text [&_p]:text-[#B2B2B2] [&_h2]:text-[#FFFFFF] [&_h2]:font-bold [&_h2]:text-4xl [&_h3]:text-[#FFFFFF] [&_h3]:text-[28px] [&_h3]:font-bold">
               <a href="/legal/risk-warning">
                 <h4 className="">Risk Warning</h4>
               </a>
@@ -40,41 +49,43 @@ function Legal() {
               <a href="/legal/regulatory-disclaimers">
                 <h4>Regulatory Disclaimers</h4>
               </a>
-              <p>
+              <p className="pb-3 pt-2">
                 Note : FastOne Global Financial Markets Limited is a FSC
                 regulated company providing online trading solutions and does
                 not manage any funds nor plays any role in any portfolio
                 management.
               </p>
               <hr id="riskwarning" />
-              <h2 className="text-center mt-5"> Risk Warning</h2>
-              <p>
-                FastOne Global Financial Markets Limited, a leading financial
-                intermediary providing trading solutions is an FSC (Financial
-                Services Commission, Mauritius) regulated company holding a
-                Category 1 Global Business License.
-              </p>
+              <h2 className="text-center mt-5 mb-3"> Risk Warning</h2>
+              <div className=" space-y-3">
+                <p>
+                  FastOne Global Financial Markets Limited, a leading financial
+                  intermediary providing trading solutions is an FSC (Financial
+                  Services Commission, Mauritius) regulated company holding a
+                  Category 1 Global Business License.
+                </p>
 
-              <p>
-                References to "FastOne" in this risk warning document shall mean
-                FastOne Global Financial Markets Limited unless otherwise
-                stated. In the best interest of our clients it is imperative for
-                all traders who are keen to become FastOne clients, to be
-                informed about the execution and various other risks involved
-                with trading at FastOne.
-              </p>
+                <p>
+                  References to "FastOne" in this risk warning document shall
+                  mean FastOne Global Financial Markets Limited unless otherwise
+                  stated. In the best interest of our clients it is imperative
+                  for all traders who are keen to become FastOne clients, to be
+                  informed about the execution and various other risks involved
+                  with trading at FastOne.
+                </p>
 
-              <p>
-                FastOne recommends traders and clients to read this risk
-                document carefully.
-              </p>
+                <p>
+                  FastOne recommends traders and clients to read this risk
+                  document carefully.
+                </p>
 
-              <p>
-                Here our clients and prospects will find detailed information
-                about execution and various other risks associated with FastOne
-                but not limited to its products/financial instruments, trading
-                technologies, execution types and services.
-              </p>
+                <p>
+                  Here our clients and prospects will find detailed information
+                  about execution and various other risks associated with
+                  FastOne but not limited to its products/financial instruments,
+                  trading technologies, execution types and services.
+                </p>
+              </div>
 
               <h3 className="mt-4">High Risk Products/Financial Instruments</h3>
               <p>
@@ -721,6 +732,7 @@ function Legal() {
             </div>
           </div>
         </div>
+        <InstantAccount />
       </section>
     </div>
   );

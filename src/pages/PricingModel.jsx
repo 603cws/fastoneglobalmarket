@@ -75,7 +75,7 @@ const PricingModel = () => {
           />
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 mt-10 lg:mb-30 3xl:mb-48">
             {pricingGrid.map((item, index) => (
               <div
                 key={index}
@@ -85,8 +85,8 @@ const PricingModel = () => {
                   <div className="">
                     <img src={item.pricingimage} alt="pricingmodel" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-sm lg:text-lg mb-2">
+                  <div className="text-start">
+                    <h3 className="font-semibold text-sm lg:text-lg mb-2 text-start">
                       {item.title}
                     </h3>
                     <p className="text-xs lg:text-sm text-[#B2B2B2]">
@@ -99,7 +99,7 @@ const PricingModel = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-12 flex justify-between border-2 border-[#4575FF] shadow-xl/30 rounded-xl p-4 items-center gap-4">
+          <div className="mt-12 lg:mx-10 flex  justify-between   border-2 border-[#4575FF] shadow-xl/30  rounded-xl p-4 items-center gap-4">
             <div className=" text-white text-sm lg:text-xl font-bold  rounded-md ">
               Start Trading Now
             </div>
@@ -123,9 +123,8 @@ const PricingModel = () => {
             </div>
           </div> */}
         </div>
-
-        <InstantAccount />
       </div>
+      <InstantAccount />
     </div>
   );
 };
