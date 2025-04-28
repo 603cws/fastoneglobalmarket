@@ -59,6 +59,7 @@ function Currencies() {
       <MarketHeaderSection
         title={"Diversify your investment portfolio by trading CFDS on forex"}
         imagepath={imagepath}
+        alt="currencies"
       />
       <WhyTrade
         title="Why trade Currencies with FastOne?"

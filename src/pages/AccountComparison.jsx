@@ -6,6 +6,7 @@ import Faq from "../components/Faq";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import InstantAccount from "../components/InstantAccount";
 import { Link } from "react-router-dom";
+import Howtogetstarted from "../components/Howtogetstarted";
 
 const advantages = [
   {
@@ -85,16 +86,15 @@ function AccountComparison() {
           <PricingTable />
         </div>
 
-        <section className="my-10 flex items-center justify-center px-4 relative">
+        <section className="my-10 flex items-center justify-center relative">
           {/* <section className="min-h-screen bg-gradient-to-r from-[#001633] to-[#00204D] flex items-center justify-center px-4"> */}
 
-          <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 text-white">
-            {/* Left Side */}
+          {/* <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 text-white">
             <div className="space-y-4">
-              <h2 className="text-xl xl:text-2xl text-[#1368A6] font-semibold">
+              <h2 className="text-2xl xl:text-3xl text-[#1368A6] font-semibold">
                 How to get Started
               </h2>
-              <p className="text-sm lg:text-base 2xl:text-lg text-[#B2B2B2]">
+              <p className=" 2xl:text-lg text-[#B2B2B2]">
                 Getting Started is as simple as 1 2 3! And the onboarding
                 process is so smooth you won’t have to worry about a thing.
               </p>
@@ -107,12 +107,11 @@ function AccountComparison() {
               </div>
             </div>
 
-            {/* Right Side */}
             <div className="bg-[#1368A6]/20 rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
-              <div className="flex items-start gap-4 lg:mt-6">
-                <div className="text-2xl font-bold text-white">1</div>
+              <div className="flex items-center gap-4 lg:mt-6">
+                <div className="text-5xl font-bold text-white">1</div>
                 <div>
-                  <h3 className="font-bold text-xl text-white">
+                  <h3 className="font-bold text-2xl text-white">
                     Open An Account
                   </h3>
                   <p className="text-sm ">
@@ -120,26 +119,27 @@ function AccountComparison() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                <div className="text-2xl font-bold text-white">2</div>
+              <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                <div className="text-5xl font-bold text-white">2</div>
                 <div>
-                  <h3 className="font-semibold text-white">Add Funds</h3>
+                  <h3 className="font-semibold text-2xl text-white">Add Funds</h3>
                   <p className="text-sm text-gray-200">
                     Fund your account using any of the multiple methods.
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                <div className="text-2xl font-bold text-white">3</div>
+              <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                <div className="text-5xl font-bold text-white">3</div>
                 <div>
-                  <h3 className="font-semibold text-white">Start Trading</h3>
+                  <h3 className="font-semibold text-2xl text-white">Start Trading</h3>
                   <p className="text-sm text-gray-200">
                     Use the desktop or mobile platform to launch your trades.
                   </p>
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <Howtogetstarted />
         </section>
 
         {/* still confuse */}

@@ -40,12 +40,12 @@ function MetaTrader4() {
 
   function TradingGrid({ imagepath, title, description }) {
     return (
-      <div className="flex flex-col justify-center items-center text-white">
+      <div className="flex flex-col justify-center px-5 md:px-0 items-center text-white">
         <div className="mb-3">
           <img src={imagepath} alt="metatrading 4" />
         </div>
-        <h3 className="mb-2">{title}</h3>
-        <p className="text-center text-white/20 text-sm"> {description} </p>
+        <h3 className="mb-2 text-base capitalize">{title}</h3>
+        <p className="text-center text-white/80 text-sm"> {description} </p>
       </div>
     );
   }
@@ -61,16 +61,16 @@ function MetaTrader4() {
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto lg:pt-10  md:pb-5 relative">
-            <div className="lg:mt-20">
+            <div className="mt-18 lg:mt-20">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
-                  <h2 className="font-bold text-2xl lg:text-left md:text-3xl lg:text-4xl lg:-mb-1">
+                  <h2 className="font-bold text-5xl pb-2 lg:pb-4 lg:text-left  lg:-mb-1">
                     MetaTrader 4
                   </h2>
-                  <p className="text-lg font-light md:text-3xl lg:text-3xl">
+                  <p className="text-lg font-light  md:text-3xl leading-[30px]">
                     One of the most popular platforms on the currency market
                   </p>
-                  <p className="text-sm lg:text-base  font-light text-white/60">
+                  <p className="text-sm lg:text-base leading-[18px] font-light text-white/60">
                     The classic MetaTrader 4 terminal offered by RoboForex is
                     the top choice for trading among its clients. It is widely
                     popular among both beginner and experienced traders,
@@ -78,8 +78,8 @@ function MetaTrader4() {
                     market. Additionally, it offers unique functionality and
                     opportunities specific to MQL platforms.
                   </p>
-                  <div className="text-sm  lg:text-base font-light text-white/60">
-                    <ul className="list-disc pl-5 lg:pl-0 lg:list-inside">
+                  <div className="text-sm  lg:text-base font-light py-6  text-white/60">
+                    <ul className="list-disc pl-5 lg:pl-0 lg:list-inside space-y-2 leading-[18px]">
                       <li>3 types of order execution</li>
                       <li>50 ready-to-use indicators for technical analysis</li>
                       <li>Basic tools for graphic analysis</li>
@@ -88,7 +88,7 @@ function MetaTrader4() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-lg">
+                    <button className="text-[#112556] text-sm lg:text-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-lg">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt4/fastoneglobal4setup.exe">
                         download meta trader 4 for pc
@@ -97,7 +97,7 @@ function MetaTrader4() {
                   </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center ">
-                  <img src={imagepath} alt="dummy image " />
+                  <img src={imagepath} alt="metatrader 4 " />
                 </div>
               </div>
 
@@ -115,7 +115,7 @@ function MetaTrader4() {
                   ))}
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
-                  <button className="text-[#112556] rounded-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-[#112556] rounded-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF]  px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open trading account{" "}
@@ -161,49 +161,6 @@ function MetaTrader4() {
             },
           ]}
         />
-
-        {/* <div className="bg-[#030B20] ">
-          <div className="container mx-auto  lg:pt-10  md:pb-5">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10 lg:justify-center lg:items-center">
-              <div className="flex-1 space-y-6">
-                <h2 className="text-white text-3xl lg:text-4xl">
-                  MetaTrader 4 web platform
-                </h2>
-                <p className="text-white/20">
-                  Also, you have an opportunity to use a web version of
-                  MetaTrader 4 platform, which is supported by all available
-                  browsers. The MT4 web terminal offers the same features and
-                  performance as the desktop version, and is still available in
-                  all languages supported by FastOne websites. Manage your
-                  positions freely and easily from any place in the world.
-                </p>
-                <div className="flex justify-start items-center gap-4">
-                  <button className="text-white border border-[#4575FF] capitalize font-medium">
-                    {" "}
-                    <a href="#">
-                      <div className="flex items-center bg-[#000A73]/50 px-10 py-1 gap-3">
-                       
-                        <div>
-                          <img src="/images/mt4.png" alt="mt5" />
-                        </div>
-                        <div>
-                          <p className="text-sm">open in</p>
-                          <h3 className="text-lg">browser</h3>
-                        </div>
-                      </div>
-                    </a>
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 flex justify-center ">
-                <div className="">
-                  <img src={imagepath} alt="dummy image" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <MetaTraderPlatform
           title="MetaTrader 4 web platform"
           imagepath="/images/metatraderwebapp.png"
@@ -224,14 +181,15 @@ function MetaTrader4() {
         />
 
         <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
-          <div className="container mx-auto flex justify-center">
-            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
+          <div className="container mx-auto flex justify-center ">
+            <div className=" w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
+              {/* <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white"> */}
               {/* Left Side */}
               <div className="space-y-4">
-                <h2 className="text-xl md:text-2xl lg:text-3xl text-white font-semibold">
+                <h2 className="text-4xl text-white font-semibold leading-[52px]">
                   Why trade on MetaTrader 4 app with Fastone
                 </h2>
-                <p className="text-sm text-white/30 ">
+                <p className="text-sm text-white/60 leading-[20px]">
                   Enjoy trading on this time-tested and convenient mobile
                   trading platform, with the broker 800,000 traders trust.
                   Access diverse financial markets and real-time execution to
@@ -241,39 +199,39 @@ function MetaTrader4() {
 
               {/* Right Side */}
               <div className="bg-[#1368A6]/20 rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
-                <div className="flex items-start gap-4">
-                  <div className="text-2xl font-bold text-white">1</div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white">
+                <div className="flex items-center gap-4">
+                  <div className="flex  text-5xl font-bold text-white">1</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Instant withdrawals
                     </h3>
-                    <p className="text-sm ">
+                    <p className="text-sm leading-[24px]">
                       Remain in control of your funds. Simply choose your
                       preferred payment method, make a withdrawal request, and
                       enjoy instant automatic approval.
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                  <div className="text-2xl font-bold text-white">2</div>
-                  <div>
-                    <h3 className="font-semibold text-white">
+                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                  <div className="flex text-5xl font-bold text-white">2</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Ultra-fast execution
                     </h3>
-                    <p className="text-sm text-gray-200">
+                    <p className="text-sm leading-[24px]">
                       Stay ahead of trends with lightning-fast execution. Get
                       your orders executed in milliseconds on all available
                       platforms at Fastone.
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                  <div className="text-2xl font-bold text-white">3</div>
-                  <div>
-                    <h3 className="font-semibold text-white">
+                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                  <div className="flex text-5xl font-bold text-white">3</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Stop Out Protection
                     </h3>
-                    <p className="text-sm text-gray-200">
+                    <p className="text-sm leading-[24px] text-gray-200">
                       Enjoy unique Stop Out Protection while trading with
                       Fastone, strengthening your positions during increased
                       volatility.

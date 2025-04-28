@@ -62,17 +62,17 @@ function MetaTrader5() {
         <Header mode={"light"} />
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
-            <div className="lg:mt-20">
+            <div className="mt-18 lg:mt-20">
               <div className="flex flex-col lg:flex-row justify-center ">
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
-                  <h2 className="font-bold text-2xl lg:text-left md:text-3xl lg:text-4xl lg:-mb-1">
+                  <h2 className="font-bold text-5xl pb-2 lg:pb-4 lg:text-left  lg:-mb-1">
                     MetaTrader 5
                   </h2>
-                  <p className="text-lg font-light md:text-3xl lg:text-3xl">
+                  <p className="text-lg font-light  md:text-3xl leading-[30px]">
                     Choose MT5 - one of the best and most advanced terminals on
                     the market
                   </p>
-                  <p className="text-sm lg:text-base  font-light text-white/60">
+                  <p className="text-sm lg:text-base leading-[18px] font-light text-white/60">
                     MetaTrader 5 (MT5) trading terminal combines advanced
                     technologies of order execution and distributed computations
                     for implementing the most ambitious trading ideas.
@@ -83,8 +83,8 @@ function MetaTrader5() {
                     technologies, then MetaTrader 5 platform is the best choice
                     for you.
                   </p>
-                  <div className="text-sm  lg:text-base font-light text-white/60">
-                    <ul className="list-disc pl-5 lg:pl-0 lg:list-inside">
+                  <div className="text-sm  lg:text-base font-light py-6  text-white/60">
+                    <ul className="list-disc pl-5 lg:pl-0 lg:list-inside space-y-2 leading-[18px]">
                       <li>4 types of order execution</li>
                       <li>Multi-currency tester</li>
                       <li>80 technical indicators and analytical tools</li>
@@ -102,7 +102,7 @@ function MetaTrader5() {
                   </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center ">
-                  <img src={imagepath} alt="dummy image " />
+                  <img src={imagepath} alt="meta trader 5 " />
                 </div>
               </div>
 
@@ -191,16 +191,15 @@ function MetaTrader5() {
             },
           ]}
         />
-
         <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
-          <div className="container mx-auto  flex justify-center">
-            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
+          <div className="container mx-auto flex justify-center ">
+            <div className=" w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
               {/* Left Side */}
               <div className="space-y-4">
-                <h2 className="text-xl md:text-2xl lg:text-3xl text-white font-semibold">
+                <h2 className="text-4xl text-white font-semibold leading-[52px]">
                   Why trade on MetaTrader 5 app with Fastone
                 </h2>
-                <p className="text-sm text-white/30 ">
+                <p className="text-sm text-white/60 leading-[20px]">
                   Better-than-market conditions, unique features and
                   cutting-edge security, partnered with our dedication to
                   transparency and excellent customer service, are the reasons
@@ -210,39 +209,39 @@ function MetaTrader5() {
 
               {/* Right Side */}
               <div className="bg-[#1368A6]/20 rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
-                <div className="flex items-start gap-4">
-                  <div className="text-2xl font-bold text-white">1</div>
-                  <div>
-                    <h3 className="font-bold text-xl text-white">
+                <div className="flex items-center gap-4">
+                  <div className="flex  text-5xl font-bold text-white">1</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Instant withdrawals
                     </h3>
-                    <p className="text-sm ">
+                    <p className="text-sm leading-[24px]">
                       Remain in control of your funds. Simply choose your
                       preferred payment method, make a withdrawal request, and
                       enjoy instant automatic approval.
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                  <div className="text-2xl font-bold text-white">2</div>
-                  <div>
-                    <h3 className="font-semibold text-white">
+                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                  <div className="flex text-5xl font-bold text-white">2</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Ultra-fast execution
                     </h3>
-                    <p className="text-sm text-gray-200">
+                    <p className="text-sm leading-[24px]">
                       Stay ahead of trends with lightning-fast execution. Get
                       your orders executed in milliseconds on all available
                       platforms at Fastone.
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 border-t border-blue-300 pt-6">
-                  <div className="text-2xl font-bold text-white">3</div>
-                  <div>
-                    <h3 className="font-semibold text-white">
+                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                  <div className="flex text-5xl font-bold text-white">3</div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
                       Stop Out Protection
                     </h3>
-                    <p className="text-sm text-gray-200">
+                    <p className="text-sm leading-[24px] text-gray-200">
                       Enjoy unique Stop Out Protection while trading with
                       Fastone, strengthening your positions during increased
                       volatility.

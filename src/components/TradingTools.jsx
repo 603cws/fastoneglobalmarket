@@ -2,16 +2,16 @@ import React from "react";
 
 const TradingTools = () => {
   return (
-    <section className="pb-3 lg:py-20  bg-[#030B20]">
+    <section className="py-12 lg:py-20  bg-[#030B20]">
       <div className="container mx-auto px-4">
         {/* Title and description row */}
 
-        <div className="flex pb-5 md:pb-0 flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-center">
-          <div className="flex-1 text-3xl text-[#4575FF] font-bold text-center">
+        <div className=" flex pb-5 md:pb-0 flex-col lg:flex-row gap-8 lg:gap-0 justify-between items-center">
+          <div className="flex-1 text-3xl lg:text-5xl text-[#4575FF] font-bold text-center">
             <h2>Trusted trading platforms</h2>
           </div>
           <div className="flex-1 gradient-left-border pl-4 relative">
-            <p className="text-[#fff]">
+            <p className="text-[#fff]  lg:text-lg">
               We understand that different clients have different needs. Hence,
               we offer a wide range of trusted award-winning platforms to choose
               from.

@@ -59,6 +59,7 @@ function Energy() {
             "Trade CFDs on Spot Energy such as Brent oil, WTI and Natural Gas and diversify your portfolio."
           }
           imagepath={imagepath}
+          alt="Energy"
         />
         <WhyTrade title="Why trade Energy with FastOne?" benefits={benefits} />
         <TradingTools />

@@ -57,6 +57,7 @@ function CFD() {
       <MarketHeaderSection
         title={"Diversify your investment portfolio by trading CFD on forex"}
         imagepath={imagepath}
+        alt="CFD"
       />
       <WhyTrade title="Why trade CFD with FastOne?" benefits={benefits} />
       <TradingTools />

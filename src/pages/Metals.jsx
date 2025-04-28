@@ -57,6 +57,7 @@ function Metals() {
       <MarketHeaderSection
         title="Trade CFDs on spot and metals, Take advantage of volatility in gold, silver, oil and natural gas."
         imagepath={imagepath}
+        alt="metals"
       />
       <WhyTrade
         title="Why trade Precious Metals with FastOne?"

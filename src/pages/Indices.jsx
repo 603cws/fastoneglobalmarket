@@ -60,6 +60,7 @@ function Indices() {
           "Trade various indices covering the US market, eurozone and emerging markets."
         }
         imagepath={imagepath}
+        alt="Indicies"
       />
       <WhyTrade title="Why trade Indices with FastOne?" benefits={benefits} />
       <TradingTools />

@@ -7,9 +7,9 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10 lg:justify-center lg:items-center">
           <div className="flex-1 space-y-6">
             {title && (
-              <h2 className="text-white text-3xl lg:text-4xl">{title}</h2>
+              <h2 className="text-white text-4xl lg:text-4xl">{title}</h2>
             )}
-            {description && <p className="text-white/20">{description}</p>}
+            {description && <p className="text-white/60">{description}</p>}
             {button && (
               <div className="flex flex-col items-start md:flex-row relative md:justify-start md:items-center gap-4">
                 {button.map((buttonitem, index) => (
