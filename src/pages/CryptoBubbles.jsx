@@ -277,8 +277,49 @@ const CryptoBubbles = ({ height }) => {
       .attr("preserveAspectRatio", "xMidYMid meet")
       .on("click", function (event) {
         const [clickX, clickY] = d3.pointer(event);
-        repelBubbles(clickX, clickY);
-        repelPointRef.current = { x: clickX, y: clickY };
+
+        // Remove any existing repel force first
+        simulationRef.current.force("repel", null);
+
+        // Add a new force that pushes nodes away from the clicked point
+        simulationRef.current.force(
+          "repel",
+          d3
+            .forceManyBody()
+            .strength(-300) // More negative = stronger repel
+            .distanceMin(50)
+            .distanceMax(100)
+        );
+
+        simulationRef.current.force(
+          "x_repel",
+          d3
+            .forceX((d) => {
+              const dx = d.x - clickX;
+              return d.x + (dx || Math.random() - 0.5); // small random nudge if 0
+            })
+            .strength(0.1)
+        );
+
+        simulationRef.current.force(
+          "y_repel",
+          d3
+            .forceY((d) => {
+              const dy = d.y - clickY;
+              return d.y + (dy || Math.random() - 0.5);
+            })
+            .strength(0.1)
+        );
+
+        simulationRef.current.alpha(0.7).restart();
+
+        // Optionally after 2 seconds, remove repel forces to let bubbles settle again
+        setTimeout(() => {
+          simulationRef.current.force("repel", null);
+          simulationRef.current.force("x_repel", null);
+          simulationRef.current.force("y_repel", null);
+          simulationRef.current.alpha(0.3).restart();
+        }, 2000);
       });
 
     // const maxChange = d3.max(data, (d) => Math.abs(d.price_change || 0));
@@ -663,32 +704,6 @@ const CryptoBubbles = ({ height }) => {
         // .alphaTarget(timeRange === "30d" ? 0.05 : 0.1)
         .alphaTarget(0.02)
         .restart();
-    }
-
-    function repelBubbles(x, y) {
-      repelPointRef.current = { x, y, expires: Date.now() + 1500 };
-      setIsRepelling(true);
-
-      // Temporarily remove center forces
-      simulationRef.current.force("x", null);
-      simulationRef.current.force("y", null);
-      simulationRef.current.alpha(0.9).restart();
-
-      setTimeout(() => {
-        // Restore center forces after repel ends
-        simulationRef.current.force(
-          "x",
-          d3.forceX(window.innerWidth / 2).strength(forceStrength)
-        );
-        simulationRef.current.force(
-          "y",
-          d3.forceY(height / 2).strength(forceStrength)
-        );
-        simulationRef.current.alpha(0.4).restart();
-
-        repelPointRef.current = null;
-        setIsRepelling(false);
-      }, 1500);
     }
 
     function ticked() {

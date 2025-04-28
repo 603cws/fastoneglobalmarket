@@ -126,160 +126,64 @@ function IntroducingBroker() {
       </section>
 
       {/* Gradient border wrapper */}
-      <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20">
-        {/* <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20"> */}
-        {/* Inner content with solid background */}
-        <div className="bg-[#030B20] text-white rounded-xl p-6 lg:p-10">
-          <div className="lg:container">
-            <div className="row inf-cta-title flex flex-col md:flex-row gap-4">
-              {/* Heading Block */}
-              <div className="w-full md:w-1/2 flex items-center font-bold">
-                <h2 className="wcu-title bg-gradient-to-r from-[#4575FF] to-[#92AEFF] bg-clip-text text-transparent text-3xl">
-                  Interested in IB Partnership opportunities??
-                </h2>
-              </div>
-
-              {/* Vertical Line + Paragraph */}
-              <div className="w-full md:w-1/2 flex items-center gap-4">
-                {/* Vertical Line */}
-                <div
-                  className="w-0.5 h-[120px]"
-                  style={{
-                    backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
-                  }}
-                />
-
-                {/* Paragraph */}
-                <div className="flex-1">
-                  <p>
-                    Join our IB Program today and elevate your business with our
-                    unparalleled support and resources. Experience the benefits
-                    of partnering with a leading CFD provider and watch your
-                    success grow!
-                  </p>
+      <section className="container mx-auto">
+        <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20">
+          {/* <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20 lg:mx-20"> */}
+          {/* Inner content with solid background */}
+          <div className="bg-[#030B20] text-white rounded-xl p-6 lg:p-10">
+            <div className="lg:container">
+              <div className="row inf-cta-title flex flex-col md:flex-row gap-4">
+                {/* Heading Block */}
+                <div className="w-full md:w-1/2 flex items-center font-bold">
+                  <h2 className="wcu-title bg-gradient-to-r from-[#4575FF] to-[#92AEFF] bg-clip-text text-transparent text-3xl">
+                    Interested in IB Partnership opportunities??
+                  </h2>
                 </div>
-              </div>
-            </div>
 
-            {/* Steps */}
-            <div className="flex flex-col md:flex-row items-start md:justify-between gap-6 md:mt-8 text-left md:text-center md:py-8">
-              {stepsData.map((step) => (
-                <div
-                  key={step.id}
-                  className="w-full md:w-1/3 flex flex-col items-center justify-start gap-4 min-h-[300px]"
-                >
-                  <img src={step.icon} alt="" className="inf-icon mb-4" />
-                  <h3 className="text-2xl mb-4">{step.title}</h3>
-                  <p className="mb-0">{step.description}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <div className="inf-cta-btn mt-4 text-left !text-[#1368A6]">
-              <Link
-                to="#"
-                onClick={(e) => handleLinkClick(e, true)}
-                className="btn-one rounded-btn inf-account"
-              >
-                Create your Partner Account
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
-        <div className="bg-[#030B20] rounded-xl text-white">
-          <div className="flex flex-col md:flex-row justify-between text-left ">
-            {referralSteps.map((item, index) => (
-              <div
-                key={index}
-                className={`w-full flex flex-col gap-3 py-6 xl:py-8 px-6 xl:px-14 border-t md:border-t-0 md:border-l-0 md:border-r ${
-                  index === 0
-                    ? "md:border-r"
-                    : index === 1
-                    ? "md:border-r"
-                    : "md:border-r-0"
-                } border-[#4575FF] `}
-              >
-                <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
-        <div className="wc-fmarket bg-[#030B20] text-white rounded-xl py-10 px-6 md:px-12">
-          <div className="container">
-            <h2 className="text-3xl font-semibold mb-8 text-left md:text-center">
-              Why Choose Fastone Markets?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: "High Payouts",
-                  desc: "With a revenue share of up to 75%, we offer one of the most competitive IB programs in the industry.",
-                },
-                {
-                  title: "Advanced Trading Platform",
-                  desc: "Your clients will have access to cutting-edge trading technology, ensuring they have the best tools to succeed.",
-                },
-                {
-                  title: "Comprehensive Support",
-                  desc: "We provide full support to help you grow your business, including marketing materials, dedicated account managers, and regular performance reports.",
-                },
-                {
-                  title: "Transparent Reporting",
-                  desc: "Stay updated with detailed reports that track your referrals and earnings in real-time.",
-                },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
-                >
-                  {/* Line (Vertical on tablet and above, Horizontal on mobile) */}
+                {/* Vertical Line + Paragraph */}
+                <div className="w-full md:w-1/2 flex items-center gap-4">
+                  {/* Vertical Line */}
                   <div
-                    className="w-full sm:w-0.5 sm:h-auto h-0.5 sm:self-stretch bg-gradient-to-r sm:bg-gradient-to-b"
+                    className="w-0.5 h-[120px]"
                     style={{
-                      backgroundImage:
-                        "linear-gradient(to bottom, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
+                      backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                     }}
                   />
-                  {/* Content */}
-                  <div className="flex-1 text-left">
-                    <h3 className="text-2xl font-semibold mb-2">
-                      {item.title}
-                    </h3>
-                    <p>{item.desc}</p>
+
+                  {/* Paragraph */}
+                  <div className="flex-1">
+                    <p>
+                      Join our IB Program today and elevate your business with
+                      our unparalleled support and resources. Experience the
+                      benefits of partnering with a leading CFD provider and
+                      watch your success grow!
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+              </div>
 
-      <section className="ib-cta mx-2 md:mx-15">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-md-12">
-              <h2 className="display-4">Join Our Network of Successful IBs</h2>
-              <p className="lead px-lg-12 m-5 text-[#B2B2B2] md:mx-20">
-                Become a part of Fastone Markets' growing community of
-                Introducing Brokers and start earning today. Whether you’re an
-                individual or a company, our program is designed to help you
-                succeed.
-              </p>
-              <div className="d-flex justify-content-center pt-8">
+              {/* Steps */}
+              <div className="flex flex-col md:flex-row items-start md:justify-between gap-6 md:mt-8 text-left md:text-center md:py-8">
+                {stepsData.map((step) => (
+                  <div
+                    key={step.id}
+                    className="w-full md:w-1/3 flex flex-col items-center justify-start gap-4 min-h-[300px]"
+                  >
+                    <img src={step.icon} alt="" className="inf-icon mb-4" />
+                    <h3 className="text-2xl mb-4">{step.title}</h3>
+                    <p className="mb-0">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <div className="inf-cta-btn mt-4 text-left !text-[#1368A6]">
                 <Link
                   to="#"
-                  onClick={(e) => handleLinkClick(e, true)}
-                  className="btn-one rounded-btn white-btn"
+                  onClick={(e) => handleLinkClick(e, false)}
+                  className="btn-one rounded-btn inf-account"
                 >
-                  Partner with us
+                  Create your Partner Account
                 </Link>
               </div>
             </div>
@@ -287,42 +191,23 @@ function IntroducingBroker() {
         </div>
       </section>
 
-      <section className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
-        <div className="bg-[#030B20] text-white rounded-xl py-10 px-0">
-          <div className="container mx-auto">
-            {/* Heading Section */}
-            <div className="mb-10 px-6 md:px-12 text-center">
-              <h2 className="text-3xl font-semibold mb-4">
-                Why partner with Fastone Markets?
-              </h2>
-              <p className="text-lg text-[#B2B2B2]">
-                Lucrative Commission Structure: Ensuring consistent and
-                substantial revenue, regardless of market conditions.
-              </p>
-            </div>
-
-            {/* Grid Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {partnerFeatures.map((item, idx) => (
+      <section className="container mx-auto">
+        <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
+          <div className="bg-[#030B20] rounded-xl text-white">
+            <div className="flex flex-col md:flex-row justify-between text-left ">
+              {referralSteps.map((item, index) => (
                 <div
-                  key={idx}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-0"
+                  key={index}
+                  className={`w-full flex flex-col gap-3 py-6 xl:py-8 px-6 xl:px-14 border-t md:border-t-0 md:border-l-0 md:border-r ${
+                    index === 0
+                      ? "md:border-r"
+                      : index === 1
+                      ? "md:border-r"
+                      : "md:border-r-0"
+                  } border-[#4575FF] `}
                 >
-                  {/* Line - Flush Left */}
-                  <div
-                    className="w-full sm:w-0.5 sm:h-auto h-0.5 sm:self-stretch bg-gradient-to-r sm:bg-gradient-to-b"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to bottom, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
-                    }}
-                  />
-                  {/* Content - With Padding */}
-                  <div className="flex-1 text-left px-6 md:px-4">
-                    <h3 className="text-2xl font-semibold mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#B2B2B2]">{item.desc}</p>
-                  </div>
+                  <h3 className="text-2xl font-semibold">{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -330,16 +215,145 @@ function IntroducingBroker() {
         </div>
       </section>
 
-      <section className="my-8 mx-4 md:mx-20">
-        <div className="bg-[#030B20] text-white rounded-xl py-10 px-0">
-          <CtaBox
-            heading="Still confused which partnership to choose ?"
-            description="Talk to our partnership expert now!"
-            buttonText="Live Chat"
-            buttonImage="/images/icons/chat.png"
-            sectionColor="#1368A6"
-            opacity="20"
-          />{" "}
+      <section className="container mx-auto">
+        <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
+          <div className="wc-fmarket bg-[#030B20] text-white rounded-xl py-10 px-6 md:px-12">
+            <div className="container">
+              <h2 className="text-3xl font-semibold mb-8 text-left md:text-center">
+                Why Choose Fastone Markets?
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  {
+                    title: "High Payouts",
+                    desc: "With a revenue share of up to 75%, we offer one of the most competitive IB programs in the industry.",
+                  },
+                  {
+                    title: "Advanced Trading Platform",
+                    desc: "Your clients will have access to cutting-edge trading technology, ensuring they have the best tools to succeed.",
+                  },
+                  {
+                    title: "Comprehensive Support",
+                    desc: "We provide full support to help you grow your business, including marketing materials, dedicated account managers, and regular performance reports.",
+                  },
+                  {
+                    title: "Transparent Reporting",
+                    desc: "Stay updated with detailed reports that track your referrals and earnings in real-time.",
+                  },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                  >
+                    {/* Line (Vertical on tablet and above, Horizontal on mobile) */}
+                    <div
+                      className="w-full sm:w-0.5 sm:h-auto h-0.5 sm:self-stretch bg-gradient-to-r sm:bg-gradient-to-b"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to bottom, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
+                      }}
+                    />
+                    {/* Content */}
+                    <div className="flex-1 text-left">
+                      <h3 className="text-2xl font-semibold mb-2">
+                        {item.title}
+                      </h3>
+                      <p>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto">
+        <div className="ib-cta mx-2 md:mx-15">
+          <div className="container">
+            <div className="row justify-content-center text-center">
+              <div className="col-md-12">
+                <h2 className="display-4">
+                  Join Our Network of Successful IBs
+                </h2>
+                <p className="lead px-lg-12 m-5 text-[#B2B2B2] md:mx-20">
+                  Become a part of Fastone Markets' growing community of
+                  Introducing Brokers and start earning today. Whether you’re an
+                  individual or a company, our program is designed to help you
+                  succeed.
+                </p>
+                <div className="d-flex justify-content-center pt-8">
+                  <Link
+                    to="#"
+                    onClick={(e) => handleLinkClick(e, false)}
+                    className="btn-one rounded-btn white-btn"
+                  >
+                    Partner with us
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto">
+        <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl my-8 mx-4 md:mx-20">
+          <div className="bg-[#030B20] text-white rounded-xl py-10 px-0">
+            <div className="container mx-auto">
+              {/* Heading Section */}
+              <div className="mb-10 px-6 md:px-12 text-center">
+                <h2 className="text-3xl font-semibold mb-4">
+                  Why partner with Fastone Markets?
+                </h2>
+                <p className="text-lg text-[#B2B2B2]">
+                  Lucrative Commission Structure: Ensuring consistent and
+                  substantial revenue, regardless of market conditions.
+                </p>
+              </div>
+
+              {/* Grid Section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {partnerFeatures.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-0"
+                  >
+                    {/* Line - Flush Left */}
+                    <div
+                      className="w-full sm:w-0.5 sm:h-auto h-0.5 sm:self-stretch bg-gradient-to-r sm:bg-gradient-to-b"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to bottom, #0F2567 0%, #92AEFF 24%, #4575FF 77%, #0F2567 100%)",
+                      }}
+                    />
+                    {/* Content - With Padding */}
+                    <div className="flex-1 text-left px-6 md:px-4">
+                      <h3 className="text-2xl font-semibold mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-[#B2B2B2]">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto">
+        <div className="my-8 mx-4 md:mx-20">
+          <div className="bg-[#030B20] text-white rounded-xl py-10 px-0">
+            <CtaBox
+              heading="Still confused which partnership to choose ?"
+              description="Talk to our partnership expert now!"
+              buttonText="Live Chat"
+              buttonImage="/images/icons/chat.png"
+              sectionColor="#1368A6"
+              opacity="20"
+            />{" "}
+          </div>
         </div>
       </section>
     </div>

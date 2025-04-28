@@ -49,7 +49,7 @@ function DepositsWithdrawls() {
 
           {/* Section with Icons */}
           <section className="w-full mt-20">
-            <div className="flex flex-wrap justify-between items-center py-10 gap-6 max-w-7xl mx-auto">
+            <div className="flex flex-wrap justify-between items-center py-10 mx-auto container">
               <div className="flex-1 flex justify-center">
                 <img
                   src="/images/dw1.png"
@@ -83,29 +83,31 @@ function DepositsWithdrawls() {
         </div>
       </section>
 
-      <section className="container mx-auto md:py-20 px-4 md:px-20">
-        <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
-          <div className="bg-[#030B20] rounded-xl text-white px-6 xl:px-14 py-10 border border-[#4575FF]">
-            <div className="text-[#B2B2B2] font-bold text-sm lg:text-lg">
-              <p>
-                FastOne Global Financial Markets Limited typically processes
-                deposits within 24 to 48 hours and processes withdrawals within
-                24 to 48 hours of receiving a valid request.
-              </p>
-              <br />
-              <p>
-                Note: this period may be extended due to enhanced Due Diligence
-                associated with larger sums or matters of concern.
-              </p>
+      <section className="py-10 md:py-20 px-4 md:px-20">
+        <div className="container mx-auto">
+          <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
+            <div className="bg-[#030B20] rounded-xl text-white px-6 xl:px-14 py-10 border border-[#4575FF]">
+              <div className="text-[#B2B2B2] font-bold text-sm lg:text-lg">
+                <p>
+                  FastOne Global Financial Markets Limited typically processes
+                  deposits within 24 to 48 hours and processes withdrawals
+                  within 24 to 48 hours of receiving a valid request.
+                </p>
+                <br />
+                <p>
+                  Note: this period may be extended due to enhanced Due
+                  Diligence associated with larger sums or matters of concern.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="container mx-auto">
-        <div className="flex flex-col gap-40 lg:gap-0 lg:flex-row justify-between items-center py-20 pt-30">
+      <section className="md:py-10 lg:py-20 px-4 md:px-20">
+        <div className="container mx-auto flex flex-col gap-20 lg:gap-10 lg:flex-row justify-between items-center py-20">
           {/* CARD 1 */}
-          <div className="relative w-[280px] rounded-lg border border-blue-500/20 p-16 text-center bg-[#030B20]">
+          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
             <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
               <img
                 src="/images/dw5.png"
@@ -113,7 +115,7 @@ function DepositsWithdrawls() {
                 className="w-30 h-30 object-contain"
               />
             </div>
-            <div className="py-4">
+            <div className="py-2">
               <h3 className="text-white font-semibold text-lg">
                 Bank Transfer
               </h3>
@@ -122,7 +124,7 @@ function DepositsWithdrawls() {
           </div>
 
           {/* CARD 2 */}
-          <div className="relative w-[280px] rounded-lg border border-blue-500/20 p-16 text-center bg-[#030B20]">
+          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
             <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
               <img
                 src="/images/dw6.png"
@@ -136,7 +138,7 @@ function DepositsWithdrawls() {
           </div>
 
           {/* CARD 3 */}
-          <div className="relative w-[280px] rounded-lg border border-blue-500/20 p-16 text-center bg-[#030B20]">
+          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
             <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
               <img
                 src="/images/dw7.png"
