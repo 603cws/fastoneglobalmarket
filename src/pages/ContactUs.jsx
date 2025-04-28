@@ -60,16 +60,16 @@ function ContactUs() {
         )}
 
         {social && (
-          <div className="flex justify-center gap-2 md:gap-4 text-white text-lg">
+          <div className="flex justify-center items-center gap-2 md:gap-4 text-white text-lg">
             <a
               href="https://www.instagram.com/fastone_global/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/instagram.png"
+                src="./images/contactus/instagram.png"
                 alt="Instagram"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-10  transition"
               />
             </a>
             <a
@@ -78,24 +78,23 @@ function ContactUs() {
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/facebook.png"
+                src="./images/contactus/f1fb3.png"
                 alt="Facebook"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-10  transition"
               />
             </a>
-
             <a
               href="https://x.com/Fastone_Markets"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/twitter.png"
+                src="./images/contactus/X.png"
                 alt="Twitter"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-8  transition"
               />
             </a>
-            <a
+            {/* <a
               href="https://www.youtube.com/@f1globexmedia744"
               target="_blank"
               rel="noopener noreferrer"
@@ -105,16 +104,16 @@ function ContactUs() {
                 alt="Youtube"
                 className="hover:brightness-125 h-8 lg:h-12 transition"
               />
-            </a>
+            </a> */}
             <a
               href="https://www.linkedin.com/company/vibhs-financials-ltd-mauritius"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/linkedin.png"
+                src="./images/contactus/linkedin.png"
                 alt="LinkedIn"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-8  transition"
               />
             </a>
           </div>
@@ -131,8 +130,8 @@ function ContactUs() {
         className="absolute w-full top-0 left-0 object-cover"
       />
       <Header />
-      <div className="pt-6 lg:pt-0 lg:py-6 md:py-10">
-        <div className="max-w-7xl mx-auto text-center lg:py-10 ">
+      <div className="pt-6 lg:pt-10 lg:pb-6 md:py-10">
+        <div className="max-w-7xl mx-auto text-center lg:py-10  ">
           <TitleArea title="Contact us" breadcrumbPaths={breadcrumbPaths} />
         </div>
       </div>
@@ -146,7 +145,7 @@ function ContactUs() {
       <div className="container mx-auto relative">
         <div className="flex flex-col justify-between items-center gap-4 py-6">
           <div>
-            <h3 className="font-bold text-[#FFFFFF]  text-lg lg:text-2xl">
+            <h3 className="font-bold text-[#FFFFFF]  text-lg lg:text-2xl ">
               FastOne Global Financial Markets Limited (Mauritius)
             </h3>
           </div>
@@ -166,6 +165,7 @@ function ContactUs() {
       <div className="container mx-auto relative">
         <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
           <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4">
+            {/* <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4"> */}
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Get in Touch!</p>
               <h4 className="text-xl">Love to hear from you</h4>
@@ -193,15 +193,6 @@ function ContactUs() {
                     required
                   />
                 </div>
-                {/* <div className="mb-2 flex flex-col gap-1.5">
-                  <label className="mt-2 text-sm">Company Name*</label>
-                  <input
-                    type="text"
-                    name="companyName"
-                    className="w-full rounded-lg p-2 mb-1 border-2 border-[#D1D5DB] bg-[#F8F8F8] focus:outline-none placeholder:text-[#CCC] font-medium text-sm"
-                    required
-                  />
-                </div> */}
                 <div className="mb-2 flex flex-col gap-1.5">
                   <label className="font-semibold mt-2 text-sm">
                     Mobile Number*
@@ -217,7 +208,7 @@ function ContactUs() {
                 <div className="mb-2 flex flex-col gap-1.5">
                   <label className=" mt-2 text-sm">Message*</label>
                   <textarea
-                    rows="4"
+                    rows="6"
                     name="message"
                     className="w-full rounded-lg p-2 mb-1 border-2 border-[#D1D5DB] bg-[#F8F8F8] focus:outline-none placeholder:text-[#CCC] font-medium text-sm"
                     placeholder="your message..."
@@ -226,7 +217,7 @@ function ContactUs() {
                   </textarea>
                 </div>
                 <button
-                  className="px-10 py-2 font-bold rounded-lg bg-[#13275C] border-black  border-1 mb-2 text-white"
+                  className="px-10 py-2 font-bold rounded-lg bg-[#13275C] border-black  border-1 mb-2 lg:mb-0 lg:mt-5 text-white "
                   // onClick={handleformsubmit}
                 >
                   Submit

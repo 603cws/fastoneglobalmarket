@@ -3,14 +3,14 @@ import Breadcrumbs from "./Breadcrumbs";
 
 const TitleArea = ({ title, description, breadcrumbPaths }) => {
   return (
-    <div className="pt-16 relative">
-      <h2 className="text-xs md:text-base text-white">
+    <div className="pt-16 relative z-10">
+      <h2 className="text-xs md:text-base text-white lg:pb-10">
         {breadcrumbPaths && (
           <Breadcrumbs paths={breadcrumbPaths} currentTitle="Pricing Model" />
         )}
       </h2>
       {title && (
-        <h1 className="mt-4 text-base md:text-xl xl:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
+        <h1 className=" uppercase mt-4 text-2xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
           {/* <h1 className="text-xl lg:text-3xl xl:text-5xl font-bold text-blue-400 mt-4"> */}
           {title}
         </h1>

@@ -42,7 +42,7 @@ function CFD() {
     { name: "Markets", href: "" },
     { name: "CFD" },
   ];
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/CDF.png";
   return (
     <div className="relative">
       <img

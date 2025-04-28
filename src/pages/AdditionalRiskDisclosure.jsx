@@ -279,15 +279,16 @@ function AdditionalRiskDisclosure() {
                 <h4 className="mt-5">CUSTOMER ACKNOWLEDGEMENT</h4>
                 <p>
                   CUSTOMER(S) ACKNOWLEDGE(S) AND CONFIRM(S) THAT HE(THEY)
-                  HAS(HAVE) FILLED UP ONLINE ACCOUNT ON www.fastoneglobalmarkets.com. BY
-                  CHECKING THE BOX IN THE UPLOAD DOCUMENTS SECTION OF OPEN
-                  ONLINE ACCOUNT ON www.fastoneglobalmarkets.com, CUSTOMER IS DIGITALLY
-                  SIGNING ADDITIONAL RISK DISCLOSURE. BY DIGITALLY SIGNING
-                  ADDITIONAL RISK DISCLOSURE CUSTOMER(S) HEREBY ACKNOWLEDGE(S)
-                  THAT HE(THEY) HAS/HAVE RECEIVED, READ AND UNDERSTAND THE
-                  ADDITIONAL RISK DICLOSURE STATEMENTS. I (WE), THE CUSTOMER
-                  (CUSTOMERS) HAS(HAVE) READ AND UNDERSTAND ADDITIONAL RISK
-                  DICLOSURE AND FULLY AGREE WITH THEM.
+                  HAS(HAVE) FILLED UP ONLINE ACCOUNT ON
+                  www.fastoneglobalmarkets.com. BY CHECKING THE BOX IN THE
+                  UPLOAD DOCUMENTS SECTION OF OPEN ONLINE ACCOUNT ON
+                  www.fastoneglobalmarkets.com, CUSTOMER IS DIGITALLY SIGNING
+                  ADDITIONAL RISK DISCLOSURE. BY DIGITALLY SIGNING ADDITIONAL
+                  RISK DISCLOSURE CUSTOMER(S) HEREBY ACKNOWLEDGE(S) THAT
+                  HE(THEY) HAS/HAVE RECEIVED, READ AND UNDERSTAND THE ADDITIONAL
+                  RISK DICLOSURE STATEMENTS. I (WE), THE CUSTOMER (CUSTOMERS)
+                  HAS(HAVE) READ AND UNDERSTAND ADDITIONAL RISK DICLOSURE AND
+                  FULLY AGREE WITH THEM.
                 </p>
               </p>
             </div>

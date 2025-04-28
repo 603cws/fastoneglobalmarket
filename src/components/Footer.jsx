@@ -125,12 +125,12 @@ export const Footer = () => {
                     </a>
                   </li>
                 </ul>
-                <div className="border-b-1 border-b-[##adadad] border-dashed pb-1">
+                <div className="border-b-1 border-b-[##adadad] border-dashed pb-1 lg:mt-3">
                   <h2>Follow Us</h2>
                   <p>Social Media</p>
                 </div>
-                <div className="">
-                  <div className="footer-social">
+                <div className="mt-3">
+                  <div className="footer-social ">
                     <ul className="flex">
                       <li>
                         <a

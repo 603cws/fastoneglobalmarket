@@ -42,7 +42,7 @@ function Metals() {
     { name: "Markets", href: "" },
     { name: "Metals" },
   ];
-  const imagepath = "/dummyimage.png";
+  const imagepath = "/images/metal.png";
   return (
     <div className="relative">
       <img
