@@ -1,12 +1,11 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { FaStar, FaRegCircle, FaBars, FaTimes } from "react-icons/fa";
+import { FaStar, FaRegCircle } from "react-icons/fa";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import PriceTicker from "./PriceTicker";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Header from "./Header";
+import Header from "../components/Header";
 import CryptoBubbles from "../pages/CryptoBubbles";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";

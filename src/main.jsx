@@ -41,7 +41,7 @@ import AdditionalRiskDisclosure from "./pages/AdditionalRiskDisclosure.jsx";
 import RegulatoryDisclaimers from "./pages/RegulatoryDisclaimers.jsx";
 import LegalTerms from "./pages/LegalTerms.jsx";
 import AppComingSoon from "./pages/AppComingSoon.jsx";
-import Landing from "./components/Landing.jsx";
+import Landing from "./pages/Landing.jsx";
 import MetaTrader4 from "./pages/MetaTrader4.jsx";
 import MetaTrader5 from "./pages/MetaTrader5.jsx";
 import CryptoBubbles from "./pages/CryptoBubbles.jsx";
