@@ -2,7 +2,7 @@ import React from "react";
 
 const TradingTools = () => {
   return (
-    <section className="lg:py-20  bg-[#030B20]">
+    <section className="pb-3 lg:py-20  bg-[#030B20]">
       <div className="container mx-auto px-4">
         {/* Title and description row */}
 
@@ -21,7 +21,8 @@ const TradingTools = () => {
 
         {/* Platform content */}
         <div className="row">
-          <div className="col-12 platform-content">
+          {/* <div className="col-12 platform-content"> */}
+          <div className="relative sm:flex justify-center items-center">
             <img
               src="/images/iPhone12Pro.png"
               className="t-platform-image"
@@ -32,9 +33,10 @@ const TradingTools = () => {
               className="t-platform-image"
               alt=""
             /> */}
-            <div className="platform-grid ">
+            <div className="platform-grid">
               {/* <a href="" className=" pf-card pf-card-1 bg-[#fff] mb-3  md:mb-0"> */}
-              <a className="pf-card pf-card-1 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
+              {/* <a className="pf-card pf-card-1 bg-[#fff] mb-3 md:mb-0 cursor-pointer"> */}
+              <a className="sm:absolute left-0 xl:left-1/6 top-1/5 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/mt4.svg"
                   className="grid-img"
@@ -45,7 +47,8 @@ const TradingTools = () => {
                   <p>Level up your experience.</p>
                 </div>
               </a>
-              <a className="pf-card pf-card-2 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
+              {/* <a className="pf-card pf-card-2 bg-[#fff] mb-3 md:mb-0 cursor-pointer"> */}
+              <a className="sm:absolute left-0 xl:left-1/6 bottom-4 xl:bottom-1/6 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/mt5.svg"
                   className="grid-img"
@@ -56,7 +59,8 @@ const TradingTools = () => {
                   <p>A step up in Trading function</p>
                 </div>
               </a>
-              <a className="pf-card pf-card-4 bg-[#fff] mb-3 md:mb-0 cursor-pointer">
+              {/* <a className="pf-card pf-card-4 bg-[#fff] mb-3 md:mb-0 cursor-pointer"> */}
+              <a className="sm:absolute right-0 xl:right-1/6 bottom-1/6 xl:bottom-1/5 bg-[#fff]  md:mb-0 cursor-pointer">
                 <img
                   src="/images/hero-icons/security.png"
                   className="grid-img"

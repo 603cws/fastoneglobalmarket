@@ -39,7 +39,7 @@ const CryptoBubbles = ({ height }) => {
 
   const [data, setData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
-  const [timeRange, setTimeRange] = useState("24h");
+  const [timeRange, setTimeRange] = useState("7d");
   const [tooltipData, setTooltipData] = useState({
     visible: false,
     x: 0,
@@ -986,7 +986,13 @@ const CryptoBubbles = ({ height }) => {
                       style={{ fill: "none", strokeWidth: 1 }}
                     />
                     <SparklinesSpots size={2} />
-                    <SparklinesCurve />
+                    <SparklinesCurve
+                      color={
+                        currentCoin[`price_change_${tooltipTimeRange}`] >= 0
+                          ? "#00ff00"
+                          : "#ff4444"
+                      }
+                    />
                   </Sparklines>
 
                   {/* Overlay for hover interaction */}
