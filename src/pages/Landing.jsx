@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import CryptoBubbles from "../pages/CryptoBubbles";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";
+import axios from "axios";
 
 const features = [
   {
@@ -253,6 +254,10 @@ function Landing() {
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
+  const [timeRange, setTimeRange] = useState("7d"); //24h
+  const [data, setData] = useState([]);
+  const positionsRef = useRef(new Map());
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -260,6 +265,106 @@ function Landing() {
 
     return () => clearInterval(interval);
   }, [totalSlides]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let response;
+
+        // First attempt: Free public API (no API key required)
+        try {
+          response = await axios.get(
+            "https://api.coingecko.com/api/v3/coins/markets",
+            {
+              params: {
+                vs_currency: "usd",
+                order: "market_cap_desc",
+                per_page: 100,
+                price_change_percentage: "24h,7d,30d,1y",
+                sparkline: true,
+              },
+            }
+          );
+          console.log("Public API");
+        } catch (primaryError) {
+          console.warn(
+            "Public API failed. Trying demo API...",
+            primaryError.message
+          );
+
+          // Fallback: demo API with demo key
+          response = await axios.get(
+            "https://api.coingecko.com/api/v3/coins/markets",
+            {
+              params: {
+                vs_currency: "usd",
+                order: "market_cap_desc",
+                per_page: 100,
+                price_change_percentage: "24h,7d,30d,1y",
+                x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
+                sparkline: true,
+              },
+            }
+          );
+          console.log("Demo API");
+        }
+
+        setData((prevData = []) => {
+          const prevDataMap = new Map(prevData.map((coin) => [coin.id, coin]));
+
+          const nodes = response.data.map((coin) => {
+            const cached = positionsRef.current.get(coin.id);
+            const existingCoin = prevDataMap.get(coin.id);
+
+            return {
+              id: coin.id,
+              symbol: coin.symbol,
+              name: coin.name,
+              price: coin.current_price,
+              market_cap: coin.market_cap,
+              market_cap_rank: coin.market_cap_rank,
+              price_change:
+                coin[`price_change_percentage_${timeRange}_in_currency`],
+              price_change_24h: coin.price_change_percentage_24h_in_currency,
+              price_change_7d: coin.price_change_percentage_7d_in_currency,
+              price_change_30d: coin.price_change_percentage_30d_in_currency,
+              price_change_1y: coin.price_change_percentage_1y_in_currency,
+              volume: coin.total_volume,
+              sparkline: coin.sparkline_in_7d?.price,
+              url: `https://www.coingecko.com/en/coins/${coin.id}`,
+              image: coin.image,
+              x: cached?.x ?? Math.random() * window.innerWidth,
+              y: cached?.y ?? Math.random() * window.innerHeight,
+              vx: cached?.vx ?? 0,
+              vy: cached?.vy ?? 0,
+              fx: null,
+              fy: null,
+              // Preserve existing sparkline_365d if available
+              sparkline_365d: existingCoin?.sparkline_365d,
+            };
+          });
+
+          // Update positionsRef with new positions
+          nodes.forEach((coin) => {
+            positionsRef.current.set(coin.id, {
+              x: coin.x,
+              y: coin.y,
+              vx: coin.vx,
+              vy: coin.vy,
+            });
+          });
+
+          return nodes;
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
+  }, [timeRange]);
 
   useLayoutEffect(() => {
     if (headerRef.current) {
@@ -295,7 +400,14 @@ function Landing() {
           style={{ height: `calc(95vh - ${headerHeight}px)` }}
         >
           {" "}
-          <CryptoBubbles height={window.innerHeight - headerHeight - 110} />
+          <CryptoBubbles
+            height={window.innerHeight - headerHeight - 110}
+            data={data}
+            setData={setData}
+            timeRange={timeRange}
+            setTimeRange={setTimeRange}
+            positionsRef={positionsRef}
+          />
         </div>
       </div>
 
@@ -531,7 +643,7 @@ function Landing() {
                 scrollbar={{ draggable: true }}
                 spaceBetween={20}
                 autoplay={true}
-                loop={true}
+                loop={false}
                 breakpoints={{
                   0: {
                     slidesPerView: 2,
@@ -544,18 +656,20 @@ function Landing() {
                   },
                 }}
               >
-                {cryptos.map((crypto, idx) => (
+                {data.slice(0, 25).map((crypto, idx) => (
                   <SwiperSlide key={idx}>
-                    <div className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF]">
-                      <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition">
+                    <div className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] h-full">
+                      <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition h-full">
                         <img
                           src={crypto.image}
                           alt={crypto.name}
                           className="w-12 h-12"
                         />
-                        <h4 className="font-semibold">{crypto.name}</h4>
+                        <h4 className="font-semibold min-h-[50px] flex items-center justify-center text-center !line-clamp-2 ">
+                          {crypto.name}
+                        </h4>
                         <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                          {crypto.reward}
+                          {crypto.price_change.toFixed(2)}%
                         </p>
                         <p className="text-sm text-gray-400">Monthly Rewards</p>
                         {/* <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
@@ -572,113 +686,111 @@ function Landing() {
       </section>
 
       {/* Section 4 */}
-      <section className="bg-[#060D27] text-white py-24 px-6">
-        <div className="container mx-auto">
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row justify-between gap-6 mb-12">
-            {/* Heading */}
-            <div className="flex-1 header-text-s2">
-              <h2 className="text-4xl md:text-5xl font-bold leading-snug">
-                What Our{" "}
-                <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                  Users Are
-                  <br className="hidden md:block" /> Saying
-                </span>
-              </h2>
-            </div>
+      {/*
+<section className="bg-[#060D27] text-white py-24 px-6">
+  <div className="container mx-auto">
+    
+    <div className="flex flex-col lg:flex-row justify-between gap-6 mb-12">
+      
+      <div className="flex-1 header-text-s2">
+        <h2 className="text-4xl md:text-5xl font-bold leading-snug">
+          What Our{" "}
+          <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+            Users Are
+            <br className="hidden md:block" /> Saying
+          </span>
+        </h2>
+      </div>
 
-            {/* Paragraph block - placed below on tablet & mobile */}
-            <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0 gap-4k">
-              {/* Gradient line */}
-              <div
-                className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b line-h-4k"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)",
-                }}
-              />
+      <div className="flex items-center gap-4 flex-1 mt-4 lg:mt-0 gap-4k">
+        
+        <div
+          className="w-1 h-24 lg:w-px lg:h-24 bg-gradient-to-b line-h-4k"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)",
+          }}
+        />
 
-              {/* Paragraph */}
-              <p className="text-gray-400 text-md sm:text-xl max-w-md para-4k">
-                Join thousands of satisfied users who are growing their crypto
-                portfolios with EPTY. Hear what they have to say about their
-                staking experience!
-              </p>
-            </div>
-          </div>
+        <p className="text-gray-400 text-md sm:text-xl max-w-md para-4k">
+          Join thousands of satisfied users who are growing their crypto
+          portfolios with EPTY. Hear what they have to say about their
+          staking experience!
+        </p>
+      </div>
 
-          {/* Testimonials Wrapper */}
-          <div className="bg-[#111827] p-6 rounded-2xl transition-all duration-500">
-            {/* Mobile: Show only currentSlide */}
-            <div className="flex flex-col gap-6 md:hidden">
-              <div className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl">
-                <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
-                  {/* Image */}
-                  <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
-                  {/* Content */}
-                  {testimonials[currentSlide] && (
-                    <div className="">
-                      <h4 className="font-semibold text-lg">
-                        {testimonials[currentSlide].name}
-                      </h4>
-                      <div className="flex text-blue-400 mb-2">
-                        {[...Array(testimonials[currentSlide].rating)].map(
-                          (_, i) => (
-                            <FaStar key={i} size={16} />
-                          )
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-300">
-                        {testimonials[currentSlide].comment}
-                      </p>
-                    </div>
-                  )}
+    </div>
+
+    <div className="bg-[#111827] p-6 rounded-2xl transition-all duration-500">
+      
+      <div className="flex flex-col gap-6 md:hidden">
+        <div className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl">
+          <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
+            
+            <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
+            
+            {testimonials[currentSlide] && (
+              <div>
+                <h4 className="font-semibold text-lg">
+                  {testimonials[currentSlide].name}
+                </h4>
+                <div className="flex text-blue-400 mb-2">
+                  {[...Array(testimonials[currentSlide].rating)].map((_, i) => (
+                    <FaStar key={i} size={16} />
+                  ))}
                 </div>
+                <p className="text-sm text-gray-300">
+                  {testimonials[currentSlide].comment}
+                </p>
               </div>
-            </div>
-
-            {/* Tablet and above: Show all */}
-            <div className="hidden md:flex flex-col lg:flex-row gap-6 gap-4k2">
-              {visibleTestimonials.map((user, idx) => (
-                <div
-                  key={idx}
-                  className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl header-text-s2"
-                >
-                  <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
-                    {/* Image */}
-                    <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
-                    {/* Content */}
-                    <div>
-                      <h4 className="font-semibold text-lg">{user.name}</h4>
-                      <div className="flex text-blue-400 mb-2">
-                        {[...Array(user.rating)].map((_, i) => (
-                          <FaStar key={i} className="icon-4k" />
-                        ))}
-                      </div>
-                      <p className="text-sm text-gray-300">{user.comment}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Pagination Dots only on mobile */}
-          <div className="flex justify-center gap-2 mt-8 gap-4k">
-            {Array.from({ length: totalSlides }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 pagination-btn-4k ${
-                  idx === currentSlide
-                    ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
-                    : "bg-gray-500 hover:bg-blue-400"
-                }`}
-              ></button>
-            ))}
+            )}
           </div>
         </div>
-      </section>
+      </div>
+
+      <div className="hidden md:flex flex-col lg:flex-row gap-6 gap-4k2">
+        {visibleTestimonials.map((user, idx) => (
+          <div
+            key={idx}
+            className="w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] p-[1px] rounded-xl header-text-s2"
+          >
+            <div className="rounded-xl p-6 flex flex-col sm:flex-row items-start gap-4 bg-[#111827] h-full">
+              
+              <div className="w-16 h-16 bg-gray-300 rounded-sm shrink-0" />
+              
+              <div>
+                <h4 className="font-semibold text-lg">{user.name}</h4>
+                <div className="flex text-blue-400 mb-2">
+                  {[...Array(user.rating)].map((_, i) => (
+                    <FaStar key={i} className="icon-4k" />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-300">{user.comment}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <div className="flex justify-center gap-2 mt-8 gap-4k">
+      {Array.from({ length: totalSlides }).map((_, idx) => (
+        <button
+          key={idx}
+          onClick={() => setCurrentSlide(idx)}
+          className={`w-3 h-3 rounded-full transition-all duration-300 pagination-btn-4k ${
+            idx === currentSlide
+              ? "bg-gradient-to-r from-[#4575FF] to-[#92AEFF] scale-110"
+              : "bg-gray-500 hover:bg-blue-400"
+          }`}
+        ></button>
+      ))}
+    </div>
+
+  </div>
+</section>
+*/}
 
       {/* Section 5 */}
       <section
