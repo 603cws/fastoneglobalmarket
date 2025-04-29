@@ -208,10 +208,10 @@ const CryptoBubbles = ({
 
     // 1. Set radius bounds based on screen size
     let minRadius, maxRadius;
-    if (window.innerWidth < 600) {
+    if (window.innerWidth <= 600) {
       minRadius = 15;
       maxRadius = 50;
-    } else if (window.innerWidth < 1024) {
+    } else if (window.innerWidth <= 1024) {
       minRadius = 20;
       maxRadius = 70;
     } else if (window.innerWidth <= 1536) {
@@ -468,8 +468,35 @@ const CryptoBubbles = ({
       const coin = data.find((c) => c.id === d.id);
 
       // Only fetch sparkline if not already stored
-      if (!coin.sparkline_365d) {
+      // if (!coin.sparkline_365d) {
+      //   try {
+      //     const res = await axios.get(
+      //       `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart`,
+      //       {
+      //         params: {
+      //           vs_currency: "usd",
+      //           days: 365,
+      //           interval: "daily",
+      //         },
+      //       }
+      //     );
+      //     // const prices = res.data.prices.map((p) => p[1]);
+      //     const prices = res.data.prices;
+
+      //     // Update that coin's data
+      //     setData((prev) =>
+      //       prev.map((c) =>
+      //         c.id === coin.id ? { ...c, sparkline_365d: prices } : c
+      //       )
+      //     );
+      //   } catch (err) {
+      //     console.warn(`Sparkline fetch failed for ${coin.id}:`, err.message);
+      //   }
+      // }
+
+      if (!coin.sparkline_365d || !coin.sparkline_24h_hourly) {
         try {
+          // 1. Get 1-year daily sparkline from CoinGecko
           const res = await axios.get(
             `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart`,
             {
@@ -480,13 +507,39 @@ const CryptoBubbles = ({
               },
             }
           );
-          // const prices = res.data.prices.map((p) => p[1]);
-          const prices = res.data.prices;
+          const prices365d = res.data.prices;
 
-          // Update that coin's data
+          // 2. Get 24h hourly sparkline from CryptoCompare
+          const symbol = coin.symbol.toUpperCase(); // CryptoCompare expects upper-case symbols
+          const hourlyRes = await axios.get(
+            `https://min-api.cryptocompare.com/data/v2/histohour`,
+            {
+              params: {
+                fsym: symbol,
+                tsym: "USD",
+                limit: 24, // Last 24 hours
+              },
+              headers: {
+                authorization: `f6585a6bc678cd650b47db2eb2df6ba3eeedb0b4a582109a15775cde620e2f9e`,
+              },
+            }
+          );
+
+          const prices24h = hourlyRes.data.Data.Data.map((point) => [
+            point.time * 1000, // Convert to milliseconds
+            point.close,
+          ]);
+
+          // Update the coin data with both sparklines
           setData((prev) =>
             prev.map((c) =>
-              c.id === coin.id ? { ...c, sparkline_365d: prices } : c
+              c.id === coin.id
+                ? {
+                    ...c,
+                    sparkline_365d: prices365d,
+                    sparkline_24h_hourly: prices24h,
+                  }
+                : c
             )
           );
         } catch (err) {
@@ -595,53 +648,6 @@ const CryptoBubbles = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // const fetchSparklineForCoin = async (coinId, range) => {
-  //   // 🛠️ override 24h request with 2d to avoid 401
-  //   const actualRange = range === "24h" ? 2 : getDaysFromRange(range);
-  //   const interval = actualRange <= 2 ? "hourly" : "daily";
-
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart`,
-  //       {
-  //         params: {
-  //           vs_currency: "usd",
-  //           days: actualRange,
-  //           interval,
-  //         },
-  //       }
-  //     );
-
-  //     const prices = response.data.prices.map((p) => p[1]);
-
-  //     // 🧠 if original request was "24h", simulate it from last 24 hourly points
-  //     if (range === "24h") {
-  //       return prices.slice(-24);
-  //     }
-
-  //     return prices;
-  //   } catch (error) {
-  //     console.warn(
-  //       `Sparkline fetch failed for ${coinId} (${range}) — ${error.message}`
-  //     );
-  //     return [];
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (!tooltipData.visible) {
-  //     setSparklineData([]);
-  //   }
-  // }, [tooltipData.visible]);
-  // console.log("sparkline", sparklineData);
-
-  // const displayPoints =
-  //   tooltipTimeRange === "1y"
-  //     ? sparklineData.slice(-90) // last ~3 months
-  //     : tooltipTimeRange === "24h"
-  //     ? sparklineData.slice(-48) // last 48 hourly points
-  //     : sparklineData.slice(-30); // default
-
   return (
     <div className="bg-[#030B20] relative">
       <svg ref={svgRef} className="bubbles-canvas w-full" />
@@ -666,18 +672,6 @@ const CryptoBubbles = ({
         (() => {
           const currentCoin = data.find((c) => c.id === tooltipData.coinId);
           if (!currentCoin) return null;
-          // const maxPrice = Math.max(...sparklineData);
-          // const maxIndex = sparklineData.indexOf(maxPrice);
-          // const graphHeight = 120;
-          // const graphWidth = sparklineRef.current?.offsetWidth || 120;
-          // const minPrice = Math.min(...sparklineData);
-
-          // // X position
-          // const maxX = (maxIndex / (sparklineData.length - 1)) * graphWidth;
-
-          // // Y position (invert because higher value = lower y)
-          // const maxY =
-          //   ((maxPrice - minPrice) / (maxPrice - minPrice || 1)) * graphHeight;
           const fullSparkline = currentCoin.sparkline_365d || [];
           let slicedSparkline = [];
 
@@ -687,7 +681,7 @@ const CryptoBubbles = ({
           else if (tooltipTimeRange === "7d")
             slicedSparkline = fullSparkline.slice(-14);
           else if (tooltipTimeRange === "24h")
-            slicedSparkline = fullSparkline.slice(-24);
+            slicedSparkline = currentCoin.sparkline_24h_hourly || [];
 
           // const timestamp = slicedSparkline[hoverIndex]?.[0];
           // const is24h = tooltipTimeRange === "24h";
@@ -708,8 +702,8 @@ const CryptoBubbles = ({
               ? date.toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
-                  hour12: true, // Keeps 12-hour format
-                  timeZone: "UTC", // If you need UTC time
+                  hour12: true,
+                  timeZone: "Asia/Kolkata",
                 })
               : date.toLocaleDateString(undefined, {
                   day: "numeric",
@@ -888,29 +882,31 @@ const CryptoBubbles = ({
               )}
 
               <div className="flex justify-between mt-3 text-xs">
-                {["24h", "7d", "30d", "1y"].map((label) => (
-                  <button
-                    key={label}
-                    className={`px-3 py-1 rounded-md cursor-pointer ${
-                      tooltipTimeRange === label
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-800 text-gray-300"
-                    }`}
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      setTooltipTimeRange(label);
-                      // if (tooltipData.coinId) {
-                      //   const prices = await fetchSparklineForCoin(
-                      //     tooltipData.coinId,
-                      //     label
-                      //   );
-                      //   setSparklineData(prices);
-                      // }
-                    }}
-                  >
-                    {label.toUpperCase()}
-                  </button>
-                ))}
+                {["24h", "7d", "30d", "1y"].map((label) => {
+                  return (
+                    <button
+                      key={label}
+                      className={`px-3 py-1 rounded-md cursor-pointer ${
+                        tooltipTimeRange === label
+                          ? "bg-green-500 text-white"
+                          : "bg-gray-800 text-gray-300"
+                      }`}
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        setTooltipTimeRange(label);
+                        // if (tooltipData.coinId) {
+                        //   const prices = await fetchSparklineForCoin(
+                        //     tooltipData.coinId,
+                        //     label
+                        //   );
+                        //   setSparklineData(prices);
+                        // }
+                      }}
+                    >
+                      {label.toUpperCase()}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           );

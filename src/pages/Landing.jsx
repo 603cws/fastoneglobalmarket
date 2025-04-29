@@ -10,32 +10,35 @@ import CryptoBubbles from "../pages/CryptoBubbles";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import axios from "axios";
+import Lottie from "lottie-react";
+import LandingAnimation from "../assets/LandingAnimation.json";
+import { useInView } from "react-intersection-observer";
 
 const features = [
   {
-    icon: "📈",
+    icon: "/icons/high_return.png",
     title: "High Returns",
     description: "Earn competitive APY on your staked assets.",
   },
   {
-    icon: "🔒",
+    icon: "/icons/secure.png",
     title: "Secure Staking",
     description: "Top-notch security protocols for peace of mind.",
   },
   {
-    icon: "⚡",
+    icon: "/icons/intant-rewards.png",
     title: "Instant Rewards",
     description: "No waiting—earn rewards instantly.",
   },
   {
-    icon: "📊",
+    icon: "icons/Realtime-track.png",
     title: "Real-Time Tracking",
     description: "Keep track of earnings with live analytics.",
   },
   {
-    icon: "🧠",
-    title: "Smart Automation",
-    description: "Let AI optimize your staking strategy.",
+    icon: "icons/support.png",
+    title: "24/7 Support",
+    description: "Our team is here to help you anytime.",
   },
   // {
   //   icon: "🌐",
@@ -59,109 +62,6 @@ const steps = [
     number: "3",
     title: "Earn Rewards",
     description: "Sit back and watch your rewards grow automatically.",
-  },
-];
-
-const cryptos = [
-  {
-    name: "Bitcoin",
-    reward: "4.5%",
-    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
-  },
-  {
-    name: "Ethereum",
-    reward: "5.2%",
-    image: "/icons/ethereum.svg",
-  },
-  {
-    name: "Solana",
-    reward: "6.1%",
-    image: "/icons/solana.svg",
-  },
-  {
-    name: "Cardano",
-    reward: "3.8%",
-    image: "/icons/cardano.svg",
-  },
-  {
-    name: "Bitcoin2",
-    reward: "4.5%",
-    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
-  },
-  {
-    name: "Ethereum",
-    reward: "5.2%",
-    image: "/icons/ethereum.svg",
-  },
-  {
-    name: "Solana",
-    reward: "6.1%",
-    image: "/icons/solana.svg",
-  },
-  {
-    name: "Cardano",
-    reward: "3.8%",
-    image: "/icons/cardano.svg",
-  },
-  {
-    name: "Bitcoin3",
-    reward: "4.5%",
-    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
-  },
-  {
-    name: "Ethereum",
-    reward: "5.2%",
-    image: "/icons/ethereum.svg",
-  },
-  {
-    name: "Solana",
-    reward: "6.1%",
-    image: "/icons/solana.svg",
-  },
-  {
-    name: "Cardano",
-    reward: "3.8%",
-    image: "/icons/cardano.svg",
-  },
-  {
-    name: "Bitcoin4",
-    reward: "4.5%",
-    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
-  },
-  {
-    name: "Ethereum",
-    reward: "5.2%",
-    image: "/icons/ethereum.svg",
-  },
-  {
-    name: "Solana",
-    reward: "6.1%",
-    image: "/icons/solana.svg",
-  },
-  {
-    name: "Cardano",
-    reward: "3.8%",
-    image: "/icons/cardano.svg",
-  },
-  {
-    name: "Bitcoin4",
-    reward: "4.5%",
-    image: "/icons/bitcoin.svg", // placeholder — update to real image or SVG
-  },
-  {
-    name: "Ethereum",
-    reward: "5.2%",
-    image: "/icons/ethereum.svg",
-  },
-  {
-    name: "Solana",
-    reward: "6.1%",
-    image: "/icons/solana.svg",
-  },
-  {
-    name: "Cardano",
-    reward: "3.8%",
-    image: "/icons/cardano.svg",
   },
 ];
 
@@ -341,6 +241,7 @@ function Landing() {
               fy: null,
               // Preserve existing sparkline_365d if available
               sparkline_365d: existingCoin?.sparkline_365d,
+              sparkline_24h_hourly: existingCoin?.sparkline_24h_hourly,
             };
           });
 
@@ -376,6 +277,10 @@ function Landing() {
     event.preventDefault();
     handleRedirect(isLogin);
   };
+  const { ref, inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
 
   return (
     <div className="scrollbar-hidden">
@@ -413,6 +318,7 @@ function Landing() {
 
       {/* Section 1 */}
       <section
+        ref={ref}
         className="relative min-h-screen bg-no-repeat bg-cover bg-center text-white flex flex-col md:flex-row items-center py-5 pt-15 sm:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
@@ -464,11 +370,7 @@ function Landing() {
 
         {/* Right-side Image Positioned Absolutely and Touching Right Edge */}
         <div className="h-full md:pt-0 pt-10 flex-1">
-          <img
-            src="/images/home-page.png"
-            alt="Home Page Graphic"
-            className="object-contain sm:mt-8 md:mt-0 w-full" //w-[320px] sm:w-[420px] md:w-[420px] lg:w-[700px]
-          />
+          {inView && <Lottie animationData={LandingAnimation} loop={false} />}
         </div>
       </section>
 
@@ -529,7 +431,7 @@ function Landing() {
               className="p-[2px] rounded-xl bg-gradient-to-br from-[#4575FF] to-[#92AEFF] header-text-s2"
             >
               <div className="rounded-xl p-4 bg-[#0A0F2C] hover:bg-blue-900/20 transition h-full">
-                <div className="text-3xl mb-2">{feature.icon}</div>
+                <img src={feature.icon} className="mb-2 h-10 w-10" />
                 <h4 className="text-lg font-semibold">{feature.title}</h4>
                 <p className="text-sm text-gray-300">{feature.description}</p>
               </div>
@@ -546,7 +448,7 @@ function Landing() {
         <div className="container mx-auto space-y-20">
           {/* Staking Steps Section */}
           <div>
-            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between lg:items-start gap-6 ">
+            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6 ">
               {/* Heading */}
               <div className="header-text-s2">
                 <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug text-start">
@@ -559,7 +461,7 @@ function Landing() {
               </div>
 
               {/* Vertical line + Paragraph in flex row */}
-              <div className="flex items-start gap-4">
+              <div className="flex items-center gap-4">
                 {/* Vertical line */}
                 <div
                   className="w-px self-stretch bg-gradient-to-b line-h-4k"
@@ -586,13 +488,41 @@ function Landing() {
                 >
                   <div className="flex items-center rounded-xl bg-[#0b132e] p-6 h-full header-text-s2">
                     {/* Number */}
-                    <div className="text-5xl font-bold text-white mr-4 ">
+                    {/* <div className="text-5xl font-bold text-white mr-4 ">
                       {step.number}
-                    </div>
+                    </div> */}
+                    <svg viewBox="0 0 200 200" class="w-[100px] h-[100px]">
+                      <defs>
+                        <linearGradient
+                          id="gradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
+                          <stop offset="0%" stop-color="#4575FF" />
+                          <stop offset="100%" stop-color="#92AEFF" />
+                        </linearGradient>
+                      </defs>
+                      <text
+                        x="50%"
+                        y="50%"
+                        dominant-baseline="middle"
+                        text-anchor="middle"
+                        font-size="150"
+                        fontFamily="inter"
+                        font-weight="bold"
+                        fill="none"
+                        stroke="url(#gradient)"
+                        stroke-width="3"
+                      >
+                        {step.number}
+                      </text>
+                    </svg>
 
                     {/* Content */}
-                    <div className="">
-                      <h4 className="text-white text-lg font-semibold mb-1">
+                    <div className="space-y-3">
+                      <h4 className="text-white text-lg font-semibold">
                         {step.title}
                       </h4>
                       <p className="text-gray-400 text-sm">
@@ -607,11 +537,11 @@ function Landing() {
 
           {/* Favorite Crypto Section */}
           <div>
-            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start">
+            <div className="text-center md:text-left mb-10 flex flex-col lg:flex-row justify-between items-start lg:items-center">
               <div className="header-text-s2">
                 <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-snug">
                   Stake Your Favorite <br />
-                  <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
+                  <span className="bg-gradient-to-r from-[#92AEFF] to-[#4575FF] text-transparent bg-clip-text">
                     Crypto Currencies
                   </span>
                 </h2>
@@ -661,15 +591,15 @@ function Landing() {
                     <div className="p-[2px] rounded-xl bg-gradient-to-r from-[#4575FF] to-[#92AEFF] h-full">
                       <div className="rounded-[10px] p-6 flex flex-col items-center text-center space-y-4 bg-[#0b132e] transition h-full">
                         <img
-                          src={crypto.image}
-                          alt={crypto.name}
+                          src={crypto?.image}
+                          alt={crypto?.name}
                           className="w-12 h-12"
                         />
                         <h4 className="font-semibold min-h-[50px] flex items-center justify-center text-center !line-clamp-2 ">
-                          {crypto.name}
+                          {crypto?.name}
                         </h4>
                         <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                          {crypto.price_change.toFixed(2)}%
+                          {crypto.price_change?.toFixed(2)}%
                         </p>
                         <p className="text-sm text-gray-400">Monthly Rewards</p>
                         {/* <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">

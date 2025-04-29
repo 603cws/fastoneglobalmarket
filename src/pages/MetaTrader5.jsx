@@ -171,10 +171,16 @@ function MetaTrader5() {
           ]}
         />
 
-        <MetaTraderPlatform
-          title="MetaTrader 5 web platform"
-          imagepath="/images/meta5webapp.png"
-          description="Using MetaTrader 5 web terminal from MetaQuotes, you can trade
+        <div className="relative">
+          <img
+            src="/images/bg-shadow-circle.png"
+            alt=""
+            className="absolute -right-1/6 top-1/6"
+          />
+          <MetaTraderPlatform
+            title="MetaTrader 5 web platform"
+            imagepath="/images/meta5webapp.png"
+            description="Using MetaTrader 5 web terminal from MetaQuotes, you can trade
                   on any device directly from a browser. The web terminal
                   includes all features and options of the desktop version, so
                   you will always be able to keep track of your positions and
@@ -182,77 +188,77 @@ function MetaTrader5() {
                   at the moment. All you have to do to use the web version of
                   MetaTrader 5 terminal is to have internet connection, a
                   browser, and the password to your FastOne trading account."
-          button={[
-            {
-              href: "#",
-              firstname: "open in",
-              lastname: "browser",
-              imgpath: "/images/mt5.png",
-            },
-          ]}
-        />
-        <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
-          <div className="container mx-auto flex justify-center ">
-            <div className=" w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
-              {/* Left Side */}
-              <div className="space-y-4">
-                <h2 className="text-4xl text-white font-semibold leading-[52px]">
-                  Why trade on MetaTrader 5 app with Fastone
-                </h2>
-                <p className="text-sm text-white/60 leading-[20px]">
-                  Better-than-market conditions, unique features and
-                  cutting-edge security, partnered with our dedication to
-                  transparency and excellent customer service, are the reasons
-                  traders continue to choose FastOne.
-                </p>
-              </div>
+            button={[
+              {
+                href: "#",
+                firstname: "open in",
+                lastname: "browser",
+                imgpath: "/images/mt5.png",
+              },
+            ]}
+          />
+          <section className="bg-[#030B20] py-10 flex items-center justify-center px-4">
+            <div className="container mx-auto flex justify-center relative">
+              <div className=" w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-10 text-white">
+                {/* Left Side */}
+                <div className="space-y-4">
+                  <h2 className="text-4xl text-white font-semibold leading-[52px]">
+                    Why trade on MetaTrader 5 app with Fastone
+                  </h2>
+                  <p className="text-sm text-white/60 leading-[20px]">
+                    Better-than-market conditions, unique features and
+                    cutting-edge security, partnered with our dedication to
+                    transparency and excellent customer service, are the reasons
+                    traders continue to choose FastOne.
+                  </p>
+                </div>
 
-              {/* Right Side */}
-              <div className="bg-[#1368A6]/20 rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
-                <div className="flex items-center gap-4">
-                  <div className="flex  text-5xl font-bold text-white">1</div>
-                  <div className="flex-1 space-y-2">
-                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
-                      Instant withdrawals
-                    </h3>
-                    <p className="text-sm leading-[24px]">
-                      Remain in control of your funds. Simply choose your
-                      preferred payment method, make a withdrawal request, and
-                      enjoy instant automatic approval.
-                    </p>
+                {/* Right Side */}
+                <div className="bg-[#092140] rounded-xl p-8 space-y-6 shadow-md border border-[#4575FF]">
+                  <div className="flex items-center gap-4">
+                    <div className="flex  text-5xl font-bold text-white">1</div>
+                    <div className="flex-1 space-y-2">
+                      <h3 className="font-bold text-xl lg:text-2xl  text-white">
+                        Instant withdrawals
+                      </h3>
+                      <p className="text-sm leading-[24px]">
+                        Remain in control of your funds. Simply choose your
+                        preferred payment method, make a withdrawal request, and
+                        enjoy instant automatic approval.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
-                  <div className="flex text-5xl font-bold text-white">2</div>
-                  <div className="flex-1 space-y-2">
-                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
-                      Ultra-fast execution
-                    </h3>
-                    <p className="text-sm leading-[24px]">
-                      Stay ahead of trends with lightning-fast execution. Get
-                      your orders executed in milliseconds on all available
-                      platforms at Fastone.
-                    </p>
+                  <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                    <div className="flex text-5xl font-bold text-white">2</div>
+                    <div className="flex-1 space-y-2">
+                      <h3 className="font-bold text-xl lg:text-2xl  text-white">
+                        Ultra-fast execution
+                      </h3>
+                      <p className="text-sm leading-[24px]">
+                        Stay ahead of trends with lightning-fast execution. Get
+                        your orders executed in milliseconds on all available
+                        platforms at Fastone.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
-                  <div className="flex text-5xl font-bold text-white">3</div>
-                  <div className="flex-1 space-y-2">
-                    <h3 className="font-bold text-xl lg:text-2xl  text-white">
-                      Stop Out Protection
-                    </h3>
-                    <p className="text-sm leading-[24px] text-gray-200">
-                      Enjoy unique Stop Out Protection while trading with
-                      Fastone, strengthening your positions during increased
-                      volatility.
-                    </p>
+                  <div className="flex items-center gap-4 border-t border-blue-300 pt-6">
+                    <div className="flex text-5xl font-bold text-white">3</div>
+                    <div className="flex-1 space-y-2">
+                      <h3 className="font-bold text-xl lg:text-2xl  text-white">
+                        Stop Out Protection
+                      </h3>
+                      <p className="text-sm leading-[24px] text-gray-200">
+                        Enjoy unique Stop Out Protection while trading with
+                        Fastone, strengthening your positions during increased
+                        volatility.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
+          </section>
+        </div>
         <InstantAccount />
       </div>
     </div>

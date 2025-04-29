@@ -1270,8 +1270,8 @@ footer {
 }
 @media (min-width: 1800px) {
   .container {
-    max-width: 1800px;
-    padding: 0 5rem;
+    max-width: 1536px;
+    padding: 0;
   }
   .header-text h1 {
     font-size: 3.5rem;
@@ -1355,4 +1355,12 @@ footer {
   .btn-4k {
     font-size: 2rem;
   }
+}
+
+.gradient-border-text {
+  color: transparent;
+  -webkit-text-stroke: 2px;
+  background: linear-gradient(to right, #4575ff, #92aeff);
+  -webkit-background-clip: text;
+  background-clip: text;
 }

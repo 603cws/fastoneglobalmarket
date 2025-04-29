@@ -2,8 +2,8 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
   console.log(button);
 
   return (
-    <div className="bg-[#030B20] ">
-      <div className="container mx-auto  lg:pt-10  md:pb-5">
+    <div className="bg-[#030B20]">
+      <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10 lg:justify-center lg:items-center">
           <div className="flex-1 space-y-6">
             {title && (
@@ -79,8 +79,8 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
             )}
           </div>
           {imagepath && (
-            <div className="flex-1 flex justify-center">
-              <div className="">
+            <div className="flex-1 flex justify-center ">
+              <div className="relative">
                 <img src={imagepath} alt="dummy image" />
               </div>
             </div>
