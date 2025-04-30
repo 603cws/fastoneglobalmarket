@@ -6,6 +6,7 @@ import WhyTrade from "../components/WhyTrade";
 import MarketHeaderSection from "../components/MarketHeaderSection";
 import TitleArea from "../components/TitleArea";
 import InstantAccount from "../components/InstantAccount";
+import CurrencyAnimation from "../assets/CurrencyAnimation.json";
 
 const benefits = [
   <>
@@ -59,6 +60,7 @@ function Currencies() {
       <MarketHeaderSection
         title={"Diversify your investment portfolio by trading CFDS on forex"}
         imagepath={imagepath}
+        animation={CurrencyAnimation}
         alt="currencies"
       />
       <WhyTrade

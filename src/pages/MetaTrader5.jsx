@@ -4,6 +4,8 @@ import InstantAccount from "../components/InstantAccount";
 import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import MetaTraderPlatform from "../components/MetaTraderPlatform";
+import Meta5MobileAnimation from "../assets/Meta5MobileAnimation.json";
+import Meta5WebAnimation from "../assets/Meta5WebAnimation.json";
 
 function MetaTrader5() {
   const imagepath = "/images/meta5.png";
@@ -56,7 +58,7 @@ function MetaTrader5() {
       <img
         src="/images/bg-shadow.png"
         alt=""
-        className="absolute top-0 left-0 w-full"
+        className="absolute top-0 left-0 max-w-full w-full"
       />
       <div className="bg-[#030B20] ">
         <Header mode={"light"} />
@@ -143,6 +145,7 @@ function MetaTrader5() {
         <MetaTraderPlatform
           title="MetaTrader 5 mobile Terminal"
           imagepath="/images/meta5mobileapp.png"
+          animation={Meta5MobileAnimation}
           description="You can trade through MetaTrader 5 using any portable device
                   from anywhere in the world at any moment. The application
                   supports both netting and hedging systems, includes all tools
@@ -171,7 +174,7 @@ function MetaTrader5() {
           ]}
         />
 
-        <div className="relative">
+        <div className="relative overflow-x-hidden">
           <img
             src="/images/bg-shadow-circle.png"
             alt=""
@@ -180,6 +183,7 @@ function MetaTrader5() {
           <MetaTraderPlatform
             title="MetaTrader 5 web platform"
             imagepath="/images/meta5webapp.png"
+            animation={Meta5WebAnimation}
             description="Using MetaTrader 5 web terminal from MetaQuotes, you can trade
                   on any device directly from a browser. The web terminal
                   includes all features and options of the desktop version, so

@@ -160,103 +160,64 @@ const CryptoBubbles = ({
     else if (timeRange === "7d") forceStrength = 0.02;
     else if (timeRange === "30d") forceStrength = 0.008;
 
-    // if (window.innerWidth < 600) {
-    //   minRadius = 15;
-    //   maxRadius = 50;
-    // } else if (window.innerWidth < 1024) {
-    //   minRadius = 20;
-    //   maxRadius = 70;
-    // } else {
-    //   minRadius = 25;
-    //   maxRadius = 115;
-    // }
+    // 1. Determine base radius
+    let baseMinRadius = 25;
+    let baseMaxRadius = 100;
 
-    // // 🔁 Adjust based on timeRange
-    // if (timeRange === "30d") {
-    //   minRadius -= 2;
-    //   maxRadius -= 10;
-    // }
-    // const priceChanges = data.map((d) =>
-    //   Math.abs(d.price_change_percentage_24h || 0)
-    // );
-    // const highChangeCount = priceChanges.filter(
-    //   (change) => change >= 10
-    // ).length;
-    // const totalCoins = data.length;
-    // const highChangeRatio = highChangeCount / totalCoins;
-    // let domainMax;
-    // if (timeRange === "24h") domainMax = 10;
-    // else if (timeRange === "7d") domainMax = 30;
-    // else if (timeRange === "30d") domainMax = 50;
-    // if (highChangeRatio > 0.5) {
-    //   // Too many high changes, keep bubbles tighter
-    //   domainMax = 10;
-    // } else if (highChangeRatio > 0.2) {
-    //   domainMax = 20;
-    // } else {
-    //   // Only a few coins are spiking — we can show more range
-    //   // domainMax = d3.max(priceChanges);
-    //   domainMax = 30;
-    // }
-
-    // const radiusScale = d3
-    //   .scalePow()
-    //   .exponent(1.3)
-    //   .domain([0, domainMax])
-    //   .range([minRadius, maxRadius])
-    //   .clamp(true);
-
-    // 1. Set radius bounds based on screen size
-    let minRadius, maxRadius;
     if (window.innerWidth <= 600) {
-      minRadius = 15;
-      maxRadius = 50;
+      baseMinRadius = 15;
+      baseMaxRadius = 50;
     } else if (window.innerWidth <= 1024) {
-      minRadius = 20;
-      maxRadius = 70;
+      baseMinRadius = 20;
+      baseMaxRadius = 70;
     } else if (window.innerWidth <= 1536) {
-      minRadius = 25;
-      maxRadius = 100;
+      baseMinRadius = 25;
+      baseMaxRadius = 100;
     } else if (window.innerWidth <= 1920) {
-      minRadius = 28;
-      maxRadius = 110;
+      baseMinRadius = 28;
+      baseMaxRadius = 110;
     } else {
-      minRadius = 35;
-      maxRadius = 120;
+      baseMinRadius = 35;
+      baseMaxRadius = 120;
     }
 
-    // 2. Extract price changes from data
-    const priceChanges = data.map((d) =>
-      Math.abs(d.price_change_percentage_24h || 0)
-    );
+    // 2. Calculate price changes
+    const priceChanges = data.map((d) => Math.abs(d.price_change || 0));
 
-    // 3. Base domainMax on timeRange
-    let baseDomainMax;
-    if (timeRange === "24h") baseDomainMax = 10;
-    else if (timeRange === "7d") baseDomainMax = 50;
-    else if (timeRange === "30d") baseDomainMax = 40;
-    else if (timeRange === "1y") baseDomainMax = 150;
-
-    // 4. Adjust domainMax based on market-wide volatility
+    // 3. Count high price change entries
     const highChangeCount = priceChanges.filter(
       (change) => change >= 10
     ).length;
-    const totalCoins = data.length;
-    const highChangeRatio = highChangeCount / totalCoins;
+    const highChangeRatio = highChangeCount / data.length;
+    console.log("highChangeCount", highChangeCount);
+    console.log("highChangeRatio", highChangeRatio);
 
-    let domainMax;
-    if (highChangeRatio > 0.6) {
-      domainMax = baseDomainMax * 0.1; // super tight if most coins are pumping
-    } else if (highChangeRatio > 0.3) {
-      domainMax = baseDomainMax * 0.75;
+    // 4. Adjust radius scale based on market activity
+    let volatilityFactor;
+    if (highChangeRatio < 0.3) {
+      volatilityFactor = 1.3; // more volatility → bigger bubbles
+    } else if (highChangeRatio < 0.6) {
+      volatilityFactor = 1.0;
     } else {
-      domainMax = baseDomainMax;
+      volatilityFactor = 0.7; // less volatility → smaller bubbles
     }
+    console.log("volatilityFactor", volatilityFactor);
 
-    // Enforce minimum domainMax (avoid all small bubbles)
+    const minRadius = baseMinRadius * volatilityFactor;
+    const maxRadius = baseMaxRadius * volatilityFactor;
+
+    // 5. Set domain based only on fixed range or timeRange
+    let domainMax;
+    if (timeRange === "24h") domainMax = 10;
+    else if (timeRange === "7d") domainMax = 50;
+    else if (timeRange === "30d") domainMax = 40;
+    else if (timeRange === "1y") domainMax = 150;
+    else domainMax = 10; // fallback
+
+    // Enforce minimum domainMax
     domainMax = Math.max(domainMax, 5);
 
-    // 5. Build the radius scale
+    // 6. Create the scale
     const radiusScale = d3
       .scalePow()
       .exponent(1.3)

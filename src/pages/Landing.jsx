@@ -13,6 +13,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import LandingAnimation from "../assets/LandingAnimation.json";
 import { useInView } from "react-intersection-observer";
+import BitcoinAnimation from "../assets/BitcoinAnimation.json";
 
 const features = [
   {
@@ -277,7 +278,11 @@ function Landing() {
     event.preventDefault();
     handleRedirect(isLogin);
   };
-  const { ref, inView } = useInView({
+  const { ref: ref1, inView: inView1 } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+  const { ref: ref2, inView: inView2 } = useInView({
     triggerOnce: false, // play once
     threshold: 0.5, // 50% of element should be visible
   });
@@ -318,7 +323,7 @@ function Landing() {
 
       {/* Section 1 */}
       <section
-        ref={ref}
+        ref={ref1}
         className="relative min-h-screen bg-no-repeat bg-cover bg-center text-white flex flex-col md:flex-row items-center py-5 pt-15 sm:pt-0"
         style={{ backgroundImage: "url('/images/bg-landing1.png')" }}
       >
@@ -370,20 +375,26 @@ function Landing() {
 
         {/* Right-side Image Positioned Absolutely and Touching Right Edge */}
         <div className="h-full md:pt-0 pt-10 flex-1">
-          {inView && <Lottie animationData={LandingAnimation} loop={false} />}
+          {inView1 && <Lottie animationData={LandingAnimation} loop={false} />}
+          {!inView1 && <img src="/images/home-page.png" alt="home-page" />}
         </div>
       </section>
 
       {/* Section 2 */}
-      <section className=" bg-[#0A0F2C] text-white py-32 px-10">
+      <section ref={ref2} className=" bg-[#0A0F2C] text-white py-32 px-10">
         <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {/* Image Block */}
           <div className="sm:flex hidden justify-center items-center w-full h-[300px] md:h-[300px] lg:col-span-1 lg:row-span-2">
-            <img
-              src="./images/bitcoin.png" // Update this path to the correct location of your image
-              alt="Bitcoin"
-              className="w-full h-full object-contain rounded-xl img-4k"
-            />
+            {!inView2 && (
+              <img
+                src="./images/bitcoin.png" // Update this path to the correct location of your image
+                alt="Bitcoin"
+                className="w-full h-full object-contain rounded-xl img-4k"
+              />
+            )}
+            {inView2 && (
+              <Lottie animationData={BitcoinAnimation} loop={false} />
+            )}
           </div>
 
           {/* Text Content with Heading + Paragraph */}

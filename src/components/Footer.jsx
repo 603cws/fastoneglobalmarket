@@ -28,12 +28,12 @@ export const Footer = () => {
           </div>
         </div>
       </section> */}
-      <footer>
+      <footer className="bg-[#030B20]">
         <section>
-          <div className="container mx-auto">
-            <div className=" grid grid-cols-2  lg:flex  lg:justify-between [&_h2]:font-bold [&_h2]:text-2xl">
+          <div className="container mx-auto text-[#B2B2B2] [&_h2]:text-[#FFFFFF]">
+            <div className=" grid grid-cols-2  lg:flex  lg:justify-between [&_h2]:font-bold [&_h2]:text-2xl [&_li]:hover:bg-gradient-to-r [&_li]:hover:from-[#4575FF] [&_li]:hover:to-[#92AEFF] [&_li]:hover:text-transparent [&_li]:hover:bg-clip-text [&_li]:hover:scale-103 [&_li]:transition-all [&_li]:duration-500 [&_li]:ease-in-out [&_ul]:space-y-1.5">
               <div className="">
-                <div className="">
+                <div className="footer-menu-title">
                   <h2>Compare</h2>
                   <p>Trade with FastOne</p>
                 </div>
@@ -217,11 +217,19 @@ export const Footer = () => {
               </div>
             </div>
 
-            <div className="footer-comapny-select">
-              <Link to="/faqs">FAQs</Link>
-              <Link to="/legal">Legal</Link>
-              <Link to="/data-protection">Data Protection</Link>
-              <Link to="/complaints">Complaints</Link>
+            <div className="footer-comapny-select [&_span]:text-white">
+              <Link to="/faqs">
+                <span>FAQs</span>
+              </Link>
+              <Link to="/legal">
+                <span>Legal</span>
+              </Link>
+              <Link to="/data-protection">
+                <span>Data Protection</span>
+              </Link>
+              <Link to="/complaints">
+                <span>Complaints</span>
+              </Link>
             </div>
             <div className="footer-bottom row">
               <div className="col-md-4">

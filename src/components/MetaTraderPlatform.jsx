@@ -1,8 +1,22 @@
-function MetaTraderPlatform({ imagepath, title, description, button }) {
+import Lottie from "lottie-react";
+import { useInView } from "react-intersection-observer";
+
+function MetaTraderPlatform({
+  imagepath,
+  title,
+  description,
+  button,
+  animation,
+}) {
   console.log(button);
 
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   return (
-    <div className="bg-[#030B20]">
+    <div ref={ref} className="bg-[#030B20]">
       <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-0  mb-10 lg:justify-center lg:items-center">
           <div className="flex-1 space-y-6">
@@ -78,7 +92,27 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
               //   </div>
             )}
           </div>
-          {imagepath && (
+          {/* {!inView && imagepath && (
+            <div className="flex-1 flex justify-center ">
+              <div className="relative">
+                <img src={imagepath} alt="dummy image" />
+              </div>
+            </div>
+          )}
+          {inView && animation && (
+            <div className="flex-1 flex justify-center ">
+              <div className="relative ">
+                <Lottie animationData={animation} />
+              </div>
+            </div>
+          )} */}
+          {inView && animation ? (
+            <div className="flex-1 flex justify-center ">
+              <div className="relative ">
+                <Lottie animationData={animation} />
+              </div>
+            </div>
+          ) : (
             <div className="flex-1 flex justify-center ">
               <div className="relative">
                 <img src={imagepath} alt="dummy image" />
