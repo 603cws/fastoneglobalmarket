@@ -21,12 +21,21 @@ function MarketHeaderSection({
                 {title}
               </h2>
             </div>
-            {inView && animation && (
+            {/* {inView && animation && (
               <div className="flex-1 flex justify-center items-center  lg:max-w-lg">
                 <Lottie animationData={animation} loop={false} />
               </div>
             )}{" "}
             {!inView && imagepath && (
+              <div className="flex-1 flex justify-center items-center  lg:max-w-lg">
+                <img src={imagepath} alt={alt} />
+              </div>
+            )} */}
+            {inView && animation ? (
+              <div className="flex-1 flex justify-center items-center  lg:max-w-lg">
+                <Lottie animationData={animation} loop={false} />
+              </div>
+            ) : (
               <div className="flex-1 flex justify-center items-center  lg:max-w-lg">
                 <img src={imagepath} alt={alt} />
               </div>

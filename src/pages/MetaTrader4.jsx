@@ -4,7 +4,9 @@ import InstantAccount from "../components/InstantAccount";
 import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import MetaTraderPlatform from "../components/MetaTraderPlatform";
-
+import Meta4HeroAnimation from "../assets/Meta4HeroAnimation.json";
+import Lottie from "lottie-react";
+import { useInView } from "react-intersection-observer";
 function MetaTrader4() {
   const imagepath = "/images/newmetatrader4.png";
   const handleLinkClick = (event, isLogin) => {
@@ -38,6 +40,11 @@ function MetaTrader4() {
     },
   ];
 
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   function TradingGrid({ imagepath, title, description }) {
     return (
       <div className="flex flex-col justify-start items-center text-white text-center w-full h-full">
@@ -62,7 +69,10 @@ function MetaTrader4() {
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto lg:pt-10  md:pb-5 relative">
             <div className="mt-18 lg:mt-20">
-              <div className="flex flex-col lg:flex-row justify-center ">
+              <div
+                ref={ref}
+                className="flex flex-col lg:flex-row justify-center "
+              >
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
                   <h2 className="font-bold text-5xl pb-2 lg:pb-4 lg:text-left  lg:-mb-1">
                     MetaTrader 4
@@ -97,7 +107,23 @@ function MetaTrader4() {
                   </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center ">
-                  <img src={imagepath} alt="metatrader 4 " />
+                  {/* <img src={imagepath} alt="metatrader 4 " /> */}
+                  <div className="relative w-full h-[350px] sm:h-[450px]">
+                    {inView ? (
+                      <div className="absolute inset-0">
+                        <Lottie
+                          animationData={Meta4HeroAnimation}
+                          loop={false}
+                        />
+                      </div>
+                    ) : (
+                      <img
+                        src={imagepath}
+                        alt="metatrader 4"
+                        className="absolute inset-0"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -163,7 +189,7 @@ function MetaTrader4() {
           ]}
         />
 
-        <div className="relative">
+        <div className="relative overflow-x-hidden">
           <img
             src="/images/bg-shadow-circle.png"
             alt=""

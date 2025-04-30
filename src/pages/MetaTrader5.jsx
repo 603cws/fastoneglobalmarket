@@ -6,6 +6,9 @@ import { handleRedirect } from "../lib/redirectLocationHandler";
 import MetaTraderPlatform from "../components/MetaTraderPlatform";
 import Meta5MobileAnimation from "../assets/Meta5MobileAnimation.json";
 import Meta5WebAnimation from "../assets/Meta5WebAnimation.json";
+import Meta5HeroAnimation from "../assets/Meta5HeroAnimation.json";
+import { useInView } from "react-intersection-observer";
+import Lottie from "lottie-react";
 
 function MetaTrader5() {
   const imagepath = "/images/meta5.png";
@@ -41,6 +44,11 @@ function MetaTrader5() {
     },
   ];
 
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   function TradingGrid({ imagepath, title, description }) {
     return (
       <div className="flex flex-col justify-start items-center text-white text-center h-full">
@@ -65,7 +73,10 @@ function MetaTrader5() {
         <div className="bg-[#030B20] pt-16">
           <div className="container mx-auto  lg:pt-10  md:pb-5 relative">
             <div className="mt-18 lg:mt-20">
-              <div className="flex flex-col lg:flex-row justify-center ">
+              <div
+                ref={ref}
+                className="flex flex-col lg:flex-row justify-center "
+              >
                 <div className="flex-1 flex flex-col py-6  pb-4 mb:pb-0 lg:py-10 text-white space-y-4">
                   <h2 className="font-bold text-5xl pb-2 lg:pb-4 lg:text-left  lg:-mb-1">
                     MetaTrader 5
@@ -103,8 +114,24 @@ function MetaTrader5() {
                     </button>
                   </div>
                 </div>
-                <div className="flex-1 flex justify-center items-center ">
-                  <img src={imagepath} alt="meta trader 5 " />
+                <div className="flex-1 flex justify-center items-center">
+                  {/* <img src={imagepath} alt="meta trader 5 " /> */}
+                  <div className="relative w-full h-[350px] sm:h-[450px]">
+                    {inView ? (
+                      <div className="absolute inset-0">
+                        <Lottie
+                          animationData={Meta5HeroAnimation}
+                          loop={false}
+                        />
+                      </div>
+                    ) : (
+                      <img
+                        src={imagepath}
+                        alt="metatrader 4 "
+                        className="absolute inset-0"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 

@@ -106,19 +106,31 @@ function MetaTraderPlatform({
               </div>
             </div>
           )} */}
-          {inView && animation ? (
-            <div className="flex-1 flex justify-center ">
-              <div className="relative ">
-                <Lottie animationData={animation} />
-              </div>
+          <div className="flex-1 flex justify-center">
+            <div className="relative w-full h-[350px] sm:h-[450px]">
+              {" "}
+              {/* Same size for both */}
+              {inView && animation ? (
+                <Lottie
+                  animationData={animation}
+                  loop={false}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                  }}
+                />
+              ) : (
+                <img
+                  src={imagepath}
+                  alt="dummy image"
+                  className="absolute top-0 left-0 w-full h-full object-contain"
+                />
+              )}
             </div>
-          ) : (
-            <div className="flex-1 flex justify-center ">
-              <div className="relative">
-                <img src={imagepath} alt="dummy image" />
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
