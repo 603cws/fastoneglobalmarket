@@ -144,11 +144,14 @@ function IntroducingBroker() {
                 <div className="w-full md:w-1/2 flex items-center gap-4">
                   {/* Vertical Line */}
                   <div
-                    className="w-0.5 h-[120px]"
+                    className="w-full sm:w-0.5 sm:h-auto h-0.5 sm:self-stretch bg-gradient-to-r sm:bg-gradient-to-b hidden sm:block"
                     style={{
                       backgroundImage: `linear-gradient(to bottom, #000 0%, #92aeff 24%, #4575ff 77%, #000 98%)`,
                     }}
                   />
+
+                  {/* Vertical line for mobile only */}
+                  <div className="w-0.5 h-25 bg-gradient-to-b from-black/20 via-[#92aeff] to-[#4575ff] block sm:hidden" />
 
                   {/* Paragraph */}
                   <div className="flex-1">
@@ -177,7 +180,7 @@ function IntroducingBroker() {
               </div>
 
               {/* CTA Button */}
-              <div className="inf-cta-btn mt-4 text-left !text-[#1368A6]">
+              <div className="inf-cta-btn text-left !text-[#1368A6]">
                 <Link
                   to="#"
                   onClick={(e) => handleLinkClick(e, false)}
@@ -222,7 +225,7 @@ function IntroducingBroker() {
               <h2 className="text-3xl font-semibold mb-8 text-left md:text-center">
                 Why Choose Fastone Markets?
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 3xl:mx-10">
                 {[
                   {
                     title: "High Payouts",
@@ -313,7 +316,7 @@ function IntroducingBroker() {
               </div>
 
               {/* Grid Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 3xl:mx-10">
                 {partnerFeatures.map((item, idx) => (
                   <div
                     key={idx}

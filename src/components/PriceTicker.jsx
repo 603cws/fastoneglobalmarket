@@ -47,16 +47,18 @@ const PriceTicker = () => {
   }, []);
 
   return (
-    <div className="tradingview-widget-container">
-      <div className="tradingview-widget-container__widget"></div>
-      <div className="tradingview-widget-copyright">
-        <a
-          href="https://in.tradingview.com/"
-          rel="noopener nofollow"
-          target="_blank"
-        >
-          {/* <span className="blue-text">Track all markets on TradingView</span> */}
-        </a>
+    <div className="relative sm:h-[45px] overflow-hidden">
+      <div className="tradingview-widget-container h-full">
+        <div className="tradingview-widget-container__widget h-full"></div>
+        <div className="tradingview-widget-copyright hidden">
+          <a
+            href="https://in.tradingview.com/"
+            rel="noopener nofollow"
+            target="_blank"
+          >
+            {/* <span className="blue-text">Track all markets on TradingView</span> */}
+          </a>
+        </div>
       </div>
     </div>
   );

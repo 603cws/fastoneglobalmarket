@@ -11,7 +11,7 @@ const Faq = ({ questions }) => {
   return (
     <div className="grid grid-cols-1">
       {questions.map((item, index) => (
-        <div key={index} className="mb-4 text-[#B2B2B2]">
+        <div key={index} className="mb-4 text-[#D1D1D1]">
           <div
             className={`text-sm lg:text-base flex justify-between items-center p-3 border cursor-pointer font-bold transition-colors duration-300 border-[#4575FF] ${
               activeIndex === index ? "bg-[#000]/30" : "bg-[#000]/30"

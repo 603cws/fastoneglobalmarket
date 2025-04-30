@@ -33,7 +33,7 @@ function Legal() {
       <section className="mt-5">
         <div className="container relative">
           <div className="row lg:pb-32">
-            <div className="col-12 space-y-1.5 about-text [&_h4]:capitalize [&_h4]:font-bold [&_h4]:bg-gradient-to-r [&_h4]:from-[#4575FF] [&_h4]:to-[#92AEFF] [&_h4]:text-transparent [&_h4]:bg-clip-text [&_p]:text-[#B2B2B2] [&_h2]:text-[#FFFFFF] [&_h2]:font-bold [&_h2]:text-4xl [&_h3]:text-[#FFFFFF] [&_h3]:text-[28px] [&_h3]:font-bold">
+            <div className="col-12 space-y-1.5 about-text [&_h4]:capitalize [&_h4]:font-bold [&_h4]:bg-gradient-to-r [&_h4]:from-[#4575FF] [&_h4]:to-[#92AEFF] [&_h4]:text-transparent [&_h4]:bg-clip-text [&_p]:text-[#D1D1D1] [&_h2]:text-[#FFFFFF] [&_h2]:font-bold [&_h2]:text-4xl [&_h3]:text-[#FFFFFF] [&_h3]:text-[28px] [&_h3]:font-bold">
               <a href="/legal/risk-warning">
                 <h4 className="">Risk Warning</h4>
               </a>

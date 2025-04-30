@@ -41,12 +41,12 @@ function MetaTrader5() {
 
   function TradingGrid({ imagepath, title, description }) {
     return (
-      <div className="flex flex-col justify-center items-center text-white">
+      <div className="flex flex-col justify-start items-center text-white text-center h-full">
         <div className="mb-3">
-          <img src={imagepath} alt="metatrading 4" />
+          <img src={imagepath} alt="metatrading 5" />
         </div>
-        <h3 className="mb-2">{title}</h3>
-        <p className="text-center text-white/20 text-sm"> {description} </p>
+        <h3 className="mb-2 min-h-[2.5rem] text-base font-medium">{title}</h3>
+        <p className="text-[#D1D1D1] text-sm">{description}</p>
       </div>
     );
   }
@@ -72,7 +72,7 @@ function MetaTrader5() {
                     Choose MT5 - one of the best and most advanced terminals on
                     the market
                   </p>
-                  <p className="text-sm lg:text-base leading-[18px] font-light text-white/60">
+                  <p className="text-sm lg:text-base leading-[18px] font-light text-[#D1D1D1]">
                     MetaTrader 5 (MT5) trading terminal combines advanced
                     technologies of order execution and distributed computations
                     for implementing the most ambitious trading ideas.
@@ -83,7 +83,7 @@ function MetaTrader5() {
                     technologies, then MetaTrader 5 platform is the best choice
                     for you.
                   </p>
-                  <div className="text-sm  lg:text-base font-light py-6  text-white/60">
+                  <div className="text-sm  lg:text-base font-light py-6 text-[#D1D1D1]">
                     <ul className="list-disc pl-5 lg:pl-0 lg:list-inside space-y-2 leading-[18px]">
                       <li>4 types of order execution</li>
                       <li>Multi-currency tester</li>
@@ -93,7 +93,7 @@ function MetaTrader5() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium">
+                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-sm">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt5/fastoneglobal5setup.exe">
                         download meta trader 5 for pc
@@ -108,7 +108,7 @@ function MetaTrader5() {
 
               {/* trading grid  */}
               <div className="my-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between lg:items-center gap-10 my-6 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-6">
                   {tradingGridData.map((data) => (
                     <div className="flex-1" key={data.title}>
                       <TradingGrid
@@ -122,14 +122,14 @@ function MetaTrader5() {
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
                   <button
                     onClick={(e) => handleLinkClick(e, false)}
-                    className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium"
+                    className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
                   >
                     {" "}
                     <a href="#">open trading account </a>
                   </button>
                   <button
                     onClick={(e) => handleLinkClick(e, false)}
-                    className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium"
+                    className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
                   >
                     {" "}
                     <a href="#">open demo account </a>

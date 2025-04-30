@@ -24,7 +24,7 @@ function ContactUs() {
     {
       title: "Mail and Phone Number",
       description:
-        "Email: support@fastoneglobalmarkets.com Phone: +230 698 3426",
+        "Email: support@fastoneglobalmarkets.com\nPhone: +230 698 3426",
       imagepath: "/images/contactus/contact-mail.png.png",
       social: false,
     },
@@ -54,7 +54,7 @@ function ContactUs() {
           </h3>
         )}
         {description && (
-          <p className="text-center text-[#fff] text-xs lg:text-sm">
+          <p className="text-center text-[#fff] text-xs lg:text-sm whitespace-pre-line">
             {description}
           </p>
         )}

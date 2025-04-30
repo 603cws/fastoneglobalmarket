@@ -23,7 +23,7 @@ function Complaints() {
     {
       title: "Mail and Phone Number",
       description:
-        "Email: support@fastoneglobalmarkets.com Phone: +230 698 3426",
+        "Email: support@fastoneglobalmarkets.com\nPhone: +230 698 3426",
       imagepath: "/images/contactus/contact-mail.png.png",
       social: false,
     },
@@ -53,22 +53,22 @@ function Complaints() {
           </h3>
         )}
         {description && (
-          <p className="text-center text-[#fff] text-xs lg:text-sm">
+          <p className="text-center text-[#fff] text-xs lg:text-sm whitespace-pre-line">
             {description}
           </p>
         )}
 
         {social && (
-          <div className="flex justify-center gap-2 md:gap-4 text-white text-lg">
+          <div className="flex justify-center items-center gap-2 md:gap-4 text-white text-lg">
             <a
               href="https://www.instagram.com/fastone_global/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/instagram.png"
+                src="./images/contactus/instagram.png"
                 alt="Instagram"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-10  transition"
               />
             </a>
             <a
@@ -77,43 +77,32 @@ function Complaints() {
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/facebook.png"
+                src="./images/contactus/f1fb3.png"
                 alt="Facebook"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-10  transition"
               />
             </a>
-
             <a
               href="https://x.com/Fastone_Markets"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/twitter.png"
+                src="./images/contactus/X.png"
                 alt="Twitter"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-8  transition"
               />
             </a>
-            <a
-              href="https://www.youtube.com/@f1globexmedia744"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="./icons/youtube.png"
-                alt="Youtube"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
-              />
-            </a>
+            s
             <a
               href="https://www.linkedin.com/company/vibhs-financials-ltd-mauritius"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="./icons/linkedin.png"
+                src="./images/contactus/linkedin.png"
                 alt="LinkedIn"
-                className="hover:brightness-125 h-8 lg:h-12 transition"
+                className="hover:brightness-125 h-8  transition"
               />
             </a>
           </div>

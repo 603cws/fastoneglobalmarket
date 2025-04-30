@@ -4,8 +4,16 @@ import Header from "../components/Header";
 import InstantAccount from "../components/InstantAccount";
 import TitleAreaCenter from "../components/TitleAreaCenter";
 import WhyTrade from "../components/WhyTrade";
+import StratergyAnimation from "../assets/StratergyAnimation.json";
+import { useInView } from "react-intersection-observer";
+import Lottie from "lottie-react";
 
 function AboutFastone() {
+  const { ref, inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   const breadcrumbPaths = [
     { name: "Home", href: "/" },
     { name: "Company", href: "" },
@@ -20,32 +28,32 @@ function AboutFastone() {
           description="FastOne Global Financial Markets Limited (FastOne), Incorporated in 2013, is a Mauritius based broker authorised and regulated by the Financial Services Commission (the “FSC”). FastOne Offer retail and professional customers around the globe with CFD Trading and related services. We are indeed able to provide Equity and algorithmic trade through partnerships."
           breadcrumbPaths={breadcrumbPaths}
         />
-        <section className="about-intro ">
+        <section className="about-intro " ref={ref}>
           <div className="container mx-auto">
             <div className="lg:flex flex-row-reverse justify-center items-center">
               <div className="flex-1 about-text text-sm lg:px-30">
                 <h3 className=" text-2xl capitalize font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text my-5">
                   FastOne Global Financial Markets Limited
                 </h3>
-                <p className="text-wrap text-[#B2B2B2] leading-6">
+                <p className="text-wrap text-[#D1D1D1] leading-6">
                   We are a leading financial intermediary with a significant
                   presence in Europe, MENA and South East Asia regions offering
                   online trading solutions. Our company is based on the central
                   concept of long-term relationship building.
                 </p>
-                <p className="text-wrap text-[#B2B2B2] leading-6">
+                <p className="text-wrap text-[#D1D1D1] leading-6">
                   We offer a growing range of services with a range of
                   user-friendly platforms which are available in many languages
                   and are extremely user-friendly to our clients. Customers are
                   given access to a variety of global markets through these
                   platforms.
                 </p>
-                <p className="text-wrap text-[#B2B2B2] leading-6">
+                <p className="text-wrap text-[#D1D1D1] leading-6">
                   We have IB Partnerships all over the globe and we work closely
                   with them to understand their specific commercial needs. We
                   are proud of our customer service.
                 </p>
-                <p className="text-wrap text-[#B2B2B2] leading-6">
+                <p className="text-wrap text-[#D1D1D1] leading-6">
                   FastOne started out in Dubai Gold Exchange as the 1st
                   recognised gold market maker over 20 years ago. In 2013,
                   FastOne moved into CFDs hence opening a Mauritian Office which
@@ -53,7 +61,7 @@ function AboutFastone() {
                   Traders are able to benefit from higher leverage without the
                   ESMA limitations.
                 </p>
-                <p className="text-wrap text-[#B2B2B2] leading-6">
+                <p className="text-wrap text-[#D1D1D1] leading-6">
                   Our senior management has extensive cfd industry experience
                   spanning over 25 years on aggregate, and this translates into
                   our transparent, reliable, and reputable service.
@@ -62,7 +70,12 @@ function AboutFastone() {
               <div className="flex-1 flex justify-center items-center">
                 <div className="">
                   {/* <AboutAnimation /> */}
-                  <img src="/images/Stratergy.png" alt="stratergy" />
+                  {!inView && (
+                    <img src="/images/Stratergy.png" alt="stratergy" />
+                  )}
+                  {inView && (
+                    <Lottie animationData={StratergyAnimation} loop={false} />
+                  )}
                 </div>
               </div>
             </div>
@@ -86,7 +99,7 @@ function AboutFastone() {
                   <h4 className="capitalize text-2xl font-bold text-white my-5">
                     Our Strategy
                   </h4>
-                  <p className="text-[#B2B2B2] text-sm text-wrap">
+                  <p className="text-[#D1D1D1] text-sm text-wrap">
                     FastOne aims growth by provision of highest possible level
                     of Customer Service to Clientele by focusing resources on
                     Customer Satisfaction, building collaborative relationship
@@ -148,7 +161,7 @@ function AboutFastone() {
                   <h4 className="capitalize text-2xl font-bold text-white my-5">
                     Our vision
                   </h4>
-                  <p className="text-[#B2B2B2] text-sm text-wrap">
+                  <p className="text-[#D1D1D1] text-sm text-wrap">
                     To be Financial Service Provider of choice. Our Vision is to
                     maintain our status as a Market Leader reknown for
                     exceptional Customer Centric Ideology by providing
@@ -199,7 +212,7 @@ function AboutFastone() {
                   <h4 className="capitalize text-2xl font-bold text-white my-5">
                     Our values
                   </h4>
-                  <p className="text-[#B2B2B2] text-sm text-wrap">
+                  <p className="text-[#D1D1D1] text-sm text-wrap">
                     We are passionate and determined in delivering a transparent
                     and authentic trading experience to our Clients as we
                     continue to drive and embrace change in a dynamic

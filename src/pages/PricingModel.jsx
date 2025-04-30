@@ -70,7 +70,7 @@ const PricingModel = () => {
           <Header />
           <TitleArea
             title="NDD EXECUTION"
-            description="Deep liquidity, the best possible prices, and ultra fast precise execution at the best prices possible. Doesn't get FASTer than this."
+            description="Deep liquidity, the best possible prices, and ultra fast precise execution at the best prices possible. Doesn't get Faster than this."
             breadcrumbPaths={breadcrumbPaths}
           />
 

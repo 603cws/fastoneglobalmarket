@@ -40,12 +40,12 @@ function MetaTrader4() {
 
   function TradingGrid({ imagepath, title, description }) {
     return (
-      <div className="flex flex-col justify-center px-5 md:px-0 items-center text-white">
+      <div className="flex flex-col justify-start items-center text-white text-center w-full h-full">
         <div className="mb-3">
           <img src={imagepath} alt="metatrading 4" />
         </div>
-        <h3 className="mb-2 text-base capitalize">{title}</h3>
-        <p className="text-center text-white/80 text-sm"> {description} </p>
+        <h3 className="mb-2 text-base capitalize min-h-[2.5rem]">{title}</h3>
+        <p className="text-white/80 text-sm">{description}</p>
       </div>
     );
   }
@@ -70,7 +70,7 @@ function MetaTrader4() {
                   <p className="text-lg font-light  md:text-3xl leading-[30px]">
                     One of the most popular platforms on the currency market
                   </p>
-                  <p className="text-sm lg:text-base leading-[18px] font-light text-white/60">
+                  <p className="text-sm lg:text-base leading-[18px] font-light text-[#D1D1D1]">
                     The classic MetaTrader 4 terminal offered by RoboForex is
                     the top choice for trading among its clients. It is widely
                     popular among both beginner and experienced traders,
@@ -78,7 +78,7 @@ function MetaTrader4() {
                     market. Additionally, it offers unique functionality and
                     opportunities specific to MQL platforms.
                   </p>
-                  <div className="text-sm  lg:text-base font-light py-6  text-white/60">
+                  <div className="text-sm  lg:text-base font-light py-6 text-[#D1D1D1]">
                     <ul className="list-disc pl-5 lg:pl-0 lg:list-inside space-y-2 leading-[18px]">
                       <li>3 types of order execution</li>
                       <li>50 ready-to-use indicators for technical analysis</li>
@@ -88,7 +88,7 @@ function MetaTrader4() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-sm lg:text-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-lg">
+                    <button className="text-[#112556] text-sm lg:text-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-sm">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt4/fastoneglobal4setup.exe">
                         download meta trader 4 for pc
@@ -103,9 +103,9 @@ function MetaTrader4() {
 
               {/* trading grid  */}
               <div className="my-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between lg:items-center gap-10 my-6 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-6">
                   {tradingGridData.map((data) => (
-                    <div className="flex-1" key={data.title}>
+                    <div className="flex" key={data.title}>
                       <TradingGrid
                         title={data.title}
                         description={data.description}
@@ -114,14 +114,15 @@ function MetaTrader4() {
                     </div>
                   ))}
                 </div>
+
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
-                  <button className="text-[#112556] rounded-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF]  px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-[#112556] rounded-sm bg-gradient-to-r from-[#4575FF] to-[#92AEFF]  px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open trading account{" "}
                     </a>
                   </button>
-                  <button className="text-white rounded-lg bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-white rounded-sm bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open demo account{" "}

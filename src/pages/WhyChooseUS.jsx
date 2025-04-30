@@ -54,7 +54,7 @@ function WhyChooseUS() {
     { name: "Why Choose Us?" },
   ];
   return (
-    <div className="bg-[#030B20]">
+    <div className="bg-[#030B20] relative">
       <img
         src="/images/bg-shadow.png"
         alt=""
@@ -90,13 +90,13 @@ function WhyChooseUS() {
         </div>
       </div>
 
-      <section className="mt-5 relative">
+      <section className="mt-5 relative py-10">
         <div className="container mx-auto">
           <div className=" space-y-4">
-            <h1 className="text-white text-center pt-8">
+            <h1 className="text-white text-center pt-8 font-bold text-4xl">
               The Advantages of Trading With FastOne
             </h1>
-            <p className="text-center text-[#B2B2B2] ">
+            <p className="text-center text-[#D1D1D1] ">
               Once you start trading with us, you will be addicted to be with us
               and here are the reasons.
             </p>

@@ -30,7 +30,7 @@ const PricingCard = ({
               className="h-0.5 w-full my-10"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
+                  "linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, #92AEFF 24%, #4575FF 77%, rgba(0, 0, 0, 0.2) 98%)",
               }}
             ></div>
             <div className="space-y-6  text-sm">
@@ -101,10 +101,10 @@ const PricingCard = ({
             className="h-0.5 w-full mt-5"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #000000 0%, #92AEFF 24%, #4575FF 77%, #000000 98%)",
+                "linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, #92AEFF 24%, #4575FF 77%, rgba(0, 0, 0, 0.2) 98%)",
             }}
           ></div>
-          <button className="mt-3 w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-[#112556] py-2 rounded-lg transition cursor-pointer">
+          <button className="mt-5 my-5 w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-[#112556] py-3 rounded-lg transition cursor-pointer">
             <a href="#" onClick={(e) => handleLinkClick(e, false)}>
               Open {title} Account
             </a>

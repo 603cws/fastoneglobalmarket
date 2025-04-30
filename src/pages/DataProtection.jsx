@@ -33,7 +33,7 @@ function DataProtection() {
       <section className="mt-5 pb-8 lg:pb-10">
         <div className="container mx-auto relative">
           <div className="row lg:pb-20">
-            <div className="col-12 about-text text-[#B2B2B2] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
+            <div className="col-12 about-text text-[#D1D1D1] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
               <p>
                 The Firm is committed to protecting and respecting your privacy.
                 This policy sets out the basis on which any personal data we

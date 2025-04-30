@@ -22,7 +22,7 @@ const FeaturesGrid = ({ advantages }) => {
                   {adv.title}
                 </h3>
               )}
-              <p className="text-[#B2B2B2] text-xs lg:text-sm ">
+              <p className="text-[#D1D1D1] text-xs lg:text-sm ">
                 {/* <p className="text-[#B2B2B2] text-xs lg:text-sm line-clamp-4"> */}
                 {adv.description}
               </p>

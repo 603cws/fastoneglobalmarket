@@ -14,13 +14,13 @@ function MetaTraderPlatform({ imagepath, title, description, button }) {
               <div className="flex flex-col items-start md:flex-row relative md:justify-start md:items-center gap-4">
                 {button.map((buttonitem, index) => (
                   <button
-                    className="text-white border border-[#4575FF] capitalize font-medium cursor-pointer"
+                    className="text-white border border-[#4575FF] capitalize font-medium cursor-pointer rounded-sm"
                     key={index}
                   >
                     {" "}
                     <a href={buttonitem.href}>
                       <div
-                        className={`flex items-center bg-[#000A73]/50 ${
+                        className={`flex items-center bg-[#000A73]/50 rounded-sm ${
                           index === 1 ? "px-12" : "px-10"
                         }   py-1 gap-3`}
                       >

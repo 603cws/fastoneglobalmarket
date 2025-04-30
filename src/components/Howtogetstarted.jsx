@@ -14,7 +14,7 @@ function Howtogetstarted() {
         <h2 className="text-2xl xl:text-3xl text-[#1368A6] font-semibold">
           How to get Started
         </h2>
-        <p className=" 2xl:text-lg text-[#B2B2B2]">
+        <p className=" 2xl:text-lg text-[#D1D1D1]">
           Getting Started is as simple as 1 2 3! And the onboarding process is
           so smooth you won’t have to worry about a thing.
         </p>

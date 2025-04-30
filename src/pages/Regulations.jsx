@@ -30,7 +30,7 @@ function Regulations() {
       <section className="container mx-auto">
         <div className="flex justify-center items-center py-10 lg:py-0 lg:pt-10 lg:pb-32">
           <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl">
-            <div className="text-[#B2B2B2] bg-[#030B20] px-6 py-10  rounded-xl">
+            <div className="text-[#D1D1D1] bg-[#030B20] px-6 py-10  rounded-xl">
               <p className="mb-4">
                 <strong>
                   FastOne Global Financial Markets Limited is authorised and
