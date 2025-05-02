@@ -10,11 +10,11 @@ const WhyTrade = ({ title, benefits }) => {
         </h2>
         <ul className="flex flex-col py-12 md:py-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:grid-rows-2 gap-8 p-0 m-0">
           {benefits.map((benefit, index) => (
-            <div className="border border-[#92AEFF] p-2 rounded-xl flex  items-center ">
-              <li
-                key={index}
-                className="text-left border-l-2 border-[#4575FF] px-4 py-4 flex  text-[#B2B2B2]"
-              >
+            <div
+              className="border border-[#92AEFF] p-2 rounded-xl flex  items-center "
+              key={index}
+            >
+              <li className="text-left border-l-2 border-[#4575FF] px-4 py-4 flex  text-[#B2B2B2]">
                 <p>{benefit}</p>
               </li>
             </div>

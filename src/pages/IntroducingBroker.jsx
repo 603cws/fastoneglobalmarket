@@ -4,6 +4,7 @@ import TitleAreaCenter from "../components/TitleAreaCenter";
 import IbAnimation from "../components/animations/IbAnimation";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";
+import InstantAccount from "../components/InstantAccount";
 
 const stepsData = [
   {
@@ -96,7 +97,7 @@ function IntroducingBroker() {
             {/* <IbAnimation /> */}
             <div className=" lg:max-w-4xl">
               {" "}
-              <img src="/images/BROKER.png" alt="" />
+              <img src="/images/BROKER.png" alt="introducing broker" />
             </div>
           </div>
           {/* <div className="row partner-img-1">
@@ -154,8 +155,8 @@ function IntroducingBroker() {
                   <div className="w-0.5 h-25 bg-gradient-to-b from-black/20 via-[#92aeff] to-[#4575ff] block sm:hidden" />
 
                   {/* Paragraph */}
-                  <div className="flex-1">
-                    <p>
+                  <div className="flex-1 ">
+                    <p className="lg:leading-[28px]">
                       Join our IB Program today and elevate your business with
                       our unparalleled support and resources. Experience the
                       benefits of partnering with a leading CFD provider and
@@ -180,7 +181,7 @@ function IntroducingBroker() {
               </div>
 
               {/* CTA Button */}
-              <div className="inf-cta-btn text-left !text-[#1368A6]">
+              <div className="inf-cta-btn mt-4 text-left !text-[#1368A6]">
                 <Link
                   to="#"
                   onClick={(e) => handleLinkClick(e, false)}
@@ -359,6 +360,7 @@ function IntroducingBroker() {
           </div>
         </div>
       </section>
+      <InstantAccount />
     </div>
   );
 }

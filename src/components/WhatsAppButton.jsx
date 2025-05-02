@@ -1,13 +1,16 @@
-import React from 'react';
-import './WhatsAppButton.css'; 
+import React from "react";
+import "./WhatsAppButton.css";
 
 const WhatsAppButton = () => {
-  const whatsappNumber = '+971521651531';
-  const message = 'Hello, I would like to chat with you!';
+  const whatsappNumber = "+971521651531";
+  const message = "Hello, I would like to chat with you!";
 
   const handleWhatsAppClick = () => {
-    const url = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+    const url = `https://wa.me/${whatsappNumber.replace(
+      /\D/g,
+      ""
+    )}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
   };
 
   return (

@@ -18,7 +18,9 @@ const TitleAreaCenter = ({ title, description, breadcrumbPaths }) => {
               </h1>
             )}
             {description && (
-              <p className=" lg:text-base text-white">{description}</p>
+              <p className=" text-base lg:leading-[24px] text-white">
+                {description}
+              </p>
             )}
           </div>
         </div>

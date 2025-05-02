@@ -7,7 +7,7 @@ const ScrollToTop = () => {
   useEffect(() => {
     // Use window.scrollTo to scroll to the top of the page on route change
     window.scrollTo(0, 0);
-    console.log("worked")
+    // console.log("worked")
   }, [location.pathname]); // Only depend on pathname
 
   return null; // No UI rendered

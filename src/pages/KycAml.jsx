@@ -26,8 +26,8 @@ function KycAml() {
       </div>
       <section className="mt-5 pb-8 lg:!pb-20">
         <div className="container relative">
-          <div className="row [&_p]:text-sm [&_h4]:capitalize [&_h4]:pb-2">
-            <div className="col-12 about-text text-[#D1D1D1] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
+          <div className="row [&_p]:text-sm [&_h4]:capitalize [&_h4]:pb-2 [&_h4]:font-medium [&_h4]:leading-[28px]">
+            <div className="col-12 about-text text-[#D1D1D1] [&_p]:leading-[24px] [&_li]:leading-[24px] [&_ul]:list-disc [&_ul]:px-8 [&_ul]:list-outsides [&_ul]:space-y-1.5 space-y-2">
               <p>
                 FastOne Global Financial Markets Limited is committed to the
                 highest standards of compliance against money laundering (AML)
