@@ -512,7 +512,7 @@ section p {
 }
 
 footer {
-  box-shadow: 0 1px 10px 1px rgba(161, 161, 161, 0.7);
+  /* box-shadow: 0 1px 10px 1px rgba(161, 161, 161, 0.7); */
   /* padding: 5rem 0 0; */
   padding: 3rem 0 0;
   margin: 0;
@@ -520,8 +520,8 @@ footer {
 
 .footer-menu-title {
   border-bottom: 1px dashed #adadad;
-
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 .footer-menu-title h2 {
   font-size: 1.25rem;
@@ -1371,4 +1371,7 @@ footer {
   background: linear-gradient(to right, #4575ff, #92aeff);
   -webkit-background-clip: text;
   background-clip: text;
+}
+.social-icon:hover path {
+  fill: url(#socialGradient);
 }

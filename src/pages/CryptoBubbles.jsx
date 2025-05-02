@@ -210,8 +210,8 @@ const CryptoBubbles = ({
     let domainMax;
     if (timeRange === "24h") domainMax = 10;
     else if (timeRange === "7d") domainMax = 50;
-    else if (timeRange === "30d") domainMax = 40;
-    else if (timeRange === "1y") domainMax = 150;
+    else if (timeRange === "30d") domainMax = 70;
+    else if (timeRange === "1y") domainMax = 100;
     else domainMax = 10; // fallback
 
     // Enforce minimum domainMax
