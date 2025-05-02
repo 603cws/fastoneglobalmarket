@@ -106,7 +106,7 @@ function MetaTrader5() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-sm">
+                    <button className="text-[#112556] text-xs lg:text-base bg-gradient-to-r from-[#4575FF] to-[#92AEFF] hover:from-[#92AEFF] hover:to-[#4575FF] px-5 py-3 capitalize font-medium rounded-sm">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt5/fastoneglobal5setup.exe">
                         download meta trader 5 for pc
@@ -127,7 +127,7 @@ function MetaTrader5() {
                     ) : (
                       <img
                         src={imagepath}
-                        alt="metatrader 4 "
+                        alt="metatrader 5 "
                         className="absolute inset-0"
                       />
                     )}
@@ -151,14 +151,14 @@ function MetaTrader5() {
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
                   <button
                     onClick={(e) => handleLinkClick(e, false)}
-                    className="text-[#112556] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
+                    className="text-white  bg-[#1378BF] hover:text-[#112556] hover:bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
                   >
                     {" "}
                     <a href="#">open trading account </a>
                   </button>
                   <button
                     onClick={(e) => handleLinkClick(e, false)}
-                    className="text-white bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
+                    className="text-white  bg-[#1378BF] hover:text-[#112556] hover:bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium rounded-sm"
                   >
                     {" "}
                     <a href="#">open demo account </a>

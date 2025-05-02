@@ -1,9 +1,20 @@
 import React from "react";
 // import "./ContactForm.css";
+import { useInView } from "react-intersection-observer";
+import ContactFormAnimation from "../assets/ContactFormAni.json";
+import Lottie from "lottie-react";
 const ContactForm = () => {
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
-      <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4">
+    <div
+      ref={ref}
+      className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20"
+    >
+      <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4 ">
+        {/* <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4 lg:px-4 lg:pt-4 lg:pb-12"> */}
         {/* <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4"> */}
         <div className="font-Poppins font-semibold py-3">
           <p className="text-sm text-[#4575FF]">Get in Touch!</p>
@@ -64,6 +75,18 @@ const ContactForm = () => {
           </form>
         </div>
       </div>
+      {/* <div className=" flex  ">
+        {inView ? (
+          <div className="lg:max-w-lg self-end">
+            <Lottie animationData={ContactFormAnimation} loop={false} />
+          </div>
+        ) : (
+          <div className="lg:max-w-lg">
+            {" "}
+            <img src="/images/contactimg.png" alt="form image" />
+          </div>
+        )}
+      </div> */}
       <div className=" flex  ">
         <div className="lg:max-w-lg">
           {" "}

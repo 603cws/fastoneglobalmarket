@@ -8,6 +8,7 @@ import Meta4HeroAnimation from "../assets/Meta4HeroAnimation.json";
 import Meta4MobileAnimation from "../assets/Meta4MobileAnimation.json";
 import Lottie from "lottie-react";
 import { useInView } from "react-intersection-observer";
+import Meta4WebAppAnimation from "../assets/Meta4WebAppAnimation.json";
 function MetaTrader4() {
   const imagepath = "/images/newmetatrader4.png";
   const handleLinkClick = (event, isLogin) => {
@@ -99,7 +100,7 @@ function MetaTrader4() {
                   </div>
 
                   <div>
-                    <button className="text-[#112556] text-sm lg:text-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-5 py-3 capitalize font-medium rounded-sm">
+                    <button className="text-[#112556] text-sm lg:text-lg bg-gradient-to-r from-[#4575FF] to-[#92AEFF] hover:from-[#92AEFF] hover:to-[#4575FF] px-5 py-3 capitalize font-medium rounded-sm">
                       {" "}
                       <a href="https://download.mql5.com/cdn/web/fastone.global.financial/mt4/fastoneglobal4setup.exe">
                         download meta trader 4 for pc
@@ -143,13 +144,13 @@ function MetaTrader4() {
                 </div>
 
                 <div className="flex flex-col md:flex-row md:gap-10 justify-center items-center mt-10 gap-4 lg:gap-4">
-                  <button className="text-[#112556] rounded-sm bg-gradient-to-r from-[#4575FF] to-[#92AEFF]  px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className=" text-white rounded-sm bg-[#1378BF] hover:text-[#112556] hover:bg-gradient-to-r from-[#4575FF] to-[#92AEFF]  px-5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open trading account{" "}
                     </a>
                   </button>
-                  <button className="text-white rounded-sm bg-gradient-to-r from-[#1378BF] to-[#1378BF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
+                  <button className="text-white rounded-sm bg-[#1378BF] hover:text-[#112556] hover:bg-gradient-to-r from-[#4575FF] to-[#92AEFF] px-6.5 py-3 lg:px-5 lg:py-3 capitalize font-medium">
                     {" "}
                     <a href="#" onClick={(e) => handleLinkClick(e, false)}>
                       open demo account{" "}
@@ -163,7 +164,7 @@ function MetaTrader4() {
 
         <MetaTraderPlatform
           title="MetaTrader 4 mobile application"
-          imagepath="/images/metatradermobile4.png"
+          imagepath="/images/Meta4Mobile.png"
           animation={Meta4MobileAnimation}
           description="MetaTrader 4 portable application will allow you to trade from
                   anywhere in the world. Designed specifically for smartphones
@@ -199,7 +200,8 @@ function MetaTrader4() {
           />
           <MetaTraderPlatform
             title="MetaTrader 4 web platform"
-            imagepath="/images/metatraderwebapp.png"
+            imagepath="/images/Meta4Web.png"
+            animation={Meta4WebAppAnimation}
             description=" Also, you have an opportunity to use a web version of
           MetaTrader 4 platform, which is supported by all available
           browsers. The MT4 web terminal offers the same features and
