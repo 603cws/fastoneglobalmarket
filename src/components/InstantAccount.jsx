@@ -17,7 +17,7 @@ function InstantAccount() {
         </div>
         <div>
           <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
-            <button className="text-xs lg:text-base bg-white text-black px-3 py-1 md:px-6 md:py-2 rounded-md font-medium cursor-pointer">
+            <button className="text-xs lg:text-base bg-white text-black px-3 py-1 md:px-6 md:py-2 rounded-md font-medium cursor-pointer transition-all duration-300 hover:bg-[#f0f4ff] hover:shadow-md hover:scale-105 hover:text-[#1e3a8a]">
               Start Live Account
             </button>
           </Link>

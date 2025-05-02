@@ -8,13 +8,12 @@ function DepositsWithdrawls() {
     { name: "Deposits and Withdrawls" },
   ];
   return (
-    <div className="bg-[#030B20]">
+    <div
+      className="bg-[#030B20] bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/bg-landing3.png')" }}
+    >
       <Header />
-
-      <section
-        className="w-full px-4 sm:px-10 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/bg-landing3.png')" }}
-      >
+      <section className="w-full px-4 sm:px-10 ">
         <div className="py-10 text-center max-w-7xl mx-auto">
           <div className="pt-24 relative">
             <h2 className="text-xs md:text-base text-white">
@@ -32,7 +31,7 @@ function DepositsWithdrawls() {
             <div className="space-y-4 flex-1 text-left">
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-snug sm:leading-tight">
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                  Deposits / Withdrawals
+                  &nbsp;&nbsp;Deposits / Withdrawals
                 </span>
               </h1>
             </div>
@@ -85,7 +84,7 @@ function DepositsWithdrawls() {
 
       <section className="py-10 md:py-20 px-4 md:px-20">
         <div className="container mx-auto">
-          <div className="p-[2px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
+          <div className="p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
             <div className="bg-[#030B20] rounded-xl text-white px-6 xl:px-14 py-10 border border-[#4575FF]">
               <div className="text-[#B2B2B2] font-bold text-sm lg:text-lg">
                 <p>
@@ -107,47 +106,55 @@ function DepositsWithdrawls() {
       <section className="md:py-10 lg:py-20 px-4 md:px-20">
         <div className="container mx-auto flex flex-col gap-20 lg:gap-10 lg:flex-row justify-between items-center py-20">
           {/* CARD 1 */}
-          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
-            <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
-              <img
-                src="/images/dw5.png"
-                alt="Bank Transfer"
-                className="w-30 h-30 object-contain"
-              />
-            </div>
-            <div className="py-2">
-              <h3 className="text-white font-semibold text-lg">
-                Bank Transfer
-              </h3>
-              <p className="text-gray-400 text-sm mt-1">(GBP/USD/EUR/MUR)</p>
+          <div className="relative w-[280px] max-w-full p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
+            <div className="rounded-xl border border-[#4575FF] flex justify-center items-center text-center bg-[#030B20] h-54">
+              <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
+                <img
+                  src="/images/dw5.png"
+                  alt="Bank Transfer"
+                  className="w-30 h-30 object-contain"
+                />
+              </div>
+              <div className="py-2">
+                <h3 className="text-white font-semibold text-lg">
+                  Bank Transfer
+                </h3>
+                <p className="text-gray-400 text-sm mt-1">(GBP/USD/EUR/MUR)</p>
+              </div>
             </div>
           </div>
 
           {/* CARD 2 */}
-          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
-            <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
-              <img
-                src="/images/dw6.png"
-                alt="Credit Card"
-                className="w-30 h-30 object-contain"
-              />
-            </div>
-            <div className="py-4">
-              <h3 className="text-white font-semibold text-lg">Credit Card</h3>
+          <div className="relative w-[280px] max-w-full p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
+            <div className=" rounded-xl border border-[#4575FF] flex justify-center items-center text-center bg-[#030B20] h-54">
+              <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
+                <img
+                  src="/images/dw6.png"
+                  alt="Credit Card"
+                  className="w-30 h-30 object-contain"
+                />
+              </div>
+              <div className="py-4">
+                <h3 className="text-white font-semibold text-lg">
+                  Credit Card
+                </h3>
+              </div>
             </div>
           </div>
 
           {/* CARD 3 */}
-          <div className="relative w-[280px] max-w-full rounded-lg border border-blue-500/20 flex justify-center items-center text-center bg-[#030B20] h-54">
-            <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
-              <img
-                src="/images/dw7.png"
-                alt="Skrill"
-                className="w-30 h-30 object-contain"
-              />
-            </div>
-            <div className="py-4">
-              <h3 className="text-white font-semibold text-lg">Skrill</h3>
+          <div className="relative w-[280px] max-w-full p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
+            <div className="rounded-xl border border-[#4575FF] flex justify-center items-center text-center bg-[#030B20] h-54">
+              <div className="absolute -top-1/3 left-1/2 transform -translate-x-1/2 rounded-sm">
+                <img
+                  src="/images/dw7.png"
+                  alt="Skrill"
+                  className="w-30 h-30 object-contain"
+                />
+              </div>
+              <div className="py-4">
+                <h3 className="text-white font-semibold text-lg">Skrill</h3>
+              </div>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ function Howtogetstarted() {
         </p>
         <div className="font-medium">
           <Link to="#" onClick={(e) => handleLinkClick(e, false)}>
-            <button className="border border-[#4575FF] bg-[#1368A6]/20 text-white px-6 py-2 rounded-md transition cursor-pointer duration-300 ">
+            <button className="gradient-button px-6 py-2 rounded-md">
               Start Trading
             </button>
           </Link>

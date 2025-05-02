@@ -5,6 +5,9 @@ import IbAnimation from "../components/animations/IbAnimation";
 import { Link } from "react-router-dom";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import InstantAccount from "../components/InstantAccount";
+import PartnerHeroAnimation from "../assets/PartnerHeroAnimation.json";
+import Lottie from "lottie-react";
+import { useInView } from "react-intersection-observer";
 
 const stepsData = [
   {
@@ -78,10 +81,17 @@ function IntroducingBroker() {
     { name: "Partners", href: "" },
     { name: "Introducing Broker" },
   ];
+
   const handleLinkClick = (event, isLogin) => {
     event.preventDefault();
     handleRedirect(isLogin);
   };
+
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   return (
     <div className="bg-[#030B20]">
       <Header />
@@ -91,13 +101,20 @@ function IntroducingBroker() {
         breadcrumbPaths={breadcrumbPaths}
       />
 
-      <section className="wc-fmarket wc-fm-2">
+      <section className="wc-fmarket wc-fm-2" ref={ref}>
         <div className="container">
           <div className="flex justify-center items-start    partner-img-1">
             {/* <IbAnimation /> */}
-            <div className=" lg:max-w-4xl">
-              {" "}
-              <img src="/images/BROKER.png" alt="introducing broker" />
+            <div className="lg:max-w-4xl">
+              {inView ? (
+                <div className="flex-1 flex justify-center items-center">
+                  <Lottie animationData={PartnerHeroAnimation} loop={false} />
+                </div>
+              ) : (
+                <div className="flex-1 flex justify-center items-center">
+                  <img src="/images/BROKER.png" alt="introducing broker" />
+                </div>
+              )}
             </div>
           </div>
           {/* <div className="row partner-img-1">

@@ -4,6 +4,14 @@
   --breakpoint-3xl: 1800px;
 }
 
+@layer components {
+  .gradient-button {
+    @apply border border-blue-600 bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text 
+           transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] 
+           hover:text-black hover:bg-clip-border cursor-pointer;
+  }
+}
+
 :root {
   --primary-color: #1368a6;
 }

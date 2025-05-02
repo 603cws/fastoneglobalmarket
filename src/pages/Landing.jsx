@@ -502,7 +502,7 @@ function Landing() {
                     {/* <div className="text-5xl font-bold text-white mr-4 ">
                       {step.number}
                     </div> */}
-                    <svg viewBox="0 0 200 200" class="w-[100px] h-[100px]">
+                    <svg viewBox="0 0 200 200" className="w-[100px] h-[100px]">
                       <defs>
                         <linearGradient
                           id="gradient"
@@ -511,21 +511,21 @@ function Landing() {
                           x2="100%"
                           y2="0%"
                         >
-                          <stop offset="0%" stop-color="#4575FF" />
-                          <stop offset="100%" stop-color="#92AEFF" />
+                          <stop offset="0%" stopColor="#4575FF" />
+                          <stop offset="100%" stopColor="#92AEFF" />
                         </linearGradient>
                       </defs>
                       <text
                         x="50%"
                         y="50%"
-                        dominant-baseline="middle"
-                        text-anchor="middle"
-                        font-size="150"
+                        dominantBaseline="middle"
+                        textAnchor="middle"
+                        fontSize="150"
                         fontFamily="inter"
-                        font-weight="bold"
+                        fontWeight="bold"
                         fill="none"
                         stroke="url(#gradient)"
-                        stroke-width="3"
+                        strokeWidth="3"
                       >
                         {step.number}
                       </text>
@@ -612,7 +612,7 @@ function Landing() {
                         <p className="text-2xl font-bold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                           {crypto.price_change?.toFixed(2)}%
                         </p>
-                        <p className="text-sm text-gray-400">Monthly Rewards</p>
+                        <p className="text-sm text-gray-400">Weekly Rewards</p>
                         {/* <button className="bg-gradient-to-r from-[#C6D5FF] to-[#698FFF] hover:opacity-90 hover:text-white text-black px-4 py-2 rounded-lg text-sm transition">
                           Stake Now
                         </button> */}

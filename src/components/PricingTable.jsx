@@ -104,7 +104,7 @@ const PricingCard = ({
                 "linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, #92AEFF 24%, #4575FF 77%, rgba(0, 0, 0, 0.2) 98%)",
             }}
           ></div>
-          <button className="mt-5 my-5 w-full bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-[#112556] py-3 rounded-lg transition cursor-pointer">
+          <button className="gradient-button mt-5 my-5 w-full py-3 rounded-lg transition cursor-pointer">
             <a href="#" onClick={(e) => handleLinkClick(e, false)}>
               Open {title} Account
             </a>
