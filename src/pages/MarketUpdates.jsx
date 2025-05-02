@@ -113,7 +113,7 @@ function MarketUpdates() {
       {/* Economic Calendar Section */}
       <section className="mt-6">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+          <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
             Economic Calendar
           </h2>
           <div className="tradingview-widget-container">
@@ -136,7 +136,7 @@ function MarketUpdates() {
       {/* Twitter Feed Section */}
       <section className="mt-24">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+          <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
             Latest News
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -159,7 +159,7 @@ function MarketUpdates() {
                       )
                     }
                   >
-                    <div className="flex items-center p-4">
+                    <div className="flex items-center p-3 border-b border-b-[#22A4FF]">
                       <img
                         src={logo}
                         alt="Logo"
@@ -172,7 +172,7 @@ function MarketUpdates() {
                         </span>
                       </div>
                     </div>
-                    <div className="p-4">
+                    <div className="p-6">
                       <p className="text-[#CDE6FF] text-sm ">{tweet.text}</p>
                     </div>
                   </div>
@@ -188,7 +188,7 @@ function MarketUpdates() {
       {/* Market Analysis Section */}
       <section className="mt-24 pb-8">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-white text-center mb-12 text-2xl font-semibold">
+          <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
             Market Analysis
           </h2>
           <div className="relative w-full pb-[56.25%]">

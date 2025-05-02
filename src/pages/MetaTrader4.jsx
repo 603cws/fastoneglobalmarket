@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { handleRedirect } from "../lib/redirectLocationHandler";
 import MetaTraderPlatform from "../components/MetaTraderPlatform";
 import Meta4HeroAnimation from "../assets/Meta4HeroAnimation.json";
+import Meta4MobileAnimation from "../assets/Meta4MobileAnimation.json";
 import Lottie from "lottie-react";
 import { useInView } from "react-intersection-observer";
 function MetaTrader4() {
@@ -163,6 +164,7 @@ function MetaTrader4() {
         <MetaTraderPlatform
           title="MetaTrader 4 mobile application"
           imagepath="/images/metatradermobile4.png"
+          animation={Meta4MobileAnimation}
           description="MetaTrader 4 portable application will allow you to trade from
                   anywhere in the world. Designed specifically for smartphones
                   and tablets, this mobile terminal offers traders a familiar

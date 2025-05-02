@@ -163,9 +163,8 @@ function ContactUs() {
       </div>
 
       <div className="container mx-auto relative">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
+        {/* <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
           <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4">
-            {/* <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4"> */}
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Get in Touch!</p>
               <h4 className="text-xl">Love to hear from you</h4>
@@ -218,7 +217,7 @@ function ContactUs() {
                 </div>
                 <button
                   className="px-10 py-2 font-bold rounded-lg bg-[#13275C] border-black  border-1 mb-2 lg:mb-0 lg:mt-5 text-white "
-                  // onClick={handleformsubmit}
+         
                 >
                   Submit
                 </button>
@@ -231,7 +230,8 @@ function ContactUs() {
               <img src="/images/contactimg.png" alt="form image" />
             </div>
           </div>
-        </div>
+        </div> */}
+        <ContactForm />
       </div>
 
       <InstantAccount />

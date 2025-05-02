@@ -5,6 +5,9 @@ import OpenAccount from "../components/OpenAccount";
 import TitleArea from "../components/TitleArea";
 import InstantAccount from "../components/InstantAccount";
 import MarketHeaderSection from "../components/MarketHeaderSection";
+import Lottie from "lottie-react";
+import { useInView } from "react-intersection-observer";
+import WhychooseusAnimation from "../assets/WhyChooseUsHreoAnimation.json";
 
 const advantages = [
   {
@@ -48,13 +51,17 @@ const advantages = [
 ];
 
 function WhyChooseUS() {
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
   const breadcrumbPaths = [
     { name: "Home", href: "/" },
     { name: "Company", href: "" },
     { name: "Why Choose Us?" },
   ];
   return (
-    <div className="bg-[#030B20] relative">
+    <div className="bg-[#030B20] relative ">
       <img
         src="/images/bg-shadow.png"
         alt=""
@@ -70,7 +77,7 @@ function WhyChooseUS() {
       <div className="bg-[#030B20] py-10 text-center">
         <TitleArea breadcrumbPaths={breadcrumbPaths} />
       </div>
-      <div className="bg-[#030B20]">
+      <div className="bg-[#030B20]" ref={ref}>
         <div className="container mx-auto lg:pt-10  md:pb-5 relative">
           <div className="">
             <div className="flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center lg:gap-10 ">
@@ -80,11 +87,24 @@ function WhyChooseUS() {
                 </h2>
               </div>
               <div className="flex-1 flex justify-center items-center  ">
+                {inView ? (
+                  <div className=" md:max-w-lg">
+                    <Lottie animationData={WhychooseusAnimation} loop={false} />
+                    {/* <div className=""></div> */}
+                  </div>
+                ) : (
+                  <div className="md:max-w-lg">
+                    {" "}
+                    <img src="/images/whychooseus.png" alt="whychooseus" />
+                  </div>
+                )}
+              </div>
+              {/* <div className="flex-1 flex justify-center items-center  ">
                 <div className="md:max-w-lg">
                   {" "}
                   <img src="/images/whychooseus.png" alt="whychooseus" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -152,7 +152,7 @@ function Complaints() {
       </div>
 
       <div className="container mx-auto relative">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
+        {/* <div className="flex flex-col md:flex-row gap-8 md:gap-3 lg:gap-0 justify-around  [&_h4]:text-white [&_h5]:text-white [&_label]:text-white py-10 lg:py-20">
           <div className=" bg-[#126CAB]/20 max-w-sm lg:max-w-lg w-full  rounded-2xl p-4">
             <div className="font-Poppins font-semibold py-3">
               <p className="text-sm text-[#4575FF]">Complaint Form</p>
@@ -160,7 +160,6 @@ function Complaints() {
                 If you have any complaint, please fill below form. We will
                 respond to your complaints within 1 day.
               </h4>
-              {/* <h5 className="text-xl">Get in Touch!</h5> */}
             </div>
             <div className="font-Poppins pl-2">
               <form action="" className="font-semibold ">
@@ -184,15 +183,6 @@ function Complaints() {
                     required
                   />
                 </div>
-                {/* <div className="mb-2 flex flex-col gap-1.5">
-                  <label className="mt-2 text-sm">Company Name*</label>
-                  <input
-                    type="text"
-                    name="companyName"
-                    className="w-full rounded-lg p-2 mb-1 border-2 border-[#D1D5DB] bg-[#F8F8F8] focus:outline-none placeholder:text-[#CCC] font-medium text-sm"
-                    required
-                  />
-                </div> */}
                 <div className="mb-2 flex flex-col gap-1.5">
                   <label className="font-semibold mt-2 text-sm">
                     Mobile Number*
@@ -217,8 +207,7 @@ function Complaints() {
                   </textarea>
                 </div>
                 <button
-                  className="px-10 py-2 font-bold rounded-lg bg-[#13275C] border-black  border-1 mb-2 text-white"
-                  // onClick={handleformsubmit}
+                  className="px-10 py-2 font-bold rounded-lg bg-[#13275C] border-white   border-1 mb-2 text-white"
                 >
                   Submit
                 </button>
@@ -231,7 +220,8 @@ function Complaints() {
               <img src="/images/contactimg.png" alt="form image" />
             </div>
           </div>
-        </div>
+        </div> */}
+        <ComplaintsForm />
       </div>
 
       <InstantAccount />

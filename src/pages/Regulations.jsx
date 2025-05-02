@@ -20,6 +20,7 @@ function Regulations() {
       <div className="pt-10 text-center">
         <TitleArea title="Regulations" breadcrumbPaths={breadcrumbPaths} />
       </div>
+
       <section>
         <div className="flex justify-center">
           <div className="md:max-w-2xl lg:max-w-3xl">
@@ -27,6 +28,14 @@ function Regulations() {
           </div>
         </div>
       </section>
+
+      {/* <section>
+        <div className="flex justify-center">
+          <div className="md:max-w-2xl lg:max-w-3xl">
+            <img src="/images/REGULATION.png" alt="regulation" />
+          </div>
+        </div>
+      </section> */}
       <section className="container mx-auto">
         <div className="flex justify-center items-center py-10 lg:py-0 lg:pt-10 lg:pb-32">
           <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl">
