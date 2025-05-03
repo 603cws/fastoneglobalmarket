@@ -5,8 +5,15 @@ import TitleBgCenter from "../components/TitleBgCenter";
 import TitleArea from "../components/TitleArea";
 import { MdClose } from "react-icons/md";
 import InstantAccount from "../components/InstantAccount";
+import { useInView } from "react-intersection-observer";
+import ContactFormAnimation from "../assets/ContactHeroAnimation.json";
+import Lottie from "lottie-react";
 
 function ContactUs() {
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
   const breadcrumbPaths = [
     { name: "Home", href: "/" },
     { name: "Company", href: "" },
@@ -136,10 +143,22 @@ function ContactUs() {
         </div>
       </div>
 
-      <div className="flex justify-center items-center relative z-10">
-        <div>
-          <img src="/images/fastonecontactus.png" alt="" />
+      <div className="flex justify-center items-center relative z-10" ref={ref}>
+        <div className="  ">
+          {inView ? (
+            <div className="">
+              <Lottie animationData={ContactFormAnimation} loop={false} />
+            </div>
+          ) : (
+            <div className="">
+              {" "}
+              <img src="/images/contactHero.png" alt="form image" />
+            </div>
+          )}
         </div>
+        {/* <div>
+          <img src="/images/contactHero.png" alt="contactus" />
+        </div> */}
       </div>
 
       <div className="container mx-auto relative">

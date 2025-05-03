@@ -294,7 +294,7 @@ export const Footer = () => {
                 <span>Complaints</span>
               </Link>
             </div>
-            <div className="space-y-4 text-xs leading-4.5">
+            <div className="space-y-4 text-xs leading-4.5 lg:pb-6">
               {/* <div className="footer-bottom"> */}
               <div className="col-md-4">
                 <p>

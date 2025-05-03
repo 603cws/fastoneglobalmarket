@@ -132,78 +132,83 @@ function MarketUpdates() {
           </div>
         </div>
       </section>
-
-      {/* Twitter Feed Section */}
-      <section className="mt-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
-            Latest News
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {loading ? (
-              <p className="text-white">Loading tweets...</p>
-            ) : tweets.length > 0 ? (
-              tweets.map((tweet, index) => {
-                const { username, logo } = getUserData(tweet);
-                return (
-                  <div
-                    key={index}
-                    className="border bg-[#fff]/0 text-white border-[#22A4FF] rounded-lg cursor-pointer transform transition-transform duration-200 hover:scale-105"
-                    onClick={() =>
-                      window.open(
-                        `https://twitter.com/${username.replace(
-                          "@",
-                          ""
-                        )}/status/${tweet.id}`,
-                        "_blank"
-                      )
-                    }
-                  >
-                    <div className="flex items-center p-3 border-b border-b-[#22A4FF]">
-                      <img
-                        src={logo}
-                        alt="Logo"
-                        className="w-8 h-8 rounded-full mr-3"
-                      />
-                      <div className="flex flex-col">
-                        <span className="font-bold">{username}</span>
-                        <span className=" text-sm">
-                          {timeAgo(tweet.created_at)}
-                        </span>
+      <div className="relative">
+        <img
+          src="/images/News.png"
+          alt=""
+          className="absolute w-full  transform -translate-y-10 left-0 object-cover"
+        />
+        {/* Twitter Feed Section */}
+        <section className="relative mt-24">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
+              Latest News
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {loading ? (
+                <p className="text-white">Loading tweets...</p>
+              ) : tweets.length > 0 ? (
+                tweets.map((tweet, index) => {
+                  const { username, logo } = getUserData(tweet);
+                  return (
+                    <div
+                      key={index}
+                      className="border bg-[#fff]/0 text-white border-[#22A4FF] rounded-lg cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                      onClick={() =>
+                        window.open(
+                          `https://twitter.com/${username.replace(
+                            "@",
+                            ""
+                          )}/status/${tweet.id}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <div className="flex items-center p-3 border-b border-b-[#22A4FF]">
+                        <img
+                          src={logo}
+                          alt="Logo"
+                          className="w-8 h-8 rounded-full mr-3"
+                        />
+                        <div className="flex flex-col">
+                          <span className="font-bold">{username}</span>
+                          <span className=" text-sm">
+                            {timeAgo(tweet.created_at)}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-[#CDE6FF] text-sm ">{tweet.text}</p>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <p className="text-[#CDE6FF] text-sm ">{tweet.text}</p>
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <p className="text-white">No tweets found</p>
-            )}
+                  );
+                })
+              ) : (
+                <p className="text-white">No tweets found</p>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Market Analysis Section */}
-      <section className="mt-24 pb-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
-            Market Analysis
-          </h2>
-          <div className="relative w-full pb-[56.25%]">
-            <iframe
-              src="https://www.youtube.com/embed/CFPIPoM8KB8"
-              title="Market Analysis"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute top-0 left-0 w-full h-full"
-            ></iframe>
+        {/* Market Analysis Section */}
+        <section className="mt-24 pb-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-white text-center mb-12 text-2xl lg:text-4xl font-semibold">
+              Market Analysis
+            </h2>
+            <div className="relative w-full pb-[56.25%]">
+              <iframe
+                src="https://www.youtube.com/embed/CFPIPoM8KB8"
+                title="Market Analysis"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </div>
       <InstantAccount />
     </div>
   );

@@ -18,7 +18,7 @@ const TitleBgCenter = ({
       }}
     >
       <div className="overlay"></div>
-      <div className="container">
+      <div className="container ">
         <div className="pta-width pt-24">
           {/* <div className="pta-width pt-24"> */}
           {breadcrumbPaths && (
