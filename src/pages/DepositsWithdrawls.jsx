@@ -1,19 +1,28 @@
 import Header from "../components/Header";
 import InstantAccount from "../components/InstantAccount";
 import Breadcrumbs from "../components/Breadcrumbs";
+import WithDrawalAnimation from "../assets/WithDrawalAnimation.json";
+import { useInView } from "react-intersection-observer";
+import Lottie from "lottie-react";
 
 function DepositsWithdrawls() {
   const breadcrumbPaths = [
     { name: "Home", href: "/" },
     { name: "Deposits and Withdrawls" },
   ];
+
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: false, // play once
+    threshold: 0.5, // 50% of element should be visible
+  });
+
   return (
     <div
       className="bg-[#030B20] bg-cover bg-center"
       style={{ backgroundImage: "url('/images/bg-landing3.png')" }}
     >
       <Header />
-      <section className="w-full px-4 sm:px-10 ">
+      <section className="w-full px-4 sm:px-10" ref={ref}>
         <div className="py-10 text-center max-w-7xl mx-auto">
           <div className="pt-24 relative">
             <h2 className="text-xs md:text-base text-white">
@@ -31,58 +40,66 @@ function DepositsWithdrawls() {
             <div className="space-y-4 flex-1 text-left">
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-snug sm:leading-tight">
                 <span className="bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
-                  &nbsp;&nbsp;Deposits / Withdrawals
+                  Deposits / Withdrawals
                 </span>
               </h1>
             </div>
 
             {/* Right Image */}
-            <div className="w-45 sm:w-64 md:w-[400px] h-45 sm:h-64 md:h-[400px] rounded-xl md:flex-1 mt-4 sm:mt-10 md:mt-0 overflow-hidden">
-              <img
-                src="/images/card.png"
-                alt="Card"
-                className="w-full h-full object-contain"
-              />
+            <div className="w-45 sm:w-64 md:w-[400px] h-48 sm:h-64 md:h-[500px] rounded-xl md:flex-1 mt-4 sm:mt-10 md:mt-0 overflow-hidden">
+              {inView ? (
+                <Lottie
+                  animationData={WithDrawalAnimation}
+                  loop={false}
+                  className="h-full object-contain"
+                />
+              ) : (
+                <img
+                  src="/images/card.png"
+                  alt="Card"
+                  className="w-full h-full object-contain"
+                />
+              )}
             </div>
           </div>
-
-          {/* Section with Icons */}
-          <section className="w-full mt-20">
-            <div className="flex flex-wrap justify-between items-center py-10 mx-auto container">
-              <div className="flex-1 flex justify-center">
-                <img
-                  src="/images/dw1.png"
-                  alt="deposit 1"
-                  className="w-[100px] sm:w-[120px] md:w-[140px] object-contain"
-                />
-              </div>
-              <div className="flex-1 flex justify-center">
-                <img
-                  src="/images/dw2.png"
-                  alt="deposit 2"
-                  className="w-[100px] sm:w-[120px] md:w-[140px] object-contain"
-                />
-              </div>
-              <div className="flex-1 flex justify-center">
-                <img
-                  src="/images/dw3.png"
-                  alt="deposit 3"
-                  className="w-[100px] sm:w-[120px] md:w-[140px] object-contain"
-                />
-              </div>
-              <div className="flex-1 flex justify-center">
-                <img
-                  src="/images/dw4.png"
-                  alt="deposit 4"
-                  className="w-[100px] sm:w-[120px] md:w-[140px] object-contain"
-                />
-              </div>
-            </div>
-          </section>
         </div>
       </section>
 
-      <section className="py-10 md:py-20 px-4 md:px-20">
+      {/* Section with Icons */}
+      <section className="w-full mt-20 px-4 md:px-10 lg:px-18 xl:px-32">
+        <div className="flex flex-wrap justify-between items-center py-10 mx-auto container">
+          <div className="flex-1 flex justify-start 3xl:justify-center">
+            <img
+              src="/images/dw1.png"
+              alt="deposit 1"
+              className="w-[100px] sm:w-[120px] md:w-[140px] icon-4k2 object-contain"
+            />
+          </div>
+          <div className="flex-1 flex justify-center">
+            <img
+              src="/images/dw2.png"
+              alt="deposit 2"
+              className="w-[100px] sm:w-[120px] md:w-[140px] icon-4k2 object-contain"
+            />
+          </div>
+          <div className="flex-1 flex justify-center">
+            <img
+              src="/images/dw3.png"
+              alt="deposit 3"
+              className="w-[100px] sm:w-[120px] md:w-[140px] icon-4k2 object-contain"
+            />
+          </div>
+          <div className="flex-1 flex justify-end 3xl:justify-center">
+            <img
+              src="/images/dw4.png"
+              alt="deposit 4"
+              className="w-[100px] sm:w-[120px] md:w-[140px] icon-4k2 object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 md:py-20 w-full px-4 md:px-10 lg:px-18 xl:px-32 px-4k">
         <div className="container mx-auto">
           <div className="p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">
             <div className="bg-[#030B20] rounded-xl text-white px-6 xl:px-14 py-10 border border-[#4575FF]">
@@ -103,7 +120,7 @@ function DepositsWithdrawls() {
         </div>
       </section>
 
-      <section className="md:py-10 lg:py-20 px-4 md:px-20">
+      <section className="md:py-10 lg:py-20 w-full px-4 md:px-10 lg:px-18 xl:px-32 px-4k">
         <div className="container mx-auto flex flex-col gap-20 lg:gap-10 lg:flex-row justify-between items-center py-20">
           {/* CARD 1 */}
           <div className="relative w-[280px] max-w-full p-[1px] bg-gradient-to-r from-[#4575FF] to-[#92AEFF] rounded-xl">

@@ -1239,13 +1239,6 @@ footer {
   }
 } */
 
-.container {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 1rem /* 16px */;
-  padding-left: 1rem /* 16px */;
-}
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
@@ -1306,6 +1299,10 @@ footer {
     width: 1.5rem;
     height: 1.5rem;
   }
+  .icon-4k2 {
+    width: 50%;
+    height: 50%;
+  }
 
   .header-text-s2 {
     gap: 1.5rem;
@@ -1362,6 +1359,9 @@ footer {
   }
   .btn-4k {
     font-size: 2rem;
+  }
+  .px-4k {
+    padding-inline: calc(var(--spacing) * 72) /* 8rem = 128px */;
   }
 }
 
