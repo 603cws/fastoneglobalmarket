@@ -69,6 +69,50 @@ const CryptoBubbles = ({
     svg.selectAll("defs").remove();
     const defs = svg.append("defs");
 
+    // Green gradient
+    const greenGradient = defs
+      .append("radialGradient")
+      .attr("id", "greenGradient")
+      .attr("cx", "50%")
+      .attr("cy", "50%");
+
+    greenGradient
+      .append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "rgba(7,19,7,1)");
+
+    greenGradient
+      .append("stop")
+      .attr("offset", "75%")
+      .attr("stop-color", "rgba(29,62,29,0.4)");
+
+    greenGradient
+      .append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "rgba(9,234,6,1)");
+
+    // Red gradient
+    const redGradient = defs
+      .append("radialGradient")
+      .attr("id", "redGradient")
+      .attr("cx", "50%")
+      .attr("cy", "50%");
+
+    redGradient
+      .append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "rgba(19,9,7, 1)");
+
+    redGradient
+      .append("stop")
+      .attr("offset", "75%")
+      .attr("stop-color", "rgba(61,29,28, 0.4)");
+
+    redGradient
+      .append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "rgba(207,51,29,1)");
+
     data.forEach((d) => {
       const change = Math.abs(d.price_change || 0);
       const blur = Math.min(12, 2 + change * 0.5); // adjust glow intensity
@@ -211,7 +255,7 @@ const CryptoBubbles = ({
     if (timeRange === "24h") domainMax = 10;
     else if (timeRange === "7d") domainMax = 50;
     else if (timeRange === "30d") domainMax = 70;
-    else if (timeRange === "1y") domainMax = 100;
+    else if (timeRange === "1y") domainMax = 120;
     else domainMax = 10; // fallback
 
     // Enforce minimum domainMax
@@ -244,7 +288,7 @@ const CryptoBubbles = ({
               return Math.abs(d.price_change) <= 1 ? base * 0.7 : base; // 🔍 Small for flat coins
             })
             .style("fill", (d) =>
-              d.price_change >= 0 ? "rgba(0,255,0,0.1)" : "rgba(255,0,0,0.1)"
+              d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
             )
             // .style("stroke", (d) =>
             //   d.price_change >= 0 ? "#4CA94E" : "#C34646"
@@ -259,8 +303,8 @@ const CryptoBubbles = ({
               return isGainer ? "#00FF00" : "#FF0000"; // very strong
             })
 
-            .style("stroke-width", 3)
-            .style("filter", (d) => `url(#glow-${d.id})`);
+            .style("stroke-width", 3);
+          // .style("filter", (d) => `url(#glow-${d.id})`);
 
           g.append("image")
             .attr("xlink:href", (d) => d.image)
@@ -344,7 +388,7 @@ const CryptoBubbles = ({
               return isGainer ? "#00FF00" : "#FF0000"; // very strong
             })
             .style("fill", (d) =>
-              d.price_change >= 0 ? "rgba(0,255,0,0.1)" : "rgba(255,0,0,0.1)"
+              d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
             );
 
           update

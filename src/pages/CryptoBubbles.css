@@ -187,7 +187,7 @@ text {
 }
 
 .node:hover circle {
-  filter: drop-shadow(0 0 8px #00d084) blur(1px);
+  /* filter: drop-shadow(0 0 8px #00d084) blur(1px); */
   stroke-width: 3px;
   transform: scale(1.05);
   cursor: pointer;
@@ -219,7 +219,7 @@ text {
 }
 
 .fade-slide-in {
-  animation: fadeSlideIn 0.5s ease-out forwards;
+  animation: fadeSlideIn 0.2s ease-out forwards;
 }
 @keyframes blink-border {
   0% {

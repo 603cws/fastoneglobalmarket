@@ -23,7 +23,7 @@ function Regulations() {
 
       <section>
         <div className="flex justify-center">
-          <div className="md:max-w-2xl lg:max-w-3xl">
+          <div className="md:max-w-2xl lg:max-w-3xl relative">
             <img src="/images/REGULATION.png" alt="regulation" />
           </div>
         </div>
@@ -36,7 +36,7 @@ function Regulations() {
           </div>
         </div>
       </section> */}
-      <section className="container mx-auto">
+      <section className="container mx-auto relative">
         <div className="flex justify-center items-center py-10 lg:py-0 lg:pt-10 lg:pb-32">
           <div className="bg-gradient-to-b from-[#4575FF] to-[#92AEFF]  p-0.5 rounded-xl">
             <div className="text-[#D1D1D1] bg-[#030B20] px-6 py-10  rounded-xl">
