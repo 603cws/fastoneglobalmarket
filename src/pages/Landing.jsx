@@ -159,6 +159,11 @@ function Landing() {
   const [data, setData] = useState([]);
   const positionsRef = useRef(new Map());
 
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -266,12 +271,34 @@ function Landing() {
     fetchData();
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
-  }, [timeRange]);
+  }, [timeRange, windowSize]);
 
+  // Use both resize observer and window resize
   useLayoutEffect(() => {
+    const updateDimensions = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    // Initial measurement
+    updateDimensions();
+
+    // Set up listeners
+    window.addEventListener("resize", updateDimensions);
+    const resizeObserver = new ResizeObserver(updateDimensions);
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
+      resizeObserver.observe(headerRef.current);
     }
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   const handleLinkClick = (event, isLogin) => {
@@ -311,7 +338,9 @@ function Landing() {
         >
           {" "}
           <CryptoBubbles
-            height={window.innerHeight - headerHeight - 110}
+            key={`${windowSize.width}-${windowSize.height}-${headerHeight}`} // Force re-render on dimension changes
+            height={windowSize.height - headerHeight - 110}
+            width={windowSize.width}
             data={data}
             setData={setData}
             timeRange={timeRange}

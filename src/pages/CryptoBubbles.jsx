@@ -31,6 +31,7 @@ const getDaysFromRange = (range) => {
 
 const CryptoBubbles = ({
   height,
+  width,
   data,
   setData,
   timeRange,
@@ -56,15 +57,20 @@ const CryptoBubbles = ({
   const [tooltipTimeRange, setTooltipTimeRange] = useState("24h");
   const [isRepelling, setIsRepelling] = useState(false);
   const [hoverIndex, setHoverIndex] = useState(null);
+  const dimensionsRef = useRef({ width, height });
 
   // const [sparklineData, setSparklineData] = useState([]);
 
   useEffect(() => {
     if (!data.length || !svgRef.current) return;
 
-    const width = window.innerWidth;
-    // const height = window.innerHeight;
+    // const width = svgRef.current.clientWidth;
+    dimensionsRef.current = { width, height };
+
     const svg = d3.select(svgRef.current);
+
+    const { width: currentWidth, height: currentHeight } =
+      dimensionsRef.current;
 
     svg.selectAll("defs").remove();
     const defs = svg.append("defs");
@@ -138,7 +144,7 @@ const CryptoBubbles = ({
     });
 
     svg
-      .attr("viewBox", [0, 0, width, height])
+      .attr("viewBox", [0, 0, currentWidth, currentHeight])
       .attr("preserveAspectRatio", "xMidYMid meet")
       .on("click", function (event) {
         const [clickX, clickY] = d3.pointer(event);
@@ -149,11 +155,7 @@ const CryptoBubbles = ({
         // Add a new force that pushes nodes away from the clicked point
         simulationRef.current.force(
           "repel",
-          d3
-            .forceManyBody()
-            .strength(-300) // More negative = stronger repel
-            .distanceMin(50)
-            .distanceMax(100)
+          d3.forceManyBody().strength(-300).distanceMin(50).distanceMax(100)
         );
 
         simulationRef.current.force(
@@ -161,7 +163,7 @@ const CryptoBubbles = ({
           d3
             .forceX((d) => {
               const dx = d.x - clickX;
-              return d.x + (dx || Math.random() - 0.5); // small random nudge if 0
+              return d.x + (dx || Math.random() - 0.5);
             })
             .strength(0.1)
         );
@@ -187,15 +189,11 @@ const CryptoBubbles = ({
         }, 2000);
       });
 
-    // const maxChange = d3.max(data, (d) => Math.abs(d.price_change || 0));
-    // const cappedMax = Math.min(maxChange, 30);
     let forceStrength;
-    // let minRadius, maxRadius;
     const collisionStrength = timeRange === "30d" ? 1 : 0.7;
-    // let jiggle = () => (Math.random() - 1) * (timeRange === "30d" ? 2 : 5);
     let jiggle;
     if (timeRange === "30d") {
-      jiggle = () => 0; // 🔥 turn off jiggle completely
+      jiggle = () => 0;
     } else {
       jiggle = () => (Math.random() - 0.5) * 3;
     }
@@ -208,16 +206,16 @@ const CryptoBubbles = ({
     let baseMinRadius = 25;
     let baseMaxRadius = 100;
 
-    if (window.innerWidth <= 600) {
+    if (currentWidth <= 600) {
       baseMinRadius = 15;
       baseMaxRadius = 50;
-    } else if (window.innerWidth <= 1024) {
+    } else if (currentWidth <= 1024) {
       baseMinRadius = 20;
       baseMaxRadius = 70;
-    } else if (window.innerWidth <= 1536) {
+    } else if (currentWidth <= 1536) {
       baseMinRadius = 25;
       baseMaxRadius = 100;
-    } else if (window.innerWidth <= 1920) {
+    } else if (currentWidth <= 1920) {
       baseMinRadius = 28;
       baseMaxRadius = 110;
     } else {
@@ -233,8 +231,6 @@ const CryptoBubbles = ({
       (change) => change >= 10
     ).length;
     const highChangeRatio = highChangeCount / data.length;
-    console.log("highChangeCount", highChangeCount);
-    console.log("highChangeRatio", highChangeRatio);
 
     // 4. Adjust radius scale based on market activity
     let volatilityFactor;
@@ -245,7 +241,6 @@ const CryptoBubbles = ({
     } else {
       volatilityFactor = 0.7; // less volatility → smaller bubbles
     }
-    console.log("volatilityFactor", volatilityFactor);
 
     const minRadius = baseMinRadius * volatilityFactor;
     const maxRadius = baseMaxRadius * volatilityFactor;
@@ -256,9 +251,8 @@ const CryptoBubbles = ({
     else if (timeRange === "7d") domainMax = 50;
     else if (timeRange === "30d") domainMax = 70;
     else if (timeRange === "1y") domainMax = 120;
-    else domainMax = 10; // fallback
+    else domainMax = 10;
 
-    // Enforce minimum domainMax
     domainMax = Math.max(domainMax, 5);
 
     // 6. Create the scale
@@ -285,7 +279,7 @@ const CryptoBubbles = ({
           g.append("circle")
             .attr("r", (d) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
-              return Math.abs(d.price_change) <= 1 ? base * 0.7 : base; // 🔍 Small for flat coins
+              return Math.abs(d.price_change) <= 1 ? base * 0.7 : base;
             })
             .style("fill", (d) =>
               d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
@@ -297,12 +291,11 @@ const CryptoBubbles = ({
               const change = Math.abs(d.price_change || 0);
               const isGainer = d.price_change >= 0;
 
-              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E"; // low change
-              if (change < 5) return isGainer ? "#379E3C" : "#ad3333"; // moderate
-              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f"; // strong
-              return isGainer ? "#00FF00" : "#FF0000"; // very strong
+              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E";
+              if (change < 5) return isGainer ? "#379E3C" : "#ad3333";
+              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f";
+              return isGainer ? "#00FF00" : "#FF0000";
             })
-
             .style("stroke-width", 3);
           // .style("filter", (d) => `url(#glow-${d.id})`);
 
@@ -319,7 +312,6 @@ const CryptoBubbles = ({
                 ? "bubble-logo center"
                 : "bubble-logo top";
             })
-
             .attr("clip-path", "circle()")
             .style("pointer-events", "none");
 
@@ -359,7 +351,6 @@ const CryptoBubbles = ({
                 )}px`
             )
             .style("pointer-events", "none")
-            // .text((d) => `${d.price_change?.toFixed(1)}%`);
             .text((d) => {
               const change = d.price_change;
               return change !== undefined && change !== null
@@ -382,10 +373,10 @@ const CryptoBubbles = ({
               const change = Math.abs(d.price_change || 0);
               const isGainer = d.price_change >= 0;
 
-              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E"; // low change
-              if (change < 5) return isGainer ? "#379E3C" : "#ad3333"; // moderate
-              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f"; // strong
-              return isGainer ? "#00FF00" : "#FF0000"; // very strong
+              if (change < 1) return isGainer ? "#234F23" : "#4A1E1E";
+              if (change < 5) return isGainer ? "#379E3C" : "#ad3333";
+              if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f";
+              return isGainer ? "#00FF00" : "#FF0000";
             })
             .style("fill", (d) =>
               d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
@@ -398,16 +389,12 @@ const CryptoBubbles = ({
               Math.abs(d.price_change) <= 1 ? "none" : "block"
             );
 
-          update
-            // .select("text.change")
-            // .text((d) => `${d.price_change?.toFixed(1)}%`);
-            .select("text.change")
-            .text((d) => {
-              const change = d.price_change;
-              return change !== undefined && change !== null
-                ? `${change.toFixed(1)}%`
-                : "–";
-            });
+          update.select("text.change").text((d) => {
+            const change = d.price_change;
+            return change !== undefined && change !== null
+              ? `${change.toFixed(1)}%`
+              : "–";
+          });
 
           update
             .select("image")
@@ -452,52 +439,13 @@ const CryptoBubbles = ({
     node.on("click", async (event, d) => {
       event.stopPropagation();
       setSelectedCoin(d);
-      // setTooltipData({
-      //   visible: true,
-      //   x: event.pageX,
-      //   y: event.pageY - 100,
-      //   coinId: d.id,
-      // });
 
-      // Remove blink from all circles
-      // svg.selectAll("circle").classed("blink", false);
-
-      // Add blink to selected
       d3.select(event.currentTarget).select("circle").classed("blink", true);
-      // const prices = await fetchSparklineForCoin(d.id, tooltipTimeRange);
-      // setSparklineData(prices);
       const svg = d3.select(svgRef.current);
       svg.selectAll("circle").classed("blink", false);
       d3.select(event.currentTarget).select("circle").classed("blink", true);
 
       const coin = data.find((c) => c.id === d.id);
-
-      // Only fetch sparkline if not already stored
-      // if (!coin.sparkline_365d) {
-      //   try {
-      //     const res = await axios.get(
-      //       `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart`,
-      //       {
-      //         params: {
-      //           vs_currency: "usd",
-      //           days: 365,
-      //           interval: "daily",
-      //         },
-      //       }
-      //     );
-      //     // const prices = res.data.prices.map((p) => p[1]);
-      //     const prices = res.data.prices;
-
-      //     // Update that coin's data
-      //     setData((prev) =>
-      //       prev.map((c) =>
-      //         c.id === coin.id ? { ...c, sparkline_365d: prices } : c
-      //       )
-      //     );
-      //   } catch (err) {
-      //     console.warn(`Sparkline fetch failed for ${coin.id}:`, err.message);
-      //   }
-      // }
 
       if (!coin.sparkline_365d || !coin.sparkline_24h_hourly) {
         try {
@@ -522,7 +470,7 @@ const CryptoBubbles = ({
               params: {
                 fsym: symbol,
                 tsym: "USD",
-                limit: 24, // Last 24 hours
+                limit: 24,
               },
               headers: {
                 authorization: `f6585a6bc678cd650b47db2eb2df6ba3eeedb0b4a582109a15775cde620e2f9e`,
@@ -531,11 +479,10 @@ const CryptoBubbles = ({
           );
 
           const prices24h = hourlyRes.data.Data.Data.map((point) => [
-            point.time * 1000, // Convert to milliseconds
+            point.time * 1000,
             point.close,
           ]);
 
-          // Update the coin data with both sparklines
           setData((prev) =>
             prev.map((c) =>
               c.id === coin.id
@@ -563,8 +510,8 @@ const CryptoBubbles = ({
     if (!simulationRef.current) {
       simulationRef.current = d3
         .forceSimulation(data)
-        .force("x", d3.forceX(width / 2).strength(forceStrength))
-        .force("y", d3.forceY(height / 2).strength(forceStrength))
+        .force("x", d3.forceX(currentWidth / 2).strength(forceStrength))
+        .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
         .force(
           "collision",
           d3.forceCollide(collisionRadius).strength(collisionStrength)
@@ -578,9 +525,9 @@ const CryptoBubbles = ({
         .on("tick", ticked);
     } else {
       simulationRef.current.nodes(data);
-      // simulationRef.current.alphaTarget(0.3).restart();
       simulationRef.current
-        // .alphaTarget(timeRange === "30d" ? 0.05 : 0.1)
+        .force("x", d3.forceX(currentWidth / 2).strength(forceStrength)) //rohit make change
+        .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
         .alphaTarget(0.02)
         .restart();
     }
@@ -589,13 +536,13 @@ const CryptoBubbles = ({
       node.each(function (d) {
         const r = radiusScale(Math.abs(d.price_change || 0));
 
-        if (d.x - r <= 0 || d.x + r >= width) {
+        if (d.x - r <= 0 || d.x + r >= currentWidth) {
           d.vx *= -1;
-          d.x = Math.max(r, Math.min(width - r, d.x));
+          d.x = Math.max(r, Math.min(currentWidth - r, d.x));
         }
-        if (d.y - r <= 0 || d.y + r >= height) {
+        if (d.y - r <= 0 || d.y + r >= currentHeight) {
           d.vy *= -1;
-          d.y = Math.max(r, Math.min(height - r, d.y));
+          d.y = Math.max(r, Math.min(currentHeight - r, d.y));
         }
 
         positionsRef.current.set(d.id, {
@@ -606,7 +553,6 @@ const CryptoBubbles = ({
         });
       });
 
-      // Custom repel logic inside tick
       if (isRepelling && repelPointRef.current) {
         const { x, y } = repelPointRef.current;
         const repelRadius = 200;
@@ -628,7 +574,11 @@ const CryptoBubbles = ({
 
       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     }
-  }, [data]);
+  }, [data, dimensionsRef, timeRange]);
+
+  useEffect(() => {
+    console.log("Size cahnged", dimensionsRef);
+  }, [dimensionsRef]);
 
   useEffect(() => {
     const handleClickOutside = () => {
@@ -642,16 +592,31 @@ const CryptoBubbles = ({
   }, [tooltipData.visible]);
 
   useEffect(() => {
+    dimensionsRef.current = { width, height };
+
+    const { width: currentWidth, height: currentHeight } =
+      dimensionsRef.current;
+
     const handleResize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      if (!svgRef.current) return;
+      // const width = svgRef.current.clientWidth;
       d3.select(svgRef.current)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("preserveAspectRatio", "xMidYMid slice");
+        .attr("viewBox", [0, 0, currentWidth, currentHeight])
+        .attr("preserveAspectRatio", "xMidYMid meet"); //rohit make change
+
+      // Restart simulation with new dimensions
+      if (simulationRef.current) {
+        simulationRef.current
+          .force("x", d3.forceX(currentWidth / 2).strength(0.02))
+          .force("y", d3.forceY(currentHeight / 2).strength(0.02))
+          .alphaTarget(0.3)
+          .restart();
+      }
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [dimensionsRef]);
 
   return (
     <div className="bg-[#030B20] relative">
