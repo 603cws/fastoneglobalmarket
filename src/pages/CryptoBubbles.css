@@ -188,7 +188,7 @@ text {
 
 .node:hover circle {
   /* filter: drop-shadow(0 0 8px #00d084) blur(1px); */
-  stroke-width: 3px;
+  /* stroke-width: 3px; */
   transform: scale(1.05);
   cursor: pointer;
 }

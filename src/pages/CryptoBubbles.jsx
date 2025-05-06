@@ -16,11 +16,11 @@ const getDaysFromRange = (range) => {
   console.log("range in getDaysFromRange", range);
 
   switch (range) {
-    case "24h":
+    case "1d":
       return 1;
-    case "7d":
+    case "1w":
       return 7;
-    case "30d":
+    case "month":
       return 30;
     case "1y":
       return 365;
@@ -54,7 +54,7 @@ const CryptoBubbles = ({
     y: 0,
     coinId: null,
   });
-  const [tooltipTimeRange, setTooltipTimeRange] = useState("24h");
+  const [tooltipTimeRange, setTooltipTimeRange] = useState("1d");
   const [isRepelling, setIsRepelling] = useState(false);
   const [hoverIndex, setHoverIndex] = useState(null);
   const dimensionsRef = useRef({ width, height });
@@ -190,17 +190,17 @@ const CryptoBubbles = ({
       });
 
     let forceStrength;
-    const collisionStrength = timeRange === "30d" ? 1 : 0.7;
+    const collisionStrength = timeRange === "month" ? 1 : 0.7;
     let jiggle;
-    if (timeRange === "30d") {
+    if (timeRange === "month") {
       jiggle = () => 0;
     } else {
       jiggle = () => (Math.random() - 0.5) * 3;
     }
 
-    if (timeRange === "24h") forceStrength = 0.015;
-    else if (timeRange === "7d") forceStrength = 0.02;
-    else if (timeRange === "30d") forceStrength = 0.008;
+    if (timeRange === "1d") forceStrength = 0.015;
+    else if (timeRange === "1w") forceStrength = 0.02;
+    else if (timeRange === "month") forceStrength = 0.008;
 
     // 1. Determine base radius
     let baseMinRadius = 25;
@@ -208,19 +208,19 @@ const CryptoBubbles = ({
 
     if (currentWidth <= 600) {
       baseMinRadius = 15;
-      baseMaxRadius = 50;
+      baseMaxRadius = 300;
     } else if (currentWidth <= 1024) {
-      baseMinRadius = 20;
-      baseMaxRadius = 70;
+      baseMinRadius = 30;
+      baseMaxRadius = 400;
     } else if (currentWidth <= 1536) {
-      baseMinRadius = 25;
-      baseMaxRadius = 100;
+      baseMinRadius = 35;
+      baseMaxRadius = 450;
     } else if (currentWidth <= 1920) {
       baseMinRadius = 28;
-      baseMaxRadius = 110;
+      baseMaxRadius = 500;
     } else {
       baseMinRadius = 35;
-      baseMaxRadius = 120;
+      baseMaxRadius = 550;
     }
 
     // 2. Calculate price changes
@@ -247,9 +247,9 @@ const CryptoBubbles = ({
 
     // 5. Set domain based only on fixed range or timeRange
     let domainMax;
-    if (timeRange === "24h") domainMax = 10;
-    else if (timeRange === "7d") domainMax = 50;
-    else if (timeRange === "30d") domainMax = 70;
+    if (timeRange === "1d") domainMax = 0.5;
+    else if (timeRange === "1w") domainMax = 0.5;
+    else if (timeRange === "month") domainMax = 70;
     else if (timeRange === "1y") domainMax = 120;
     else domainMax = 10;
 
@@ -257,7 +257,7 @@ const CryptoBubbles = ({
 
     // 6. Create the scale
     const radiusScale = d3
-      .scalePow()
+      .scaleSqrt()
       .exponent(1.3)
       .domain([0, domainMax])
       .range([minRadius, maxRadius])
@@ -279,7 +279,7 @@ const CryptoBubbles = ({
           g.append("circle")
             .attr("r", (d) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
-              return Math.abs(d.price_change) <= 1 ? base * 0.7 : base;
+              return Math.abs(d.price_change) <= 0.01 ? base * 0.7 : base;
             })
             .style("fill", (d) =>
               d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
@@ -295,23 +295,49 @@ const CryptoBubbles = ({
               if (change < 5) return isGainer ? "#379E3C" : "#ad3333";
               if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f";
               return isGainer ? "#00FF00" : "#FF0000";
-            })
-            .style("stroke-width", 3);
+            });
+          // .style("stroke-width", 3);
           // .style("filter", (d) => `url(#glow-${d.id})`);
 
           g.append("image")
-            .attr("xlink:href", (d) => d.image)
-            .attr("width", (d) =>
-              radiusScale(Math.abs(d.price_change / 4 || 0))
+            .attr("xlink:href", (d) => d.image.base)
+            .attr(
+              "width",
+              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 2
             )
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 4 || 0))
             )
-            .attr("class", (d) => {
-              return Math.abs(d.price_change) <= 1
+            .attr(
+              "x",
+              (d) => -radiusScale(Math.abs(d.price_change / 4 || 0)) / 4
+            ) // shift left
+            .attr("class", (d) =>
+              Math.abs(d.price_change) <= 1
                 ? "bubble-logo center"
-                : "bubble-logo top";
-            })
+                : "bubble-logo top"
+            )
+            .attr("clip-path", "circle()")
+            .style("pointer-events", "none");
+
+          g.append("image")
+            .attr("xlink:href", (d) => d.image.quote)
+            .attr(
+              "width",
+              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 2
+            )
+            .attr("height", (d) =>
+              radiusScale(Math.abs(d.price_change / 4 || 0))
+            )
+            .attr(
+              "x",
+              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 4
+            ) // shift right
+            .attr("class", (d) =>
+              Math.abs(d.price_change) <= 1
+                ? "bubble-logo center"
+                : "bubble-logo top"
+            )
             .attr("clip-path", "circle()")
             .style("pointer-events", "none");
 
@@ -331,7 +357,7 @@ const CryptoBubbles = ({
                 )}px`
             )
             .style("pointer-events", "none")
-            .text((d) => d.symbol.toUpperCase())
+            .text((d) => d.symbol?.toUpperCase())
             .style("display", (d) =>
               Math.abs(d.price_change) <= 1 ? "none" : "block"
             );
@@ -367,7 +393,7 @@ const CryptoBubbles = ({
             .duration(500)
             .attr("r", (d) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
-              return Math.abs(d.price_change) <= 1 ? base * 0.7 : base;
+              return Math.abs(d.price_change) <= 0.1 ? base * 0.7 : base;
             })
             .style("stroke", (d) => {
               const change = Math.abs(d.price_change || 0);
@@ -384,7 +410,7 @@ const CryptoBubbles = ({
 
           update
             .select("text.symbol")
-            .text((d) => d.symbol.toUpperCase())
+            .text((d) => d.symbol?.toUpperCase())
             .style("display", (d) =>
               Math.abs(d.price_change) <= 1 ? "none" : "block"
             );
@@ -473,7 +499,7 @@ const CryptoBubbles = ({
                 limit: 24,
               },
               headers: {
-                authorization: `f6585a6bc678cd650b47db2eb2df6ba3eeedb0b4a582109a15775cde620e2f9e`,
+                authorization: `f6585a6bc678cd650b41wb2eb2df6ba3eeedb0b4a582109a15775cde620e2f9e`,
               },
             }
           );
@@ -526,8 +552,8 @@ const CryptoBubbles = ({
     } else {
       simulationRef.current.nodes(data);
       simulationRef.current
-        .force("x", d3.forceX(currentWidth / 2).strength(forceStrength)) //rohit make change
-        .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
+        // .force("x", d3.forceX(currentWidth / 2).strength(forceStrength)) //rohit make change
+        // .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
         .alphaTarget(0.02)
         .restart();
     }
@@ -625,7 +651,7 @@ const CryptoBubbles = ({
       <div className="controls">
         {/* <h1>Crypto Bubbles</h1> */}
         <div className="time-range">
-          {["24h", "7d", "30d", "1y"].map((range) => (
+          {["1d", "1w", "month", "1y"].map((range) => (
             <button
               key={range}
               onClick={() => setTimeRange(range)}
@@ -646,11 +672,11 @@ const CryptoBubbles = ({
           let slicedSparkline = [];
 
           if (tooltipTimeRange === "1y") slicedSparkline = fullSparkline;
-          else if (tooltipTimeRange === "30d")
+          else if (tooltipTimeRange === "month")
             slicedSparkline = fullSparkline.slice(-30);
-          else if (tooltipTimeRange === "7d")
+          else if (tooltipTimeRange === "1w")
             slicedSparkline = fullSparkline.slice(-14);
-          else if (tooltipTimeRange === "24h")
+          else if (tooltipTimeRange === "1d")
             slicedSparkline = currentCoin.sparkline_24h_hourly || [];
 
           // const timestamp = slicedSparkline[hoverIndex]?.[0];
@@ -668,7 +694,7 @@ const CryptoBubbles = ({
           console.log("date", date);
 
           const formatted =
-            tooltipTimeRange === "24h"
+            tooltipTimeRange === "1d"
               ? date.toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -852,7 +878,7 @@ const CryptoBubbles = ({
               )}
 
               <div className="flex justify-between mt-3 text-xs">
-                {["24h", "7d", "30d", "1y"].map((label) => {
+                {["1d", "1w", "month", "1y"].map((label) => {
                   return (
                     <button
                       key={label}

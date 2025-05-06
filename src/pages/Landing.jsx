@@ -145,6 +145,9 @@ const faqs = [
   },
 ];
 
+const symbols =
+  "SGD/JPY,TRY,NZD/JPY,NZD/USD,NZD/CAD,NZD/CHF,NOK/JPY,NOK/SEK,HKD/JPY,GBP/USD,GBP/NZD,GBP/NOK,GBP/JPY,GBP/AUD,EUR/USD,USD/JPY,USD/CAD,USD/CHF,AUD/USD,EUR/JPY,EUR/GBP,EUR/AUD,ZAR/JPY,USD/ZAR,USD/TRY,AUD/CHF,AUD/JPY,AUD/CAD,AUD/NZD,AUD/SGD,USD/SGD,USD/SEK,USD/PLN,USD/NOK,USD/MXN,USD/HKD,USD/DKK,USD/CZK,USD/CNH,GBP/CAD,EUR/CAD,CAD/CHF,EUR/CHF,CHF/JPY,GBP/CHF,EUR/NZD,CAD/JPY";
+
 function Landing() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const cardsPerSlide = 2;
@@ -155,7 +158,7 @@ function Landing() {
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  const [timeRange, setTimeRange] = useState("7d"); //24h
+  const [timeRange, setTimeRange] = useState("1w"); //24h
   const [data, setData] = useState([]);
   const positionsRef = useRef(new Map());
 
@@ -163,6 +166,9 @@ function Landing() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
+  const count = symbols.split(",").length;
+  console.log("Count of Symbols: ", count); // Output: 47
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -172,106 +178,161 @@ function Landing() {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       let response;
+
+  //       // First attempt: Free public API (no API key required)
+  //       try {
+  //         response = await axios.get(
+  //           "https://api.coingecko.com/api/v3/coins/markets",
+  //           {
+  //             params: {
+  //               vs_currency: "usd",
+  //               order: "market_cap_desc",
+  //               per_page: 100,
+  //               price_change_percentage: "24h,7d,30d,1y",
+  //               sparkline: true,
+  //             },
+  //           }
+  //         );
+  //         console.log("Public API");
+  //       } catch (primaryError) {
+  //         console.warn(
+  //           "Public API failed. Trying demo API...",
+  //           primaryError.message
+  //         );
+
+  //         // Fallback: demo API with demo key
+  //         response = await axios.get(
+  //           "https://api.coingecko.com/api/v3/coins/markets",
+  //           {
+  //             params: {
+  //               vs_currency: "usd",
+  //               order: "market_cap_desc",
+  //               per_page: 100,
+  //               price_change_percentage: "24h,7d,30d,1y",
+  //               x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
+  //               sparkline: true,
+  //             },
+  //           }
+  //         );
+  //         console.log("Demo API");
+  //       }
+
+  //       setData((prevData = []) => {
+  //         const prevDataMap = new Map(prevData.map((coin) => [coin.id, coin]));
+
+  //         const nodes = response.data.map((coin) => {
+  //           const cached = positionsRef.current.get(coin.id);
+  //           const existingCoin = prevDataMap.get(coin.id);
+
+  //           return {
+  //             id: coin.id,
+  //             symbol: coin.symbol,
+  //             name: coin.name,
+  //             price: coin.current_price,
+  //             market_cap: coin.market_cap,
+  //             market_cap_rank: coin.market_cap_rank,
+  //             price_change:
+  //               coin[`price_change_percentage_${timeRange}_in_currency`],
+  //             price_change_24h: coin.price_change_percentage_24h_in_currency,
+  //             price_change_7d: coin.price_change_percentage_7d_in_currency,
+  //             price_change_30d: coin.price_change_percentage_30d_in_currency,
+  //             price_change_1y: coin.price_change_percentage_1y_in_currency,
+  //             volume: coin.total_volume,
+  //             sparkline: coin.sparkline_in_7d?.price,
+  //             url: `https://www.coingecko.com/en/coins/${coin.id}`,
+  //             image: coin.image,
+  //             x: cached?.x ?? Math.random() * window.innerWidth,
+  //             y: cached?.y ?? Math.random() * window.innerHeight,
+  //             vx: cached?.vx ?? 0,
+  //             vy: cached?.vy ?? 0,
+  //             fx: null,
+  //             fy: null,
+  //             // Preserve existing sparkline_365d if available
+  //             sparkline_365d: existingCoin?.sparkline_365d,
+  //             sparkline_24h_hourly: existingCoin?.sparkline_24h_hourly,
+  //           };
+  //         });
+
+  //         // Update positionsRef with new positions
+  //         nodes.forEach((coin) => {
+  //           positionsRef.current.set(coin.id, {
+  //             x: coin.x,
+  //             y: coin.y,
+  //             vx: coin.vx,
+  //             vy: coin.vy,
+  //           });
+  //         });
+
+  //         return nodes;
+  //       });
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 30000);
+  //   return () => clearInterval(interval);
+  // }, [timeRange, windowSize]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response;
+        const response = await axios.get(
+          `https://fcsapi.com/api-v3/forex/latest?symbol=${symbols}`, //&period=${timeRange}
+          {
+            params: {
+              access_key: "PW97M1pUEFTcjM0CrC2VyZI",
+              period: timeRange,
+              // symbols: "EUR/USD,USD/JPY", // Add desired currency pairs
+            },
+          }
+        );
 
-        // First attempt: Free public API (no API key required)
-        try {
-          response = await axios.get(
-            "https://api.coingecko.com/api/v3/coins/markets",
-            {
-              params: {
-                vs_currency: "usd",
-                order: "market_cap_desc",
-                per_page: 100,
-                price_change_percentage: "24h,7d,30d,1y",
-                sparkline: true,
-              },
-            }
-          );
-          console.log("Public API");
-        } catch (primaryError) {
-          console.warn(
-            "Public API failed. Trying demo API...",
-            primaryError.message
-          );
+        console.log("API response:", response.data);
 
-          // Fallback: demo API with demo key
-          response = await axios.get(
-            "https://api.coingecko.com/api/v3/coins/markets",
-            {
-              params: {
-                vs_currency: "usd",
-                order: "market_cap_desc",
-                per_page: 100,
-                price_change_percentage: "24h,7d,30d,1y",
-                x_cg_demo_api_key: "CG-7AbQRHEkb37BAAFt4qDVSE68",
-                sparkline: true,
-              },
-            }
-          );
-          console.log("Demo API");
-        }
+        const forexData = response.data.response.map((item) => {
+          const [base, quote] = item.s.split("/"); // Correctly split the pair
+          const cached = positionsRef.current.get(item.s);
 
-        setData((prevData = []) => {
-          const prevDataMap = new Map(prevData.map((coin) => [coin.id, coin]));
-
-          const nodes = response.data.map((coin) => {
-            const cached = positionsRef.current.get(coin.id);
-            const existingCoin = prevDataMap.get(coin.id);
-
-            return {
-              id: coin.id,
-              symbol: coin.symbol,
-              name: coin.name,
-              price: coin.current_price,
-              market_cap: coin.market_cap,
-              market_cap_rank: coin.market_cap_rank,
-              price_change:
-                coin[`price_change_percentage_${timeRange}_in_currency`],
-              price_change_24h: coin.price_change_percentage_24h_in_currency,
-              price_change_7d: coin.price_change_percentage_7d_in_currency,
-              price_change_30d: coin.price_change_percentage_30d_in_currency,
-              price_change_1y: coin.price_change_percentage_1y_in_currency,
-              volume: coin.total_volume,
-              sparkline: coin.sparkline_in_7d?.price,
-              url: `https://www.coingecko.com/en/coins/${coin.id}`,
-              image: coin.image,
-              x: cached?.x ?? Math.random() * window.innerWidth,
-              y: cached?.y ?? Math.random() * window.innerHeight,
-              vx: cached?.vx ?? 0,
-              vy: cached?.vy ?? 0,
-              fx: null,
-              fy: null,
-              // Preserve existing sparkline_365d if available
-              sparkline_365d: existingCoin?.sparkline_365d,
-              sparkline_24h_hourly: existingCoin?.sparkline_24h_hourly,
-            };
-          });
-
-          // Update positionsRef with new positions
-          nodes.forEach((coin) => {
-            positionsRef.current.set(coin.id, {
-              x: coin.x,
-              y: coin.y,
-              vx: coin.vx,
-              vy: coin.vy,
-            });
-          });
-
-          return nodes;
+          return {
+            id: item.s,
+            symbol: item.s,
+            name: item.name || item.s,
+            price: parseFloat(item.c),
+            price_change: parseFloat(item.cp),
+            image: {
+              base: `https://flagcdn.com/224x168/${base
+                .slice(0, 2)
+                .toLowerCase()}.png`,
+              quote: `https://flagcdn.com/224x168/${quote
+                .slice(0, 2)
+                .toLowerCase()}.png`,
+            },
+            url: `https://www.example.com/forex/${item.s}`,
+            x: cached?.x ?? Math.random() * window.innerWidth,
+            y: cached?.y ?? Math.random() * window.innerHeight,
+            vx: cached?.vx ?? 0,
+            vy: cached?.vy ?? 0,
+            fx: null,
+            fy: null,
+          };
         });
+
+        setData(forexData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching forex data:", error);
       }
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 30000);
+    const interval = setInterval(fetchData, 60000);
     return () => clearInterval(interval);
-  }, [timeRange, windowSize]);
+  }, [timeRange]);
 
   // Use both resize observer and window resize
   useLayoutEffect(() => {
