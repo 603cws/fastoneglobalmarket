@@ -160,6 +160,7 @@ function Landing() {
 
   const [timeRange, setTimeRange] = useState("1w"); //24h
   const [data, setData] = useState([]);
+  // const [apiSource, setApiSource] = useState("public");
   const positionsRef = useRef(new Map());
 
   const [windowSize, setWindowSize] = useState({
@@ -279,60 +280,60 @@ function Landing() {
   //   return () => clearInterval(interval);
   // }, [timeRange, windowSize]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://fcsapi.com/api-v3/forex/latest?symbol=${symbols}`, //&period=${timeRange}
-          {
-            params: {
-              access_key: "PW97M1pUEFTcjM0CrC2VyZI",
-              period: timeRange,
-              // symbols: "EUR/USD,USD/JPY", // Add desired currency pairs
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://fcsapi.com/api-v3/forex/latest?symbol=${symbols}`, //&period=${timeRange}
+  //         {
+  //           params: {
+  //             access_key: "PW97M1pUEFTcjM0CrC2VyZI",
+  //             period: timeRange,
+  //             // symbols: "EUR/USD,USD/JPY", // Add desired currency pairs
+  //           },
+  //         }
+  //       );
 
-        console.log("API response:", response.data);
+  //       console.log("API response:", response.data);
 
-        const forexData = response.data.response.map((item) => {
-          const [base, quote] = item.s.split("/"); // Correctly split the pair
-          const cached = positionsRef.current.get(item.s);
+  //       const forexData = response.data.response.map((item) => {
+  //         const [base, quote] = item.s.split("/"); // Correctly split the pair
+  //         const cached = positionsRef.current.get(item.s);
 
-          return {
-            id: item.s,
-            symbol: item.s,
-            name: item.name || item.s,
-            price: parseFloat(item.c),
-            price_change: parseFloat(item.cp),
-            image: {
-              base: `https://flagcdn.com/224x168/${base
-                .slice(0, 2)
-                .toLowerCase()}.png`,
-              quote: `https://flagcdn.com/224x168/${quote
-                .slice(0, 2)
-                .toLowerCase()}.png`,
-            },
-            url: `https://www.example.com/forex/${item.s}`,
-            x: cached?.x ?? Math.random() * window.innerWidth,
-            y: cached?.y ?? Math.random() * window.innerHeight,
-            vx: cached?.vx ?? 0,
-            vy: cached?.vy ?? 0,
-            fx: null,
-            fy: null,
-          };
-        });
+  //         return {
+  //           id: item.s,
+  //           symbol: item.s,
+  //           name: item.name || item.s,
+  //           price: parseFloat(item.c),
+  //           price_change: parseFloat(item.cp),
+  //           image: {
+  //             base: `https://flagcdn.com/224x168/${base
+  //               .slice(0, 2)
+  //               .toLowerCase()}.png`,
+  //             quote: `https://flagcdn.com/224x168/${quote
+  //               .slice(0, 2)
+  //               .toLowerCase()}.png`,
+  //           },
+  //           url: `https://www.example.com/forex/${item.s}`,
+  //           x: cached?.x ?? Math.random() * window.innerWidth,
+  //           y: cached?.y ?? Math.random() * window.innerHeight,
+  //           vx: cached?.vx ?? 0,
+  //           vy: cached?.vy ?? 0,
+  //           fx: null,
+  //           fy: null,
+  //         };
+  //       });
 
-        setData(forexData);
-      } catch (error) {
-        console.error("Error fetching forex data:", error);
-      }
-    };
+  //       setData(forexData);
+  //     } catch (error) {
+  //       console.error("Error fetching forex data:", error);
+  //     }
+  //   };
 
-    fetchData();
-    const interval = setInterval(fetchData, 60000);
-    return () => clearInterval(interval);
-  }, [timeRange]);
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 60000);
+  //   return () => clearInterval(interval);
+  // }, [timeRange]);
 
   // Use both resize observer and window resize
   useLayoutEffect(() => {
@@ -393,7 +394,7 @@ function Landing() {
         <div ref={headerRef} className="">
           <Header />
         </div>
-        <div
+        {/* <div
           className="pt-20"
           style={{ height: `calc(95vh - ${headerHeight}px)` }}
         >
@@ -407,8 +408,9 @@ function Landing() {
             timeRange={timeRange}
             setTimeRange={setTimeRange}
             positionsRef={positionsRef}
+            apiSource={apiSource}
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Section 1 */}
@@ -430,7 +432,7 @@ function Landing() {
               </span>
             </p>
 
-            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug sm:leading-tight ">
+            <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug sm:leading-tight ">
               <span className="whitespace-nowrap bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text">
                 Empower Your Trade
               </span>
@@ -438,7 +440,7 @@ function Landing() {
               <span className="text-white">Master the Markets</span>
             </h1>
 
-            <p className="text-gray-300 text-xl sm:text-md lg:text-lg xl:text-2xl leading-relaxed">
+            <p className="text-gray-300 text-base sm:text-md lg:text-lg xl:text-2xl leading-relaxed text-wrap">
               Stake your cryptocurrencies and earn up to{" "}
               <span className="hidden md:inline">
                 <br />
@@ -448,7 +450,7 @@ function Landing() {
               transparent, and beginner-friendly.
             </p>
 
-            <div className="flex gap-3 pt-4 w-full justify-start md:justify-normal gap-4k">
+            <div className="sm:flex gap-3 pt-4 w-full sm:justify-start md:justify-normal gap-4k">
               <Link to="#" onClick={(e) => handleLinkClick(e, true)}>
                 <button className="text-sm sm:text-base whitespace-nowrap border border-blue-600 px-3 sm:px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-[#4575FF] to-[#92AEFF] text-transparent bg-clip-text transition-all duration-300 hover:bg-gradient-to-r hover:from-[#C6D5FF] hover:to-[#698FFF] hover:text-black hover:bg-clip-border cursor-pointer">
                   Start Staking Now
