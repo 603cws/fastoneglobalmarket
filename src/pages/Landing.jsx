@@ -145,8 +145,8 @@ const faqs = [
   },
 ];
 
-const symbols =
-  "SGD/JPY,TRY,NZD/JPY,NZD/USD,NZD/CAD,NZD/CHF,NOK/JPY,NOK/SEK,HKD/JPY,GBP/USD,GBP/NZD,GBP/NOK,GBP/JPY,GBP/AUD,EUR/USD,USD/JPY,USD/CAD,USD/CHF,AUD/USD,EUR/JPY,EUR/GBP,EUR/AUD,ZAR/JPY,USD/ZAR,USD/TRY,AUD/CHF,AUD/JPY,AUD/CAD,AUD/NZD,AUD/SGD,USD/SGD,USD/SEK,USD/PLN,USD/NOK,USD/MXN,USD/HKD,USD/DKK,USD/CZK,USD/CNH,GBP/CAD,EUR/CAD,CAD/CHF,EUR/CHF,CHF/JPY,GBP/CHF,EUR/NZD,CAD/JPY";
+// const symbols =
+//   "SGD/JPY,TRY,NZD/JPY,NZD/USD,NZD/CAD,NZD/CHF,NOK/JPY,NOK/SEK,HKD/JPY,GBP/USD,GBP/NZD,GBP/NOK,GBP/JPY,GBP/AUD,EUR/USD,USD/JPY,USD/CAD,USD/CHF,AUD/USD,EUR/JPY,EUR/GBP,EUR/AUD,ZAR/JPY,USD/ZAR,USD/TRY,AUD/CHF,AUD/JPY,AUD/CAD,AUD/NZD,AUD/SGD,USD/SGD,USD/SEK,USD/PLN,USD/NOK,USD/MXN,USD/HKD,USD/DKK,USD/CZK,USD/CNH,GBP/CAD,EUR/CAD,CAD/CHF,EUR/CHF,CHF/JPY,GBP/CHF,EUR/NZD,CAD/JPY";
 
 function Landing() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -168,8 +168,8 @@ function Landing() {
     height: window.innerHeight,
   });
 
-  const count = symbols.split(",").length;
-  console.log("Count of Symbols: ", count); // Output: 47
+  // const count = symbols.split(",").length;
+  // console.log("Count of Symbols: ", count); // Output: 47
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -280,6 +280,90 @@ function Landing() {
   //   return () => clearInterval(interval);
   // }, [timeRange, windowSize]);
 
+  const symbols = [
+    "^NDX",
+    "^DJI",
+    "^GSPC",
+    "NIFTY.NS",
+    "^HSI",
+    "^N225",
+    "BTC-USD",
+    "ETH-USD",
+    "SOL-USD",
+    "ADA-USD",
+    "XRP-USD",
+    "GC=F",
+    "SI=F",
+    "XAUUSD=X",
+    "XAGUSD=X",
+    "CL=F",
+    "HG=F",
+    "NG=F",
+    "AAPL",
+    "MSFT",
+    "META",
+    "NVDA",
+    "GOOG",
+    "EURUSD=X",
+    "GBPUSD=X",
+    "USDJPY=X",
+    "AUDUSD=X",
+    "USDCAD=X",
+    "USDCHF=X",
+    "NZDUSD=X",
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await Promise.all(
+          symbols.map(async (symbol) => {
+            try {
+              const res = await axios.get(
+                `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`
+              );
+              const result = res.data.chart?.result?.[0]?.meta;
+              console.log(res.data);
+              const price = result?.regularMarketPrice;
+              const changePercent = result?.regularMarketChangePercent;
+
+              const cached = positionsRef.current.get(symbol);
+
+              return {
+                id: symbol,
+                symbol,
+                name: symbol,
+                price: parseFloat(price),
+                price_change: parseFloat(changePercent),
+                image: null, // Add image if needed like in forex case
+                url: `https://finance.yahoo.com/quote/${symbol}`,
+                x: cached?.x ?? Math.random() * window.innerWidth,
+                y: cached?.y ?? Math.random() * window.innerHeight,
+                vx: cached?.vx ?? 0,
+                vy: cached?.vy ?? 0,
+                fx: null,
+                fy: null,
+              };
+            } catch (err) {
+              console.error(`Error fetching data for ${symbol}:`, err);
+              return null;
+            }
+          })
+        );
+
+        // Filter out any null entries caused by failed requests
+        const validData = results.filter((item) => item !== null);
+        setData(validData);
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, [timeRange]);
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -336,6 +420,7 @@ function Landing() {
   // }, [timeRange]);
 
   // Use both resize observer and window resize
+
   useLayoutEffect(() => {
     const updateDimensions = () => {
       setWindowSize({
