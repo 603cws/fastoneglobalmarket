@@ -314,55 +314,76 @@ function Landing() {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMarketData = async () => {
       try {
-        const results = await Promise.all(
-          symbols.map(async (symbol) => {
-            try {
-              const res = await axios.get(
-                `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`
-              );
-              const result = res.data.chart?.result?.[0]?.meta;
-              console.log(res.data);
-              const price = result?.regularMarketPrice;
-              const changePercent = result?.regularMarketChangePercent;
-
-              const cached = positionsRef.current.get(symbol);
-
-              return {
-                id: symbol,
-                symbol,
-                name: symbol,
-                price: parseFloat(price),
-                price_change: parseFloat(changePercent),
-                image: null, // Add image if needed like in forex case
-                url: `https://finance.yahoo.com/quote/${symbol}`,
-                x: cached?.x ?? Math.random() * window.innerWidth,
-                y: cached?.y ?? Math.random() * window.innerHeight,
-                vx: cached?.vx ?? 0,
-                vy: cached?.vy ?? 0,
-                fx: null,
-                fy: null,
-              };
-            } catch (err) {
-              console.error(`Error fetching data for ${symbol}:`, err);
-              return null;
-            }
-          })
-        );
-
-        // Filter out any null entries caused by failed requests
-        const validData = results.filter((item) => item !== null);
-        setData(validData);
+        // Use the public URL or the signed URL here
+        const url =
+          "https://fastone-market-data-storage.s3.eu-north-1.amazonaws.com/market-data.json";
+        const response = await axios.get(url);
+        setData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching market data:", error);
       }
     };
 
-    fetchData();
-    const interval = setInterval(fetchData, 60000);
+    fetchMarketData();
+    const interval = setInterval(fetchMarketData, 60000); // Fetch every minute
     return () => clearInterval(interval);
-  }, [timeRange]);
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const results = await Promise.all(
+  //         symbols.map(async (symbol) => {
+  //           try {
+  //             const res = await axios.get(
+  //               `http://localhost:5000/api/market-data`
+  //             );
+  //             // const response = await axios.get("http://localhost:5000/api/market-data");
+
+  //             const result = res.data.chart?.result?.[0]?.meta;
+  //             console.log(res.data);
+  //             const price = result?.regularMarketPrice;
+  //             const changePercent = result?.regularMarketChangePercent;
+
+  //             const cached = positionsRef.current.get(symbol);
+
+  //             return {
+  //               id: symbol,
+  //               symbol,
+  //               name: symbol,
+  //               price: parseFloat(price),
+  //               price_change: parseFloat(changePercent),
+  //               image: null, // Add image if needed like in forex case
+  //               url: `https://finance.yahoo.com/quote/${symbol}`,
+  //               x: cached?.x ?? Math.random() * window.innerWidth,
+  //               y: cached?.y ?? Math.random() * window.innerHeight,
+  //               vx: cached?.vx ?? 0,
+  //               vy: cached?.vy ?? 0,
+  //               fx: null,
+  //               fy: null,
+  //             };
+  //           } catch (err) {
+  //             console.error(`Error fetching data for ${symbol}:`, err);
+  //             return null;
+  //           }
+  //         })
+  //       );
+
+  //       // Filter out any null entries caused by failed requests
+  //       const validData = results.filter((item) => item !== null);
+  //       setData(validData);
+  //     } catch (error) {
+  //       console.error("Error fetching market data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 60000);
+  //   return () => clearInterval(interval);
+  // }, [timeRange]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
