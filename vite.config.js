@@ -12,5 +12,7 @@ export default defineConfig({
         changeOrigin: true, // Change origin for CORS
       },
     },
+    open: true,
+    port: 5173,
   },
 });
