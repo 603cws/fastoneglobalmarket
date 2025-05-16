@@ -302,7 +302,12 @@ const CryptoBubbles = ({
                 ? "bubble-logo center"
                 : "bubble-logo top";
             })
-            .attr("clip-path", "circle()")
+            // .attr("clip-path", "circle()")
+            .attr("clip-path", (d) => {
+              const isDualFlag = d.image.includes("USD"); // Or any identifier you use
+              return isDualFlag ? "circle(100%)" : "circle()";
+            })
+
             .style("pointer-events", "none");
 
           // SYMBOL — only if price_change > ±1%
