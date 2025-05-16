@@ -145,8 +145,39 @@ const faqs = [
   },
 ];
 
-// const symbols =
-//   "SGD/JPY,TRY,NZD/JPY,NZD/USD,NZD/CAD,NZD/CHF,NOK/JPY,NOK/SEK,HKD/JPY,GBP/USD,GBP/NZD,GBP/NOK,GBP/JPY,GBP/AUD,EUR/USD,USD/JPY,USD/CAD,USD/CHF,AUD/USD,EUR/JPY,EUR/GBP,EUR/AUD,ZAR/JPY,USD/ZAR,USD/TRY,AUD/CHF,AUD/JPY,AUD/CAD,AUD/NZD,AUD/SGD,USD/SGD,USD/SEK,USD/PLN,USD/NOK,USD/MXN,USD/HKD,USD/DKK,USD/CZK,USD/CNH,GBP/CAD,EUR/CAD,CAD/CHF,EUR/CHF,CHF/JPY,GBP/CHF,EUR/NZD,CAD/JPY";
+const symbols = [
+  "^NDX",
+  "^DJI",
+  "^GSPC",
+  "^NSEI",
+  "^HSI",
+  "^N225",
+  "BTC-USD",
+  "ETH-USD",
+  "SOL-USD",
+  "ADA-USD",
+  "XRP-USD",
+  "GC=F",
+  "SI=F",
+  // "XAUUSD=K",
+  // "XAGUSD=M",
+  // "XAGUSD=N",
+  "CL=F",
+  "HG=F",
+  "NG=F",
+  "AAPL",
+  "MSFT",
+  "META",
+  "NVDA",
+  "GOOG",
+  "EURUSD=X",
+  "GBPUSD=X",
+  "USDJPY=X",
+  "AUDUSD=X",
+  "USDCAD=X",
+  "USDCHF=X",
+  "NZDUSD=X",
+];
 
 function Landing() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -280,38 +311,14 @@ function Landing() {
   //   return () => clearInterval(interval);
   // }, [timeRange, windowSize]);
 
-  const symbols = [
-    "^NDX",
-    "^DJI",
-    "^GSPC",
-    "NIFTY.NS",
-    "^HSI",
-    "^N225",
-    "BTC-USD",
-    "ETH-USD",
-    "SOL-USD",
-    "ADA-USD",
-    "XRP-USD",
-    "GC=F",
-    "SI=F",
-    "XAUUSD=X",
-    "XAGUSD=X",
-    "CL=F",
-    "HG=F",
-    "NG=F",
-    "AAPL",
-    "MSFT",
-    "META",
-    "NVDA",
-    "GOOG",
-    "EURUSD=X",
-    "GBPUSD=X",
-    "USDJPY=X",
-    "AUDUSD=X",
-    "USDCAD=X",
-    "USDCHF=X",
-    "NZDUSD=X",
-  ];
+  function calculatePercentageDifference(oldPrice, newPrice) {
+    if (oldPrice === 0) {
+      throw new Error("Old price cannot be zero.");
+    }
+    const difference = newPrice - oldPrice;
+    const percentageDifference = (difference / oldPrice) * 100;
+    return percentageDifference;
+  }
 
   useEffect(() => {
     const fetchMarketData = async () => {
@@ -320,15 +327,89 @@ function Landing() {
         const url =
           "https://fastone-market-data-storage.s3.eu-north-1.amazonaws.com/market-data.json";
         const response = await axios.get(url);
-        setData(response.data);
+        // setData(response.data);
         console.log(response.data);
+
+        const result = response.data.map((symbol) => {
+          const cached = positionsRef.current.get(symbol);
+
+          const pricechanged = calculatePercentageDifference(
+            symbol.meta.previousClose,
+            symbol.price
+          );
+          const symbolName =
+            symbol.meta.longName?.split(" ")[0] ||
+            symbol.meta.shortName?.split(" ")[0] ||
+            symbol.symbol;
+          return {
+            id: symbol.id,
+            symbol: symbolName,
+            name: symbol.name,
+            price: symbol.price,
+            // image: `./images/symbols/${symbolName}.png`, // e.g., BTC-USD => btc-usd.png
+            image: `./images/symbols/${symbolName.replace(/\//g, "")}.png`,
+            // image: `./images/symbols/NASDAQ.png`, // e.g., BTC-USD => btc-usd.png
+            // market_cap: symbol.market_cap,
+            // market_cap_rank: symbol.market_cap_rank,
+            price_change: pricechanged,
+            // price_change_24h: symbol.price_change_percentage_24h_in_currency,
+            // price_change_7d: symbol.price_change_percentage_7d_in_currency,
+            // price_change_30d: symbol.price_change_percentage_30d_in_currency,
+            // price_change_1y: symbol.price_change_percentage_1y_in_currency,
+            volume: symbol.meta.regularMarketVolume,
+            // sparkline: symbol.sparkline_in_7d?.price,
+            // url: `https://www.coingecko.com/en/coins/${symbol.id}`,
+            // image: symbol.image,
+            x: cached?.x ?? Math.random() * window.innerWidth,
+            y: cached?.y ?? Math.random() * window.innerHeight,
+            vx: cached?.vx ?? 0,
+            vy: cached?.vy ?? 0,
+            fx: null,
+            fy: null,
+            // Preserve existing sparkline_365d if available
+            // sparkline_365d: existingCoin?.sparkline_365d,
+            // sparkline_24h_hourly: existingCoin?.sparkline_24h_hourly,
+          };
+        });
+
+        setData(result);
+        // console.log(data);
+        console.log(result);
+
+        // return {
+        //             id: symbol.id,
+        //             symbol: coin.symbol,
+        //             name: coin.name,
+        //             price: coin.current_price,
+        //             market_cap: coin.market_cap,
+        //             market_cap_rank: coin.market_cap_rank,
+        //             price_change:
+        //               coin[`price_change_percentage_${timeRange}_in_currency`],
+        //             price_change_24h: coin.price_change_percentage_24h_in_currency,
+        //             price_change_7d: coin.price_change_percentage_7d_in_currency,
+        //             price_change_30d: coin.price_change_percentage_30d_in_currency,
+        //             price_change_1y: coin.price_change_percentage_1y_in_currency,
+        //             volume: coin.total_volume,
+        //             sparkline: coin.sparkline_in_7d?.price,
+        //             url: `https://www.coingecko.com/en/coins/${coin.id}`,
+        //             image: coin.image,
+        //             x: cached?.x ?? Math.random() * window.innerWidth,
+        //             y: cached?.y ?? Math.random() * window.innerHeight,
+        //             vx: cached?.vx ?? 0,
+        //             vy: cached?.vy ?? 0,
+        //             fx: null,
+        //             fy: null,
+        //             // Preserve existing sparkline_365d if available
+        //             sparkline_365d: existingCoin?.sparkline_365d,
+        //             sparkline_24h_hourly: existingCoin?.sparkline_24h_hourly,
+        //           };
       } catch (error) {
         console.error("Error fetching market data:", error);
       }
     };
 
     fetchMarketData();
-    const interval = setInterval(fetchMarketData, 60000); // Fetch every minute
+    const interval = setInterval(fetchMarketData, 100000); // Fetch every minute
     return () => clearInterval(interval);
   }, []);
 
@@ -500,23 +581,25 @@ function Landing() {
         <div ref={headerRef} className="">
           <Header />
         </div>
-        {/* <div
-          className="pt-20"
-          style={{ height: `calc(95vh - ${headerHeight}px)` }}
-        >
-          {" "}
-          <CryptoBubbles
-            key={`${windowSize.width}-${windowSize.height}-${headerHeight}`} // Force re-render on dimension changes
-            height={windowSize.height - headerHeight - 110}
-            width={windowSize.width}
-            data={data}
-            setData={setData}
-            timeRange={timeRange}
-            setTimeRange={setTimeRange}
-            positionsRef={positionsRef}
-            apiSource={apiSource}
-          />
-        </div> */}
+        {import.meta.env.MODE === "development" && (
+          <div
+            className="pt-20"
+            style={{ height: `calc(95vh - ${headerHeight}px)` }}
+          >
+            {" "}
+            <CryptoBubbles
+              key={`${windowSize.width}-${windowSize.height}-${headerHeight}`} // Force re-render on dimension changes
+              height={windowSize.height - headerHeight - 110}
+              width={windowSize.width}
+              data={data}
+              setData={setData}
+              timeRange={timeRange}
+              setTimeRange={setTimeRange}
+              positionsRef={positionsRef}
+              // apiSource={apiSource}
+            />
+          </div>
+        )}
       </div>
 
       {/* Section 1 */}

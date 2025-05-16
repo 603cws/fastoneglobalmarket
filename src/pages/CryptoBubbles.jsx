@@ -10,7 +10,6 @@ import {
   SparklinesReferenceLine,
   SparklinesSpots,
 } from "react-sparklines";
-// import { clamp } from "three/src/math/MathUtils.js";
 
 const getDaysFromRange = (range) => {
   console.log("range in getDaysFromRange", range);
@@ -39,15 +38,12 @@ const CryptoBubbles = ({
   positionsRef,
 }) => {
   const svgRef = useRef(null);
-  // const positionsRef = useRef(new Map());
   const simulationRef = useRef(null);
   const repelPointRef = useRef(null);
   const sparklineRef = useRef(null);
   const graphRef = useRef(null);
 
-  // const [data, setData] = useState([]);
   const [selectedCoin, setSelectedCoin] = useState(null);
-  // const [timeRange, setTimeRange] = useState("24h");
   const [tooltipData, setTooltipData] = useState({
     visible: false,
     x: 0,
@@ -58,8 +54,6 @@ const CryptoBubbles = ({
   const [isRepelling, setIsRepelling] = useState(false);
   const [hoverIndex, setHoverIndex] = useState(null);
   const dimensionsRef = useRef({ width, height });
-
-  // const [sparklineData, setSparklineData] = useState([]);
 
   useEffect(() => {
     if (!data.length || !svgRef.current) return;
@@ -208,19 +202,19 @@ const CryptoBubbles = ({
 
     if (currentWidth <= 600) {
       baseMinRadius = 15;
-      baseMaxRadius = 300;
+      baseMaxRadius = 60;
     } else if (currentWidth <= 1024) {
       baseMinRadius = 30;
-      baseMaxRadius = 400;
+      baseMaxRadius = 80;
     } else if (currentWidth <= 1536) {
       baseMinRadius = 35;
-      baseMaxRadius = 450;
+      baseMaxRadius = 110;
     } else if (currentWidth <= 1920) {
       baseMinRadius = 28;
-      baseMaxRadius = 500;
+      baseMaxRadius = 120;
     } else {
       baseMinRadius = 35;
-      baseMaxRadius = 550;
+      baseMaxRadius = 150;
     }
 
     // 2. Calculate price changes
@@ -279,14 +273,14 @@ const CryptoBubbles = ({
           g.append("circle")
             .attr("r", (d) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
-              return Math.abs(d.price_change) <= 0.01 ? base * 0.7 : base;
+              return Math.abs(d.price_change) <= 0.01
+                ? base * 0.7
+                : base * 1.15;
             })
             .style("fill", (d) =>
               d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
             )
-            // .style("stroke", (d) =>
-            //   d.price_change >= 0 ? "#4CA94E" : "#C34646"
-            // )
+
             .style("stroke", (d) => {
               const change = Math.abs(d.price_change || 0);
               const isGainer = d.price_change >= 0;
@@ -296,48 +290,18 @@ const CryptoBubbles = ({
               if (change < 10) return isGainer ? "#4CA94E" : "#f00f0f";
               return isGainer ? "#00FF00" : "#FF0000";
             });
-          // .style("stroke-width", 3);
-          // .style("filter", (d) => `url(#glow-${d.id})`);
 
           g.append("image")
-            .attr("xlink:href", (d) => d.image.base)
-            .attr(
-              "width",
-              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 2
-            )
+            .attr("xlink:href", (d) => d.image)
+            .attr("width", (d) => radiusScale(Math.abs(d.pricechange / 2 || 0)))
             .attr("height", (d) =>
-              radiusScale(Math.abs(d.price_change / 4 || 0))
+              radiusScale(Math.abs(d.price_change / 2 || 0))
             )
-            .attr(
-              "x",
-              (d) => -radiusScale(Math.abs(d.price_change / 4 || 0)) / 4
-            ) // shift left
-            .attr("class", (d) =>
-              Math.abs(d.price_change) <= 1
+            .attr("class", (d) => {
+              return Math.abs(d.price_change) <= 0
                 ? "bubble-logo center"
-                : "bubble-logo top"
-            )
-            .attr("clip-path", "circle()")
-            .style("pointer-events", "none");
-
-          g.append("image")
-            .attr("xlink:href", (d) => d.image.quote)
-            .attr(
-              "width",
-              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 2
-            )
-            .attr("height", (d) =>
-              radiusScale(Math.abs(d.price_change / 4 || 0))
-            )
-            .attr(
-              "x",
-              (d) => radiusScale(Math.abs(d.price_change / 4 || 0)) / 4
-            ) // shift right
-            .attr("class", (d) =>
-              Math.abs(d.price_change) <= 1
-                ? "bubble-logo center"
-                : "bubble-logo top"
-            )
+                : "bubble-logo top";
+            })
             .attr("clip-path", "circle()")
             .style("pointer-events", "none");
 
@@ -352,15 +316,12 @@ const CryptoBubbles = ({
               "font-size",
               (d) =>
                 `${Math.min(
-                  radiusScale(Math.abs(d.price_change || 0)) / 2.5,
+                  radiusScale(Math.abs(d.price_change || 0)) / 3,
                   15
                 )}px`
             )
             .style("pointer-events", "none")
-            .text((d) => d.symbol?.toUpperCase())
-            .style("display", (d) =>
-              Math.abs(d.price_change) <= 1 ? "none" : "block"
-            );
+            .text((d) => d.symbol?.toUpperCase());
 
           // ALWAYS SHOW % CHANGE
           g.append("text")
@@ -393,7 +354,7 @@ const CryptoBubbles = ({
             .duration(500)
             .attr("r", (d) => {
               const base = radiusScale(Math.abs(d.price_change || 0));
-              return Math.abs(d.price_change) <= 0.1 ? base * 0.7 : base;
+              return Math.abs(d.price_change) <= 0.1 ? base * 0.7 : base * 1.15;
             })
             .style("stroke", (d) => {
               const change = Math.abs(d.price_change || 0);
@@ -408,12 +369,7 @@ const CryptoBubbles = ({
               d.price_change >= 0 ? "url(#greenGradient)" : "url(#redGradient)"
             );
 
-          update
-            .select("text.symbol")
-            .text((d) => d.symbol?.toUpperCase())
-            .style("display", (d) =>
-              Math.abs(d.price_change) <= 1 ? "none" : "block"
-            );
+          update.select("text.symbol").text((d) => d.symbol?.toUpperCase());
 
           update.select("text.change").text((d) => {
             const change = d.price_change;
@@ -423,19 +379,45 @@ const CryptoBubbles = ({
           });
 
           update
-            .select("image")
+            .select("image.base")
             .transition()
             .duration(500)
-            .attr("width", (d) =>
-              radiusScale(Math.abs(d.price_change / 4 || 0))
-            )
-            .attr("height", (d) =>
-              radiusScale(Math.abs(d.price_change / 4 || 0))
-            )
-            .attr("class", (d) => {
-              return Math.abs(d.price_change) <= 1
-                ? "bubble-logo center"
-                : "bubble-logo top";
+            .attr("width", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return r * 0.5;
+            })
+            .attr("height", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return r * 0.5;
+            })
+            .attr("x", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return -r * 0.25;
+            })
+            .attr("y", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return -r * 0.25;
+            });
+
+          update
+            .select("image.quote")
+            .transition()
+            .duration(500)
+            .attr("width", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return r * 0.5;
+            })
+            .attr("height", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return r * 0.5;
+            })
+            .attr("x", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return r * 0.25;
+            })
+            .attr("y", (d) => {
+              const r = radiusScale(Math.abs(d.price_change || 0));
+              return -r * 0.25;
             });
 
           return update;
@@ -536,8 +518,8 @@ const CryptoBubbles = ({
     if (!simulationRef.current) {
       simulationRef.current = d3
         .forceSimulation(data)
-        .force("x", d3.forceX(currentWidth / 2).strength(forceStrength))
-        .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
+        // .force("x", d3.forceX(currentWidth / 2).strength(forceStrength))   //SUNNY
+        // .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
         .force(
           "collision",
           d3.forceCollide(collisionRadius).strength(collisionStrength)
@@ -551,11 +533,7 @@ const CryptoBubbles = ({
         .on("tick", ticked);
     } else {
       simulationRef.current.nodes(data);
-      simulationRef.current
-        // .force("x", d3.forceX(currentWidth / 2).strength(forceStrength)) //rohit make change
-        // .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
-        .alphaTarget(0.02)
-        .restart();
+      simulationRef.current.alphaTarget(0.02).restart();
     }
 
     function ticked() {
@@ -647,11 +625,10 @@ const CryptoBubbles = ({
   return (
     <div className="bg-[#030B20] relative">
       <svg ref={svgRef} className="bubbles-canvas w-full" />
-
       <div className="controls">
         {/* <h1>Crypto Bubbles</h1> */}
         <div className="time-range">
-          {["1d", "1w", "month", "1y"].map((range) => (
+          {["1d", "1w", "month"].map((range) => (
             <button
               key={range}
               onClick={() => setTimeRange(range)}
@@ -678,15 +655,6 @@ const CryptoBubbles = ({
             slicedSparkline = fullSparkline.slice(-14);
           else if (tooltipTimeRange === "1d")
             slicedSparkline = currentCoin.sparkline_24h_hourly || [];
-
-          // const timestamp = slicedSparkline[hoverIndex]?.[0];
-          // const is24h = tooltipTimeRange === "24h";
-          // const formatted = is24h
-          //   ? new Date(timestamp).toLocaleTimeString([], {
-          //       hour: "2-digit",
-          //       minute: "2-digit",
-          //     })
-          //   : new Date(timestamp).toLocaleDateString();
 
           const timestamp = slicedSparkline[hoverIndex]?.[0];
           const date = new Date(timestamp);
@@ -715,13 +683,17 @@ const CryptoBubbles = ({
               className="absolute z-50 bg-[#1a1c1f] text-white shadow-2xl rounded-2xl p-6 max-w-lg w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all fade-slide-in"
             >
               <div className="flex justify-between items-center mb-4">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={currentCoin.image}
-                    alt={currentCoin.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <div className="text-lg font-bold">{currentCoin.name}</div>
+                <div className="relative flex items-center justify-between gap-3">
+                  <div className="relative w-12 h-12">
+                    <img
+                      src={currentCoin.image}
+                      alt={currentCoin.image}
+                      className="w-12 h-12  absolute top-0 left-0"
+                    />
+                  </div>
+                  <div className="text-lg font-bold flex">
+                    {currentCoin.symbol}
+                  </div>
                 </div>
                 <button
                   onClick={(e) => {
@@ -736,48 +708,25 @@ const CryptoBubbles = ({
                   ×
                 </button>
               </div>
-
               <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                 <div>
-                  <p className="text-gray-400">Rank</p>
-                  <p className="font-semibold">
-                    #{currentCoin.market_cap_rank}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-400">Market Cap</p>
-                  <p className="font-semibold">
-                    ${currentCoin.market_cap.toLocaleString()}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-400">24h Volume</p>
-                  <p className="font-semibold">
-                    ${currentCoin.volume.toLocaleString()}
-                  </p>
-                </div>
-                <div>
                   <p className="text-gray-400">Price</p>
-                  <p className="font-semibold text-green-400">
-                    ${currentCoin.price.toFixed(4)}
+                  <p className="font-semibold">
+                    ${currentCoin.price.toLocaleString()}
                   </p>
                 </div>
               </div>
-
               <div className="text-sm mb-3">
                 <p className="text-gray-400">Change ({tooltipTimeRange})</p>
                 <p
                   className={`font-semibold ${
-                    currentCoin[`price_change_${tooltipTimeRange}`] >= 0
+                    currentCoin.price_change >= 0
                       ? "text-green-400"
                       : "text-red-400"
                   }`}
                 >
-                  {typeof currentCoin[`price_change_${tooltipTimeRange}`] ===
-                  "number"
-                    ? `${currentCoin[
-                        `price_change_${tooltipTimeRange}`
-                      ].toFixed(2)}%`
+                  {typeof currentCoin.price_change === "number"
+                    ? `${currentCoin.price_change.toFixed(2)}%`
                     : "–"}
                 </p>
               </div>
@@ -876,34 +825,6 @@ const CryptoBubbles = ({
                   )}
                 </div>
               )}
-
-              <div className="flex justify-between mt-3 text-xs">
-                {["1d", "1w", "month", "1y"].map((label) => {
-                  return (
-                    <button
-                      key={label}
-                      className={`px-3 py-1 rounded-md cursor-pointer ${
-                        tooltipTimeRange === label
-                          ? "bg-green-500 text-white"
-                          : "bg-gray-800 text-gray-300"
-                      }`}
-                      onClick={async (e) => {
-                        e.stopPropagation();
-                        setTooltipTimeRange(label);
-                        // if (tooltipData.coinId) {
-                        //   const prices = await fetchSparklineForCoin(
-                        //     tooltipData.coinId,
-                        //     label
-                        //   );
-                        //   setSparklineData(prices);
-                        // }
-                      }}
-                    >
-                      {label.toUpperCase()}
-                    </button>
-                  );
-                })}
-              </div>
             </div>
           );
         })()}
