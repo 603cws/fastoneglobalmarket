@@ -320,6 +320,13 @@ function Landing() {
     return percentageDifference;
   }
 
+  function cleanName(name) {
+    if (!name) return undefined;
+    return name
+      .replace(/,|\.\s*com/gi, "") // Remove "," and ".com" or ". com"
+      .trim(); // Clean up extra spaces
+  }
+
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
@@ -337,10 +344,12 @@ function Landing() {
             symbol.meta.previousClose,
             symbol.price
           );
+
           const symbolName =
-            symbol.meta.longName?.split(" ")[0] ||
-            symbol.meta.shortName?.split(" ")[0] ||
+            cleanName(symbol.meta.longName)?.split(" ")[0] ||
+            cleanName(symbol.meta.shortName)?.split(" ")[0] ||
             symbol.symbol;
+
           return {
             id: symbol.id,
             symbol: symbolName,
@@ -581,25 +590,25 @@ function Landing() {
         <div ref={headerRef} className="">
           <Header />
         </div>
-        {import.meta.env.MODE === "development" && (
-          <div
-            className="pt-20"
-            style={{ height: `calc(95vh - ${headerHeight}px)` }}
-          >
-            {" "}
-            <CryptoBubbles
-              key={`${windowSize.width}-${windowSize.height}-${headerHeight}`} // Force re-render on dimension changes
-              height={windowSize.height - headerHeight - 110}
-              width={windowSize.width}
-              data={data}
-              setData={setData}
-              timeRange={timeRange}
-              setTimeRange={setTimeRange}
-              positionsRef={positionsRef}
-              // apiSource={apiSource}
-            />
-          </div>
-        )}
+        {/* {import.meta.env.MODE === "development" && ( */}
+        <div
+          className="pt-20"
+          style={{ height: `calc(95vh - ${headerHeight}px)` }}
+        >
+          {" "}
+          <CryptoBubbles
+            key={`${windowSize.width}-${windowSize.height}-${headerHeight}`} // Force re-render on dimension changes
+            height={windowSize.height - headerHeight - 110}
+            width={windowSize.width}
+            data={data}
+            setData={setData}
+            timeRange={timeRange}
+            setTimeRange={setTimeRange}
+            positionsRef={positionsRef}
+            // apiSource={apiSource}
+          />
+        </div>
+        {/* )} */}
       </div>
 
       {/* Section 1 */}
