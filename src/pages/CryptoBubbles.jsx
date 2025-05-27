@@ -525,11 +525,8 @@ const CryptoBubbles = ({
         .forceSimulation(data)
         // .force("x", d3.forceX(currentWidth / 2).strength(forceStrength))   //SUNNY
         // .force("y", d3.forceY(currentHeight / 2).strength(forceStrength))
-        .force(
-          "collision",
-          d3.forceCollide(collisionRadius).strength(collisionStrength)
-        )
-        // .force("jiggle", d3.forceManyBody().strength(jiggle))
+        .force("collision", d3.forceCollide(collisionRadius).strength(0.7))
+        .force("jiggle", d3.forceManyBody().strength(1))
         .force("charge", d3.forceManyBody().strength(-5))
         .velocityDecay(0.92)
         .alpha(0.4)
@@ -630,8 +627,7 @@ const CryptoBubbles = ({
   return (
     <div className="bg-[#030B20] relative">
       <svg ref={svgRef} className="bubbles-canvas w-full" />
-      <div className="controls">
-        {/* <h1>Crypto Bubbles</h1> */}
+      {/* <div className="controls">
         <div className="time-range">
           {["1d", "1w", "month"].map((range) => (
             <button
@@ -643,7 +639,7 @@ const CryptoBubbles = ({
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {tooltipData.visible &&
         tooltipData.coinId &&
