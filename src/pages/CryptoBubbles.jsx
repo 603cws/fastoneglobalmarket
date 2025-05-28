@@ -42,6 +42,7 @@ const CryptoBubbles = ({
   const repelPointRef = useRef(null);
   const sparklineRef = useRef(null);
   const graphRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [tooltipData, setTooltipData] = useState({
@@ -65,6 +66,61 @@ const CryptoBubbles = ({
 
     const { width: currentWidth, height: currentHeight } =
       dimensionsRef.current;
+
+    data.forEach((d) => {
+      if (!d.x) d.x = Math.random() * width;
+      if (!d.y) d.y = Math.random() * height;
+      if (!d.vx) d.vx = (Math.random() - 0.5) * 2;
+      if (!d.vy) d.vy = (Math.random() - 0.5) * 2;
+    });
+
+    function animate() {
+      data.forEach((d) => {
+        const r = radiusScale(Math.abs(d.price_change || 0));
+
+        d.x += d.vx;
+        d.y += d.vy;
+
+        // Bounce on canvas edges
+        if (d.x - r < 0 || d.x + r > width) d.vx *= -1;
+        if (d.y - r < 0 || d.y + r > height) d.vy *= -1;
+      });
+      const strength = 0.1;
+
+      for (let i = 0; i < data.length; i++) {
+        for (let j = i + 1; j < data.length; j++) {
+          const a = data[i];
+          const b = data[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const distSq = dx * dx + dy * dy;
+
+          const rA = radiusScale(Math.abs(a.price_change || 0));
+          const rB = radiusScale(Math.abs(b.price_change || 0));
+          const minDist = rA + rB + 2;
+
+          const dist = Math.sqrt(distSq) || 0.1;
+          const overlap = minDist - dist;
+
+          if (overlap > 0) {
+            const fx = (dx / dist) * overlap * strength;
+            const fy = (dy / dist) * overlap * strength;
+
+            a.vx -= fx;
+            a.vy -= fy;
+            b.vx += fx;
+            b.vy += fy;
+          }
+        }
+      }
+
+      // Move DOM nodes
+      d3.select(svgRef.current)
+        .selectAll(".node")
+        .attr("transform", (d) => `translate(${d.x},${d.y})`);
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    }
 
     svg.selectAll("defs").remove();
     const defs = svg.append("defs");
@@ -208,7 +264,7 @@ const CryptoBubbles = ({
       baseMaxRadius = 80;
     } else if (currentWidth <= 1536) {
       baseMinRadius = 35;
-      baseMaxRadius = 110;
+      baseMaxRadius = 95;
     } else if (currentWidth <= 1920) {
       baseMinRadius = 28;
       baseMaxRadius = 120;
@@ -259,7 +315,7 @@ const CryptoBubbles = ({
 
     let collisionRadius = (d) => {
       const base = radiusScale(Math.abs(d.price_change || 0));
-      const buffer = 8; // Add consistent spacing around all bubbles
+      const buffer = 20; // Add consistent spacing around all bubbles
       return base + buffer;
     };
 
@@ -293,7 +349,9 @@ const CryptoBubbles = ({
 
           g.append("image")
             .attr("xlink:href", (d) => d.image)
-            .attr("width", (d) => radiusScale(Math.abs(d.pricechange / 2 || 0)))
+            .attr("width", (d) =>
+              radiusScale(Math.abs(d.price_change / 2 || 0))
+            )
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 2 || 0))
             )
@@ -308,13 +366,16 @@ const CryptoBubbles = ({
               return isDualFlag ? "circle(100%)" : "circle()";
             })
 
-            .style("pointer-events", "none");
+            .style("pointer-events", "none")
+            .style("display", (d) =>
+              Math.abs(d.price_change) <= 0.1 ? "none" : "block"
+            );
 
           // SYMBOL — only if price_change > ±1%
           g.append("text")
             .attr("class", "symbol")
             .attr("text-anchor", "middle")
-            .attr("dy", ".3em")
+            .attr("dy", "1em")
             .style("fill", "#fff")
             .style("font-weight", "bold")
             .style(
@@ -332,7 +393,7 @@ const CryptoBubbles = ({
           g.append("text")
             .attr("class", "change")
             .attr("text-anchor", "middle")
-            .attr("dy", "1.8em")
+            .attr("dy", "2.2em")
             .style("fill", "#fff")
             .style(
               "font-size",
@@ -384,51 +445,32 @@ const CryptoBubbles = ({
           });
 
           update
-            .select("image.base")
+            .select("image")
             .transition()
             .duration(500)
-            .attr("width", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return r * 0.5;
-            })
-            .attr("height", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return r * 0.5;
-            })
-            .attr("x", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return -r * 0.25;
-            })
-            .attr("y", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return -r * 0.25;
-            });
-
-          update
-            .select("image.quote")
-            .transition()
-            .duration(500)
-            .attr("width", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return r * 0.5;
-            })
-            .attr("height", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return r * 0.5;
-            })
-            .attr("x", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return r * 0.25;
-            })
-            .attr("y", (d) => {
-              const r = radiusScale(Math.abs(d.price_change || 0));
-              return -r * 0.25;
-            });
+            .attr("width", (d) =>
+              radiusScale(Math.abs(d.price_change / 2 || 0))
+            )
+            .attr("height", (d) =>
+              radiusScale(Math.abs(d.price_change / 2 || 0))
+            )
+            .style("display", (d) =>
+              Math.abs(d.price_change) <= 0.1 ? "none" : "block"
+            );
+          // .attr("x", (d) => {
+          //   const r = radiusScale(Math.abs(d.price_change || 0));
+          //   return -r * 0.25;
+          // })
+          // .attr("y", (d) => {
+          //   const r = radiusScale(Math.abs(d.price_change || 0));
+          //   return -r * 0.25;
+          // });
 
           return update;
         },
         (exit) => exit.remove()
       );
+    animationFrameRef.current = requestAnimationFrame(animate);
 
     const drag = d3
       .drag()
