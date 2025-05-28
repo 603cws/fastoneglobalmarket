@@ -75,18 +75,39 @@ const CryptoBubbles = ({
     });
 
     function animate() {
+      const damping = 1; // Slight friction
+      const repulsionStrength = 0.05;
+
       data.forEach((d) => {
         const r = radiusScale(Math.abs(d.price_change || 0));
 
+        // Update position
         d.x += d.vx;
         d.y += d.vy;
 
-        // Bounce on canvas edges
-        if (d.x - r < 0 || d.x + r > width) d.vx *= -1;
-        if (d.y - r < 0 || d.y + r > height) d.vy *= -1;
-      });
-      const strength = 0.1;
+        // Apply mild damping (friction)
+        d.vx *= damping;
+        d.vy *= damping;
 
+        // Bounce from walls — full direction-aware bounce
+        if (d.x - r < 0) {
+          d.x = r;
+          d.vx = Math.abs(d.vx);
+        } else if (d.x + r > width) {
+          d.x = width - r;
+          d.vx = -Math.abs(d.vx);
+        }
+
+        if (d.y - r < 0) {
+          d.y = r;
+          d.vy = Math.abs(d.vy);
+        } else if (d.y + r > height) {
+          d.y = height - r;
+          d.vy = -Math.abs(d.vy);
+        }
+      });
+
+      // Apply repulsion between overlapping bubbles
       for (let i = 0; i < data.length; i++) {
         for (let j = i + 1; j < data.length; j++) {
           const a = data[i];
@@ -103,8 +124,8 @@ const CryptoBubbles = ({
           const overlap = minDist - dist;
 
           if (overlap > 0) {
-            const fx = (dx / dist) * overlap * strength;
-            const fy = (dy / dist) * overlap * strength;
+            const fx = (dx / dist) * overlap * repulsionStrength;
+            const fy = (dy / dist) * overlap * repulsionStrength;
 
             a.vx -= fx;
             a.vy -= fy;
@@ -114,7 +135,7 @@ const CryptoBubbles = ({
         }
       }
 
-      // Move DOM nodes
+      // Update DOM positions
       d3.select(svgRef.current)
         .selectAll(".node")
         .attr("transform", (d) => `translate(${d.x},${d.y})`);
@@ -356,7 +377,7 @@ const CryptoBubbles = ({
               radiusScale(Math.abs(d.price_change / 2 || 0))
             )
             .attr("class", (d) => {
-              return Math.abs(d.price_change) <= 0
+              return Math.abs(d.price_change) <= 0.1
                 ? "bubble-logo center"
                 : "bubble-logo top";
             })
@@ -366,10 +387,7 @@ const CryptoBubbles = ({
               return isDualFlag ? "circle(100%)" : "circle()";
             })
 
-            .style("pointer-events", "none")
-            .style("display", (d) =>
-              Math.abs(d.price_change) <= 0.1 ? "none" : "block"
-            );
+            .style("pointer-events", "none");
 
           // SYMBOL — only if price_change > ±1%
           g.append("text")
@@ -387,13 +405,16 @@ const CryptoBubbles = ({
                 )}px`
             )
             .style("pointer-events", "none")
-            .text((d) => d.symbol?.toUpperCase());
+            .text((d) => d.symbol?.toUpperCase())
+            .style("display", (d) =>
+              Math.abs(d.price_change) <= 0.1 ? "none" : "block"
+            );
 
           // ALWAYS SHOW % CHANGE
           g.append("text")
             .attr("class", "change")
             .attr("text-anchor", "middle")
-            .attr("dy", "2.2em")
+            .attr("dy", "2.7em")
             .style("fill", "#fff")
             .style(
               "font-size",
@@ -453,10 +474,10 @@ const CryptoBubbles = ({
             )
             .attr("height", (d) =>
               radiusScale(Math.abs(d.price_change / 2 || 0))
-            )
-            .style("display", (d) =>
-              Math.abs(d.price_change) <= 0.1 ? "none" : "block"
             );
+          // .style("display", (d) =>
+          //   Math.abs(d.price_change) <= 0.1 ? "none" : "block"
+          // );
           // .attr("x", (d) => {
           //   const r = radiusScale(Math.abs(d.price_change || 0));
           //   return -r * 0.25;

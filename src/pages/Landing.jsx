@@ -14,6 +14,7 @@ import Lottie from "lottie-react";
 import LandingAnimation from "../assets/LandingAnimation.json";
 import { useInView } from "react-intersection-observer";
 import BitcoinAnimation from "../assets/BitcoinAnimation.json";
+import BubbleLoader from "../components/animations/BubbleLoader";
 
 const features = [
   {
@@ -188,6 +189,7 @@ function Landing() {
   const visibleTestimonials = testimonials.slice(start, start + cardsPerSlide);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const [timeRange, setTimeRange] = useState("1w"); //24h
   const [data, setData] = useState([]);
@@ -414,6 +416,8 @@ function Landing() {
         //           };
       } catch (error) {
         console.error("Error fetching market data:", error);
+      } finally {
+        setLoading(false); // Hide loader
       }
     };
 
@@ -592,7 +596,7 @@ function Landing() {
         </div>
         {/* {import.meta.env.MODE === "development" && ( */}
         <div
-          className="pt-20"
+          className="relative pt-20"
           style={{ height: `calc(95vh - ${headerHeight}px)` }}
         >
           {" "}
@@ -607,6 +611,7 @@ function Landing() {
             positionsRef={positionsRef}
             // apiSource={apiSource}
           />
+          {loading && <BubbleLoader />}
         </div>
         {/* )} */}
       </div>
